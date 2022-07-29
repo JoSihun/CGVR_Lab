@@ -10,4 +10,10 @@ public class IndexController {
     public String index() {
         return "index";
     }
+
+    // 연구실 페이지
+    @GetMapping("/lab")
+    public String lab() {
+        return "lab";
+    }
 }
