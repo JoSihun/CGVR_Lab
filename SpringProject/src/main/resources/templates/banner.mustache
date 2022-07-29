@@ -1,56 +1,66 @@
-<!-- 하얀색 bg-light -->
-<!-- 검은색 bg-dark -->
-<!-- 그레이 bg-secondary -->
+<!-- Carousel wrapper -->
+<div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+    <!-- Indicator Bottom Buttons-->
+    <div class="carousel-indicators">
+        <button
+                type="button"
+                data-mdb-target="#carouselBasicExample"
+                data-mdb-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+        ></button>
+        <button
+                type="button"
+                data-mdb-target="#carouselBasicExample"
+                data-mdb-slide-to="1"
+                aria-label="Slide 2"
+        ></button>
+        <button
+                type="button"
+                data-mdb-target="#carouselBasicExample"
+                data-mdb-slide-to="2"
+                aria-label="Slide 3"
+        ></button>
+    </div>
 
-<!-- 빨간색 bg-danger -->
-<!-- 파란색 bg-primary -->
-<!-- 초록색 bg-success -->
-
-<!-- 청록색 bg-info -->
-<!-- 노란색 bg-warning -->
-
-<!-- Carousel Banner Image-->
-<div id="carouselIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselIndicators" data-slide-to="2"></li>
-    </ol>
-
+    <!-- Inner -->
     <div class="carousel-inner">
-        <div class="carousel-item bg-secondary active" style="text-align: center">
-<!--            <img class="d-block w-100" src="/banner1.jpg" alt="First slide" style="height: 400px">-->
-            <img src="/banner1.jpg" alt="First slide" style="height: 400px">
-            <div class="carousel-caption d-none d-md-block" style="color: #FFFFFF">
-                <h5>First Slide Label</h5>
-                <p>This is First Slide for Skuniv CGVR Lab.</p>
+        <!-- Carousel Item 1 -->
+        <div class="carousel-item active bg-dark text-center">
+            <img src="/img/banner1.jpg" alt="Sunset Over the City" style="height: 400px"/>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
         </div>
-        <div class="carousel-item bg-secondary" style="text-align: center">
-<!--            <img class="d-block w-100" src="/banner2.jpg" alt="Second slide" style="height: 400px">-->
-            <img src="/banner2.jpg" alt="Second slide" style="height: 400px">
-            <div class="carousel-caption d-none d-md-block" style="color: #FFFFFF">
-                <h5>Second Slide Label</h5>
-                <p>This is Second Slide for Skuniv CGVR Lab.</p>
+
+        <!-- Carousel Item 2 -->
+        <div class="carousel-item active bg-dark text-center">
+            <img src="/img/banner2.jpg" alt="Canyon at Nigh" style="height: 400px"/>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
         </div>
-        <div class="carousel-item bg-secondary" style="text-align: center">
-<!--            <img class="d-block w-100" src="/banner3.jpg" alt="Third slide" style="height: 400px">-->
-            <img src="/banner3.jpg" alt="Third slide" style="height: 400px">
-            <div class="carousel-caption d-none d-md-block" style="color: #FFFFFF">
-                <h5>Third Slide Label</h5>
-                <p>This is Third Slide for Skuniv CGVR Lab.</p>
+
+        <!-- Carousel Item 3 -->
+        <div class="carousel-item active bg-dark text-center">
+            <img src="/img/banner3.jpg" alt="Cliff Above a Stormy Sea" style="height: 400px"/>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
             </div>
         </div>
     </div>
 
-    <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+    <!-- Prev, Next Controls Buttons -->
+    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-
-    <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
