@@ -1,0 +1,110 @@
+{{>header}}
+{{>banner}}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-xl-2">
+            <div class="card shadow mb-4 text-dark bg-light">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h5 class="m-0 font-weight-bold">연구생 정보</h5>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body" height="1000">
+                    <div><a class="card-text text-dark">2017305045 염동빈</a></div>
+                    <div><a class="card-text text-dark">재학정보 : 4학년</a></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-8">
+                    <input type="text" class="form-control mb-4" id="search" placeholder="게시글 제목입력"/>
+                </div>
+                <div class="col-xl-4">
+                    <a href="#" role="button" class="btn btn-outline-secondary btn-block mb-4">검색</a>
+                </div>
+            </div>
+
+            <div class="row-cols-xl-2">
+                <a href="#" role="button" class="btn btn-outline-secondary btn-block mb-4">글 쓰기</a>
+            </div>
+
+            <div class="row-cols-xl-2">
+                <div class="card shadow mb-4 text-dark bg-light">
+                    <!-- Card Header -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold">공지사항</h5>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div><a class="card-text text-dark" href="/notice/all">전체 공지사항</a></div>
+                        <div><a class="card-text text-dark" href="/notice/normal">일반 공지사항</a></div>
+                        <div><a class="card-text text-dark" href="/notice/lect">수업 공지사항</a></div>
+                        <div><a class="card-text text-dark" href="/notice/lab"><b>연구 공지사항</b></a></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-10">
+            <div class="card shadow mb-4 text-dark bg-light">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h5 class="m-0 font-weight-bold">연구 공지사항</h5>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table text-center table-hover">
+                        <thead class="thead-strong">
+                        <tr>
+                            <th style="width: 5%">번호</th>
+                            <th class="text-left" style="width: 40%">제목</th>
+                            <th style="width: 20%">작성자</th>
+                            <th style="width: 20%">작성일</th>
+                            <th style="width: 10%">조회수</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        <tr>
+                            <td style="width: 5%">2</td>
+                            <td class="text-left" style="width: 40%"><a href="#">연구 공지사항 예시2</a></td>
+                            <td style="width: 20%">관리자</td>
+                            <td style="width: 20%">2022.08.01</td>
+                            <td style="width: 10%">80</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 5%">1</td>
+                            <td class="text-left" style="width: 40%"><a href="#">연구 공지사항 예시1</a></td>
+                            <td style="width: 20%">관리자</td>
+                            <td style="width: 20%">2022.08.01</td>
+                            <td style="width: 10%">80</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </table>
+            </div>
+            <div>
+                <nav aria-label="paging">
+                    <ul class="pagination pagination-lg justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{{>footer}}

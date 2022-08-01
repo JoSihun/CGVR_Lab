@@ -2,78 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7f2ee6b-7334-45d3-bd23-90164ee4456d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/java/com/skuniv/cgvr/IndexController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/java/com/skuniv/cgvr/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/banner1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/banner2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/banner3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/logo_01.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/logo_02.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/logo_03.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/logo_04.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/signin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/templates/banner.mustache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/templates/footer.mustache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/templates/header.mustache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/templates/login.mustache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/templates/navbar.mustache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documents/참고사이트/BootStrap Components.url" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documents/참고사이트/BootStrap Free Template 1.url" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documents/참고사이트/BootStrap Free Template 2.url" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documents/참고사이트/BootStrap Free Template 3.url" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documents/참고사이트/BootStrap NavBar.url" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documents/참고사이트/Mustache 기초.url" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documents/참고사이트/Sportal httpRequest.url" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/java/com/skuniv/cgvr/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/java/com/skuniv/cgvr/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-grid.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-grid.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-grid.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-grid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-grid.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-grid.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-grid.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-grid.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-grid.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-grid.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-grid.rtl.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-grid.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-grid.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-grid.rtl.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-reboot.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-reboot.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-reboot.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-reboot.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-reboot.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-reboot.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-reboot.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-reboot.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-reboot.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-reboot.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-reboot.rtl.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-reboot.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-reboot.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-utilities.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-utilities.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-utilities.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-utilities.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-utilities.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-utilities.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-utilities.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-utilities.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-utilities.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-utilities.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-utilities.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-utilities.rtl.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-utilities.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-utilities.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.rtl.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/css/bootstrap.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.rtl.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.bundle.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.bundle.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.esm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.esm.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.esm.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.esm.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.esm.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.esm.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.esm.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/static/js/bootstrap.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/static/bootstrap.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/main/resources/templates/index.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/main/resources/templates/index.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringProject/src/test/java/com/skuniv/cgvr/CgvrApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringProject/src/test/java/com/skuniv/cgvr/CgvrApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documents/01_프로젝트_개발계획.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/documents/01_프로젝트_개발계획.pptx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
