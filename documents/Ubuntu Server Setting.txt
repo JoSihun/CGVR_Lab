@@ -46,3 +46,17 @@ SELECT User, Host, authentication_string FROM mysql.user;		# 계정정보 확인
 ps -aux | grep ssh					# Read SSH Process PID
 kill PID						# Kill Process, 첫 숫자가 PID
 ssh -O cancel -L 3307:localhost:3306 210.110.39.106		# SSH Tunneling 취소방법2
+
+=============================================================================
+# NginX Setting
+sudo apt update		# 서버 패키지 업데이트
+sudo apt upgrade		# 서버 패키지 업데이트
+sudo apt install nginx	# Install NginX
+sudo service nginx start	# NginX Service Start
+sudo service nginx status	# NginX Service Status
+sudo netstat -lntp		# Listening Port Check
+ps -ef | grep nginx		# Nginx Process Check
+
+sudo vim /etc/nginx/sites-enabled/test.conf	# 포트변경
+sudo vim /etc/nginx/nginx.conf		# 포트변경
+sudo systemctl restart nginx			# NginX Restart
