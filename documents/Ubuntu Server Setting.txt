@@ -49,9 +49,11 @@ ssh -O cancel -L 3307:localhost:3306 210.110.39.106		# SSH Tunneling 취소방�
 
 =============================================================================
 # NginX Setting
-sudo apt update		# 서버 패키지 업데이트
-sudo apt upgrade		# 서버 패키지 업데이트
-sudo apt install nginx	# Install NginX
+sudo apt update				# 서버 패키지 업데이트
+sudo apt upgrade				# 서버 패키지 업데이트
+sudo apt install nginx			# Install NginX
+sudo apt-get purge nginx nginx-common	# Nginx Clean Remove
+sudo apt-get autoremove			# 종속성 관련 패키지 삭제
 sudo service nginx start	# NginX Service Start
 sudo service nginx status	# NginX Service Status
 sudo netstat -lntp		# Listening Port Check
