@@ -1,42 +1,55 @@
 {{>header}}
 
-
 <div class="container-fluid">
     <div class="row mx-4 my-4 justify-content-center">
-        <!-- Sidebar -->
+        <!-- SideMenu Navbar -->
         <div class="col-lg-2">
-            <div id="scrollspy" class="sticky-top">
-                <ul class="nav flex-column nav-pills menu-sidebar">
-                    <li class="nav-item"><a class="nav-link" href="/introduction/professor"><h5>Professor</h5></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/introduction/researchers"><h5>Researchers</h5></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#section-3"><h5>Laboratory</h5></a></li>
-                </ul>
+            <div id="sidebar" class="position-fixed">
+                <h3>Introductions</h3><hr>
+                <nav class="nav nav-pills flex-column menu-sidebar">
+                    <a class="nav-link" href="/introduction/professor"><h4>Professor</h4></a>
+                    <a class="nav-link" href="/introduction/researchers"><h4>Researchers</h4></a>
+                    <a class="nav-link" href="#item-3"><h4>Laboratory</h4></a>
+                </nav>
             </div>
         </div>
 
         <!-- Content -->
         <div class="col-lg-8">
-            <div
-                data-mdb-spy="scroll"
-                data-mdb-target="#scrollspy"
-                data-mdb-offset="0"
-                class="scrollspy-example">
+            <div data-bs-spy="scroll" data-bs-target="#sidebar" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
 
-                <section id="section-3">
-                    <h3>Laboratory</h3>
-                    <hr class="divider-horizontal" />
-                    Laboratory
-                </section>
+                <div id="item-3">
+                    <h3>Laboratory</h3><hr>
+                    <div class="col-lg-auto mb-4">
+                        <img class="img-fluid rounded" src="/img/laboratory.jpg">
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>Skuniv CGVR LAB</strong></h5>
+                            <h6 class="card-subtitle mb-4 text-muted">북악관 - 506 / 02 940 7744</h6>
+                            <p class="card-text">
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+                                This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab. This is CGVR Lab.
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
 
             </div>
         </div>
-
-
-
-
     </div>
 </div>
-
 
 
 {{>footer}}
