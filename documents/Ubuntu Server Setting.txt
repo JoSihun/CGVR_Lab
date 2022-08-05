@@ -62,3 +62,17 @@ ps -ef | grep nginx		# Nginx Process Check
 sudo vim /etc/nginx/sites-enabled/test.conf	# 포트변경
 sudo vim /etc/nginx/nginx.conf		# 포트변경
 sudo systemctl restart nginx			# NginX Restart
+=============================================================================
+# Java Install
+sudp apt-get update
+sudo apt-get upgrade
+sudo apt-get install openjdk-11-jdk		# Java 11 Install
+java -version				# Java Install Check1
+javac -version				# Java Install Check2
+
+# Java 환경변수 Setting
+sudo vim ~/.bashrc							# 환경변수 파일열기
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))		# 맨 밑에 추가
+export PATH=$PATH:$JAVA_HOME/bin					# 맨 밑에 추가
+source ~/.bashrc							# 현재 터미널에 적용
+echo $JAVA_HOME							# 적용사항 확인
