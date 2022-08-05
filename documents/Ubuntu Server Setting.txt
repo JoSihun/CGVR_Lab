@@ -76,3 +76,17 @@ export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))		# 맨 밑�
 export PATH=$PATH:$JAVA_HOME/bin					# 맨 밑에 추가
 source ~/.bashrc							# 현재 터미널에 적용
 echo $JAVA_HOME							# 적용사항 확인
+
+=============================================================================
+# Spring NginX Server 연동
+WikiDocs 4-06 서버 스크립트 참고
+WikiDocs 4-08 NginX 참고
+
+=============================================================================
+# Ubuntu Server NginX 가동
+1) jar 배포파일 생성
+2) lib 폴더에서 최상단 폴더로 이동
+3) git push
+4) Ubuntu lab506에서 stop.sh 실행
+5) Ubuntu lab506에서 git pull
+6) Ubuntu lab506에서 start.sh 실행
