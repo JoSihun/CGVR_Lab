@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CGVR_PID=$(ps -ef | grep java | grep CGVR_Lab | awk '{print $2}')
+CGVR_PID=$(ps -ef | grep java | grep cgvr | awk '{print $2}')
 
 if [ -z "$CGVR_PID" ];
 then
