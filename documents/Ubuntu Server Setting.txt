@@ -1,0 +1,92 @@
+# Ubuntu Add USER
+sudo deluser username		# 계정삭제
+sudo adduser username		# 계정추가
+sudo usermod -aG sudo username	# 계정권한부여1
+sudo vim /etc/sudoers		# 계정권한부여2
+username	ALL=(ALL:ALL) ALL		# 계정권한부여2
+:wq				# 계정권한부여2
+
+=============================================================================
+# Git 설치
+sudo apt-get update
+sudo apt-get install git
+
+=============================================================================
+# Ubuntu MySQL Setting
+sudo apt-get install mysql-server
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf	# Port 변경 시 수정
+sudo ufw allow mysql			# Port 3306(Default)
+sudo systemctl start mysql			# MySQL Service 시작
+sudo systemctl enable mysql			# Ubuntu 서버 재시작 시 MySQL 자동 재시작
+sudo mysql -u root -p			# MySQL 접속
+
+=============================================================================
+# MySQL Add DATABASE
+SELECT User, Host, authentication_string FROM mysql.user;		# 계정정보 확인
+CREATE DATABASE DB이름;					# 데이터베이스 생성
+SHOW DATABASES;						# 데이터베이스 확인
+
+=============================================================================
+# MySQL Add USER
+show variables like 'validate_password%';				# 보안레벨 확인
+set global validate_password.policy=LOW;			# 보안레벨 변경
+CREATE USER '유저이름'@'localhost' IDENTIFIED BY '비밀번호';	# 계정 생성
+FLUSH PRIVILEGES;						# 변경사항 적용
+SELECT User, Host, authentication_string FROM mysql.user;		# 계정정보 확인
+
+=============================================================================
+# MySQL Add USER GRANT
+GRANT ALL PRIVILEGES ON DB이름.* TO '유저이름'@'localhost';	# 계정권한 부여
+FLUSH PRIVILEGES;						# 변경사항 적용
+SHOW GRANTS FOR '유저이름'@'localhost';			# 계정권한 확인
+SELECT User, Host, authentication_string FROM mysql.user;		# 계정정보 확인
+
+=============================================================================
+# SSH Manual Tunneling Cancel
+ps -aux | grep ssh					# Read SSH Process PID
+kill PID						# Kill Process, 첫 숫자가 PID
+ssh -O cancel -L 3307:localhost:3306 210.110.39.106		# SSH Tunneling 취소방법2
+
+=============================================================================
+# NginX Setting
+sudo apt update				# 서버 패키지 업데이트
+sudo apt upgrade				# 서버 패키지 업데이트
+sudo apt install nginx			# Install NginX
+sudo apt-get purge nginx nginx-common	# Nginx Clean Remove
+sudo apt-get autoremove			# 종속성 관련 패키지 삭제
+sudo service nginx start	# NginX Service Start
+sudo service nginx status	# NginX Service Status
+sudo netstat -lntp		# Listening Port Check
+ps -ef | grep nginx		# Nginx Process Check
+
+sudo vim /etc/nginx/sites-enabled/test.conf	# 포트변경
+sudo vim /etc/nginx/nginx.conf		# 포트변경
+sudo systemctl restart nginx			# NginX Restart
+=============================================================================
+# Java Install
+sudp apt-get update
+sudo apt-get upgrade
+sudo apt-get install openjdk-11-jdk		# Java 11 Install
+java -version				# Java Install Check1
+javac -version				# Java Install Check2
+
+# Java 환경변수 Setting
+sudo vim ~/.bashrc							# 환경변수 파일열기
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))		# 맨 밑에 추가
+export PATH=$PATH:$JAVA_HOME/bin					# 맨 밑에 추가
+source ~/.bashrc							# 현재 터미널에 적용
+echo $JAVA_HOME							# 적용사항 확인
+
+=============================================================================
+# Spring NginX Server 연동
+WikiDocs 4-06 서버 스크립트 참고
+WikiDocs 4-08 NginX 참고
+
+=============================================================================
+# Ubuntu Server NginX 가동
+1) jar 배포파일 생성
+2) lib 폴더에서 최상단 폴더로 이동
+3) git push
+4) Ubuntu lab506에서 stop.sh 실행
+5) Ubuntu lab506에서 git pull
+6) Ubuntu lab506에서 start.sh 실행

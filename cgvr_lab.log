@@ -1,0 +1,33 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.6.9)
+
+2022-08-05 16:46:55.630  INFO 9056 --- [           main] com.skuniv.cgvr.CgvrApplication          : Starting CgvrApplication using Java 11.0.16 on lab506-System-Product-Name with PID 9056 (/home/lab506/바탕화면/CGVR_Lab/cgvr-0.0.1-SNAPSHOT.jar started by lab506 in /home/lab506/바탕화면/CGVR_Lab)
+2022-08-05 16:46:55.632  INFO 9056 --- [           main] com.skuniv.cgvr.CgvrApplication          : No active profile set, falling back to 1 default profile: "default"
+2022-08-05 16:46:56.078  INFO 9056 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-08-05 16:46:56.089  INFO 9056 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2022-08-05 16:46:56.481  INFO 9056 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-08-05 16:46:56.490  INFO 9056 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-08-05 16:46:56.490  INFO 9056 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.64]
+2022-08-05 16:46:56.544  INFO 9056 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-08-05 16:46:56.544  INFO 9056 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 873 ms
+2022-08-05 16:46:56.685  INFO 9056 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-08-05 16:46:56.720  INFO 9056 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.9.Final
+2022-08-05 16:46:56.847  INFO 9056 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-08-05 16:46:56.912  INFO 9056 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-08-05 16:46:57.046  INFO 9056 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-08-05 16:46:57.068  INFO 9056 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-08-05 16:46:57.228  INFO 9056 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-08-05 16:46:57.235  INFO 9056 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-08-05 16:46:57.267  WARN 9056 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-08-05 16:46:57.405  INFO 9056 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-08-05 16:46:57.507  INFO 9056 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-08-05 16:46:57.514  INFO 9056 --- [           main] com.skuniv.cgvr.CgvrApplication          : Started CgvrApplication in 2.216 seconds (JVM running for 2.527)
+2022-08-05 16:55:33.925  INFO 9056 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-08-05 16:55:33.926  INFO 9056 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-08-05 16:55:33.927  INFO 9056 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
