@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class NormalNotController {
     @GetMapping("/notice/normal")
     public String allNotice() {
-        return "normalnotice";
+        return "Notice/normalnotice";
     }
 }

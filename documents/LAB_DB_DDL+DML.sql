@@ -15,6 +15,11 @@ create table tag (
     content varchar(10)							# 태그 내용
 );
 
+create table attachment (
+	id integer auto_increment primary key,		# 첨부파일 id
+    file varchar(255)							# 내용
+);
+
 create table general_notice_board(				# 일반 공지사항
 	id integer auto_increment primary key,		# 게시글 id
     title varchar(50) not null,					# 게시글제목
@@ -24,15 +29,10 @@ create table general_notice_board(				# 일반 공지사항
     mod_date date,								# 수정일
     author varchar(30) not null,				# 작성자
     tag_id integer,								# 태그 아이디
+    attachment_id integer,						# 첨부파일 아이디
     foreign key (tag_id) references tag(id)
-    on delete cascade on update cascade
-);
-
-create table general_notice_attachment(			# 일반 공지사항 첨부파일
-	id integer,									# 게시글 id
-    file varchar(200),							# 첨부파일
-    primary key(id, file),
-    foreign key (id) references general_notice_board(id)
+    on delete cascade on update cascade,
+    foreign key (attachment_id) references attachment(id)
     on delete cascade on update cascade
 );
 
@@ -45,15 +45,10 @@ create table lecture_notice_board(				# 수업 공지사항
     mod_date date,								# 수정일
     author varchar(30) not null,				# 작성자
     tag_id integer,								# 태그 아이디
+    attachment_id integer,						# 첨부파일 아이디
     foreign key (tag_id) references tag(id)
-    on delete cascade on update cascade
-);
-
-create table lecture_notice_attachment(			# 수업 공지사항 첨부파일
-	id integer,									# 게시글 id
-    file varchar(200),							# 첨부파일
-    primary key(id, file),
-    foreign key (id) references lecture_notice_board(id)
+    on delete cascade on update cascade,
+    foreign key (attachment_id) references attachment(id)
     on delete cascade on update cascade
 );
 
@@ -68,19 +63,14 @@ create table laboratory_notice_board(			# 연구 공지사항
     tag1_id integer,							# 1차 태그 아이디
     tag2_id integer,							# 2차 태그 아이디
     tag3_id integer,							# 3차 태그 아이디
+    attachment_id integer,						# 첨부파일 아이디
     foreign key (tag1_id) references tag(id)
     on delete cascade on update cascade,
     foreign key (tag2_id) references tag(id)
     on delete cascade on update cascade,
     foreign key (tag3_id) references tag(id)
-    on delete cascade on update cascade
-);
-
-create table laboratory_notice_attachment(		# 연구 공지사항 첨부파일
-	id integer,									# 게시글 id
-    file varchar(200),							# 첨부파일
-    primary key(id, file),
-    foreign key (id) references laboratory_notice_board(id)
+    on delete cascade on update cascade,
+	foreign key (attachment_id) references attachment(id)
     on delete cascade on update cascade
 );
 
@@ -94,19 +84,15 @@ create table paper_board(						# 논문 게시판
     author varchar(30) not null,				# 작성자
     tag1_id integer,							# 1차 태그 아이디
     tag2_id integer,							# 2차 태그 아이디
+    attachment_id integer,						# 첨부파일 아이디
     foreign key (tag1_id) references tag(id)
     on delete cascade on update cascade,
     foreign key (tag2_id) references tag(id)
+    on delete cascade on update cascade,
+	foreign key (attachment_id) references attachment(id)
     on delete cascade on update cascade
 );
 
-create table paper_attachment(					# 논문 게시판 첨부파일
-	id integer,									# 게시글 id
-    file varchar(200),							# 첨부파일
-    primary key(id, file),
-    foreign key (id) references paper_board(id)
-    on delete cascade on update cascade
-);
 
 create table material_board(					# 자료 게시판
 	id integer auto_increment primary key,		# 게시글 id
@@ -118,17 +104,12 @@ create table material_board(					# 자료 게시판
     author varchar(30) not null,				# 작성자
     tag1_id integer,							# 1차 태그 아이디
     tag2_id integer,							# 2차 태그 아이디
+    attachment_id integer,						# 첨부파일 아이디
     foreign key (tag1_id) references tag(id)
     on delete cascade on update cascade,
     foreign key (tag2_id) references tag(id)
-    on delete cascade on update cascade
-);
-
-create table material_attachment(				# 자료 게시판 첨부파일
-	id integer,									# 게시글 id
-    file varchar(200),							# 첨부파일
-    primary key(id, file),
-    foreign key (id) references material_board(id)
+    on delete cascade on update cascade,
+	foreign key (attachment_id) references attachment(id)
     on delete cascade on update cascade
 );
 

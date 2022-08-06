@@ -1,7 +1,7 @@
 {{>header}}
 {{>banner}}
 <div class="container-fluid mt-4">
-    <div class="row">
+    <div class="row mx-4 my-4">
         <div class="col-xl-2">
             <div class="card shadow mb-4 text-dark bg-light">
                 <!-- Card Header -->
@@ -20,25 +20,25 @@
                     <input type="text" class="form-control mb-4" id="search" placeholder="게시글 제목입력"/>
                 </div>
                 <div class="col-xl-4">
-                    <a href="#" role="button" class="btn btn-outline-secondary btn-block mb-4">검색</a>
+                    <a href="#" role="button" class="btn btn-outline-dark btn-block mb-4">검색</a>
                 </div>
             </div>
 
             <div class="row-cols-xl-2">
-                <a href="#" role="button" class="btn btn-outline-secondary btn-block mb-4">글 쓰기</a>
+                <a href="#" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
             </div>
 
-            <div class="row-cols-xl-2">
-                <div class="card shadow mb-4 text-dark bg-light">
+            <div class="row-cols-xl">
+                <div class="card shadow text-dark bg-light">
                     <!-- Card Header -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h5 class="m-0 font-weight-bold">공지사항</h5>
                     </div>
                     <!-- Card Body -->
-                    <div class="card-body">
+                    <div class="card-body" style="align-content: baseline">
                         <div><a class="card-text text-dark" href="/notice/all">전체 공지사항</a></div>
-                        <div><a class="card-text text-dark" href="/notice/normal">일반 공지사항</a></div>
-                        <div><a class="card-text text-dark" href="/notice/lect"><b>수업 공지사항</b></a></div>
+                        <div><a class="card-text text-dark" href="/notice/normal"><b>일반 공지사항</b></a></div>
+                        <div><a class="card-text text-dark" href="/notice/lect">수업 공지사항</a></div>
                         <div><a class="card-text text-dark" href="/notice/lab">연구 공지사항</a></div>
                     </div>
                 </div>
@@ -46,10 +46,10 @@
 
         </div>
         <div class="col-xl-10">
-            <div class="card shadow mb-4 text-dark bg-light">
+            <div class="card shadow h-100 mb-4 text-dark bg-light">
                 <!-- Card Header -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h5 class="m-0 font-weight-bold">수업 공지사항</h5>
+                    <h5 class="m-0 font-weight-bold">일반 공지사항</h5>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -66,14 +66,14 @@
                         <tbody id="tbody">
                         <tr>
                             <td style="width: 5%">2</td>
-                            <td class="text-left" style="width: 40%"><a href="#">수업 공지사항 예시2</a></td>
+                            <td class="text-left" style="width: 40%"><a href="#">일반 공지사항 예시2</a></td>
                             <td style="width: 20%">관리자</td>
                             <td style="width: 20%">2022.08.01</td>
                             <td style="width: 10%">80</td>
                         </tr>
                         <tr>
                             <td style="width: 5%">1</td>
-                            <td class="text-left" style="width: 40%"><a href="#">수업 공지사항 예시1</a></td>
+                            <td class="text-left" style="width: 40%"><a href="#">일반 공지사항 예시1</a></td>
                             <td style="width: 20%">관리자</td>
                             <td style="width: 20%">2022.08.01</td>
                             <td style="width: 10%">80</td>

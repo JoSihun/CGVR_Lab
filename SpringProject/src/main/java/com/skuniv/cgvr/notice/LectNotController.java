@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LectNotController {
     @GetMapping("/notice/lect")
     public String allNotice() {
-        return "lectnotice";
+        return "Notice/lectnotice";
     }
 }

@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LabNotController {
     @GetMapping("/notice/lab")
     public String allNotice() {
-        return "labnotice";
+        return "Notice/labnotice";
     }
 }
