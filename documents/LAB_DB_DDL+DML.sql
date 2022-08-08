@@ -25,8 +25,8 @@ create table general_notice_board(				# 일반 공지사항
     title varchar(50) not null,					# 게시글제목
     content varchar(200) not null,				# 게시글내용
     hits integer not null,						# 조회수
-    reg_date date not null,						# 작성일
-    mod_date date,								# 수정일
+    reg_date datetime not null,						# 작성일
+    mod_date datetime,								# 수정일
     author varchar(30) not null,				# 작성자
     tag_id integer,								# 태그 아이디
     attachment_id integer,						# 첨부파일 아이디
@@ -41,8 +41,8 @@ create table lecture_notice_board(				# 수업 공지사항
     title varchar(50) not null,					# 게시글제목
     content varchar(200) not null,				# 게시글내용
     hits integer not null,						# 조회수
-    reg_date date not null,						# 작성일
-    mod_date date,								# 수정일
+    reg_date datetime not null,						# 작성일
+    mod_date datetime,								# 수정일
     author varchar(30) not null,				# 작성자
     tag_id integer,								# 태그 아이디
     attachment_id integer,						# 첨부파일 아이디
@@ -57,8 +57,8 @@ create table laboratory_notice_board(			# 연구 공지사항
     title varchar(50) not null,					# 게시글제목
     content varchar(200) not null,				# 게시글내용
     hits integer not null,						# 조회수
-    reg_date date not null,						# 작성일
-    mod_date date,								# 수정일
+    reg_date datetime not null,						# 작성일
+    mod_date datetime,								# 수정일
     author varchar(30) not null,				# 작성자
     tag1_id integer,							# 1차 태그 아이디
     tag2_id integer,							# 2차 태그 아이디
@@ -79,8 +79,8 @@ create table paper_board(						# 논문 게시판
     title varchar(50) not null,					# 게시글제목
     content varchar(200) not null,				# 게시글내용
     hits integer not null,						# 조회수
-    reg_date date not null,						# 작성일
-    mod_date date,								# 수정일
+    reg_date datetime not null,						# 작성일
+    mod_date datetime,								# 수정일
     author varchar(30) not null,				# 작성자
     tag1_id integer,							# 1차 태그 아이디
     tag2_id integer,							# 2차 태그 아이디
@@ -99,8 +99,8 @@ create table material_board(					# 자료 게시판
     title varchar(50) not null,					# 게시글제목
     content varchar(200) not null,				# 게시글내용
     hits integer not null,						# 조회수
-    reg_date date not null,						# 작성일
-    mod_date date,								# 수정일
+    reg_date datetime not null,						# 작성일
+    mod_date datetime,								# 수정일
     author varchar(30) not null,				# 작성자
     tag1_id integer,							# 1차 태그 아이디
     tag2_id integer,							# 2차 태그 아이디

@@ -29,8 +29,8 @@ create table notice_board(						# 공지 게시판
     title varchar(50) not null,					# 게시글제목
     content varchar(200) not null,				# 게시글내용
     hits integer not null,						# 조회수
-    reg_date date not null,						# 작성일
-    mod_date date,								# 수정일
+    reg_date datetime not null,						# 작성일
+    mod_date datetime,								# 수정일
     author varchar(30) not null,				# 작성자
     tag_id integer,								# 태그 아이디
     attachment_id integer,						# 첨부파일 아이디
@@ -47,8 +47,8 @@ create table material_board(					# 자료 게시판
     title varchar(50) not null,					# 게시글제목
     content varchar(200) not null,				# 게시글내용
     hits integer not null,						# 조회수
-    reg_date date not null,						# 작성일
-    mod_date date,								# 수정일
+    reg_date datetime not null,						# 작성일
+    mod_date datetime,								# 수정일
     author varchar(30) not null,				# 작성자
     tag_id integer,								# 태그 아이디
     attachment_id integer,						# 첨부파일 아이디
@@ -65,8 +65,8 @@ create table practice_board(					# 실습 게시판
     title varchar(50) not null,					# 게시글제목
     content varchar(200) not null,				# 게시글내용
     hits integer not null,						# 조회수
-    reg_date date not null,						# 작성일
-    mod_date date,								# 수정일
+    reg_date datetime not null,						# 작성일
+    mod_date datetime,								# 수정일
     author varchar(30) not null,				# 작성자
     tag_id integer,								# 태그 아이디
     attachment_id integer,						# 첨부파일 아이디
@@ -83,8 +83,8 @@ create table assignment_board(					# 과제 게시판
     title varchar(50) not null,					# 게시글제목
     content varchar(200) not null,				# 게시글내용
     hits integer not null,						# 조회수
-    reg_date date not null,						# 작성일
-    mod_date date,								# 수정일
+    reg_date datetime not null,						# 작성일
+    mod_date datetime,								# 수정일
     author varchar(30) not null,				# 작성자
     tag_id integer,								# 태그 아이디
     attachment_id integer,						# 첨부파일 아이디

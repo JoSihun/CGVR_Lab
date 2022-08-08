@@ -1,12 +1,12 @@
-package com.skuniv.cgvr.notice;
+package com.skuniv.cgvr.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LabNotController {
-    @GetMapping("/notice/lab")
+public class AllNotController {
+    @GetMapping("/notice/all")
     public String allNotice() {
-        return "Notice/labnotice";
+        return "notice/allnotice";
     }
 }

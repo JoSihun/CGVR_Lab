@@ -1,0 +1,37 @@
+{{>header}}
+<div class="container-fluid mt-4">
+    <div class="col-xl-12">
+        <div style="align-content: center">
+            <h1>게시글 임시 등록페이지</h1>
+        </div>
+        <form action="/notice/lect/save" method="post">
+            <div class="form_group">
+                <label for="title">제목</label>
+                <input type="text" class=form-control name="title" placeholder="제목입력"/>
+            </div>
+            <div class="form_group">
+                <label for="content">내용</label>
+                <input type="text" class=form-control name="content" placeholder="내용입력"/>
+            </div>
+            <div class="form_group">
+                <label for="hits">조회수</label>
+                <input type="text" class=form-control name="hits" placeholder="조회수입력"/>
+            </div>
+            <div class="form_group">
+                <label for="author">작성자</label>
+                <input type="text" class=form-control name="author" placeholder="작성자입력"/>
+            </div>
+            <div class="form_group">
+                <label for="tag_id">태그</label>
+                <input type="text" class=form-control name=tag_id" placeholder="태그아이디입력"/>
+            </div>
+            <div class="form_group">
+                <label for="attachment_id">첨부파일</label>
+                <input type="text" class=form-control name="attachment_id" placeholder="첨부파일아이디입력"/>
+            </div>
+            <a href="javascript:history.back();">취소</a>
+            <input type="submit" class="btn-outline-dark" value="등록">
+        </form>
+    </div>
+</div>
+{{>footer}}
