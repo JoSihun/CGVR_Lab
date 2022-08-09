@@ -24,8 +24,6 @@ public class Laboratory_Notice_Dto {
                 .title(title)
                 .content(content)
                 .hits(hits)
-                .reg_date(reg_date)
-                .mod_date(mod_date)
                 .author(author)
                 .tag1_id(tag1_id)
                 .tag2_id(tag2_id)

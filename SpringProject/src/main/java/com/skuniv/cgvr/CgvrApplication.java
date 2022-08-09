@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.annotation.PreDestroy;
 
-@EnableJpaAuditing
+@EnableJpaAuditing		// JPA Auditing 기능 사용을 위함
 @SpringBootApplication
 public class CgvrApplication {
 

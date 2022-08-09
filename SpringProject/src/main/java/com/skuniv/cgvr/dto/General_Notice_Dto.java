@@ -27,8 +27,6 @@ public class General_Notice_Dto {
                 .title(title)
                 .content(content)
                 .hits(hits)
-                .reg_date(reg_date)
-                .mod_date(mod_date)
                 .author(author)
                 .tag_id(tag_id)
                 .attachment_id(attachment_id)
