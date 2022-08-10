@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LectureNoticeController {
     @GetMapping("/notice/lect")
-    public String allNotice() {
-        return "Notice/lectnotice";
+    public String lecture() {
+        return "notice_lecture";
     }
 }
