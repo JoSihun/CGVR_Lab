@@ -1,4 +1,4 @@
-package com.skuniv.cgvr;
+package com.skuniv.cgvr.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

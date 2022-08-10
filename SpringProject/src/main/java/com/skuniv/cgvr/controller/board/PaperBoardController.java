@@ -1,2 +1,4 @@
-package com.skuniv.cgvr.controller.board;public class PaperController {
+package com.skuniv.cgvr.controller.board;
+
+public class PaperBoardController {
 }

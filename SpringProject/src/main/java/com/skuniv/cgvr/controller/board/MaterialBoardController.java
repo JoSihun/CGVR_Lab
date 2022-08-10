@@ -1,2 +1,4 @@
-package com.skuniv.cgvr.controller.board;public class MaterialController {
+package com.skuniv.cgvr.controller.board;
+
+public class MaterialBoardController {
 }

@@ -1,4 +1,4 @@
-package com.skuniv.cgvr.post;
+package com.skuniv.cgvr.controller.post;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
