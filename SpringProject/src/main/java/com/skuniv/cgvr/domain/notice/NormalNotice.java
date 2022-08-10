@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
-@Entity
+@Entity(name="normal_notice")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
@@ -34,4 +34,9 @@ public class NormalNotice extends TimeEntity{   // Auditing 기능 사용 Entity
     private Integer tag3_id;
     @Column
     private Integer attachment_id;
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }

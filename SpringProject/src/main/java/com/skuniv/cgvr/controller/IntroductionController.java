@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IntroductionController {
     @GetMapping("/introduction/professor")
     public String professor() {
-        return "professor";
+        return "introduction_professor";
     }
 
     @GetMapping("/introduction/researchers")
     public String researchers() {
-        return "researchers";
+        return "introduction_researchers";
     }
 
     @GetMapping("/introduction/laboratory")
     public String laboratory() {
-        return "laboratory";
+        return "introduction_laboratory";
     }
 }

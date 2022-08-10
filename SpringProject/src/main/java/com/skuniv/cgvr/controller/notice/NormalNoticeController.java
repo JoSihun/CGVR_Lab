@@ -1,11 +1,14 @@
 package com.skuniv.cgvr.controller.notice;
 
+import com.skuniv.cgvr.dto.notice.LectureNoticeDto;
 import com.skuniv.cgvr.dto.notice.NormalNoticeDto;
 import com.skuniv.cgvr.service.notice.NormalNoticeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -19,7 +22,7 @@ public class NormalNoticeController {
 
     @GetMapping("/notice/normal")
     public String norNotice(Model model) {
-        List<NormalNoticeDto> boardDtoList = normal_notice_service.getList();
+        List<NormalNoticeDto> boardDtoList = normal_notice_service.findAllDesc();
         model.addAttribute("normal_notice_board", boardDtoList);
         return "notice_normal";
     }
@@ -34,5 +37,17 @@ public class NormalNoticeController {
     public String write(NormalNoticeDto Dto) {
         normal_notice_service.savePost(Dto);
         return "redirect:/notice/normal";
+    }
+    @RequestMapping("notice/post_form")
+    public String post_form() {
+        return "notice_post_form";
+    }
+
+    /* detail tmp mapping */
+    @GetMapping("/notice/normal/{id}")
+    public String findById(@PathVariable Integer id, Model model) {
+        NormalNoticeDto normalNoticeDto = normal_notice_service.findById(id);
+        model.addAttribute("post", normalNoticeDto);
+        return "notice_detail";
     }
 }

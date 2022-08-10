@@ -5,6 +5,7 @@ import com.skuniv.cgvr.service.notice.LectureNoticeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class LectureNoticeController {
 
     @GetMapping("/notice/lecture")
     public String lectNotice(Model model) {
-        List<LectureNoticeDto> boardDtoList = lecture_notice_service.getList();
+        List<LectureNoticeDto> boardDtoList = lecture_notice_service.findAllDesc();
         model.addAttribute("lecture_notice_board", boardDtoList);
         return "notice_lecture";
     }
@@ -34,5 +35,12 @@ public class LectureNoticeController {
     public String write(LectureNoticeDto Dto) {
         lecture_notice_service.savePost(Dto);
         return "redirect:/notice/lecture";
+    }
+    /* detail tmp mapping */
+    @GetMapping("/notice/lecture/{id}")
+    public String findById(@PathVariable Integer id, Model model) {
+        LectureNoticeDto  lectureNoticeDto = lecture_notice_service.findById(id);
+        model.addAttribute("post", lectureNoticeDto);
+        return "notice_detail";
     }
 }

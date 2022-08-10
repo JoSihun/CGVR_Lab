@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name="lecture_notice")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
@@ -31,4 +31,8 @@ public class LectureNotice extends TimeEntity{   // Auditing 기능 사용 Entit
     private Integer tag3_id;
     @Column
     private Integer attachment_id;
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }

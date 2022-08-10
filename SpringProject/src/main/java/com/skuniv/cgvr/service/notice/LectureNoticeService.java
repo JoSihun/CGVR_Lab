@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LectureNoticeService {
@@ -17,8 +18,9 @@ public class LectureNoticeService {
         this.lecture_notice_repository = lecture_notice_repository;
     }
     //@Transactional(readOnly = true) // 조회 기능만 남김
+    /* 단순 조회 */
     @Transactional
-    public List<LectureNoticeDto> getList() {
+    public List<LectureNoticeDto> findAll() {
         List<LectureNotice> boards = lecture_notice_repository.findAll();
         List<LectureNoticeDto> DtoList = new ArrayList<>();
 
@@ -38,10 +40,19 @@ public class LectureNoticeService {
                     .build();
             DtoList.add(Dto);
         }
-
         return DtoList;
     }
-
+    /* 역순 조회 */
+    @Transactional
+    public List<LectureNoticeDto> findAllDesc() {
+        return lecture_notice_repository.findAllDesc().stream()
+                .map(LectureNoticeDto::new)
+                .collect(Collectors.toList());
+    }
+    public LectureNoticeDto findById(Integer id) {
+        LectureNotice entity = lecture_notice_repository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 게시글이 존재하지 않음. id = " + id));
+        return new LectureNoticeDto(entity);
+    }
     @Transactional
     public Integer savePost(LectureNoticeDto Dto) {
         return lecture_notice_repository.save(Dto.toEntity()).getId();

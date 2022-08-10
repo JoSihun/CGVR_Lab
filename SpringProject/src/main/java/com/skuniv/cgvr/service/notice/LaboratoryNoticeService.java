@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LaboratoryNoticeService {
@@ -17,8 +18,9 @@ public class LaboratoryNoticeService {
         this.laboratory_notice_repository = laboratory_notice_repository;
     }
     //@Transactional(readOnly = true) // 조회 기능만 남김
+    /* 단순 조회 */
     @Transactional
-    public List<LaboratoryNoticeDto> getList() {
+    public List<LaboratoryNoticeDto> findAll() {
         List<LaboratoryNotice> boards = laboratory_notice_repository.findAll();
         List<LaboratoryNoticeDto> DtoList = new ArrayList<>();
 
@@ -38,10 +40,18 @@ public class LaboratoryNoticeService {
                     .build();
             DtoList.add(Dto);
         }
-
         return DtoList;
     }
-
+    @Transactional
+    public List<LaboratoryNoticeDto> findAllDesc() {
+        return laboratory_notice_repository.findAllDesc().stream()
+                .map(LaboratoryNoticeDto::new)
+                .collect(Collectors.toList());
+    }
+    public LaboratoryNoticeDto findById(Integer id) {
+        LaboratoryNotice entity = laboratory_notice_repository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 게시글이 존재하지 않음. id = " + id));
+        return new LaboratoryNoticeDto(entity);
+    }
     @Transactional
     public Integer savePost(LaboratoryNoticeDto Dto) {
         return laboratory_notice_repository.save(Dto.toEntity()).getId();
