@@ -1,4 +1,4 @@
-package com.skuniv.cgvr.domain.entity;
+package com.skuniv.cgvr.domain.notice;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
 public class TimeEntity {
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime reg_date;
+    private LocalDateTime regDate;
 
     @LastModifiedDate
     @Column
-    private LocalDateTime mod_date;
+    private LocalDateTime modDate;
 
 }

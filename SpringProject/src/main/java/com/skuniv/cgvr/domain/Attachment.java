@@ -1,4 +1,4 @@
-package com.skuniv.cgvr.domain.entity;
+package com.skuniv.cgvr.domain;
 
 import lombok.Builder;
 import lombok.Getter;
