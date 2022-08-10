@@ -21,13 +21,13 @@ public class Lecture_Notice_Controller {
     public String lectNotice(Model model) {
         List<Lecture_Notice_Dto> boardDtoList = lecture_notice_service.getList();
         model.addAttribute("lecture_notice_board", boardDtoList);
-        return "notice/lectnotice";
+        return "notice_lecture";
     }
 
     /* Tmp Save Btn Page */
     @GetMapping("/notice/lect/save")
     public String write() {
-        return "notice/tmpposts-save";
+        return "tmpposts-save";
     }
 
     @PostMapping("/notice/lect/save")

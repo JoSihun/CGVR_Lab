@@ -1,9 +1,7 @@
 package com.skuniv.cgvr.controller;
 
 import com.skuniv.cgvr.dto.General_Notice_Dto;
-import com.skuniv.cgvr.dto.Lecture_Notice_Dto;
 import com.skuniv.cgvr.service.General_Notice_Service;
-import com.skuniv.cgvr.service.Lecture_Notice_Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +21,13 @@ public class General_Notice_Controller {
     public String norNotice(Model model) {
         List<General_Notice_Dto> boardDtoList = general_notice_service.getList();
         model.addAttribute("general_notice_board", boardDtoList);
-        return "notice/normalnotice";
+        return "notice_normal";
     }
 
     /* Tmp Save Btn Page */
     @GetMapping("/notice/normal/save")
     public String write() {
-        return "notice/tmpposts-save";
+        return "tmpposts-save";
     }
 
     @PostMapping("/notice/normal/save")
