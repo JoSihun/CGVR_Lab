@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LectureNoticeController {
-    @GetMapping("/notice/lect")
-    public String lecture() {
+    @GetMapping("/notice/lecture")
+    public String lecture_notice() {
         return "notice_lecture";
     }
 }
