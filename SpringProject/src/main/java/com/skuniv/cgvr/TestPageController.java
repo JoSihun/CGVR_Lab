@@ -13,4 +13,7 @@ public class TestPageController {
 
     @GetMapping("/testpage_professor")
     public String testpage_professor() { return "testpage_professor"; }
+
+    @GetMapping("/testpage_post_form")
+    public String testpage_post_form() { return "testpage_post_form"; }
 }

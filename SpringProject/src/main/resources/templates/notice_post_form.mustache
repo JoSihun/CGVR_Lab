@@ -54,6 +54,15 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <form method="post">
+                        <!-- Category -->
+                        <div class="mx-4 my-4">
+                            <label for="category" class="form-label">카테고리</label>
+                            <select class="form-control" name="category">
+                                <option value="1">일반 공지사항</option>
+                                <option value="2">수업 공지사항</option>
+                                <option value="3">연구 공지사항</option>
+                            </select>
+                        </div>
                         <!-- Title -->
                         <div class="mx-4 my-4">
                             <label for="subject" class="form-label">제목</label>
@@ -63,7 +72,8 @@
                         <!-- Attachment  -->
                         <div class="mx-4 my-4">
                             <label class="form-label">첨부파일</label>
-                            <input type="file" class="form-control" aria-label="file example" required>
+<!--                            <input type="file" class="form-control" aria-label="file example" required>-->
+                            <input type="file" class="form-control" aria-label="file example">
                             <div class="invalid-feedback">Example invalid form file feedback</div>
                         </div>
 
@@ -72,6 +82,7 @@
                             <label for="editordata" class="form-label">내용</label>
                             <textarea id="summernote" name="editordata" class="form-control"></textarea>
                         </div>
+
                         <div class="mx-4 my-4 text-end">
                             <input class="btn btn-dark my-2" type="submit" value="저장하기">
                         </div>
@@ -92,7 +103,7 @@
             maxHeight: null,
             focus: true,
             lang: "ko-KR",
-            placeholder: '최대 2048자까지 쓸 수 있습니다'
+            placeholder: '내용을 입력하세요'
         });
     });
 </script>
