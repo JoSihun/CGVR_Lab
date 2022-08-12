@@ -3,6 +3,7 @@ package com.skuniv.cgvr.service.notice;
 import com.skuniv.cgvr.domain.notice.NormalNotice;
 import com.skuniv.cgvr.repository.notice.NormalNoticeRepository;
 import com.skuniv.cgvr.dto.notice.NormalNoticeDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class NormalNoticeService {
     private final NormalNoticeRepository normal_notice_repository;
 
+    @Autowired
     public NormalNoticeService(NormalNoticeRepository normal_notice_repository) {
         this.normal_notice_repository = normal_notice_repository;
     }
@@ -34,15 +36,16 @@ public class NormalNoticeService {
                     .regDate(board.getRegDate())
                     .modDate(board.getModDate())
                     .author(board.getAuthor())
-                    .tag1_id(board.getTag1_id())
-                    .tag2_id(board.getTag2_id())
-                    .tag3_id(board.getTag3_id())
+                    .category1_id(board.getCategory1_id())
+                    .category2_id(board.getCategory2_id())
+                    .category3_id(board.getCategory3_id())
                     .attachment_id(board.getAttachment_id())
                     .build();
             DtoList.add(Dto);
         }
         return DtoList;
     }
+    /* 역순 조회 */
     @Transactional
     public List<NormalNoticeDto> findAllDesc() {
         return normal_notice_repository.findAllDesc().stream()

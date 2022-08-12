@@ -21,8 +21,8 @@ public class LaboratoryNoticeController {
 
     @GetMapping("/notice/laboratory")
     public String labNotice(Model model) {
-        List<LaboratoryNoticeDto> boardDtoList = laboratory_notice_service.findAllDesc();
-        model.addAttribute("laboratory_notice_board", boardDtoList);
+        List<LaboratoryNoticeDto> noticeDtoList = laboratory_notice_service.findAllDesc();
+        model.addAttribute("laboratory_notice_list", noticeDtoList);
         return "notice_laboratory";
     }
 

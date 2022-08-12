@@ -27,11 +27,11 @@ public class NormalNotice extends TimeEntity{   // Auditing 기능 사용 Entity
     @Column
     private String author;
     @Column(nullable = false)
-    private Integer tag1_id;
+    private Integer category1_id;
     @Column
-    private Integer tag2_id;
+    private Integer category2_id;
     @Column
-    private Integer tag3_id;
+    private Integer category3_id;
     @Column
     private Integer attachment_id;
 

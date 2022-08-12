@@ -20,8 +20,8 @@ public class LectureNoticeController {
 
     @GetMapping("/notice/lecture")
     public String lectNotice(Model model) {
-        List<LectureNoticeDto> boardDtoList = lecture_notice_service.findAllDesc();
-        model.addAttribute("lecture_notice_board", boardDtoList);
+        List<LectureNoticeDto> noticeDtoList = lecture_notice_service.findAllDesc();
+        model.addAttribute("lecture_notice_list", noticeDtoList);
         return "notice_lecture";
     }
 

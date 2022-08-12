@@ -3,6 +3,7 @@ package com.skuniv.cgvr.service.notice;
 import com.skuniv.cgvr.domain.notice.LectureNotice;
 import com.skuniv.cgvr.dto.notice.LectureNoticeDto;
 import com.skuniv.cgvr.repository.notice.LectureNoticeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class LectureNoticeService {
     private final LectureNoticeRepository lecture_notice_repository;
 
+    @Autowired
     public LectureNoticeService(LectureNoticeRepository lecture_notice_repository) {
         this.lecture_notice_repository = lecture_notice_repository;
     }
@@ -33,9 +35,9 @@ public class LectureNoticeService {
                     .regDate(board.getRegDate())
                     .modDate(board.getModDate())
                     .author(board.getAuthor())
-                    .tag1_id(board.getTag1_id())
-                    .tag2_id(board.getTag2_id())
-                    .tag3_id(board.getTag3_id())
+                    .category1_id(board.getCategory1_id())
+                    .category2_id(board.getCategory2_id())
+                    .category3_id(board.getCategory3_id())
                     .attachment_id(board.getAttachment_id())
                     .build();
             DtoList.add(Dto);

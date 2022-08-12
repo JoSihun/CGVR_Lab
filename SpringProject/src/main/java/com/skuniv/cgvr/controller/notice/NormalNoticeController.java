@@ -22,8 +22,8 @@ public class NormalNoticeController {
 
     @GetMapping("/notice/normal")
     public String norNotice(Model model) {
-        List<NormalNoticeDto> boardDtoList = normal_notice_service.findAllDesc();
-        model.addAttribute("normal_notice_board", boardDtoList);
+        List<NormalNoticeDto> noticeDtoList = normal_notice_service.findAllDesc();
+        model.addAttribute("normal_notice_list", noticeDtoList);
         return "notice_normal";
     }
 
