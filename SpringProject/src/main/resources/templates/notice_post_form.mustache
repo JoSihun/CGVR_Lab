@@ -53,31 +53,37 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <form method="post">
+                    <form action="/notice/lecture/save" method="post">
                         <!-- Title -->
                         <div class="mx-4 my-4">
-                            <label for="subject" class="form-label">제목</label>
-                            <input name="subject" class="form-control" type="text" placeholder="제목을 입력하세요">
+                            <label for="title" class="form-label">제목</label>
+                            <input name="title" class="form-control" type="text" placeholder="제목을 입력하세요">
                         </div>
-
                         <!-- Attachment  -->
                         <div class="mx-4 my-4">
                             <label class="form-label">첨부파일</label>
                             <input type="file" class="form-control" aria-label="file example" required>
                             <div class="invalid-feedback">Example invalid form file feedback</div>
                         </div>
-
+                        <!-- Input Tmp Attachment id -->
+                        <input type="hidden" class="form-control" name="attachment" value="2"/>
                         <!-- Content -->
                         <div class="mx-4 my-4">
-                            <label for="editordata" class="form-label">내용</label>
-                            <textarea id="summernote" name="editordata" class="form-control"></textarea>
+                            <label for="content" class="form-label">내용</label>
+                            <textarea id="summernote" name="content" class="form-control"></textarea>
                         </div>
+                        <!-- Hits -->
+                        <input type="hidden" class="form-control" name="hits" value="0"/>
+                        <!-- Category -->
+                        <input type="hidden" class="form-control" name="category1_id" value="2"/>
+                        <!-- Author -->
+                        <input type="hidden" class="form-control" name="author" value="2017305045 염동빈"/>
+
                         <div class="mx-4 my-4 text-end">
                             <input class="btn btn-dark my-2" type="submit" value="저장하기">
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>

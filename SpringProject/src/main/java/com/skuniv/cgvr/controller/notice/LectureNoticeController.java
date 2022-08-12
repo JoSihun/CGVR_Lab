@@ -27,9 +27,12 @@ public class LectureNoticeController {
 
     /* Tmp Save Btn Page */
     @GetMapping("/notice/lecture/save")
+    /*
     public String write() {
         return "tmpposts-save";
     }
+     */
+    public String write() { return "notice_post_form"; }
 
     @PostMapping("/notice/lecture/save")
     public String write(LectureNoticeDto Dto) {
