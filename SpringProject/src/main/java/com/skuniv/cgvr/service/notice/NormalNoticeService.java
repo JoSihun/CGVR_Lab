@@ -52,12 +52,12 @@ public class NormalNoticeService {
                 .map(NormalNoticeDto::new)
                 .collect(Collectors.toList());
     }
-    public NormalNoticeDto findById(Integer id) {
+    public NormalNoticeDto findById(Long id) {
         NormalNotice entity = normal_notice_repository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 게시글이 존재하지 않음. id = " + id));
         return new NormalNoticeDto(entity);
     }
     @Transactional
-    public Integer savePost(NormalNoticeDto Dto) {
+    public Long savePost(NormalNoticeDto Dto) {
         return normal_notice_repository.save(Dto.toEntity()).getId();
     }
 }

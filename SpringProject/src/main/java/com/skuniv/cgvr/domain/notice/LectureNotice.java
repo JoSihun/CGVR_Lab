@@ -13,24 +13,24 @@ import javax.persistence.*;
 @Builder
 public class LectureNotice extends TimeEntity{   // Auditing 기능 사용 Entity 상속
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false, length = 50)
     private String title;
     @Column(columnDefinition = "TEXT")
     private String content;
     @ColumnDefault("0")
-    private Integer hits;
+    private Long hits;
     @Column
     private String author;
     @Column(nullable = false)
-    private Integer category1_id;
+    private Long category1_id;
     @Column
-    private Integer category2_id;
+    private Long category2_id;
     @Column
-    private Integer category3_id;
+    private Long category3_id;
     @Column
-    private Integer attachment_id;
+    private Long attachment_id;
     public void update(String title, String content) {
         this.title = title;
         this.content = content;

@@ -14,11 +14,11 @@ import javax.persistence.*;
 public class Attachment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column
     private String file;
     @Builder
-    public Attachment(Integer id, String file) {
+    public Attachment(Long id, String file) {
         this.id = id;
         this.file = file;
     }

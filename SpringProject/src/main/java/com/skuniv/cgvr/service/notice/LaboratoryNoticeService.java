@@ -51,12 +51,12 @@ public class LaboratoryNoticeService {
                 .map(LaboratoryNoticeDto::new)
                 .collect(Collectors.toList());
     }
-    public LaboratoryNoticeDto findById(Integer id) {
+    public LaboratoryNoticeDto findById(Long id) {
         LaboratoryNotice entity = laboratory_notice_repository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 게시글이 존재하지 않음. id = " + id));
         return new LaboratoryNoticeDto(entity);
     }
     @Transactional
-    public Integer savePost(LaboratoryNoticeDto Dto) {
+    public Long savePost(LaboratoryNoticeDto Dto) {
         return laboratory_notice_repository.save(Dto.toEntity()).getId();
     }
 }

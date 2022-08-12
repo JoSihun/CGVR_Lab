@@ -1,7 +1,6 @@
 package com.skuniv.cgvr.controller.notice;
 
 import com.skuniv.cgvr.dto.notice.LaboratoryNoticeDto;
-import com.skuniv.cgvr.dto.notice.LectureNoticeDto;
 import com.skuniv.cgvr.service.notice.LaboratoryNoticeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +38,7 @@ public class LaboratoryNoticeController {
     }
     /* detail tmp mapping */
     @GetMapping("/notice/laboratory/{id}")
-    public String findById(@PathVariable Integer id, Model model) {
+    public String findById(@PathVariable Long id, Model model) {
         LaboratoryNoticeDto laboratoryNoticeDto = laboratory_notice_service.findById(id);
         model.addAttribute("post", laboratoryNoticeDto);
         return "notice_detail";

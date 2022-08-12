@@ -45,7 +45,7 @@ public class NormalNoticeController {
 
     /* detail tmp mapping */
     @GetMapping("/notice/normal/{id}")
-    public String findById(@PathVariable Integer id, Model model) {
+    public String findById(@PathVariable Long id, Model model) {
         NormalNoticeDto normalNoticeDto = normal_notice_service.findById(id);
         model.addAttribute("post", normalNoticeDto);
         return "notice_detail";

@@ -11,17 +11,17 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 public class LaboratoryNoticeDto {
-    private Integer id;
+    private Long id;
     private String title;
     private String content;
-    private Integer hits;
+    private Long hits;
     private LocalDateTime regDate;
     private LocalDateTime modDate;
     private String author;
-    private Integer category1_id;
-    private Integer category2_id;
-    private Integer category3_id;
-    private Integer attachment_id;
+    private Long category1_id;
+    private Long category2_id;
+    private Long category3_id;
+    private Long attachment_id;
 
     public LaboratoryNoticeDto(LaboratoryNotice entity) {
         this.id = entity.getId();
@@ -37,7 +37,7 @@ public class LaboratoryNoticeDto {
         this.attachment_id = entity.getAttachment_id();
     }
     @Builder
-    public LaboratoryNoticeDto(Integer id, String title, String content, Integer hits, LocalDateTime regDate, LocalDateTime modDate, String author, Integer category1_id, Integer category2_id, Integer category3_id, Integer attachment_id) {
+    public LaboratoryNoticeDto(Long id, String title, String content, Long hits, LocalDateTime regDate, LocalDateTime modDate, String author, Long category1_id, Long category2_id, Long category3_id, Long attachment_id) {
         this.id = id;
         this.title = title;
         this.content = content;
