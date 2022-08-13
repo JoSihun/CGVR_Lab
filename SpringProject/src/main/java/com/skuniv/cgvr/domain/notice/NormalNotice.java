@@ -1,6 +1,7 @@
 package com.skuniv.cgvr.domain.notice;
 
 import lombok.*;
+import net.bytebuddy.asm.Advice;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -29,27 +30,40 @@ public class NormalNotice{
     private Long category3_id;
     private Long attachment_id;
 
-    @CreatedDate
+
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 
     @Builder
     public NormalNotice(String title, String content, String author,
                         Long hits, Long attachment_id,
-                        Long category1_id, Long category2_id, Long category3_id,
-                        LocalDateTime regDate, LocalDateTime modDate) {
+                        Long category1_id, Long category2_id, Long category3_id) {
         this.title = title;
         this.content = content;
         this.author = author;
 
-        this.hits = hits;
+        this.hits = Long.valueOf(1);
         this.category1_id = category1_id;
         this.category2_id = category2_id;
         this.category3_id = category3_id;
         this.attachment_id = attachment_id;
 
-        this.regDate = regDate;
-        this.modDate = modDate;
+        this.regDate = LocalDateTime.now();
+        this.modDate = LocalDateTime.now();
+    }
+
+    public void update(String title, String content, String author,
+                       Long category1_id, Long category2_id, Long category3_id,
+                       Long attachment_id) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+
+        this.category1_id = category1_id;
+        this.category2_id = category2_id;
+        this.category3_id = category3_id;
+        this.attachment_id = attachment_id;
+        this.modDate = LocalDateTime.now();
     }
 
 }

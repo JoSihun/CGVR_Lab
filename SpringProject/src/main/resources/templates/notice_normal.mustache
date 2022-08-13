@@ -16,10 +16,10 @@
             </div>
 
             <div class="row">
-                <div class="col-xl-8">
+                <div class="col-sm-8">
                     <input type="text" class="form-control mb-4" id="search" placeholder="게시글 제목입력"/>
                 </div>
-                <div class="col-xl-4">
+                <div class="col-sm-4">
                     <a href="#" role="button" class="btn btn-outline-dark btn-block mb-4">검색</a>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                         </tr>
                         </thead>
                         <tbody id="tbody">
-                        {{#general_notice_board}}
+                        {{#normalNoticeResponseDtos}}
                             <tr>
                                 <th scope="row" style="width: 5%" class="text-center">{{id}}</th>
                                 <td style="width: 50%" class="text-start"><a href="{{id}}">{{title}}</a></td>
@@ -72,7 +72,7 @@
                                 <td style="width: 15%" class="text-center">{{regDate}}</td>
                                 <td style="width: 10%" class="text-center">{{hits}}</td>
                             </tr>
-                        {{/general_notice_board}}
+                        {{/normalNoticeResponseDtos}}
                         </tbody>
                     </table>
                 </div>

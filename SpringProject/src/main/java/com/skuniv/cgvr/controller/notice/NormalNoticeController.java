@@ -1,5 +1,7 @@
 package com.skuniv.cgvr.controller.notice;
 
+import com.skuniv.cgvr.domain.notice.NormalNotice;
+import com.skuniv.cgvr.dto.notice.NormalNoticeResponseDto;
 import com.skuniv.cgvr.dto.notice.NormalNoticeSaveRequestDto;
 import com.skuniv.cgvr.service.notice.NormalNoticeService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +17,9 @@ public class NormalNoticeController {
     private final NormalNoticeService normalNoticeService;
 
     @GetMapping("notice/normal")
-    public String notice_normal() {
+    public String notice_normal(Model model) {
+        List<NormalNoticeResponseDto> normalNoticeResponseDtos = this.normalNoticeService.findAll();
+        model.addAttribute("normalNoticeResponseDtos", normalNoticeResponseDtos);
         return "notice_normal";
     }
 
@@ -24,8 +28,11 @@ public class NormalNoticeController {
         return "notice_post_form";
     }
 
-    @RequestMapping("notice/post")
-    public Long save(NormalNoticeSaveRequestDto requestDto) {
-        return normalNoticeService.save(requestDto);
+    @PostMapping("notice/post")
+    public String notice_post_save(NormalNoticeSaveRequestDto requestDto) {
+        Long id = normalNoticeService.save(requestDto);
+        return "redirect:/notice/normal";
     }
+
+
 }

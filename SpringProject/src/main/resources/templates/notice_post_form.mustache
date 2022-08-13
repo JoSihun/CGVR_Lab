@@ -25,7 +25,7 @@
             </div>
 
             <div class="row-cols-xl-2">
-                <a href="../notice/post_form" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
+                <a href="notice_post_form" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
             </div>
 
             <div class="row-cols-xl">
@@ -56,8 +56,8 @@
                     <form method="post">
                         <!-- Category -->
                         <div class="mx-4 my-4">
-                            <label for="category" class="form-label">카테고리</label>
-                            <select class="form-control" name="category">
+                            <label for="category1_id" class="form-label">카테고리</label>
+                            <select class="form-control" name="category1_id">
                                 <option value="1">일반 공지사항</option>
                                 <option value="2">수업 공지사항</option>
                                 <option value="3">연구 공지사항</option>
@@ -65,8 +65,8 @@
                         </div>
                         <!-- Title -->
                         <div class="mx-4 my-4">
-                            <label for="subject" class="form-label">제목</label>
-                            <input name="subject" class="form-control" type="text" placeholder="제목을 입력하세요">
+                            <label for="title" class="form-label">제목</label>
+                            <input name="title" class="form-control" type="text" placeholder="제목을 입력하세요">
                         </div>
 
                         <!-- Attachment  -->
@@ -79,9 +79,14 @@
 
                         <!-- Content -->
                         <div class="mx-4 my-4">
-                            <label for="editordata" class="form-label">내용</label>
-                            <textarea id="summernote" name="editordata" class="form-control"></textarea>
+                            <label for="content" class="form-label">내용</label>
+                            <textarea id="summernote" name="content" class="form-control"></textarea>
                         </div>
+
+                        <!-- Hidden Params -->
+                        <input type="hidden" class="form-control" name="author" value="히든작성자"/>
+                        <input type="hidden" class="form-control" name="hits" value="1"/>
+
 
                         <div class="mx-4 my-4 text-end">
                             <input class="btn btn-dark my-2" type="submit" value="저장하기">
