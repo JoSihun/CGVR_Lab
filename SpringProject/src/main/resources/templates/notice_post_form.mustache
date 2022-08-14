@@ -3,9 +3,9 @@
 <div class="container-fluid mt-4">
     <div class="row mx-4 my-4">
         <div class="col-xl-2">
-            <div class="card shadow mb-4 text-dark bg-light">
+            <div class="card border border-dark mb-4 text-dark bg-light">
                 <!-- Card Header -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
                     <h5 class="m-0 font-weight-bold">연구생 정보</h5>
                 </div>
                 <!-- Card Body -->
@@ -17,21 +17,21 @@
 
             <div class="row">
                 <div class="col-xl-8">
-                    <input type="text" class="form-control mb-4" id="search" placeholder="게시글 제목입력"/>
+                    <input type="text" class="form-control border-dark mb-4" id="search" placeholder="게시글 제목입력"/>
                 </div>
                 <div class="col-xl-4">
-                    <a href="#" role="button" class="btn btn-outline-dark btn-block mb-4">검색</a>
+                    <a href="#" role="button" class="btn btn-dark btn-block mb-4">검색</a>
                 </div>
             </div>
 
             <div class="row-cols-xl-2">
-                <a href="/notice/lecture/save" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
+                <a href="/notice/post" role="button" class="btn btn-dark btn-block mb-4">글 쓰기</a>
             </div>
 
             <div class="row-cols-xl">
-                <div class="card shadow text-dark bg-light">
+                <div class="card border border-dark text-dark bg-light">
                     <!-- Card Header -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
                         <h5 class="m-0 font-weight-bold">공지사항</h5>
                     </div>
                     <!-- Card Body -->
@@ -46,14 +46,14 @@
 
         </div>
         <div class="col-xl-10">
-            <div class="card shadow h-100 text-dark bg-light">
+            <div class="card border border-dark h-100 mb-4 text-dark bg-light">
                 <!-- Card Header -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
                     <h5 class="m-0 font-weight-bold">공지사항 글 쓰기</h5>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <form action="/notice/lecture/save" method="post">
+                    <form action="/notice/post" method="post">
                         <!-- Category -->
                         <div class="col-xl-4">
                             <div class="mx-4 my-4">

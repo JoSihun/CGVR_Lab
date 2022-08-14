@@ -29,7 +29,7 @@ public class LectureNoticeController {
     }
 
     @GetMapping("/notice/lecture")
-    public String lectNotice(Model model) {
+    public String notice_lecture(Model model) {
         /*
         //  기존에 받아오던 LectureNoticeDtoList
         //  List<LectureNoticeDto> noticeDtoList = lecture_notice_service.findAllDesc();
@@ -42,16 +42,16 @@ public class LectureNoticeController {
     }
 
     /* Post Btn Page */
-    @GetMapping("/notice/lecture/save")
+    @GetMapping("/notice/post")
     /*
     public String write() {
         return "tmpposts-save";
     }
      */
-    public String write() { return "notice_post_form"; }
+    public String save() { return "notice_post_form"; }
 
-    @PostMapping("/notice/lecture/save")
-    public String write(LectureNoticeDto lectureNoticeDto) {
+    @PostMapping("/notice/post")
+    public String save_post(LectureNoticeDto lectureNoticeDto) {
         lecture_notice_service.savePost(lectureNoticeDto);
         return "redirect:/notice/lecture";
     }
