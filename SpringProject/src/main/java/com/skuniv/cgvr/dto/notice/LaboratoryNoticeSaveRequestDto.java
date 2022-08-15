@@ -1,13 +1,11 @@
 package com.skuniv.cgvr.dto.notice;
 
 import com.skuniv.cgvr.domain.notice.LaboratoryNotice;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
+@Data
 @NoArgsConstructor
-public class LaboratorySaveRequestDto {
+public class LaboratoryNoticeSaveRequestDto {
     private String title;
     private String content;
     private String author;
@@ -17,9 +15,9 @@ public class LaboratorySaveRequestDto {
     private Long attachment_id;
 
     @Builder
-    public LaboratorySaveRequestDto(String title, String content, String author, Long hits,
-                                    Long category1_id, Long category2_id,
-                                    Long category3_id, Long attachment_id) {
+    public LaboratoryNoticeSaveRequestDto(String title, String content, String author, Long hits,
+                                          Long category1_id, Long category2_id,
+                                          Long category3_id, Long attachment_id) {
         this.title = title;
         this.content = content;
         this.author = author;

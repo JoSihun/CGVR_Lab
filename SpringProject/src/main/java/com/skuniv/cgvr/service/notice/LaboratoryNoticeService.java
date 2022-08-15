@@ -2,8 +2,8 @@ package com.skuniv.cgvr.service.notice;
 
 import com.skuniv.cgvr.domain.notice.LaboratoryNotice;
 import com.skuniv.cgvr.dto.notice.LaboratoryNoticeListResponseDto;
-import com.skuniv.cgvr.dto.notice.LaboratoryResponseDto;
-import com.skuniv.cgvr.dto.notice.LaboratorySaveRequestDto;
+import com.skuniv.cgvr.dto.notice.LaboratoryNoticeResponseDto;
+import com.skuniv.cgvr.dto.notice.LaboratoryNoticeSaveRequestDto;
 import com.skuniv.cgvr.repository.notice.LaboratoryNoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,18 +19,18 @@ public class LaboratoryNoticeService {
 
     // insert
     @Transactional
-    public Long save(LaboratorySaveRequestDto requestDto) {
-        return this.laboratoryNoticeRepository.save(requestDto.toEntity()).getId();
+    public Long save(LaboratoryNoticeSaveRequestDto requestDto) {
+        return laboratoryNoticeRepository.save(requestDto.toEntity()).getId();
     }
 
     // update
 
     // findById
-    public LaboratoryResponseDto findById(Long id) {
+    public LaboratoryNoticeResponseDto findById(Long id) {
         LaboratoryNotice entity = laboratoryNoticeRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 없습니다. id="+ id)
         );
-        return new LaboratoryResponseDto(entity);
+        return new LaboratoryNoticeResponseDto(entity);
     }
 
     @Transactional(readOnly = true)

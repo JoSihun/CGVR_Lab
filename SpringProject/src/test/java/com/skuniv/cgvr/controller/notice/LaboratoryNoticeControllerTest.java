@@ -1,7 +1,7 @@
 package com.skuniv.cgvr.controller.notice;
 
 import com.skuniv.cgvr.domain.notice.LaboratoryNotice;
-import com.skuniv.cgvr.dto.notice.LaboratorySaveRequestDto;
+import com.skuniv.cgvr.dto.notice.LaboratoryNoticeSaveRequestDto;
 import com.skuniv.cgvr.repository.notice.LaboratoryNoticeRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -37,7 +37,7 @@ public class LaboratoryNoticeControllerTest {
     @Test
     public void 게시글_등록() throws Exception {
         // given
-        LaboratorySaveRequestDto requestDto = LaboratorySaveRequestDto.builder()
+        LaboratoryNoticeSaveRequestDto requestDto = LaboratoryNoticeSaveRequestDto.builder()
                 .title("title")
                 .content("content")
                 .author("author")

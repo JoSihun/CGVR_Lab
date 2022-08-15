@@ -1,12 +1,12 @@
 package com.skuniv.cgvr.dto.notice;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @NoArgsConstructor
-public class LaboratoryUpdateRequestDto {
+public class LaboratoryNoticeUpdateRequestDto {
     private String title;
     private String content;
     private Long category1_id;
@@ -15,8 +15,8 @@ public class LaboratoryUpdateRequestDto {
     private Long attachment_id;
 
     @Builder
-    public LaboratoryUpdateRequestDto(String title, String content, Long category1_id,
-                                      Long category2_id, Long category3_id, Long attachment_id) {
+    public LaboratoryNoticeUpdateRequestDto(String title, String content, Long category1_id,
+                                            Long category2_id, Long category3_id, Long attachment_id) {
         this.title = title;
         this.content = content;
         this.category1_id = category1_id;

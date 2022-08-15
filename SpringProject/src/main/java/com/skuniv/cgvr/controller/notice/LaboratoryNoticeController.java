@@ -1,7 +1,7 @@
 package com.skuniv.cgvr.controller.notice;
 
-import com.skuniv.cgvr.dto.notice.LaboratoryResponseDto;
-import com.skuniv.cgvr.dto.notice.LaboratorySaveRequestDto;
+import com.skuniv.cgvr.dto.notice.LaboratoryNoticeResponseDto;
+import com.skuniv.cgvr.dto.notice.LaboratoryNoticeSaveRequestDto;
 import com.skuniv.cgvr.service.notice.LaboratoryNoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,23 +14,22 @@ public class LaboratoryNoticeController {
     private final LaboratoryNoticeService laboratoryNoticeService;
 
     @GetMapping("/notice/laboratory")
-    public String labNotice(Model model) {
+    public String laboratoryNoticeBoard(Model model) {
         model.addAttribute("laboratory_notice_board", laboratoryNoticeService.findAllDesc());
         return "notice_laboratory";
     }
 
     // 글쓰기 페이지로 매핑
     @GetMapping("/notice/save")
-    public String save() {
-        //return "notice_post_form";
-        return "tmp_laboratory_save_form";
+    public String laboratoryNoticeSaveForm() {
+        return "notice_post_form";
     }
 
     // 글 저장
     @PostMapping("/notice/save")
-    public String save(LaboratorySaveRequestDto requestDto) {
+    public String laboratoryNoticeSave(LaboratoryNoticeSaveRequestDto requestDto) {
         Long id = laboratoryNoticeService.save(requestDto);
-        return "redirect:/notice/laboratory";
+        return "redirect:/notice/laboratory/" + id.toString();
     }
 
     // 수정
@@ -38,8 +37,8 @@ public class LaboratoryNoticeController {
 
     // 상세 조회
     @GetMapping("/notice/laboratory/{id}")
-    public String findById(@PathVariable Long id, Model model) {
-        LaboratoryResponseDto dto = laboratoryNoticeService.findById(id);
+    public String laboratoryNoticeView(@PathVariable Long id, Model model) {
+        LaboratoryNoticeResponseDto dto = laboratoryNoticeService.findById(id);
         model.addAttribute("post", dto);
         return "notice_detail";
     }

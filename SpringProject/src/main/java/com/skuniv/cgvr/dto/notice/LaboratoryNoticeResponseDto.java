@@ -6,11 +6,12 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class LaboratoryResponseDto {
+public class LaboratoryNoticeResponseDto {
     private Long id;
     private String title;
     private String content;
     private String author;
+    private LocalDateTime regDate;
     private LocalDateTime modDate;
     private Long hits;
     private Long category1_id;
@@ -18,11 +19,12 @@ public class LaboratoryResponseDto {
     private Long category3_id;
     private Long attachment_id;
 
-    public LaboratoryResponseDto(LaboratoryNotice entity) {
+    public LaboratoryNoticeResponseDto(LaboratoryNotice entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.content = entity.getContent();
         this.author = entity.getAuthor();
+        this.regDate = entity.getRegDate();
         this.modDate = entity.getModDate();
         this.hits = entity.getHits();
         this.category1_id = entity.getCategory1_id();
