@@ -5,11 +5,12 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Entity(name="lecture_notice")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class LectureNotice {   // Auditing 기능 사용 Entity 상속
+public class LectureNotice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,14 +29,16 @@ public class LectureNotice {   // Auditing 기능 사용 Entity 상속
     private Long category3_id;
     private Long attachment_id;
 
-
     private LocalDateTime regDate;
     private LocalDateTime modDate;
+
+    @OneToMany(mappedBy = "lectureNotice", cascade = CascadeType.REMOVE)
+    private List<LectureNoticeAnswer> lectureNoticeAnswerList;
 
     @Builder
     public LectureNotice(String title, String content, String author,
                         Long hits, Long attachment_id,
-                        Long category1_id, Long category2_id, Long category3_id) {
+                        Long category1_id, Long category2_id, Long category3_id, List<LectureNoticeAnswer> lectureNoticeAnswerList) {
         this.title = title;
         this.content = content;
         this.author = author;
@@ -48,6 +51,8 @@ public class LectureNotice {   // Auditing 기능 사용 Entity 상속
 
         this.regDate = LocalDateTime.now();
         this.modDate = LocalDateTime.now();
+
+        this.lectureNoticeAnswerList = lectureNoticeAnswerList;
     }
 
     public void update(String title, String content, String author,

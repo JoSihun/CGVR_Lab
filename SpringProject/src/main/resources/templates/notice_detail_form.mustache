@@ -73,47 +73,37 @@
             </div>
             <div class="card border border-dark mb-4 text-dark bg-light">
                 <div class="card-header">
-                    <h5 class="card-title">댓글 20</h5>
+                    <h5 class="card-title">댓글 {{AnswerCount}}</h5>
                 </div>
                 <div class="card-body">
                     <!-- 반복을 통한 댓글 리스트 조회 -->
                     <ul id="comment-list" class="list-group bg-light">
+                        {{#lectureNoticeAnswerResponseDtos}}
                         <li id="comment-3" class="list-group-item">
                             <div>
                                 <div>
-                                    <strong>2016305078 강건마</strong>
-                                    <small>22.08.09 19:29</small>
+                                    <strong>{{author}}</strong>
+                                    <small><span style="color:#6c757d">{{regDate}}</span></small>
                                 </div>
                                 <div>
-                                    여자가...말대꾸?!
+                                    {{content}}
                                     <a href="#" class="float-end m-1">삭제</a>
                                     <a href="#" class="float-end m-1">수정 </a>
                                 </div>
                             </div>
                         </li>
-                        <li id="comment-2" class="list-group-item">
-                            <div>
-                                <div>
-                                    <strong>2016305078 최영환</strong>
-                                    <small>22.08.09 19:29</small>
-                                </div>
-                                <div>
-                                    그 누구보다 빠르게 난 남들과는 다르게 색다르게 리듬을 타는 비트 위의 나그네 더 빠르게 빨려들어가 빠져버리는 네 박자 리듬 위에 나는 매일 비트를 쪼개
-                                    <a href="#" class="float-end m-1">삭제</a>
-                                    <a href="#" class="float-end m-1">수정 </a>
-                                </div>
-                            </div>
-                        </li>
+                        {{/lectureNoticeAnswerResponseDtos}}
                     </ul>
                 </div>
             </div>
             <!-- 댓글 입력창 -->
             <div class="card border border-dark mb-4 text-dark bg-light">
                 <div class="card-body">
-                    <form class="mb-4">
-                        <textarea class="form-control" rows="3" placeholder="댓글을 작성해보세요."></textarea>
+                    <form action="/notice/lecture/{{lectureNoticeResponseDto.id}}/answer" method="post" class="mb-4">
+                        <input name="author" class="form-control" type="hidden" value="2017305045 염동빈"/>
+                        <textarea class="form-control" name="content" rows="3" placeholder="댓글을 작성해보세요."></textarea>
+                        <input class="btn btn-dark my-2" style="float:right" type="submit" value="등록">
                     </form>
-                    <a class="btn btn-dark" style="float:right">등록</a>
                 </div>
             </div>
         </div>
