@@ -1,47 +1,46 @@
 package com.skuniv.cgvr.controller.notice;
 
-import com.skuniv.cgvr.dto.notice.LaboratoryNoticeDto;
-import com.skuniv.cgvr.dto.notice.LectureNoticeDto;
+import com.skuniv.cgvr.dto.notice.LaboratoryResponseDto;
+import com.skuniv.cgvr.dto.notice.LaboratorySaveRequestDto;
 import com.skuniv.cgvr.service.notice.LaboratoryNoticeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@Controller
+@RequiredArgsConstructor
+@Controller     // Controller 와 RestController 의 분리가 필요함
 public class LaboratoryNoticeController {
-    private LaboratoryNoticeService laboratory_notice_service;
-
-    public LaboratoryNoticeController(LaboratoryNoticeService laboratory_notice_service) {
-        this.laboratory_notice_service = laboratory_notice_service;
-    }
+    private final LaboratoryNoticeService laboratoryNoticeService;
 
     @GetMapping("/notice/laboratory")
     public String labNotice(Model model) {
-        List<LaboratoryNoticeDto> boardDtoList = laboratory_notice_service.findAllDesc();
-        model.addAttribute("laboratory_notice_board", boardDtoList);
+        model.addAttribute("laboratory_notice_board", laboratoryNoticeService.findAllDesc());
         return "notice_laboratory";
     }
 
-    /* Tmp Save Btn Page */
-    @GetMapping("/notice/laboratory/save")
-    public String write() {
-        return "tmpposts-save";
+    // 글쓰기 페이지로 매핑
+    @GetMapping("/notice/save")
+    public String save() {
+        //return "notice_post_form";
+        return "tmp_laboratory_save_form";
     }
 
-    @PostMapping("/notice/laboratory/save")
-    public String write(LaboratoryNoticeDto Dto) {
-        laboratory_notice_service.savePost(Dto);
+    // 글 저장
+    @PostMapping("/notice/save")
+    public String save(LaboratorySaveRequestDto requestDto) {
+        Long id = laboratoryNoticeService.save(requestDto);
         return "redirect:/notice/laboratory";
     }
-    /* detail tmp mapping */
+
+    // 수정
+    // 수정 페이지가 필요함
+
+    // 상세 조회
     @GetMapping("/notice/laboratory/{id}")
-    public String findById(@PathVariable Integer id, Model model) {
-        LaboratoryNoticeDto laboratoryNoticeDto = laboratory_notice_service.findById(id);
-        model.addAttribute("post", laboratoryNoticeDto);
+    public String findById(@PathVariable Long id, Model model) {
+        LaboratoryResponseDto dto = laboratoryNoticeService.findById(id);
+        model.addAttribute("post", dto);
         return "notice_detail";
     }
 }

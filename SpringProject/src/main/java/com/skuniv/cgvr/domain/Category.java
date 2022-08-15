@@ -8,17 +8,16 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
-public class Tag {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String content;
     @Builder
-    public Tag(Integer id, String content) {
+    public Category(Integer id, String content) {
         this.id = id;
         this.content = content;
     }

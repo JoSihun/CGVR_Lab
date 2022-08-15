@@ -1,59 +1,44 @@
 package com.skuniv.cgvr.service.notice;
 
 import com.skuniv.cgvr.domain.notice.LaboratoryNotice;
+import com.skuniv.cgvr.dto.notice.LaboratoryNoticeListResponseDto;
+import com.skuniv.cgvr.dto.notice.LaboratoryResponseDto;
+import com.skuniv.cgvr.dto.notice.LaboratorySaveRequestDto;
 import com.skuniv.cgvr.repository.notice.LaboratoryNoticeRepository;
-import com.skuniv.cgvr.dto.notice.LaboratoryNoticeDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class LaboratoryNoticeService {
-    private final LaboratoryNoticeRepository laboratory_notice_repository;
+    private final LaboratoryNoticeRepository laboratoryNoticeRepository;
 
-    public LaboratoryNoticeService(LaboratoryNoticeRepository laboratory_notice_repository) {
-        this.laboratory_notice_repository = laboratory_notice_repository;
-    }
-    //@Transactional(readOnly = true) // 조회 기능만 남김
-    /* 단순 조회 */
+    // insert
     @Transactional
-    public List<LaboratoryNoticeDto> findAll() {
-        List<LaboratoryNotice> boards = laboratory_notice_repository.findAll();
-        List<LaboratoryNoticeDto> DtoList = new ArrayList<>();
+    public Long save(LaboratorySaveRequestDto requestDto) {
+        return this.laboratoryNoticeRepository.save(requestDto.toEntity()).getId();
+    }
 
-        for(LaboratoryNotice board : boards) {
-            LaboratoryNoticeDto Dto = LaboratoryNoticeDto.builder()
-                    .id(board.getId())
-                    .title(board.getTitle())
-                    .content(board.getContent())
-                    .hits(board.getHits())
-                    .regDate(board.getRegDate())
-                    .modDate(board.getModDate())
-                    .author(board.getAuthor())
-                    .tag1_id(board.getTag1_id())
-                    .tag2_id(board.getTag2_id())
-                    .tag3_id(board.getTag3_id())
-                    .attachment_id(board.getAttachment_id())
-                    .build();
-            DtoList.add(Dto);
-        }
-        return DtoList;
+    // update
+
+    // findById
+    public LaboratoryResponseDto findById(Long id) {
+        LaboratoryNotice entity = laboratoryNoticeRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시글이 없습니다. id="+ id)
+        );
+        return new LaboratoryResponseDto(entity);
     }
-    @Transactional
-    public List<LaboratoryNoticeDto> findAllDesc() {
-        return laboratory_notice_repository.findAllDesc().stream()
-                .map(LaboratoryNoticeDto::new)
+
+    @Transactional(readOnly = true)
+    public List<LaboratoryNoticeListResponseDto> findAllDesc() {
+        return laboratoryNoticeRepository.findAllDesc().stream()
+                .map(LaboratoryNoticeListResponseDto::new)
                 .collect(Collectors.toList());
     }
-    public LaboratoryNoticeDto findById(Integer id) {
-        LaboratoryNotice entity = laboratory_notice_repository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 게시글이 존재하지 않음. id = " + id));
-        return new LaboratoryNoticeDto(entity);
-    }
-    @Transactional
-    public Integer savePost(LaboratoryNoticeDto Dto) {
-        return laboratory_notice_repository.save(Dto.toEntity()).getId();
-    }
+
+    // delete
 }

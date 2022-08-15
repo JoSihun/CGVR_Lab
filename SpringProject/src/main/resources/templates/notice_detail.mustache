@@ -25,7 +25,7 @@
             </div>
 
             <div class="row-cols-xl-2">
-                <a href="#" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
+                <a href="/notice/laboratory/save" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
             </div>
 
             <div class="row-cols-xl">
@@ -48,19 +48,16 @@
 
         <div class="col-xl-10">
             <!-- 게시글 -->
+            {{#post}}
             <div class="card shadow mb-4 text-dark bg-light">
                 <!-- Card Header -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h5 class="m-0 card-title">글 제목</h5>
-                    <h6 class="card-subtitle">작성자 조회수 등록일 </h6>
+                    <h5 class="m-0 card-title">{{title}}</h5>
+                    <h6 class="card-subtitle">작성자 : {{author}} 조회수 : {{hits}} 작성일 : {{regDate}} </h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <p>글 내용</p>
-                    <p>글 내용</p>
-                    <p>글 내용</p>
-                    <p>글 내용</p>
-                    <p>글 내용</p>
+                    <p>{{content}}</p>
                 </div>
                 <!-- Card Footer -->
                 <div class="card-footer">
@@ -69,7 +66,8 @@
                     <a href="#" class="btn btn-danger" style="float:right;">삭제</a>
                     <a href="#" class="btn btn-primary" style="float:right;">수정</a>
                 </div>
-            </div>
+            {{/post}}
+        </div>
 
             <!-- 댓글 목록 -->
             <div class="card shadow mb-4 text-dark bg-light">

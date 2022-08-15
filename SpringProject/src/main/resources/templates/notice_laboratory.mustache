@@ -25,7 +25,7 @@
             </div>
 
             <div class="row-cols-xl-2">
-                <a href="#" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
+                <a href="/notice/save" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
             </div>
 
             <div class="row-cols-xl">
@@ -67,7 +67,7 @@
                         {{#laboratory_notice_board}}
                             <tr>
                                 <th scope="row" style="width: 5%" class="text-center">{{id}}</th>
-                                <td style="width: 50%" class="text-start"><a href="{{id}}">{{title}}</a></td>
+                                <td style="width: 50%" class="text-start"><a href="/notice/laboratory/{{id}}">{{title}}</a></td>
                                 <td style="width: 15%" class="text-center">{{author}}</td>
                                 <td style="width: 15%" class="text-center">{{regDate}}</td>
                                 <td style="width: 10%" class="text-center">{{hits}}</td>
