@@ -64,15 +64,15 @@
                         </tr>
                         </thead>
                         <tbody id="tbody">
-                        {{#notice_map_list}}
+                        {{#lectureNoticeResponseDtos}}
                             <tr>
                                 <td scope="row" style="width: 5%" class="text-center">{{id}}</td>
                                 <td style="width: 50%" class="text-start"><a href="lecture/{{id}}" style="color: black">{{title}}</a></td>
                                 <td style="width: 15%" class="text-center">{{author}}</td>
-                                <td style="width: 15%" class="text-center">{{regDate_formatted}}</td>
+                                <td style="width: 15%" class="text-center">{{regDate}}</td>
                                 <td style="width: 10%" class="text-center">{{hits}}</td>
                             </tr>
-                        {{/notice_map_list}}
+                        {{/lectureNoticeResponseDtos}}
                         </tbody>
                     </table>
                 </div>
