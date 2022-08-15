@@ -1,0 +1,124 @@
+{{>header}}
+{{>banner}}
+<div class="container-fluid mt-4">
+    <div class="row mx-4 my-4">
+        <div class="col-xl-2">
+            <div class="card shadow mb-4 text-dark bg-light">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h5 class="m-0 font-weight-bold">연구생 정보</h5>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div><a class="card-text text-dark">2017305045 염동빈</a></div>
+                    <div><a class="card-text text-dark">재학정보 : 4학년</a></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-8">
+                    <input type="text" class="form-control mb-4" id="search" placeholder="게시글 제목입력"/>
+                </div>
+                <div class="col-xl-4">
+                    <a href="#" role="button" class="btn btn-outline-dark btn-block mb-4">검색</a>
+                </div>
+            </div>
+
+            <div class="row-cols-xl-2">
+                <a href="#" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
+            </div>
+
+            <div class="row-cols-xl">
+                <div class="card shadow text-dark bg-light">
+                    <!-- Card Header -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold">공지사항</h5>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body" style="align-content: baseline">
+                        <div><a class="card-text text-dark" href="/notice/all">전체 게시판</a></div>
+                        <div><a class="card-text text-dark" href="/notice/normal">공지 게시판</a></div>
+                        <div><a class="card-text text-dark" href="/notice/lect">논문 게시판</a></div>
+                        <div><a class="card-text text-dark" href="/notice/lab">자료 게시판</a></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xl-10">
+            {{#normalNoticeResponseDto}}
+            <!-- 게시글 -->
+            <div class="card shadow mb-4 text-dark bg-light">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h5 class="m-0 card-title">{{title}}</h5>
+                    <h6 class="card-subtitle">작성자 {{author}} 조회수 {{hits}} 등록일{{regDate}}</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <p>{{content}}</p>
+                </div>
+                <!-- Card Footer -->
+                <div class="card-footer">
+                    <p class="card-text text-dark">첨부 파일</p>
+                    <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
+                    <a href="#" class="btn btn-danger" style="float:right;">삭제</a>
+                    <a href="#" class="btn btn-primary" style="float:right;">수정</a>
+                </div>
+            </div>
+
+            <!-- 댓글 목록 -->
+            <div class="card shadow mb-4 text-dark bg-light">
+                <div class="card-header">
+                    <h5 class="card-title">댓글 20</h5>
+                </div>
+                <div class="card-body">
+                    <!-- 반복을 통한 댓글 리스트 조회 -->
+                    <ul id="comment-list" class="list-group bg-light">
+                        <li id="comment-3" class="list-group-item">
+                            <div>
+                                <div>
+                                    <strong>2016305078 강건마</strong>
+                                    <small>22.08.09 19:29</small>
+                                </div>
+                                <div>
+                                    여자가...말대꾸?!
+                                    <a href="#" class="float-end m-1">삭제</a>
+                                    <a href="#" class="float-end m-1">수정 </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="comment-2" class="list-group-item">
+                            <div>
+                                <div>
+                                    <strong>2016305078 최영환</strong>
+                                    <small>22.08.09 19:29</small>
+                                </div>
+                                <div>
+                                    그 누구보다 빠르게 난 남들과는 다르게 색다르게 리듬을 타는 비트 위의 나그네 더 빠르게 빨려들어가 빠져버리는 네 박자 리듬 위에 나는 매일 비트를 쪼개
+                                    그 누구보다 빠르게 난 남들과는 다르게 색다르게 리듬을 타는 비트 위의 나그네 더 빠르게 빨려들어가 빠져버리는 네 박자 리듬 위에 나는 매일 비트를 쪼개
+                                    그 누구보다 빠르게 난 남들과는 다르게 색다르게 리듬을 타는 비트 위의 나그네 더 빠르게 빨려들어가 빠져버리는 네 박자 리듬 위에 나는 매일 비트를 쪼개
+                                    그 누구보다 빠르게 난 남들과는 다르게 색다르게 리듬을 타는 비트 위의 나그네 더 빠르게 빨려들어가 빠져버리는 네 박자 리듬 위에 나는 매일 비트를 쪼개
+                                    <a href="#" class="float-end m-1">삭제</a>
+                                    <a href="#" class="float-end m-1">수정 </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {{/normalNoticeResponseDto}}
+            <!-- 댓글 입력창 -->
+            <div class="card shadow mb-4 text-dark bg-light">
+                <div class="card-body">
+                    <form class="mb-4">
+                        <textarea class="form-control" rows="3" placeholder="댓글을 작성해보세요."></textarea>
+                    </form>
+                    <a class="btn btn-primary" style="float:right;btn-space">등록</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{>footer}}

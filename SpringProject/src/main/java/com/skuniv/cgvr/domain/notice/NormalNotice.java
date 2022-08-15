@@ -66,4 +66,11 @@ public class NormalNotice{
         this.modDate = LocalDateTime.now();
     }
 
+    public void delete() {
+    }
+
+    public void increaseHits() {
+        this.hits++;
+    }
+
 }

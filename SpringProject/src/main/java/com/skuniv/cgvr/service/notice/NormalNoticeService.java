@@ -22,14 +22,35 @@ import java.util.stream.Collectors;
 public class NormalNoticeService {
     private final NormalNoticeRepository normalNoticeRepository;
 
-
+    /* 게시판 글목록 */
     @Transactional
-    public Long save(NormalNoticeSaveRequestDto requestDto) {
+    public List<NormalNoticeResponseDto> findAll() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id", "regDate");
+        List<NormalNotice> normalNoticeList = this.normalNoticeRepository.findAll(sort);
+        return normalNoticeList.stream().map(NormalNoticeResponseDto::new).collect(Collectors.toList());
+    }
+
+
+    /* 게시글 상세보기 */
+    @Transactional
+    public NormalNoticeResponseDto findById(final Long id) {
+        NormalNotice entity = normalNoticeRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다. id = " + id));
+        entity.increaseHits();
+        return new NormalNoticeResponseDto(entity);
+    }
+
+
+    /* 게시글 저장하기 */
+    @Transactional
+    public Long save(final NormalNoticeSaveRequestDto requestDto) {
         return this.normalNoticeRepository.save(requestDto.toEntity()).getId();
     }
 
+
+    /* 게시글 수정하기 */
     @Transactional
-    public Long update(Long id, NormalNoticeUpdateRequestDto requestDto){
+    public Long update(final Long id, final NormalNoticeUpdateRequestDto requestDto){
         NormalNotice entity = normalNoticeRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + id)
         );
@@ -39,11 +60,13 @@ public class NormalNoticeService {
         return id;
     }
 
-    @Transactional
-    public List<NormalNoticeResponseDto> findAll() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id", "regDate");
-        List<NormalNotice> normalNoticeList = this.normalNoticeRepository.findAll(sort);
-        return normalNoticeList.stream().map(NormalNoticeResponseDto::new).collect(Collectors.toList());
-    }
 
+    /* 게시글 삭제하기 */
+    @Transactional
+    public Long delete(final Long id) {
+        NormalNotice entity = normalNoticeRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("이미 존재하지 않는 게시글입니다. id=" + id));
+        entity.delete();
+        return id;
+    }
 }

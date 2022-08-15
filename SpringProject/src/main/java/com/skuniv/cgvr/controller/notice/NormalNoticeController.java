@@ -17,22 +17,32 @@ public class NormalNoticeController {
     private final NormalNoticeService normalNoticeService;
 
     @GetMapping("notice/normal")
-    public String notice_normal(Model model) {
+    public String normalNoticeBoard(Model model) {
         List<NormalNoticeResponseDto> normalNoticeResponseDtos = this.normalNoticeService.findAll();
         model.addAttribute("normalNoticeResponseDtos", normalNoticeResponseDtos);
         return "notice_normal";
     }
 
-    @GetMapping("notice/post")
-    public String notice_post() {
+    @GetMapping("notice/normal/post/{id}")
+    public String normalNoticePostView(@PathVariable Long id, Model model) {
+        NormalNoticeResponseDto normalNoticeResponseDto = normalNoticeService.findById(id);
+        model.addAttribute("normalNoticeResponseDto", normalNoticeResponseDto);
+        return "notice_post_view";
+    }
+
+
+    @GetMapping("notice/post/form")
+    public String normalNoticePostForm() {
         return "notice_post_form";
     }
 
-    @PostMapping("notice/post")
-    public String notice_post_save(NormalNoticeSaveRequestDto requestDto) {
+    @PostMapping("notice/post/form")
+    public String normalNoticePostSave(NormalNoticeSaveRequestDto requestDto) {
         Long id = normalNoticeService.save(requestDto);
-        return "redirect:/notice/normal";
+        return "redirect:/notice/normal/post/id";
     }
+
+
 
 
 }
