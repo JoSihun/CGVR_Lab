@@ -49,24 +49,26 @@
             <div class="card border border-dark mb-4 text-dark bg-light">
                 <!-- Card Header -->
                 <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h5 class="m-0 font-weight-bold">{{category_dto.content}} 공지사항</h5>
+                    <h5 class="m-0 font-weight-bold">{{categoryDto.content}} 공지사항</h5>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
+                    {{#lectureNoticeResponseDto}}
                     <!-- Title -->
                     <div class="mx-4">
-                        <h3>{{lecture_notice_dto.title}}</h3>
+                        <h3>{{title}}</h3>
                     </div>
                     <!-- Author % RegDate & Hits -->
                     <div class="mx-4 col-xl-4">
-                        <strong>{{lecture_notice_dto.author}}</strong>
-                        <small><span style="color:#6c757d">{{regDate}} 조회 {{lecture_notice_dto.hits}}</span></small>
+                        <strong>{{author}}</strong>
+                        <small><span style="color:#6c757d">{{regDate}} 조회 {{hits}}</span></small>
                     </div>
                     <hr>
                     <!-- Content -->
                     <div class="mx-4 my-4">
-                        {{lecture_notice_dto.content}}
+                        {{{content}}}
                     </div>
+                    {{/lectureNoticeResponseDto}}
                 </div>
             </div>
             <div class="card border border-dark mb-4 text-dark bg-light">

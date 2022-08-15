@@ -1,7 +1,9 @@
 package com.skuniv.cgvr.controller.notice;
 
+import com.skuniv.cgvr.domain.notice.LectureNotice;
 import com.skuniv.cgvr.dto.CategoryDto;
-import com.skuniv.cgvr.dto.notice.LectureNoticeDto;
+import com.skuniv.cgvr.dto.notice.LectureNoticeResponseDto;
+import com.skuniv.cgvr.dto.notice.LectureNoticeSaveRequestDto;
 import com.skuniv.cgvr.service.CategoryService;
 import com.skuniv.cgvr.service.notice.LectureNoticeService;
 import org.springframework.stereotype.Controller;
@@ -10,63 +12,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class LectureNoticeController {
-    private LectureNoticeService lecture_notice_service;
+    private LectureNoticeService lectureNoticeService;
     private CategoryService categoryService;
 
-    public LectureNoticeController(LectureNoticeService lecture_notice_service, CategoryService categoryService) {
-        this.lecture_notice_service = lecture_notice_service;
+    public LectureNoticeController(LectureNoticeService lectureNoticeService, CategoryService categoryService) {
+        this.lectureNoticeService = lectureNoticeService;
         this.categoryService = categoryService;
     }
 
     @GetMapping("/notice/lecture")
     public String notice_lecture(Model model) {
-        /*
-        //  기존에 받아오던 LectureNoticeDtoList
-        //  List<LectureNoticeDto> noticeDtoList = lecture_notice_service.findAllDesc();
-         */
-        // 날짜 포매팅 후 받아오는 LectureNoticeHashMapList
-        List<HashMap> noticeMapList = lecture_notice_service.findAllDescAsMap();
-        //model.addAttribute("lecture_notice_list", noticeDtoList);
-        model.addAttribute("notice_map_list", noticeMapList);
+        List<LectureNoticeResponseDto> lectureNoticeResponseDtos = lectureNoticeService.findAll();
+        for(LectureNoticeResponseDto lectureNoticeResponseDto : lectureNoticeResponseDtos) {
+            // regDate 포맷변경
+            lectureNoticeResponseDto.setRegDate();
+        }
+        model.addAttribute("lectureNoticeResponseDtos", lectureNoticeResponseDtos);
         return "notice_lecture";
     }
 
-    /* Post Btn Page */
     @GetMapping("/notice/post")
-    /*
-    public String write() {
-        return "tmpposts-save";
-    }
-     */
     public String save() { return "notice_post_form"; }
 
     @PostMapping("/notice/post")
-    public String save_post(LectureNoticeDto lectureNoticeDto) {
-        lecture_notice_service.savePost(lectureNoticeDto);
+    public String save_post(LectureNoticeSaveRequestDto lectureNoticeSaveRequestDto) {
+        lectureNoticeService.save(lectureNoticeSaveRequestDto);
         return "redirect:/notice/lecture";
     }
-    /* detail tmp mapping */
+
     @GetMapping("/notice/lecture/{id}")
     public String findById(@PathVariable Long id, Model model) {
-        LectureNoticeDto  lectureNoticeDto = lecture_notice_service.findById(id);
+        LectureNoticeResponseDto  lectureNoticeResponseDto = lectureNoticeService.findById(id);
         // 카테고리 id로 카테고리 Dto 얻기
-        CategoryDto categoryDto = categoryService.findById(lectureNoticeDto.getCategory1_id());
-        // LocalDateTime 포맷 변환
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
-        // 변환된 LocalDateTime 따로 Attribute
-        model.addAttribute("regDate", lectureNoticeDto.getRegDate().format(formatter));
-        model.addAttribute("lecture_notice_dto", lectureNoticeDto);
-        model.addAttribute("category_dto", categoryDto);
+        CategoryDto categoryDto = categoryService.findById(lectureNoticeResponseDto.getCategory1_id());
+
+        model.addAttribute("lectureNoticeResponseDto", lectureNoticeResponseDto);
+        model.addAttribute("categoryDto", categoryDto);
         return "notice_detail_form";
     }
 }

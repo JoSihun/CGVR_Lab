@@ -1,6 +1,5 @@
 package com.skuniv.cgvr.controller.notice;
 
-import com.skuniv.cgvr.dto.notice.LectureNoticeDto;
 import com.skuniv.cgvr.dto.notice.NormalNoticeDto;
 import com.skuniv.cgvr.service.notice.NormalNoticeService;
 import org.springframework.stereotype.Controller;
