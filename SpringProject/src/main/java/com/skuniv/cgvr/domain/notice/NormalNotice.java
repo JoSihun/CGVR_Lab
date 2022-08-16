@@ -42,7 +42,7 @@ public class NormalNotice{
         this.content = content;
         this.author = author;
 
-        this.hits = Long.valueOf(1);
+        this.hits = Long.valueOf(0);
         this.category1_id = category1_id;
         this.category2_id = category2_id;
         this.category3_id = category3_id;
@@ -64,9 +64,6 @@ public class NormalNotice{
         this.category3_id = category3_id;
         this.attachment_id = attachment_id;
         this.modDate = LocalDateTime.now();
-    }
-
-    public void delete() {
     }
 
     public void increaseHits() {

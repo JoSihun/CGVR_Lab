@@ -66,7 +66,7 @@ public class NormalNoticeService {
     public Long delete(final Long id) {
         NormalNotice entity = normalNoticeRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("이미 존재하지 않는 게시글입니다. id=" + id));
-        entity.delete();
+        normalNoticeRepository.delete(entity);
         return id;
     }
 }

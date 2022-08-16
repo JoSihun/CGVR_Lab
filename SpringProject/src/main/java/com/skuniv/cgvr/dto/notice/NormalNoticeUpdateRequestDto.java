@@ -2,13 +2,15 @@ package com.skuniv.cgvr.dto.notice;
 
 import com.skuniv.cgvr.domain.notice.NormalNotice;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
-@Getter
+//@NoArgsConstructor
+//@Getter
+@Data
 public class NormalNoticeUpdateRequestDto {
     private String title;
     private String content;
@@ -21,21 +23,21 @@ public class NormalNoticeUpdateRequestDto {
     private Long attachment_id;
 
 
-    @Builder
-    public NormalNoticeUpdateRequestDto(String title, String content, String author, Long hits,
-                                      Long category1_id, Long category2_id, Long category3_id,
-                                      Long attachment_id) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
-
-        this.hits = hits;
-        this.category1_id = category1_id;
-        this.category2_id = category2_id;
-        this.category3_id = category3_id;
-        this.attachment_id = attachment_id;
-
-    }
+//    @Builder
+//    public NormalNoticeUpdateRequestDto(String title, String content, String author, Long hits,
+//                                      Long category1_id, Long category2_id, Long category3_id,
+//                                      Long attachment_id) {
+//        this.title = title;
+//        this.content = content;
+//        this.author = author;
+//
+//        this.hits = hits;
+//        this.category1_id = category1_id;
+//        this.category2_id = category2_id;
+//        this.category3_id = category3_id;
+//        this.attachment_id = attachment_id;
+//
+//    }
 
     public NormalNotice toEntity() {
         return NormalNotice.builder()

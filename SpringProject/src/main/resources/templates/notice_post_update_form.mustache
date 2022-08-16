@@ -52,22 +52,25 @@
                 <div class="card-header py-3 d-flex flex-row bg-dark text-white align-items-center justify-content-between">
                     <h5 class="m-0 font-weight-bold">전체 공지사항</h5>
                 </div>
+
+                {{#normalNoticeResponseDto}}
                 <!-- Card Body -->
                 <div class="card-body">
                     <form method="post">
                         <!-- Category -->
                         <div class="mx-4 my-4">
                             <label for="category1_id" class="form-label">카테고리</label>
-                            <select class="form-control" name="category1_id">
+                            <select id="category" class="form-control" name="category1_id">
                                 <option value="1">일반 공지사항</option>
                                 <option value="2">수업 공지사항</option>
                                 <option value="3">연구 공지사항</option>
                             </select>
                         </div>
+
                         <!-- Title -->
                         <div class="mx-4 my-4">
                             <label for="title" class="form-label">제목</label>
-                            <input name="title" class="form-control" type="text" placeholder="제목을 입력하세요">
+                            <input name="title" class="form-control" type="text" placeholder="제목을 입력하세요" value="{{title}}">
                         </div>
 
                         <!-- Attachment  -->
@@ -81,7 +84,7 @@
                         <!-- Content -->
                         <div class="mx-4 my-4">
                             <label for="content" class="form-label">내용</label>
-                            <textarea id="summernote" name="content" class="form-control"></textarea>
+                            <textarea id="summernote" name="content" class="form-control">{{content}}</textarea>
                         </div>
 
                         <!-- Hidden Params -->
@@ -94,7 +97,7 @@
                         </div>
                     </form>
                 </div>
-
+                {{/normalNoticeResponseDto}}
             </div>
         </div>
     </div>
@@ -102,6 +105,10 @@
 
 
 <script>
+    $(document).ready(function () {
+        $("#category").val("{{normalNoticeResponseDto.category1_id}}").prop("selected", true)
+    });
+
     $(document).ready(function() {
         $('#summernote').summernote({
             height: 500,

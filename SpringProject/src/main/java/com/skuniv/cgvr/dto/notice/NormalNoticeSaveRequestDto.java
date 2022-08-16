@@ -24,6 +24,7 @@ public class NormalNoticeSaveRequestDto {
 //    public NormalNoticeSaveRequestDto(String title, String content, String author, Long hits,
 //                                      Long category1_id, Long category2_id, Long category3_id,
 //                                      Long attachment_id) {
+    
 //        System.out.println("SaveRequestDto Builder Title: " + title);
 //        System.out.println("SaveRequestDto Builder Title: " + title);
 //        System.out.println("SaveRequestDto Builder Title: " + title);

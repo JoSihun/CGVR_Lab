@@ -4,6 +4,7 @@ import com.skuniv.cgvr.domain.notice.NormalNotice;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Getter
@@ -19,8 +20,8 @@ public class NormalNoticeResponseDto {
     private Long category3_id;
     private Long attachment_id;
 
-    private LocalDateTime regDate;
-    private LocalDateTime modDate;
+    private String regDate;
+    private String modDate;
 
     public NormalNoticeResponseDto(NormalNotice entity) {
         this.id = entity.getId();
@@ -34,7 +35,7 @@ public class NormalNoticeResponseDto {
         this.category3_id = entity.getCategory3_id();
         this.attachment_id = entity.getAttachment_id();
 
-        this.regDate = entity.getRegDate();
-        this.modDate = entity.getModDate();
+        this.regDate = entity.getRegDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.modDate = entity.getModDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }
