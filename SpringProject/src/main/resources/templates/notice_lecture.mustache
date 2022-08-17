@@ -5,11 +5,11 @@
         <div class="col-xl-2">
             <div class="card border border-dark mb-4 text-dark bg-light">
                 <!-- Card Header -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
                     <h5 class="m-0 font-weight-bold">연구생 정보</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" height="1000">
+                <div class="card-body">
                     <div><a class="card-text text-dark">2017305045 염동빈</a></div>
                     <div><a class="card-text text-dark">재학정보 : 4학년</a></div>
                 </div>
@@ -17,21 +17,21 @@
 
             <div class="row">
                 <div class="col-xl-8">
-                    <input type="text" class="form-control mb-4" id="search" placeholder="게시글 제목입력"/>
+                    <input type="text" class="form-control border-dark mb-4" id="search" placeholder="게시글 제목입력"/>
                 </div>
                 <div class="col-xl-4">
-                    <a href="#" role="button" class="btn btn-outline-dark btn-block mb-4">검색</a>
+                    <a href="#" role="button" class="btn btn-dark btn-block mb-4">검색</a>
                 </div>
             </div>
 
             <div class="row-cols-xl-2">
-                <a href="lecture/save" role="button" class="btn btn-outline-dark btn-block mb-4">글 쓰기</a>
+                <a href="/notice/post" role="button" class="btn btn-dark btn-block mb-4">글 쓰기</a>
             </div>
 
             <div class="row-cols-xl">
                 <div class="card border border-dark text-dark bg-light">
                     <!-- Card Header -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
                         <h5 class="m-0 font-weight-bold">공지사항</h5>
                     </div>
                     <!-- Card Body -->
@@ -48,31 +48,31 @@
         <div class="col-xl-10">
             <div class="card border border-dark h-100 mb-4 text-dark bg-light">
                 <!-- Card Header -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
                     <h5 class="m-0 font-weight-bold">수업 공지사항</h5>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <table class="table table-hover table-sm">
-                        <thead class="table-dark">
+                        <thead>
                         <tr>
-                            <th scope="col" style="width: 5%" class="text-center">번호</th>
-                            <th scope="col"style="width: 50%" class="text-start">제목</th>
-                            <th scope="col" style="width: 15%" class="text-center">작성자</th>
-                            <th scope="col" style="width: 15%" class="text-center">작성일</th>
-                            <th scope="col" style="width: 10%" class="text-center">조회수</th>
+                            <th scope="col" style="width: 5%" class="text-center"><b>번호</b></th>
+                            <th scope="col"style="width: 50%" class="text-start"><b>제목</b></th>
+                            <th scope="col" style="width: 15%" class="text-center"><b>작성자</b></th>
+                            <th scope="col" style="width: 15%" class="text-center"><b>작성일</b></th>
+                            <th scope="col" style="width: 10%" class="text-center"><b>조회수</b></th>
                         </tr>
                         </thead>
                         <tbody id="tbody">
-                        {{#lecture_notice_board}}
+                        {{#lectureNoticeResponseDtos}}
                             <tr>
-                                <th scope="row" style="width: 5%" class="text-center">{{id}}</th>
-                                <td style="width: 50%" class="text-start"><a href="{{id}}">{{title}}</a></td>
+                                <td scope="row" style="width: 5%" class="text-center">{{id}}</td>
+                                <td style="width: 50%" class="text-start"><a href="lecture/{{id}}" style="color: black">{{title}}</a></td>
                                 <td style="width: 15%" class="text-center">{{author}}</td>
                                 <td style="width: 15%" class="text-center">{{regDate}}</td>
                                 <td style="width: 10%" class="text-center">{{hits}}</td>
                             </tr>
-                        {{/lecture_notice_board}}
+                        {{/lectureNoticeResponseDtos}}
                         </tbody>
                     </table>
                 </div>
