@@ -2,6 +2,7 @@ package com.skuniv.cgvr.controller.notice;
 
 import com.skuniv.cgvr.dto.notice.LaboratoryNoticeResponseDto;
 import com.skuniv.cgvr.dto.notice.LaboratoryNoticeSaveRequestDto;
+import com.skuniv.cgvr.dto.notice.LaboratoryNoticeUpdateRequestDto;
 import com.skuniv.cgvr.service.notice.LaboratoryNoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -29,11 +30,24 @@ public class LaboratoryNoticeController {
     @PostMapping("/notice/save")
     public String laboratoryNoticeSave(LaboratoryNoticeSaveRequestDto requestDto) {
         Long id = laboratoryNoticeService.save(requestDto);
+
         return "redirect:/notice/laboratory/" + id.toString();
     }
 
+    // 수정 화면
+    @GetMapping("/notice/laboratory/update/{id}")
+    public String laboratoryNoticeUpdateForm(@PathVariable Long id, Model model) {
+        LaboratoryNoticeResponseDto dto = laboratoryNoticeService.findById(id);
+        model.addAttribute("post", dto);
+        return "notice_post_update";
+    }
+
     // 수정
-    // 수정 페이지가 필요함
+    @PostMapping("/notice/laboratory/update/{id}")
+    public String laboratoryNoticeUpdate(@PathVariable Long id, LaboratoryNoticeUpdateRequestDto requestDto) {
+        laboratoryNoticeService.update(id, requestDto);
+        return "redirect:/notice/laboratory/" + id.toString();
+    }
 
     // 상세 조회
     @GetMapping("/notice/laboratory/{id}")

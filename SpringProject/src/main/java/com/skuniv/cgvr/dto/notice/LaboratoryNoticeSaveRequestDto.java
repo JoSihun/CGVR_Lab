@@ -3,6 +3,7 @@ package com.skuniv.cgvr.dto.notice;
 import com.skuniv.cgvr.domain.notice.LaboratoryNotice;
 import lombok.*;
 
+//@Getter
 @Data
 @NoArgsConstructor
 public class LaboratoryNoticeSaveRequestDto {
