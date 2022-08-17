@@ -1,9 +1,9 @@
-package com.skuniv.cgvr.controller.board;
+package com.skuniv.cgvr.controller.laboratory;
 
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class NoticeBoardController {
+public class LaboratoryNoticeController {
     public String notice() {
         return "board_notice";
     }
