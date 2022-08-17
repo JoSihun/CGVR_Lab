@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@Entity(name="lecture_notice")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity(name="lecture_notice")
 public class LectureNotice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

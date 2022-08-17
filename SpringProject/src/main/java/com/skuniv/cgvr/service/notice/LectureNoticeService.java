@@ -5,7 +5,6 @@ import com.skuniv.cgvr.dto.notice.LectureNoticeResponseDto;
 import com.skuniv.cgvr.dto.notice.LectureNoticeSaveRequestDto;
 import com.skuniv.cgvr.dto.notice.LectureNoticeUpdateRequestDto;
 import com.skuniv.cgvr.repository.notice.LectureNoticeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +16,6 @@ import java.util.stream.Collectors;
 public class LectureNoticeService {
     private final LectureNoticeRepository lectureNoticeRepository;
 
-    @Autowired
     public LectureNoticeService(LectureNoticeRepository lectureNoticeRepository) {
         this.lectureNoticeRepository = lectureNoticeRepository;
     }
