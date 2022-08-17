@@ -70,9 +70,7 @@ public class NormalNoticeController {
     /* 게시글 삭제 / 추후 javaScript를 통한 DeleteMapping 처리로 수정해야함 */
     @GetMapping("notice/normal/post/delete/{id}")
     public String normalNoticePostDelete(@PathVariable Long id) {
-        System.out.println("Delete Check Point 1");
         normalNoticeService.delete(id);
-        System.out.println("Delete Check Point 2");
         return "redirect:/notice/normal";
     }
 
