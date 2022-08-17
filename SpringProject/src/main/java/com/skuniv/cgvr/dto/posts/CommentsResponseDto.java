@@ -7,13 +7,13 @@ import java.time.format.DateTimeFormatter;
 
 @Getter
 public class CommentsResponseDto {
-    private final String content;
-    private final String author;
-    private final String createdDate;
-    private final String updatedDate;
+    private String content;
+    private String author;
+    private String createdDate;
+    private String updatedDate;
 
     // Posts ID가 왜 필요한지 모르겠음, 추후 재확인요망
-    private final Long postsId;
+    private Long postsId;
 
 
     public CommentsResponseDto(Comments entity) {

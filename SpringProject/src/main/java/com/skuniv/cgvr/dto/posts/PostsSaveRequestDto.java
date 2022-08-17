@@ -22,21 +22,6 @@ public class PostsSaveRequestDto {
     private String categoryName;
 
 
-//    @Builder
-//    public PostsSaveRequestDto(String title, String content, String author,
-//                               String projectName, String categoryName,
-//                               Long hits, Long attachment_id) {
-//        this.title = title;
-//        this.content = content;
-//        this.author = author;
-//
-//        this.hits = hits;
-//        this.projectName = projectName;
-//        this.categoryName = categoryName;
-//        this.attachment_id = attachment_id;
-//    }
-
-
     public Posts toEntity() {
         return Posts.builder()
                 .title(title)
