@@ -3,6 +3,9 @@ package com.skuniv.cgvr.dto.posts;
 import com.skuniv.cgvr.domain.posts.Posts;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Getter
 public class PostsListResponseDto {
     private Long id;
@@ -15,12 +18,28 @@ public class PostsListResponseDto {
 
 
     public PostsListResponseDto(Posts entity) {
-        this.id = getId();
-        this.hits = getHits();
-        this.title = getTitle();
-        this.author = getAuthor();
+        this.id = entity.getId();
+        this.hits = entity.getHits();
+        this.title = entity.getTitle();
+        this.author = entity.getAuthor();
 
-        this.createdDate = getCreatedDate();
-        this.updatedDate = getUpdatedDate();
+        this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+        this.updatedDate = entity.getUpdatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+    }
+
+
+    public void formatCreatedDate() {
+        String[] array = this.createdDate.split(" ");   // 날짜 시간 분리
+        // 최초작성일이 오늘인 경우
+        if (array[0].equals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")))) {
+            this.createdDate = array[1].substring(0, 5);      // 시간 분단위까지만 저장
+        } else {
+            this.createdDate = array[0];                      // 날짜 저장
+        }
+    }
+
+
+    public void formatTitle(String commentsCount) {
+        this.title += String.format(" [%s]", commentsCount);
     }
 }
