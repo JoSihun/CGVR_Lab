@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class LaboratoryNoticeService {
     private final LaboratoryNoticeRepository laboratory_notice_repository;
 
-    @Autowired
     public LaboratoryNoticeService(LaboratoryNoticeRepository laboratory_notice_repository) {
         this.laboratory_notice_repository = laboratory_notice_repository;
     }

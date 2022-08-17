@@ -36,6 +36,7 @@ public class LectureNoticeController {
             lectureNoticeResponseDto.setRegDate();
             // 제목에 댓글 수 추가
             List<LectureNoticeAnswerResponseDto> lectureNoticeAnswerResponseDtos = lectureNoticeResponseDto.getLectureNoticeAnswerList();
+            if(lectureNoticeAnswerResponseDtos.size() != 0)
             lectureNoticeResponseDto.setTitle(Integer.toString(lectureNoticeAnswerResponseDtos.size()));
         }
         model.addAttribute("lectureNoticeResponseDtos", lectureNoticeResponseDtos);
