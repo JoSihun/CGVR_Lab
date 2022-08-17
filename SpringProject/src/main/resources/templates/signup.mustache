@@ -29,14 +29,14 @@
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="loginName" class="form-control" />
-                            <label class="form-label" for="loginName">Email or username</label>
+                            <input type="email" id="username" class="form-control" />
+                            <label class="form-label" for="username">Email or Username</label>
                         </div>
 
                         <!-- Password input -->
                         <div class="form-outline mb-4">
-                            <input type="password" id="loginPassword" class="form-control" />
-                            <label class="form-label" for="loginPassword">Password</label>
+                            <input type="password" id="password" class="form-control" />
+                            <label class="form-label" for="password">Password</label>
                         </div>
 
                         <!-- 2 column grid layout -->
@@ -57,6 +57,7 @@
 
                         <!-- Submit button -->
                         <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
                         <!-- Register buttons -->
                         <div class="text-center">
@@ -67,31 +68,30 @@
 
                 <!-- Register -->
                 <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                    <form>
+                    <form method="post">
                         <h3 class="text-center">Sign Up</h3>
+                        <!-- Username input -->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="username" class="form-control" />
+                            <label class="form-label" for="username">Username</label>
+                        </div>
 
                         <!-- Name input -->
                         <div class="form-outline mb-4">
-                            <input type="text" id="registerName" class="form-control" />
-                            <label class="form-label" for="registerName">Name</label>
-                        </div>
-
-                        <!-- Username input -->
-                        <div class="form-outline mb-4">
-                            <input type="text" id="registerUsername" class="form-control" />
-                            <label class="form-label" for="registerUsername">Username</label>
+                            <input type="text" id="name" class="form-control" />
+                            <label class="form-label" for="name">Name</label>
                         </div>
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="registerEmail" class="form-control" />
-                            <label class="form-label" for="registerEmail">Email</label>
+                            <input type="email" id="email" class="form-control" />
+                            <label class="form-label" for="email">Email</label>
                         </div>
 
                         <!-- Password input -->
                         <div class="form-outline mb-4">
-                            <input type="password" id="registerPassword" class="form-control" />
-                            <label class="form-label" for="registerPassword">Password</label>
+                            <input type="password" id="password" class="form-control" />
+                            <label class="form-label" for="password">Password</label>
                         </div>
 
                         <!-- Repeat Password input -->
@@ -110,7 +110,8 @@
                         </div>
 
                         <!-- Submit button -->
-                        <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Sign up</button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     </form>
                 </div>
             </div>
@@ -120,6 +121,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        var errorMessage = [[$(errorMessage)]];
+        if (errorMessage != null) {
+            alert(errorMessage);
+        }
+    })
+</script>
 
 
 {{>footer}}

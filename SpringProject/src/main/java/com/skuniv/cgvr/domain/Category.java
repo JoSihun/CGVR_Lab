@@ -14,7 +14,6 @@ public class Category {
     @Column
     private String content;
     @Builder
-
     public Category(Long id, String content) {
         this.id = id;
         this.content = content;
