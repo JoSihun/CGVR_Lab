@@ -1,12 +1,9 @@
 package com.skuniv.cgvr.dto.notice;
 
 import com.skuniv.cgvr.domain.notice.LectureNotice;
-import com.skuniv.cgvr.domain.notice.NormalNotice;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
