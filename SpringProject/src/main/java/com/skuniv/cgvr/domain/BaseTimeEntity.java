@@ -1,7 +1,5 @@
-package com.skuniv.cgvr.domain.notice;
+package com.skuniv.cgvr.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,14 +10,13 @@ import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)  // 데이터 조작 시 자동 날짜 수정을 위한 리스너
-public class TimeEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class BaseTimeEntity {
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime regDate;
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Column
-    private LocalDateTime modDate;
-
+    @Column(updatable = true)
+    private LocalDateTime updatedDate;
 }

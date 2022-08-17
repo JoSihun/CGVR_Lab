@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class LaboratoryNotice extends TimeEntity{    // Auditing 기능 사용 Entity 상속
+public class LaboratoryNotice {    // Auditing 기능 사용 Entity 상속
     @Id
     @GeneratedValue
     private Integer id;
