@@ -16,8 +16,12 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
-        List<NormalNoticeResponseDto> normalNoticeResponseDtos = this.normalNoticeService.findAll().subList(0, 5);
-        model.addAttribute("normalNoticeResponseDtos", normalNoticeResponseDtos);
+//        try {
+//            List<NormalNoticeResponseDto> normalNoticeResponseDtos = this.normalNoticeService.findAll().subList(0, 5);
+//            model.addAttribute("normalNoticeResponseDtos", normalNoticeResponseDtos);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return "index";
     }
 
