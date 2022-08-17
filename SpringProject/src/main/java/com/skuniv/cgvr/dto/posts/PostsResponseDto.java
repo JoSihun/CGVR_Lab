@@ -3,18 +3,24 @@ package com.skuniv.cgvr.dto.posts;
 import com.skuniv.cgvr.domain.posts.Posts;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Getter
 public class PostsResponseDto {
-    private final Long id;
-    private final String title;
-    private final String content;
-    private final String author;
+    private Long id;
+    private String title;
+    private String content;
+    private String author;
 
-    private final Long hits;
-    private final Long attachment_id;
+    private Long hits;
+    private Long attachment_id;
 
-    private final String projectName;
-    private final String categoryName;
+    private String projectName;
+    private String categoryName;
+
+    private String createdDate;
+    private String updatedDate;
 
 
     public PostsResponseDto(Posts entity) {
@@ -27,5 +33,9 @@ public class PostsResponseDto {
         this.projectName = entity.getProjectName();
         this.categoryName = entity.getCategoryName();
         this.attachment_id = entity.getAttachment_id();
+
+        this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+        this.updatedDate = entity.getUpdatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
     }
+
 }

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -31,19 +32,23 @@ public class Posts extends BaseTimeEntity {
     private Long hits;
     private Long attachment_id;
 
+    @OneToMany(mappedBy = "posts", cascade = CascadeType.REMOVE)
+    private List<Comments> commentsList;
+
 
     @Builder
     public Posts(String title, String content, String author,
                  String projectName, String categoryName,
-                 Long hits, Long attachment_id) {
+                 Long hits, Long attachment_id, List<Comments> commentsList) {
         this.title = title;
         this.content = content;
         this.author = author;
 
-        this.hits = Long.valueOf(0);
+        this.hits = 0L;
         this.projectName = projectName;
         this.categoryName = categoryName;
         this.attachment_id = attachment_id;
+        this.commentsList = commentsList;
     }
 
     public void increaseHits() {

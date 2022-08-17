@@ -1,9 +1,8 @@
 package com.skuniv.cgvr.controller.notice;
 
-import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
-import com.skuniv.cgvr.dto.posts.PostsResponseDto;
-import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
-import com.skuniv.cgvr.dto.posts.PostsUpdateRequestDto;
+import com.skuniv.cgvr.domain.posts.Comments;
+import com.skuniv.cgvr.dto.posts.*;
+import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +17,7 @@ import java.util.List;
 @Controller
 public class NoticeNormalController {
     private final PostsService postsService;
+    private final CommentsService commentsService;
 
 
     /* 게시판 목록보기 */
@@ -32,10 +32,14 @@ public class NoticeNormalController {
 
 
     /* 게시글 상세보기 */
+    // 댓글 기능을 추가하였으나, 테스트 해보지 않았음
     @GetMapping("notice/normal/posts/{id}")
     public String noticeNormalPost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
+        List<CommentsResponseDto> responseDtoList = this.commentsService.findAll(id);
         model.addAttribute("posts", responseDto);
+        model.addAttribute("comments", responseDtoList);
+        model.addAttribute("commentsCount", responseDtoList.size());
         return "notice_post_view";
     }
 
@@ -91,5 +95,16 @@ public class NoticeNormalController {
     public String noticeNormalPostDelete(@PathVariable Long id) {
         this.postsService.delete(id);
         return "redirect:/notice/normal/board";
+    }
+
+
+    /* 댓글 등록요청 */
+    // RestController 처리예정
+    // JavaScript AJAX 통신 처리예정
+    // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
+    @PostMapping("notice/normal/posts/{id}/comment")
+    public String CommentSave(@PathVariable Long id, CommentsSaveRequestDto requestDto) {
+        this.commentsService.save(id, requestDto);
+        return "redirect:/notice/normal/posts/" + id;
     }
 }
