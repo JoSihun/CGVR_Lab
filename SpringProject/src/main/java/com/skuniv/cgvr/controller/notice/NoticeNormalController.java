@@ -1,6 +1,5 @@
 package com.skuniv.cgvr.controller.notice;
 
-import com.skuniv.cgvr.domain.posts.Comments;
 import com.skuniv.cgvr.dto.posts.*;
 import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
@@ -35,11 +34,11 @@ public class NoticeNormalController {
     // 댓글 기능을 추가하였으나, 테스트 해보지 않았음
     @GetMapping("notice/normal/posts/{id}")
     public String noticeNormalPost(@PathVariable Long id, Model model) {
-        PostsResponseDto responseDto = this.postsService.findById(id);
-        List<CommentsResponseDto> responseDtoList = this.commentsService.findAll(id);
-        model.addAttribute("posts", responseDto);
-        model.addAttribute("comments", responseDtoList);
-        model.addAttribute("commentsCount", responseDtoList.size());
+        PostsResponseDto postsResponseDto = this.postsService.findById(id);
+        List<CommentsListResponseDto> commentsListResponseDtos = this.commentsService.findAllByPostId(id);
+        model.addAttribute("posts", postsResponseDto);
+        model.addAttribute("comments", commentsListResponseDtos);
+        model.addAttribute("commentsCount", commentsListResponseDtos.size());
         return "notice_post_view";
     }
 
@@ -98,11 +97,16 @@ public class NoticeNormalController {
     }
 
 
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+
     /* 댓글 등록요청 */
     // RestController 처리예정
     // JavaScript AJAX 통신 처리예정
     // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
-    @PostMapping("notice/normal/posts/{id}/comment")
+    @PostMapping("notice/normal/posts/{id}")
     public String CommentSave(@PathVariable Long id, CommentsSaveRequestDto requestDto) {
         this.commentsService.save(id, requestDto);
         return "redirect:/notice/normal/posts/" + id;
