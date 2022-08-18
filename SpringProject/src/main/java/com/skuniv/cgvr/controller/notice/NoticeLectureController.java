@@ -27,7 +27,7 @@ public class NoticeLectureController {
         // PostsService -> findByCategory~~~ 추가한 뒤 카테고리별 추출처리필요
         List<PostsListResponseDto> responseDtoList = this.postsService.findAllDesc();
         model.addAttribute("posts", responseDtoList);
-        return "notice_lecture";
+        return "notice_lecture_board";
     }
 
 
@@ -36,7 +36,7 @@ public class NoticeLectureController {
     public String noticeLecturePost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
         model.addAttribute("posts", responseDto);
-        return "notice_post_view";
+        return "notice_lecture_posts";
     }
 
 
@@ -48,7 +48,7 @@ public class NoticeLectureController {
     /* 게시글 작성폼 */
     @GetMapping("notice/lecture/posts/form")
     public String noticeLecturePostForm() {
-        return "notice_post_form";
+        return "notice_lecture_posts_form";
     }
 
 
@@ -57,7 +57,7 @@ public class NoticeLectureController {
     public String noticeLecturePostUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
         model.addAttribute("posts", responseDto);
-        return "notice_post_update_form";
+        return "notice_lecture_posts_update_form";
     }
 
 

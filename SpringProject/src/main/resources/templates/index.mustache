@@ -21,19 +21,19 @@
             <div class="card border border-dark h-100">
                 <h5 class="card-header text-white bg-dark text-center">일반 공지사항</h5>
                 <ul class="list-group list-group-dark">
-                    {{#normalNoticeResponseDtos}}
+                    {{#noticeNormalPosts}}
                     <li class="list-group-item px-3">
                         <table>
                             <tr>
                                 <td style="width: 10%" class="text-center">{{id}}</td>
-                                <td style="width: 30%" class="text-start"><a href="/notice/normal/post/{{id}}">{{title}}</a></td>
+                                <td style="width: 30%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
                                 <td style="width: 10%" class="text-center">{{hits}}</td>
                                 <td style="width: 20%" class="text-center">{{author}}</td>
-                                <td style="width: 30%" class="text-center">{{regDate}}</td>
+                                <td style="width: 30%" class="text-center">{{createdDate}}</td>
                             </tr>
                         </table>
                     </li>
-                    {{/normalNoticeResponseDtos}}
+                    {{/noticeNormalPosts}}
                 </ul>
             </div>
         </div>
@@ -44,11 +44,19 @@
             <div class="card border border-dark h-100">
                 <h5 class="card-header text-white bg-dark text-center">수업 공지사항</h5>
                 <ul class="list-group list-group-dark">
-                    <li class="list-group-item px-3">0001   글 제목 1  2022.01.01  관리자</li>
-                    <li class="list-group-item px-3">0002   글 제목 2  2022.01.02  관리자</li>
-                    <li class="list-group-item px-3">0003   글 제목 3  2022.01.03  관리자</li>
-                    <li class="list-group-item px-3">0004   글 제목 4  2022.01.04  관리자</li>
-                    <li class="list-group-item px-3">0005   글 제목 5  2022.01.05  관리자</li>
+                    {{#noticeLecturePosts}}
+                        <li class="list-group-item px-3">
+                            <table>
+                                <tr>
+                                    <td style="width: 10%" class="text-center">{{id}}</td>
+                                    <td style="width: 30%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                    <td style="width: 10%" class="text-center">{{hits}}</td>
+                                    <td style="width: 20%" class="text-center">{{author}}</td>
+                                    <td style="width: 30%" class="text-center">{{createdDate}}</td>
+                                </tr>
+                            </table>
+                        </li>
+                    {{/noticeLecturePosts}}
                 </ul>
             </div>
         </div>
@@ -58,11 +66,19 @@
             <div class="card border border-dark h-100">
                 <h5 class="card-header text-white bg-dark text-center">연구 공지사항</h5>
                 <ul class="list-group list-group-dark">
-                    <li class="list-group-item px-3">0001   글 제목 1  2022.01.01  관리자</li>
-                    <li class="list-group-item px-3">0002   글 제목 2  2022.01.02  관리자</li>
-                    <li class="list-group-item px-3">0003   글 제목 3  2022.01.03  관리자</li>
-                    <li class="list-group-item px-3">0004   글 제목 4  2022.01.04  관리자</li>
-                    <li class="list-group-item px-3">0005   글 제목 5  2022.01.05  관리자</li>
+                    {{#noticeLaboratoryPosts}}
+                        <li class="list-group-item px-3">
+                            <table>
+                                <tr>
+                                    <td style="width: 10%" class="text-center">{{id}}</td>
+                                    <td style="width: 30%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                    <td style="width: 10%" class="text-center">{{hits}}</td>
+                                    <td style="width: 20%" class="text-center">{{author}}</td>
+                                    <td style="width: 30%" class="text-center">{{createdDate}}</td>
+                                </tr>
+                            </table>
+                        </li>
+                    {{/noticeLaboratoryPosts}}
                 </ul>
             </div>
         </div>
@@ -75,11 +91,19 @@
             <div class="card border border-dark h-100">
                 <h5 class="card-header text-white bg-dark text-center">연구실 공지사항</h5>
                 <ul class="list-group list-group-dark">
-                    <li class="list-group-item px-3">0001   글 제목 1  2022.01.01  관리자</li>
-                    <li class="list-group-item px-3">0002   글 제목 2  2022.01.02  관리자</li>
-                    <li class="list-group-item px-3">0003   글 제목 3  2022.01.03  관리자</li>
-                    <li class="list-group-item px-3">0004   글 제목 4  2022.01.04  관리자</li>
-                    <li class="list-group-item px-3">0005   글 제목 5  2022.01.05  관리자</li>
+                    {{#LaboratoryNoticePosts}}
+                        <li class="list-group-item px-3">
+                            <table>
+                                <tr>
+                                    <td style="width: 10%" class="text-center">{{id}}</td>
+                                    <td style="width: 30%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                    <td style="width: 10%" class="text-center">{{hits}}</td>
+                                    <td style="width: 20%" class="text-center">{{author}}</td>
+                                    <td style="width: 30%" class="text-center">{{createdDate}}</td>
+                                </tr>
+                            </table>
+                        </li>
+                    {{/LaboratoryNoticePosts}}
                 </ul>
             </div>
         </div>
@@ -89,11 +113,19 @@
             <div class="card border border-dark h-100">
                 <h5 class="card-header text-white bg-dark text-center">논문 게시판</h5>
                 <ul class="list-group list-group-dark">
-                    <li class="list-group-item px-3">0001   글 제목 1  2022.01.01  관리자</li>
-                    <li class="list-group-item px-3">0002   글 제목 2  2022.01.02  관리자</li>
-                    <li class="list-group-item px-3">0003   글 제목 3  2022.01.03  관리자</li>
-                    <li class="list-group-item px-3">0004   글 제목 4  2022.01.04  관리자</li>
-                    <li class="list-group-item px-3">0005   글 제목 5  2022.01.05  관리자</li>
+                    {{#LaboratoryPaperPosts}}
+                        <li class="list-group-item px-3">
+                            <table>
+                                <tr>
+                                    <td style="width: 10%" class="text-center">{{id}}</td>
+                                    <td style="width: 30%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                    <td style="width: 10%" class="text-center">{{hits}}</td>
+                                    <td style="width: 20%" class="text-center">{{author}}</td>
+                                    <td style="width: 30%" class="text-center">{{createdDate}}</td>
+                                </tr>
+                            </table>
+                        </li>
+                    {{/LaboratoryPaperPosts}}
                 </ul>
             </div>
         </div>
@@ -103,11 +135,19 @@
             <div class="card border border-dark h-100">
                 <h5 class="card-header text-white bg-dark text-center">자료 게시판</h5>
                 <ul class="list-group list-group-dark">
-                    <li class="list-group-item px-3">0001   글 제목 1  2022.01.01  관리자</li>
-                    <li class="list-group-item px-3">0002   글 제목 2  2022.01.02  관리자</li>
-                    <li class="list-group-item px-3">0003   글 제목 3  2022.01.03  관리자</li>
-                    <li class="list-group-item px-3">0004   글 제목 4  2022.01.04  관리자</li>
-                    <li class="list-group-item px-3">0005   글 제목 5  2022.01.05  관리자</li>
+                    {{#LaboratoryMaterialPosts}}
+                        <li class="list-group-item px-3">
+                            <table>
+                                <tr>
+                                    <td style="width: 10%" class="text-center">{{id}}</td>
+                                    <td style="width: 30%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                    <td style="width: 10%" class="text-center">{{hits}}</td>
+                                    <td style="width: 20%" class="text-center">{{author}}</td>
+                                    <td style="width: 30%" class="text-center">{{createdDate}}</td>
+                                </tr>
+                            </table>
+                        </li>
+                    {{/LaboratoryMaterialPosts}}
                 </ul>
             </div>
         </div>
