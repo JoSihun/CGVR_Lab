@@ -94,7 +94,7 @@ public class UserController {
 
     /* 관리자 추가요청 */
     @PostMapping("/admin")
-    public String addAdmin(UserSaveRequestDto requestDto, HttpServletResponse response) throws Exception {
+    public String adminSave(UserSaveRequestDto requestDto) {
         this.userService.save(requestDto);
         return "redirect:/admin";
     }
