@@ -27,7 +27,7 @@ public class NoticeNormalController {
         // PostsService -> findByCategory~~~ 추가한 뒤 카테고리별 추출처리필요
         List<PostsListResponseDto> responseDtoList = this.postsService.findAllDesc();
         model.addAttribute("posts", responseDtoList);
-        return "notice_normal";
+        return "notice_normal_board";
     }
 
 
@@ -40,7 +40,7 @@ public class NoticeNormalController {
         model.addAttribute("posts", responseDto);
         model.addAttribute("comments", responseDtoList);
         model.addAttribute("commentsCount", responseDtoList.size());
-        return "notice_post_view";
+        return "notice_normal_posts";
     }
 
 
@@ -52,7 +52,7 @@ public class NoticeNormalController {
     /* 게시글 작성폼 */
     @GetMapping("notice/normal/posts/form")
     public String noticeNormalPostForm() {
-        return "notice_post_form";
+        return "notice_normal_posts_form";
     }
 
 
@@ -61,7 +61,7 @@ public class NoticeNormalController {
     public String noticeNormalPostUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
         model.addAttribute("posts", responseDto);
-        return "notice_post_update_form";
+        return "notice_normal_posts_update_form";
     }
 
 

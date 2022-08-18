@@ -27,7 +27,7 @@ public class NoticeLaboratoryController {
         // PostsService -> findByCategory~~~ 추가한 뒤 카테고리별 추출처리필요
         List<PostsListResponseDto> responseDtoList = this.postsService.findAllDesc();
         model.addAttribute("posts", responseDtoList);
-        return "notice_laboratory";
+        return "notice_laboratory_board";
     }
 
 
@@ -36,7 +36,7 @@ public class NoticeLaboratoryController {
     public String noticeLaboratoryPost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
         model.addAttribute("posts", responseDto);
-        return "notice_post_view";
+        return "notice_laboratory_posts";
     }
 
 
@@ -48,7 +48,7 @@ public class NoticeLaboratoryController {
     /* 게시글 작성폼 */
     @GetMapping("notice/laboratory/posts/form")
     public String noticeLaboratoryPostForm() {
-        return "notice_post_form";
+        return "notice_laboratory_posts_form";
     }
 
 
@@ -57,7 +57,7 @@ public class NoticeLaboratoryController {
     public String noticeLaboratoryPostUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
         model.addAttribute("posts", responseDto);
-        return "notice_post_update_form";
+        return "notice_laboratory_posts_update_form";
     }
 
 
