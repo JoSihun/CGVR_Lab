@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.ArrayList;
@@ -34,6 +33,7 @@ public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private static final String loginURL = "https://sportal.skuniv.ac.kr/sportal/auth2/login.sku";
+    private static final String lectURL = "https://sportal.skuniv.ac.kr/sportal/common/selectList.sku";
 
     class UserData {    // for Login
         String accessToken; // bearing token
@@ -41,9 +41,17 @@ public class UserController {
         String grade;       // grade
         String email;       // e-mail
         String contact;     // phone_number
+        ArrayList<String> yearList = new ArrayList<>();
+    }
+    class LectureData {     // for Login
+        // 강의정보
+        String cpp = "";         // c++ year (1학기) CE1102
+        String mfc = "";         // mfc year (2학기) CE1047
+        String cg = "";          // graphics year (1학기) CE1053
+        String ar = "";          // vr/ar year (2학기) CE1168 -> 수업명 바뀌어서 학수번호 바뀜
     }
 
-    /* 로그인 화면이동 */
+    /* 로그인 화면보기 */
     @GetMapping("/signin")
     public String signin() {
         return "signin";
@@ -56,6 +64,8 @@ public class UserController {
         // 로그인 실패시
         if(userData == null)
             return "redirect:/signin";
+        // 강의 정보 가져오기
+        LectureData lectureData = getLectureData(userId, userData.accessToken, userData.yearList);
         // 세션 설정
         session.setAttribute("sessionUserId", userId);              // 학번
         session.setAttribute("sessionKorName", userData.korName);   // 이름
@@ -94,7 +104,7 @@ public class UserController {
 
     /* 관리자 추가요청 */
     @PostMapping("/admin")
-    public String addAdmin(UserSaveRequestDto requestDto, HttpServletResponse response) throws Exception {
+    public String addAdmin(UserSaveRequestDto requestDto) {
         this.userService.save(requestDto);
         return "redirect:/admin";
     }
@@ -144,6 +154,53 @@ public class UserController {
         userData.grade = response.getJSONObject("USER_INFO").get("SCHYR").toString();
         userData.email = response.getJSONObject("USER_INFO").get("EMAIL").toString();
         userData.contact = response.getJSONObject("USER_INFO").get("PHONE_MOBILE").toString();
+        for(int i = 0; i < response.getJSONArray("YEAR_LIST").length(); i++) {
+            userData.yearList.add(response.getJSONArray("YEAR_LIST").getJSONObject(i).get("value").toString());
+        }
         return userData;
+    }
+    public LectureData getLectureData(String userId, String accessToken, ArrayList<String> yearList) {
+        JSONObject response;
+        LectureData lectureData = new LectureData();
+        for(String year : yearList) {
+            for(int term = 1; term <= 2; term++) {
+                JSONObject payload;
+                JSONObject parameter;
+
+                parameter = new JSONObject();
+                parameter.put("ID", userId);
+                parameter.put("LECT_YEAR", year);
+                parameter.put("LECT_TERM", term);
+                parameter.put("STNT_NUMB", userId);
+
+                payload = new JSONObject();
+                payload.put("MAP_ID", "education.ual.UAL_04004_T.select");
+                payload.put("SYS_ID", "AL");
+                payload.put("accessToken", accessToken);
+                payload.put("parameter", parameter);
+                payload.put("path", "common/selectList");
+                payload.put("programID", "UAL_04004_T");
+                payload.put("userID", userId);
+
+                response = Connector.getInstance().getResponseWithToken(lectURL, accessToken, payload);
+                if (response.get("RTN_STATUS").toString().equals("S")) {
+                    // 수강한 모든 수업을 순회하면서, 가장 최근에 들은 김태영 교수님 수업 년도 조회
+                    for (int i = 0; i < response.getJSONArray("LIST").length(); i++) {
+                        if (response.getJSONArray("LIST").getJSONObject(i).get("SUBJ_CD").toString().equals("CE1102")) {
+                            if (lectureData.cpp.equals("")) lectureData.cpp = year;
+                        } else if (response.getJSONArray("LIST").getJSONObject(i).get("SUBJ_CD").toString().equals("CE1047")) {
+                            if (lectureData.mfc.equals("")) lectureData.mfc = year;
+                        } else if (response.getJSONArray("LIST").getJSONObject(i).get("SUBJ_CD").toString().equals("CE1053")) {
+                            if (lectureData.cg.equals("")) lectureData.cg = year;
+                        } else if (response.getJSONArray("LIST").getJSONObject(i).get("SUBJ_CD").toString().equals("CE1168")) {
+                            if (lectureData.ar.equals("")) lectureData.ar = year;
+                        }
+                    }
+                } else {
+                    // System.out.println(year + "-" + term + " Lecture info 없음!");
+                }
+            }
+        }
+        return lectureData;
     }
 }

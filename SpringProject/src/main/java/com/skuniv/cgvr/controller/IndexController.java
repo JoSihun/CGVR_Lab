@@ -32,7 +32,7 @@ public class IndexController {
         model.addAttribute("LaboratoryNoticePosts", responseDtoList4);
         model.addAttribute("LaboratoryPaperPosts", responseDtoList5);
         model.addAttribute("LaboratoryMaterialPosts", responseDtoList6);
-        
+
         return "index";
     }
 

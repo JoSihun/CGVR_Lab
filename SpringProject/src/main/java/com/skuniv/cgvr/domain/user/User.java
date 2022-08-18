@@ -18,10 +18,8 @@ public class User {
     private Long id;            // PK
 
     @Column(unique = true)
-    private String username;    // ID
-    private String password;    // PW
-
-    private String name;
+    private String userId;    // ID
+    private String korName;
     private String contact;
     private String email;
 
@@ -29,21 +27,19 @@ public class User {
     private UserRole role;
 
     @Builder
-    public User(String username, String password, UserRole role,
-                String name, String email, String contact) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
+    public User(String userId, UserRole role,
+                String korName, String email, String contact) {
+        this.userId = userId;
+        this.korName = korName;
         this.email = email;
         this.contact = contact;
         this.role = role;
     }
 
-    public static User createUser(UserFormDto userFormDto, PasswordEncoder passwordEncoder) {
+    public static User createUser(UserFormDto userFormDto) {
         return User.builder()
-                .username(userFormDto.getUsername())
-                .password(passwordEncoder.encode(userFormDto.getPassword()))
-                .name(userFormDto.getName())
+                .userId(userFormDto.getUserId())
+                .korName(userFormDto.getKorName())
                 .email(userFormDto.getEmail())
                 .contact(userFormDto.getContact())
                 .role(UserRole.USER)

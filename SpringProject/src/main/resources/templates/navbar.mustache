@@ -61,10 +61,21 @@
             <!-- Right Menu Elements; Sign Up & Sign In -->
             <!-- 추후 로그인 여부에 따른 상태 변경 필요 -->
             <div class="d-flex justify-content-end">
+                {{^sessionKorName}}
                 <a class="btn btn-dark" href="/signup">Sign Up</a>
                 <a class="btn btn-dark" href="/signin">Sign In</a>
+                {{/sessionKorName}}
+                {{#sessionKorName}}
+                    <a class="navbar-brand"><b>{{sessionKorName}}님</b></a>
+                    {{^admin}}
+                        <a class="btn btn-dark" href="/signout">Sign out</a>
+                    {{/admin}}
+                    {{#admin}}
+                        <a class="btn btn-dark" href="/admin">고나리</a>
+                        <a class="btn btn-dark" href="/signout">Sign out</a>
+                    {{/admin}}
+                {{/sessionKorName}}
             </div>
-
         </div>
     </div>
 </nav>

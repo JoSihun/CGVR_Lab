@@ -1,0 +1,91 @@
+{{>header}}
+{{>banner}}
+{{#admin}}
+    <div class="container-fluid mt-4">
+        <div class="row mx-4 my-4">
+            <div class="col-xl-2">
+                <div class="card border border-dark mb-4 text-dark bg-light">
+                    <!-- Card Header -->
+                    <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold">회원 정보</h5>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div><a class="card-text text-dark">{{sessionUserId}} {{sessionKorName}}</a></div>
+                        <div><a class="card-text text-dark">재학정보 : {{sessionGrade}}학년</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-10">
+                <div class="card border border-dark mb-4 text-dark bg-light">
+                    <!-- Card Header -->
+                    <div class="card-header py-3 d-flex flex-row bg-dark text-white align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold">관리자 정보</h5>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="text-center"><b>학번</b></th>
+                                <th scope="col" class="text-center"><b>이름</b></th>
+                                <th scope="col" class="text-center"><b>연락처</b></th>
+                                <th scope="col" class="text-center"><b>이메일</b></th>
+                            </tr>
+                            </thead>
+                            <!-- user Entity 가 필요할 것 -->
+                            <tbody id="tbody">
+                            {{#users}}
+                            <tr>
+                                <th scope="row" class="text-center">{{userId}}</th>
+                                <th scope="row" class="text-center">{{korName}}</th>
+                                <th scope="row" class="text-center">{{contact}}</th>
+                                <th scope="row" class="text-center">{{email}}</th>
+                            </tr>
+                            {{/users}}
+                            </tbody>
+                        </table>
+                    </div>
+                    </table>
+                </div>
+                <div class="card border border-dark text-dark bg-light">
+                    <!-- Card Header -->
+                    <div class="card-header py-3 d-flex flex-row bg-dark text-white align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold">관리자 추가</h5>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="row">
+                                <div class="form_group col-xl-2">
+                                    <input type="text" class=form-control name="userId" placeholder="학번입력"/>
+                                </div>
+                                <div class="form_group col-xl-2">
+                                    <input type="text" class=form-control name="korName" placeholder="이름입력"/>
+                                </div>
+                                <div class="form_group col-xl-2">
+                                    <input type="tel" class=form-control name="contact" placeholder="연락처입력"/>
+                                </div>
+                                <div class="form_group col-xl-3">
+                                    <input type="email" class=form-control name="email" placeholder="이메일입력"/>
+                                </div>
+                                <!-- Hidden -->
+                                <input type="hidden" class="form-control" name="role" value="ADMIN"/>
+                                <div class="form_group col-xl-2">
+                                    <input type="submit" class="btn btn-dark" value="추가"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/admin}}
+{{^admin}}
+    <div class="text-center mx-auto my-auto">
+        <h2>관리자 전용 페이지입니다!</h2>
+    </div>
+{{/admin}}
+{{>footer}}
