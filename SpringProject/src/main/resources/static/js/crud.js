@@ -18,18 +18,18 @@ var main = {
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val(),
-            category1_id: $('#category1_id').val()
+            categoryName: $('#categoryName').val()
         };
 
         $.ajax({
             type: 'POST',
-            url: '/notice/save',
+            url: '/notice/all/api/posts',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
+            data: JSON.stringify(data),
+        }).done(function(response) {
             alert('글이 등록되었습니다.');
-            window.location.href = '/notice/laboratory';
+            window.location.href = '/notice/all/posts/' + response;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -37,20 +37,21 @@ var main = {
     update : function () {
         var data = {
             title: $('#title').val(),
-            content: $('#content').val()
+            content: $('#content').val(),
+            categoryName: $('#categoryName').val()
         };
 
         var id = $('#id').val();
 
         $.ajax({
             type: 'PUT',
-            url: '/notice/laboratory/update/'+id,
+            url: '/notice/all/api/posts/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
+            data: JSON.stringify(data),
+        }).done(function(id) {
             alert('글이 수정되었습니다.');
-            // window.location.href = '/';
+            window.location.href = '/notice/all/posts/' + id;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -60,12 +61,12 @@ var main = {
 
         $.ajax({
             type: 'DELETE',
-            url: '/notice/laboratory/'+id,
+            url: '/notice/all/api/posts/'+id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType:'application/json; charset=utf-8',
         }).done(function() {
             alert('글이 삭제되었습니다.');
-            // window.location.href = '/';
+            window.location.href = '/notice/all/board';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
