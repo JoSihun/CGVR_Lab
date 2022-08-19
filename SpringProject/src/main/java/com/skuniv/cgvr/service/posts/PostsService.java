@@ -21,27 +21,53 @@ public class PostsService {
     private final PostsRepository postsRepository;
 
 
-    /* 게시판 목록보기 - 작성순 */
-    // 최초작성일자 기준으로 정렬하게 세팅되어 있음
-    // 최종수정일자 기준으로 정렬하려면 updatedDate 사용
+    /* 전체 게시판 목록보기 - 작성순 */
     @Transactional
     public List<PostsListResponseDto> findAllAsc() {
-        Sort sort = Sort.by(Sort.Direction.ASC, "id", "createdDate");
+        // 최초작성일자 기준으로 정렬하려면 id 대신 createdDate 사용
+        // 최종수정일자 기준으로 정렬하려면 id 대신 updatedDate 사용
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         List<Posts> postsList = this.postsRepository.findAll(sort);
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
 
-    /* 게시판 목록보기 - 최신순 */
-    // 최초작성일자 기준으로 정렬하게 세팅되어 있음
-    // 최종수정일자 기준으로 정렬하려면 updatedDate 사용
+    /* 전체 게시판 목록보기 - 최신순 */
     @Transactional
     public List<PostsListResponseDto> findAllDesc() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id", "createdDate");
+        // 최초작성일자 기준으로 정렬하려면 id 대신 createdDate 사용
+        // 최종수정일자 기준으로 정렬하려면 id 대신 updatedDate 사용
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
         List<Posts> postsList = this.postsRepository.findAll(sort);
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
+
+    /* 카테고리별 게시판 목록보기 - 작성순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByCategoryNameAsc(String categoryName) {
+        // 최초작성일자 기준으로 정렬하려면 id 대신 createdDate 사용
+        // 최종수정일자 기준으로 정렬하려면 id 대신 updatedDate 사용
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+        List<Posts> postsList = this.postsRepository.findByCategoryName(categoryName, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+
+    /* 카테고리별 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByCategoryNameDesc(String categoryName) {
+        // 최초작성일자 기준으로 정렬하려면 id 대신 createdDate 사용
+        // 최종수정일자 기준으로 정렬하려면 id 대신 updatedDate 사용
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findByCategoryName(categoryName, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /* 게시글 상세조회 */
     @Transactional
@@ -51,11 +77,6 @@ public class PostsService {
         entity.increaseHits();
         return new PostsResponseDto(entity);
     }
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////
 
 
     /* 게시글 저장하기 */
@@ -84,4 +105,5 @@ public class PostsService {
         this.postsRepository.delete(entity);
         return id;
     }
+
 }

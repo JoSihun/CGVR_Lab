@@ -22,9 +22,7 @@ public class NoticeNormalController {
     /* 게시판 목록보기 */
     @GetMapping("notice/normal/board")
     public String noticeNormalBoard(Model model) {
-        // PostsRepository -> findByCategory~~~ 처리 후
-        // PostsService -> findByCategory~~~ 추가한 뒤 카테고리별 추출처리필요
-        List<PostsListResponseDto> responseDtoList = this.postsService.findAllDesc();
+        List<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryNameDesc("일반");
         model.addAttribute("posts", responseDtoList);
         return "notice_normal_board";
     }
@@ -35,10 +33,10 @@ public class NoticeNormalController {
     @GetMapping("notice/normal/posts/{id}")
     public String noticeNormalPost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
-        List<CommentsResponseDto> responseDtoList = this.commentsService.findAllByPostId(id);
+        List<CommentsListResponseDto> responseDtoList = this.commentsService.findAllByPostId(id);
         model.addAttribute("posts", responseDto);
         model.addAttribute("comments", responseDtoList);
-        model.addAttribute("commentsCount", responseDtoList.size());
+        model.addAttribute("commentsSize", responseDtoList.size());
         return "notice_normal_posts";
     }
 
@@ -89,7 +87,7 @@ public class NoticeNormalController {
     // DeleteMapping 처리예정
     // RestController 처리예정
     // JavaScript AJAX 통신 처리예정
-    // 왜인지는 모르나 현재 GetMapping으로 처리되고 있음
+    // 현재 <a href=""> 사용하여 GetMapping으로 처리되고 있음
     @GetMapping("notice/normal/posts/delete/{id}")
     public String noticeNormalPostDelete(@PathVariable Long id) {
         this.postsService.delete(id);
@@ -106,7 +104,8 @@ public class NoticeNormalController {
     // RestController 처리예정
     // JavaScript AJAX 통신 처리예정
     // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
-    @PostMapping("notice/normal/posts/{id}")
+    // 현재 <a href=""> 사용하여 GetMapping으로 처리되고 있음
+    @PostMapping("notice/normal/posts/{id}/comments")
     public String CommentSave(@PathVariable Long id, CommentsSaveRequestDto requestDto) {
         this.commentsService.save(id, requestDto);
         return "redirect:/notice/normal/posts/" + id;

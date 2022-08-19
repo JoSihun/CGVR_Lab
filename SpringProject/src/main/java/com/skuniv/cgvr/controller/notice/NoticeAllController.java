@@ -23,8 +23,6 @@ public class NoticeAllController {
     /* 게시판 목록보기 */
     @GetMapping("notice/all/board")
     public String noticeAllBoard(Model model) {
-        // PostsRepository -> findByCategory~~~ 처리 후
-        // PostsService -> findByCategory~~~ 추가한 뒤 카테고리별 추출처리필요
         List<PostsListResponseDto> responseDtoList = this.postsService.findAllDesc();
         model.addAttribute("posts", responseDtoList);
         return "notice_all_board";
