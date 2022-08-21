@@ -38,7 +38,7 @@
             <!-- 글쓰기 빠른메뉴 -->
             <div class="row mb-4">
                 <div class="col-xl-12">
-                    <form class="d-flex" method="post">
+                    <form class="d-flex" method="GET" action="/laboratory/all/posts/form">
                         <button class="btn btn-dark btn-block" type="submit">글쓰기</button>
                     </form>
                 </div>
@@ -50,15 +50,15 @@
                     <div class="card border border-dark">
                         <!-- Card Header -->
                         <div class="card-header bg-dark text-white">
-                            <h5 class="m-0"><b>공지사항</b></h5>
+                            <h5 class="m-0"><b>연구 게시판</b></h5>
                         </div>
 
                         <!-- Card Body -->
                         <div class="card-body text-dark">
-                            <div><a class="card-text text-dark" href="/notice/all/board"><b>전체 공지사항</b></a></div>
-                            <div><a class="card-text text-dark" href="/notice/normal/board">일반 공지사항</a></div>
-                            <div><a class="card-text text-dark" href="/notice/lecture/board">수업 공지사항</a></div>
-                            <div><a class="card-text text-dark" href="/notice/laboratory/board">연구 공지사항</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/all/board">전체 게시판</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/notice/board">공지 게시판</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/paper/board"><b>논문 게시판</b></a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/material/board">자료 게시판</a></div>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
             <div class="card border border-dark h-100">
                 <!-- Card Header -->
                 <div class="card-header bg-dark text-white">
-                    <h5 class="m-0"><b>전체 공지사항</b></h5>
+                    <h5 class="m-0"><b>논문 게시판</b></h5>
                 </div>
 
                 <!-- Card Body -->
@@ -100,7 +100,48 @@
                     </table>
                 </div>
 
-                <div class="card-footer text-dark">
+                <div class="text-dark"><hr>
+
+                    <!-- 게시글 검색 및 글쓰기 -->
+                    <div class="row">
+                        <!-- Column 1: Empty Space -->
+                        <div class="col-sm-2 text-start">
+
+                        </div>
+
+                        <!-- Column 2: Search Form -->
+                        <div class="col-sm-8 text-center">
+                            <form method="POST">
+                                <div class="row">
+                                    <!-- Sub Column 1: Search Category -->
+                                    <div class="col-sm-2 text-end">
+                                        <select class="form-select text-center" name="searchCategory">
+                                            <option value="제목">제목</option>
+                                            <option value="작성자">작성자</option>
+                                            <option value="제목+작성자">제목+작성자</option>
+                                        </select>
+                                    </div>
+                                    <!-- Sub Column 2: Input Search Keyword -->
+                                    <div class="col-sm-8 text-center">
+                                        <input class="form-control border-dark" id="search" type="text" placeholder="게시글 제목입력">
+                                    </div>
+                                    <!-- Sub Column 3: Search Button -->
+                                    <div class="col-sm-2 text-start">
+                                        <button class="btn btn-dark" type="submit">검색</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Column 3: Writing Post Form -->
+                        <div class="col-sm-2 text-end">
+                            <form method="GET" action="/laboratory/paper/posts/form">
+                                <button class="btn btn-dark me-4" type="submit">글쓰기</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
                     <nav aria-label="Page navigation Sample">
                         <ul class="pagination pagination-lg m-0 justify-content-center">
                             <li class="page-item"><a class="page-link" href="#">첫 페이지</a></li>

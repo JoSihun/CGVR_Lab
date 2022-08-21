@@ -1,0 +1,241 @@
+{{>header}}
+{{>banner}}
+<div class="container-fluid">
+    <div class="row mx-4 my-4">
+        <!-- 좌측 사이드 메뉴 -->
+        <div class="col-xl-2">
+            <!-- 연구생 정보 -->
+            <div class="row mb-4">
+                <div class="col-xl-12">
+                    <div class="card border border-dark">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>연구생 정보</b></h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <div><p class="card-text"><strong>이름</strong> : 염동빈</p></div>
+                            <div><p class="card-text"><strong>학번</strong> : 2017305045</p></div>
+                            <div><p class="card-text"><strong>재학정보</strong> : 4학년</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 게시글 검색 빠른메뉴 -->
+            <form method="post">
+                <div class="row mb-4">
+                    <div class="col-sm-8 mb-2">
+                        <input class="form-control border-dark" id="search" type="text" placeholder="게시글 제목입력">
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-dark btn-block" type="submit">검색</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- 글쓰기 빠른메뉴 -->
+            <div class="row mb-4">
+                <div class="col-xl-12">
+                    <form class="d-flex" method="GET" action="/laboratory/all/posts/form">
+                        <button class="btn btn-dark btn-block" type="submit">글쓰기</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 게시판 빠른메뉴 -->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card border border-dark">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>연구 게시판</b></h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <div><a class="card-text text-dark" href="/laboratory/all/board"><b>전체 게시판</b></a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/notice/board">공지 게시판</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/paper/board">논문 게시판</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/material/board">자료 게시판</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 우측 게시판 보드 -->
+        <div class="col-xl-10 h-100">
+            <!-- Posts Content -->
+            <div class="card shadow mb-4 border border-dark bg-light">
+                <!-- Card Header -->
+                <div class="card-header bg-dark text-white">
+                    <h5 class="m-0"><b>전체 게시판</b></h5>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body text-dark">
+                    <h3 class="card-title">이것은 제목이니라</h3>
+                    <strong>author</strong>
+                    <small><span style="color:#6c757d">createdDate 조회 hits</span></small>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-footer text-dark">
+                    <p class="card-text">content</p>
+                </div>
+
+                <!-- Card Footer -->
+                <div class="card-footer text-dark">
+                    <p class="card-text text-dark">첨부 파일</p>
+                    <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
+                    <a href="/notice/all/posts/delete/id" id="btn-delete" class="btn btn-danger" style="float:right;">삭제</a>
+                    <a href="/notice/all/posts/update/id" id="btn-update" class="btn btn-primary" style="float:right;">수정</a>
+                </div>
+
+            </div>
+
+            <!-- Posts Comments -->
+            <div class="card shadow border border-dark bg-light mb-4">
+                <!-- Card Header -->
+                <div class="card-header bg-dark text-white">
+                    <h5 class="m-0"><b>댓글 20</b></h5>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body text-dark">
+                    <ul class="list-group bg-light">
+                        <li class="list-group-item">
+                            <div>
+                                <strong>2016305078 강건마&nbsp;</strong>
+                                <small>2022.08.18 18:18&nbsp;</small>
+                                <small><a class="text-dark" href="#">수정</a></small>
+                                <small>/</small>
+                                <small><a class="text-dark" href="#">삭제</a></small>
+                            </div>
+                            <div>
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div>
+                                <strong>2016305078 강건마&nbsp;</strong>
+                                <small>2022.08.18 18:18&nbsp;</small>
+                            </div>
+                            <div>
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                            </div>
+                            <div class="text-start">
+                                <small><a class="text-dark" href="#">수정</a></small>
+                                <small>/</small>
+                                <small><a class="text-dark" href="#">삭제</a></small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div>
+                                <strong>2016305078 강건마&nbsp;</strong>
+                                <small>2022.08.18 18:18&nbsp;</small>
+                            </div>
+                            <div>
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                            </div>
+                            <div class="text-end">
+                                <small><a class="text-dark" href="#">수정</a></small>
+                                <small>/</small>
+                                <small><a class="text-dark" href="#">삭제</a></small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div>
+                                <strong>2016305078 강건마&nbsp;</strong>
+                                <small><a class="text-dark" href="#">수정</a></small>
+                                <small>/</small>
+                                <small><a class="text-dark" href="#">삭제</a></small>
+                            </div>
+                            <div>
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                            </div>
+                            <div class="text-start">
+                                <small>2022.08.18 18:18&nbsp;</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div>
+                                <strong>2016305078 강건마&nbsp;</strong>
+                                <small><a class="text-dark" href="#">수정</a></small>
+                                <small>/</small>
+                                <small><a class="text-dark" href="#">삭제</a></small>
+                            </div>
+                            <div>
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                            </div>
+                            <div class="text-end">
+                                <small>2022.08.18 18:18&nbsp;</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-inline-block">
+                                    <strong>2016305078 강건마&nbsp;</strong>
+                                    <small>2022.08.18 18:18&nbsp;</small>
+                                </div>
+                                <div class="d-inline-block">
+                                    <small><a class="text-dark" href="#">수정</a></small>
+                                    <small>/</small>
+                                    <small><a class="text-dark" href="#">삭제</a></small>
+                                </div>
+                            </div>
+                            <div>
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                                이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라 이것은 댓글이니라
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Input Comments -->
+            <div class="card shadow border border-dark bg-light mb-4">
+                <div class="card-body">
+                    <form class="mb-4">
+                        <input name="author" class="form-control" type="hidden"/>
+                        <textarea class="form-control" rows="3" placeholder="댓글을 작성해보세요."></textarea>
+                    </form>
+                    <a class="btn btn-dark" style="float:right;btn-space">등록</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+{{>footer}}

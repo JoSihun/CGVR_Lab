@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,6 +25,13 @@ public class NoticeAllController {
     @GetMapping("notice/all/board")
     public String noticeAllBoard(Model model) {
         List<PostsListResponseDto> responseDtoList = this.postsService.findAllDesc();
+//        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllByCategoryNameDesc("일반");
+//        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllByCategoryNameDesc("수업");
+//        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllByCategoryNameDesc("연구");
+//        List<PostsListResponseDto> responseDtoList = new ArrayList<PostsListResponseDto>();
+//        responseDtoList.addAll(responseDtoList1);
+//        responseDtoList.addAll(responseDtoList2);
+//        responseDtoList.addAll(responseDtoList3);
         model.addAttribute("posts", responseDtoList);
         return "notice_all_board";
     }

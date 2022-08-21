@@ -11,28 +11,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-public class LaboratoryNoticeController {
+public class LaboratoryAllController {
     private final PostsService postsService;
 
     /* 게시판 목록보기 */
-    @GetMapping("laboratory/notice/board")
-    public String laboratoryNoticeBoard(Model model) {
-        List<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryNameDesc("공지");
+    @GetMapping("laboratory/all/board")
+    public String laboratoryAllBoard(Model model) {
+        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllByCategoryNameDesc("공지");
+        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllByCategoryNameDesc("논문");
+        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllByCategoryNameDesc("자료");
+        List<PostsListResponseDto> responseDtoList = new ArrayList<PostsListResponseDto>();
+        responseDtoList.addAll(responseDtoList1);
+        responseDtoList.addAll(responseDtoList2);
+        responseDtoList.addAll(responseDtoList3);
         model.addAttribute("posts", responseDtoList);
-        return "laboratory_notice_board";
+        return "laboratory_all_board";
     }
 
 
     /* 게시글 상세보기 */
-    @GetMapping("laboratory/notice/posts/{id}")
-    public String laboratoryNoticePost(@PathVariable Long id, Model model) {
+    @GetMapping("laboratory/all/posts/{id}")
+    public String laboratoryAllPost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
         model.addAttribute("posts", responseDto);
-        return "laboratory_notice_posts";
+        return "laboratory_all_posts";
     }
 
 
@@ -41,18 +48,18 @@ public class LaboratoryNoticeController {
     ////////////////////////////////////////////////////////////////////////////
 
     /* 게시글 작성폼 */
-    @GetMapping("laboratory/notice/posts/form")
-    public String laboratoryNoticePostForm() {
-        return "laboratory_notice_posts_form";
+    @GetMapping("laboratory/all/posts/form")
+    public String laboratoryAllPostForm() {
+        return "laboratory_all_posts_form";
     }
 
 
     /* 게시글 작성요청 */
     // RestController 처리예정
     // JavaScript AJAX 통신 처리예정
-    @PostMapping("laboratory/notice/posts/form")
-    public String laboratoryNoticePostSave(PostsSaveRequestDto requestDto) {
+    @PostMapping("laboratory/all/posts/form")
+    public String laboratoryAllPostSave(PostsSaveRequestDto requestDto) {
         Long id = this.postsService.save(requestDto);
-        return "redirect:/laboratory/notice/posts/" + id;
+        return "redirect:/laboratory/all/posts/" + id;
     }
 }
