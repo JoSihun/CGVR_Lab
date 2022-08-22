@@ -74,9 +74,10 @@ laboratory_material_posts_form.mustache{{>header}}
                     <h5 class="m-0"><b>전체 게시판</b></h5>
                 </div>
 
+                {{#posts}}
                 <!-- Card Body -->
                 <div class="card-body text-dark">
-                    <form method="post">
+                    <form method="POST" action="/laboratory/all/posts/update/{{id}}">
                         <!-- Category -->
                         <div class="mx-4 mb-4 d-flex">
                             <!-- CategoryName -->
@@ -101,7 +102,7 @@ laboratory_material_posts_form.mustache{{>header}}
                         <!-- Title -->
                         <div class="mx-4 mb-4">
                             <label for="title" class="form-label">제목</label>
-                            <input name="title" class="form-control" type="text" placeholder="제목을 입력하세요">
+                            <input name="title" class="form-control" type="text" placeholder="제목을 입력하세요" value="{{title}}">
                         </div>
                         <!-- Attachment  -->
                         <div class="mx-4 mb-4">
@@ -115,18 +116,18 @@ laboratory_material_posts_form.mustache{{>header}}
                         <!-- Content -->
                         <div class="mx-4 mb-4">
                             <label for="content" class="form-label">내용</label>
-                            <textarea id="summernote" name="content" class="form-control"></textarea>
+                            <textarea id="summernote" name="content" class="form-control">{{content}}</textarea>
                         </div>
 
                         <!-- Hidden Params -->
                         <input type="hidden" class="form-control" name="author" value="히든작성자"/>
 
                         <div class="mx-4 mb-4 text-end">
-                            <input id="btn-save" class="btn btn-dark" type="submit" value="저장하기">
+                            <button class="btn btn-dark" type="submit" id="btn-save">저장하기</button>
                         </div>
                     </form>
                 </div>
-
+                {{/posts}}
             </div>
         </div>
 
@@ -135,6 +136,11 @@ laboratory_material_posts_form.mustache{{>header}}
 
 
 <script>
+    $(document).ready(function () {
+        $("#category").val("{{posts.categoryName}}").prop("selected", true)
+        $("#project").val("{{posts.projectName}}").prop("selected", true)
+    });
+
     $(document).ready(function() {
         $('#summernote').summernote({
             height: 500,
