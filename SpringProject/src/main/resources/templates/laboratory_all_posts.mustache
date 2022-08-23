@@ -105,7 +105,7 @@
                             <button class="btn btn-primary" type="submit" id="btn-update">수정</button>
                         </form>
                         <form class="d-inline-block" method="GET" action="/laboratory/all/posts/delete/{{id}}">
-                            <button class="btn btn-danger" type="submit" id="btn-delete">삭제</button>
+                            <button class="btn btn-danger" type="submit" id="btn-posts-delete">삭제</button>
                         </form>
                     </div>
                 </div>
@@ -124,27 +124,6 @@
                 <!-- Card Body -->
                 <div class="card-body text-dark">
                     <ul class="list-group bg-light">
-                        <li class="list-group-item">
-                            <div class="d-flex justify-content-between">
-                                <div class="d-inline-block">
-                                    <strong>2016305078 강건마&nbsp;</strong>
-                                    <small>2022.08.18 18:18&nbsp;</small>
-                                </div>
-                                <div class="d-inline-block">
-                                    <small><a class="text-dark" href="#">수정</a></small>
-                                    <small>/</small>
-                                    <small><a class="text-dark" href="#">삭제</a></small>
-                                </div>
-                            </div>
-                            <div>
-                                이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것.
-                                이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것.
-                                이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것.
-                                이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것.
-                                이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것. 이것은 댓글출력 예시입니다. 추후 삭제할 것.
-                            </div>
-                        </li>
-
                         {{#comments}}
                         <li class="list-group-item">
                             <div class="d-flex justify-content-between">
@@ -153,9 +132,9 @@
                                     <small>{{createdDate}}&nbsp;</small>
                                 </div>
                                 <div class="d-inline-block">
-                                    <small><a class="text-dark" href="#">수정</a></small>
+                                    <small><a class="text-dark" style="color: gray" href="#">수정</a></small>
                                     <small>/</small>
-                                    <small><a class="text-dark" href="#">삭제</a></small>
+                                    <small><a class="text-dark" style="color: gray" href="#">삭제</a></small>
                                 </div>
                             </div>
                             <div>
@@ -172,11 +151,13 @@
             <!-- Input Comments -->
             <div class="card shadow border border-dark bg-light mb-4">
                 <div class="card-body">
-                    <form class="mb-4">
-                        <input name="author" class="form-control" type="hidden"/>
+                    <form class="mb-4" method="POST">
+                        <!-- Hidden Param -->
+                        <input type="hidden" class="form-control" name="author" value="히든작성자"/>
+
                         <textarea class="form-control" rows="3" placeholder="댓글을 작성해보세요."></textarea>
+                        <button class="btn btn-dark" type="submit" id="btn-comments-save">등록</button>
                     </form>
-                    <a class="btn btn-dark" style="float:right;btn-space">등록</a>
                 </div>
             </div>
 
