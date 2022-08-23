@@ -29,6 +29,12 @@ var main = {
             data: JSON.stringify(data),
         }).done(function(response) {
             alert('글이 등록되었습니다.');
+            var arrayLink = document.location.href.split('/').slice(2, -1);
+            var stringLink = arrayLink.join('/');
+            var redirectUrl = 'http://' + stringLink + '/' + response;
+
+
+
             window.location.href = '/notice/all/posts/' + response;
         }).fail(function (error) {
             alert(JSON.stringify(error));
