@@ -6,8 +6,6 @@ import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-
 @RequiredArgsConstructor
 @RestController
 public class NoticeAllRestController {

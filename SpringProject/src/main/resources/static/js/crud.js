@@ -1,15 +1,27 @@
 var main = {
     init : function () {
         var _this = this;
-        $('#btn-save').on('click', function () {
+        $('#btn-posts-save').on('click', function () {
             _this.save();
         });
 
-        $('#btn-update').on('click', function () {
+        $('#btn-posts-update').on('click', function () {
             _this.update();
         });
 
-        $('#btn-delete').on('click', function () {
+        $('#btn-posts-delete').on('click', function () {
+            _this.delete();
+        });
+
+        $('#btn-comments-save').on('click', function () {
+            _this.save();
+        });
+
+        $('#btn-comments-update').on('click', function () {
+            _this.update();
+        });
+
+        $('#btn-comments-delete').on('click', function () {
             _this.delete();
         });
     },
@@ -29,13 +41,11 @@ var main = {
             data: JSON.stringify(data),
         }).done(function(response) {
             alert('글이 등록되었습니다.');
-            var arrayLink = document.location.href.split('/').slice(2, -1);
+            var arrayLink = document.location.href.split('/').slice(3, -1);
             var stringLink = arrayLink.join('/');
-            var redirectUrl = 'http://' + stringLink + '/' + response;
-
-
-
-            window.location.href = '/notice/all/posts/' + response;
+            var redirectUrl = '/' + stringLink + '/' + response;
+            console.log(redirectUrl);
+            window.location.href = redirectUrl;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -55,9 +65,13 @@ var main = {
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data),
-        }).done(function(id) {
+        }).done(function(response) {
             alert('글이 수정되었습니다.');
-            window.location.href = '/notice/all/posts/' + id;
+            var arrayLink = document.location.href.split('/').slice(3, -2);
+            var stringLink = arrayLink.join('/');
+            var redirectUrl = '/' + stringLink + '/' + response;
+            console.log(redirectUrl);
+            window.location.href = redirectUrl;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -72,7 +86,11 @@ var main = {
             contentType:'application/json; charset=utf-8',
         }).done(function() {
             alert('글이 삭제되었습니다.');
-            window.location.href = '/notice/all/board';
+            var arrayLink = document.location.href.split('/').slice(3, -2);
+            var stringLink = arrayLink.join('/');
+            var redirectUrl = '/' + stringLink + '/board';
+            console.log(redirectUrl);
+            window.location.href = redirectUrl;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
