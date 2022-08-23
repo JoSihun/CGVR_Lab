@@ -9,7 +9,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,17 +33,17 @@ public class UserService {
         return postsList.stream().map(UserListResponseDto::new).collect(Collectors.toList());
     }
 
+    /* 관리자 등록 */
     @Transactional
-    public void save(final UserSaveRequestDto requestDto) {
-        User findUser = this.userRepository.findByUserId(requestDto.getUserId());
-        if (findUser != null) {
-            /*  존재하는 아이디에 대해서 어떻게 처리할지 고민중
-                RestController 동일하게 적용해서 Alert 처리하고 싶음
-             */
-            //throw new IllegalStateException("이미 존재하는 아이디입니다.");
-        }
-        else {
-            this.userRepository.save(requestDto.toEntity());
-        }
+    public Long regist(final UserSaveRequestDto requestDto) {
+        return this.userRepository.save(requestDto.toEntity()).getId();
+    }
+    /* 관리자 제거 */
+    @Transactional
+    public Long delete(final Long id) {
+        User entity = this.userRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("이미 존재하지 않는 게시글입니다. id=" + id));
+        this.userRepository.delete(entity);
+        return id;
     }
 }

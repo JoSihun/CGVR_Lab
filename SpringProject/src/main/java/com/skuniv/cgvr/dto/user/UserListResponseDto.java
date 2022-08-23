@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class UserListResponseDto {
+    private Long id;
     private String userId;    // ID
     private String korName;
     private String contact;
@@ -13,6 +14,7 @@ public class UserListResponseDto {
     private UserRole role;
 
     public UserListResponseDto(User entity) {
+        this.id = entity.getId();
         this.userId = entity.getUserId();
         this.korName = entity.getKorName();
         this.contact = entity.getContact();

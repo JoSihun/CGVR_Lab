@@ -1,15 +1,14 @@
 package com.skuniv.cgvr.domain.user;
 
 import com.skuniv.cgvr.dto.user.UserFormDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 public class User {
@@ -18,6 +17,7 @@ public class User {
     private Long id;            // PK
 
     @Column(unique = true)
+    @NotNull
     private String userId;    // ID
     private String korName;
     private String contact;

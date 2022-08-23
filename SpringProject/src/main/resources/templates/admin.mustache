@@ -25,7 +25,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <table class="table table-hover table-sm">
+                        <table class="table table-striped table-sm">
                             <thead>
                             <tr>
                                 <th scope="col" class="text-center"><b>학번</b></th>
@@ -34,14 +34,18 @@
                                 <th scope="col" class="text-center"><b>이메일</b></th>
                             </tr>
                             </thead>
-                            <!-- user Entity 가 필요할 것 -->
                             <tbody id="tbody">
                             {{#users}}
                             <tr>
-                                <th scope="row" class="text-center">{{userId}}</th>
-                                <th scope="row" class="text-center">{{korName}}</th>
-                                <th scope="row" class="text-center">{{contact}}</th>
-                                <th scope="row" class="text-center">{{email}}</th>
+                                {{#userId}}<th scope="row" class="text-center">{{userId}}</th>{{/userId}}
+                                {{^userId}}<th scope="row" class="text-center">없음</th>{{/userId}}
+                                {{#korName}}<th scope="row" class="text-center">{{korName}}</th>{{/korName}}
+                                {{^korName}}<th scope="row" class="text-center">없음</th>{{/korName}}
+                                {{#contact}}<th scope="row" class="text-center">{{contact}}</th>{{/contact}}
+                                {{^contact}}<th scope="row" class="text-center">없음</th>{{/contact}}
+                                {{#email}}<th scope="row" class="text-center">{{email}}</th>{{/email}}
+                                {{^email}}<th scope="row" class="text-center">없음</th>{{/email}}
+                                <th><a type="button" onclick="main.delete({{id}})" class="btn btn-sm btn-danger">삭제</a></th>
                             </tr>
                             {{/users}}
                             </tbody>
@@ -52,28 +56,28 @@
                 <div class="card border border-dark text-dark bg-light">
                     <!-- Card Header -->
                     <div class="card-header py-3 d-flex flex-row bg-dark text-white align-items-center justify-content-between">
-                        <h5 class="m-0 font-weight-bold">관리자 추가</h5>
+                        <h5 class="m-0 font-weight-bold">관리자 등록</h5>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <form method="post">
+                        <form>
                             <div class="row">
                                 <div class="form_group col-xl-2">
-                                    <input type="text" class=form-control name="userId" placeholder="학번입력"/>
+                                    <input type="text" class=form-control id="userId" name="userId" placeholder="학번입력"/>
                                 </div>
                                 <div class="form_group col-xl-2">
-                                    <input type="text" class=form-control name="korName" placeholder="이름입력"/>
+                                    <input type="text" class=form-control id="korName" name="korName" placeholder="이름입력"/>
                                 </div>
                                 <div class="form_group col-xl-2">
-                                    <input type="tel" class=form-control name="contact" placeholder="연락처입력"/>
+                                    <input type="text" class=form-control id="contact" name="contact" placeholder="연락처입력"/>
                                 </div>
                                 <div class="form_group col-xl-3">
-                                    <input type="email" class=form-control name="email" placeholder="이메일입력"/>
+                                    <input type="text" class=form-control id="email" name="email" placeholder="이메일입력"/>
                                 </div>
                                 <!-- Hidden -->
-                                <input type="hidden" class="form-control" name="role" value="ADMIN"/>
+                                <input type="hidden" class="form-control" id="role" name="role" value="ADMIN"/>
                                 <div class="form_group col-xl-2">
-                                    <input type="submit" class="btn btn-dark" value="추가"/>
+                                    <button id="admin-assign" class="btn btn-dark" type="button">등록</button>
                                 </div>
                             </div>
                         </form>
