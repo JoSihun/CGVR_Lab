@@ -2,6 +2,7 @@ laboratory_material_posts_form.mustache{{>header}}
 {{>banner}}
 <div class="container-fluid">
     <div class="row mx-4 my-4">
+
         <!-- 좌측 사이드 메뉴 -->
         <div class="col-xl-2">
             <!-- 연구생 정보 -->
@@ -78,47 +79,45 @@ laboratory_material_posts_form.mustache{{>header}}
                 <div class="card-body text-dark">
                     <form method="post">
                         <!-- Category -->
-                        <div class="mx-4 mb-4 d-flex">
+                        <div class="mx-4 mb-2 d-flex">
                             <!-- CategoryName -->
-                            <div class="d-inline-block">
-                                <label for="categoryName" class="form-label">카테고리</label>
+                            <div class="d-inline-block w-50">
                                 <select class="form-control" name="categoryName" id="category">
+                                    <option value="공지">게시판을 선택하세요</option>
                                     <option value="공지">공지 게시판</option>
                                     <option value="논문">논문 게시판</option>
                                     <option value="자료">자료 게시판</option>
                                 </select>
                             </div>
                             <!-- ProjectName -->
-                            <div class="d-inline-block">
-                                <label for="projectName" class="form-label">프로젝트</label>
+                            <div class="d-inline-block w-50">
                                 <select class="form-control" name="projectName" id="project">
+                                    <option value="프로젝트1">프로젝트를 선택하세요</option>
                                     <option value="프로젝트1">프로젝트1</option>
                                     <option value="프로젝트2">프로젝트2</option>
                                     <option value="프로젝트3">프로젝트3</option>
                                 </select>
                             </div>
                         </div>
+
                         <!-- Title -->
-                        <div class="mx-4 mb-4">
-                            <label for="title" class="form-label">제목</label>
+                        <div class="mx-4 mb-2">
                             <input name="title" class="form-control" type="text" placeholder="제목을 입력하세요">
                         </div>
-                        <!-- Attachment  -->
-                        <div class="mx-4 mb-4">
-                            <label class="form-label">첨부파일</label>
-                            <!--                            <input type="file" class="form-control" aria-label="file example" required>-->
-                            <input type="file" class="form-control" aria-label="file example">
-                            <div class="invalid-feedback">Example invalid form file feedback</div>
-                        </div>
-                        <!-- Input Tmp Attachment id -->
-                        <input type="hidden" class="form-control" name="attachment_id" value="1"/>
+
                         <!-- Content -->
-                        <div class="mx-4 mb-4">
-                            <label for="content" class="form-label">내용</label>
+                        <div class="mx-4 mb-2">
                             <textarea id="summernote" name="content" class="form-control"></textarea>
                         </div>
 
-                        <!-- Hidden Params -->
+                        <!-- Attachment  -->
+                        <div class="mx-4 mb-2">
+                            <input type="file" class="form-control" aria-label="file example">
+                            <div class="invalid-feedback">Example invalid form file feedback</div>
+                        </div>
+
+                        <!-- Temporal Hidden Params -->
+                        <input type="hidden" class="form-control" name="attachment_id" value="1"/>
                         <input type="hidden" class="form-control" name="author" value="히든작성자"/>
 
                         <div class="mx-4 mb-4 text-end">
