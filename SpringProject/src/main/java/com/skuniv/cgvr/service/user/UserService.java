@@ -37,9 +37,9 @@ public class UserService {
     @Transactional
     public Long regist(final UserSaveRequestDto requestDto) {
         // 학번 중복 시 어떻게 해결할지 흠흠
-//        User findUser = this.userRepository.findByUserId(requestDto.getUserId());
-//        if (findUser != null)
-//            requestDto.setUserId(null);
+        User findUser = this.userRepository.findByUserId(requestDto.getUserId());
+        if (findUser != null)
+            requestDto.setUserId(null);
         return this.userRepository.save(requestDto.toEntity()).getId();
     }
     /* 관리자 제거 */

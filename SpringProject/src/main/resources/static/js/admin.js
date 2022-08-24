@@ -1,14 +1,14 @@
 var main = {
     init : function () {
         var _this = this;
-        $('#admin-assign').on('click', function () {
-            _this.assign();
+        $('#admin-grant').on('click', function () {
+            _this.grant();
         });
-        $('#admin-delete').on('click', function () {
-            _this.delete();
+        $('#admin-revoke').on('click', function () {
+            _this.revoke();
         });
     },
-    assign : function () {
+    grant : function () {
         var data = {
             contact: $('#contact').val(),
             email: $('#email').val(),
@@ -28,18 +28,14 @@ var main = {
                 alert('관리자가 등록되었습니다.');
                 window.location.href = '/admin';
             }).fail(function (error) {
-                alert(JSON.stringify(error));
+                alert('등록할 관리자의 학번이 이미 존재합니다.');
             });
         }
-        // else if(data.userId == null) {
-        //     alert('이미 등록된 회원의 학번입니다.');
-        //     //window.location.href = '/admin';
-        // }
         else {
             alert('학번은 필수 입력사항입니다.');
         }
     },
-    delete : function (id) {
+    revoke : function (id) {
 
         const con_check = confirm('삭제하시겠습니까?');
         if(con_check) {

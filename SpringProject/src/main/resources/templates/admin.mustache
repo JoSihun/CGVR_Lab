@@ -45,7 +45,7 @@
                                 {{^contact}}<th scope="row" class="text-center">없음</th>{{/contact}}
                                 {{#email}}<th scope="row" class="text-center">{{email}}</th>{{/email}}
                                 {{^email}}<th scope="row" class="text-center">없음</th>{{/email}}
-                                <th><a type="button" onclick="main.delete({{id}})" class="btn btn-sm btn-danger">삭제</a></th>
+                                <th><a type="button" onclick="main.revoke({{id}})" class="btn btn-sm btn-danger">삭제</a></th>
                             </tr>
                             {{/users}}
                             </tbody>
@@ -77,7 +77,7 @@
                                 <!-- Hidden -->
                                 <input type="hidden" class="form-control" id="role" name="role" value="ADMIN"/>
                                 <div class="form_group col-xl-2">
-                                    <button id="admin-assign" class="btn btn-dark" type="button">등록</button>
+                                    <button id="admin-grant" class="btn btn-dark" type="button">등록</button>
                                 </div>
                             </div>
                         </form>
