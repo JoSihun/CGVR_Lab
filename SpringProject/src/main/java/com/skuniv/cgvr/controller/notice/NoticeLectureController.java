@@ -23,9 +23,7 @@ public class NoticeLectureController {
     /* 게시판 목록보기 */
     @GetMapping("notice/lecture/board")
     public String noticeLectureBoard(Model model) {
-        // PostsRepository -> findByCategory~~~ 처리 후
-        // PostsService -> findByCategory~~~ 추가한 뒤 카테고리별 추출처리필요
-        List<PostsListResponseDto> responseDtoList = this.postsService.findAllDesc();
+        List<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryNameDesc("수업");
         model.addAttribute("posts", responseDtoList);
         return "notice_lecture_board";
     }

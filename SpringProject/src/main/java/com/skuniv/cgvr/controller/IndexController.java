@@ -17,14 +17,13 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
         // 최대 5개만 가져오는 기능필요
-        // 카테고리별로 추출해서 가져오는 기능필요 -> PostsService -> findByCategory?
-        // 임시로 전체 게시글 불러오기 / 변수명 숫자로 일원화 처리, 추후수정필요
-        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllDesc();
-        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllDesc();
-        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllDesc();
-        List<PostsListResponseDto> responseDtoList4 = this.postsService.findAllDesc();
-        List<PostsListResponseDto> responseDtoList5 = this.postsService.findAllDesc();
-        List<PostsListResponseDto> responseDtoList6 = this.postsService.findAllDesc();
+        // 임시로 변수명 숫자로 일원화 처리, 추후수정필요
+        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllByCategoryNameDesc("일반");
+        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllByCategoryNameDesc("수업");
+        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllByCategoryNameDesc("연구");
+        List<PostsListResponseDto> responseDtoList4 = this.postsService.findAllByCategoryNameDesc("공지");
+        List<PostsListResponseDto> responseDtoList5 = this.postsService.findAllByCategoryNameDesc("논문");
+        List<PostsListResponseDto> responseDtoList6 = this.postsService.findAllByCategoryNameDesc("자료");
 
         model.addAttribute("noticeNormalPosts", responseDtoList1);
         model.addAttribute("noticeLecturePosts", responseDtoList2);

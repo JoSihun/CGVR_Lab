@@ -1,15 +1,27 @@
 var main = {
     init : function () {
         var _this = this;
-        $('#btn-save').on('click', function () {
+        $('#btn-posts-save').on('click', function () {
             _this.save();
         });
 
-        $('#btn-update').on('click', function () {
+        $('#btn-posts-update').on('click', function () {
             _this.update();
         });
 
-        $('#btn-delete').on('click', function () {
+        $('#btn-posts-delete').on('click', function () {
+            _this.delete();
+        });
+
+        $('#btn-comments-save').on('click', function () {
+            _this.save();
+        });
+
+        $('#btn-comments-update').on('click', function () {
+            _this.update();
+        });
+
+        $('#btn-comments-delete').on('click', function () {
             _this.delete();
         });
     },
@@ -18,18 +30,22 @@ var main = {
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val(),
-            category1_id: $('#category1_id').val()
+            categoryName: $('#categoryName').val()
         };
 
         $.ajax({
             type: 'POST',
-            url: '/notice/save',
+            url: '/notice/all/api/posts',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
+            data: JSON.stringify(data),
+        }).done(function(response) {
             alert('글이 등록되었습니다.');
-            window.location.href = '/notice/laboratory';
+            var arrayLink = document.location.href.split('/').slice(3, -1);
+            var stringLink = arrayLink.join('/');
+            var redirectUrl = '/' + stringLink + '/' + response;
+            console.log(redirectUrl);
+            window.location.href = redirectUrl;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -37,20 +53,25 @@ var main = {
     update : function () {
         var data = {
             title: $('#title').val(),
-            content: $('#content').val()
+            content: $('#content').val(),
+            categoryName: $('#categoryName').val()
         };
 
         var id = $('#id').val();
 
         $.ajax({
             type: 'PUT',
-            url: '/notice/laboratory/update/'+id,
+            url: '/notice/all/api/posts/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
+            data: JSON.stringify(data),
+        }).done(function(response) {
             alert('글이 수정되었습니다.');
-            // window.location.href = '/';
+            var arrayLink = document.location.href.split('/').slice(3, -2);
+            var stringLink = arrayLink.join('/');
+            var redirectUrl = '/' + stringLink + '/' + response;
+            console.log(redirectUrl);
+            window.location.href = redirectUrl;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -60,12 +81,16 @@ var main = {
 
         $.ajax({
             type: 'DELETE',
-            url: '/notice/laboratory/'+id,
+            url: '/notice/all/api/posts/'+id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType:'application/json; charset=utf-8',
         }).done(function() {
             alert('글이 삭제되었습니다.');
-            // window.location.href = '/';
+            var arrayLink = document.location.href.split('/').slice(3, -2);
+            var stringLink = arrayLink.join('/');
+            var redirectUrl = '/' + stringLink + '/board';
+            console.log(redirectUrl);
+            window.location.href = redirectUrl;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

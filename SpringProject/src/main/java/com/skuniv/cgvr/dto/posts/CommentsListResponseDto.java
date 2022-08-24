@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.time.format.DateTimeFormatter;
 
 @Getter
-public class CommentsResponseDto {
+public class CommentsListResponseDto {
     private String content;
     private String author;
     private String createdDate;
@@ -16,7 +16,7 @@ public class CommentsResponseDto {
     private Long postsId;
 
 
-    public CommentsResponseDto(Comments entity) {
+    public CommentsListResponseDto(Comments entity) {
         this.content = entity.getContent();
         this.author = entity.getAuthor();
         this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));

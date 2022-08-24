@@ -2,13 +2,12 @@ package com.skuniv.cgvr.service.posts;
 
 import com.skuniv.cgvr.domain.posts.Comments;
 import com.skuniv.cgvr.domain.posts.Posts;
-import com.skuniv.cgvr.dto.posts.CommentsResponseDto;
+import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.CommentsSaveRequestDto;
 import com.skuniv.cgvr.dto.posts.CommentsUpdateRequestDto;
 import com.skuniv.cgvr.repository.posts.CommentsRepository;
 import com.skuniv.cgvr.repository.posts.PostsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,11 +24,11 @@ public class CommentsService {
     /* 댓글 불러오기 */
     // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
     @Transactional
-    public List<CommentsResponseDto> findAll(Long postId) {
+    public List<CommentsListResponseDto> findAllByPostId(Long postId) {
         Posts entity = this.postsRepository.findById(postId).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + postId));
         List<Comments> commentsList = entity.getCommentsList();
-        return commentsList.stream().map(CommentsResponseDto::new).collect(Collectors.toList());
+        return commentsList.stream().map(CommentsListResponseDto::new).collect(Collectors.toList());
     }
 
 

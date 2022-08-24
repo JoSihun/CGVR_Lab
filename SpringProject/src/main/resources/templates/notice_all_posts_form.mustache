@@ -54,11 +54,11 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <form method="post">
+                    <form>
                         <!-- Category -->
                         <div class="mx-4 my-4">
                             <label for="categoryName" class="form-label">카테고리</label>
-                            <select class="form-control" name="categoryName">
+                            <select class="form-control" id="categoryName" name="categoryName">
                                 <option value="일반">일반 공지사항</option>
                                 <option value="수업">수업 공지사항</option>
                                 <option value="연구">연구 공지사항</option>
@@ -67,7 +67,7 @@
                         <!-- Title -->
                         <div class="mx-4 my-4">
                             <label for="title" class="form-label">제목</label>
-                            <input name="title" class="form-control" type="text" placeholder="제목을 입력하세요">
+                            <input id="title" name="title" class="form-control" type="text" placeholder="제목을 입력하세요">
                         </div>
                         <!-- Attachment  -->
                         <div class="mx-4 my-4">
@@ -77,18 +77,21 @@
                             <div class="invalid-feedback">Example invalid form file feedback</div>
                         </div>
                         <!-- Input Tmp Attachment id -->
-                        <input type="hidden" class="form-control" name="attachment_id" value="1"/>
+                        <input type="hidden" class="form-control" id="attachment_id" name="attachment_id" value="1"/>
                         <!-- Content -->
                         <div class="mx-4 my-4">
                             <label for="content" class="form-label">내용</label>
-                            <textarea id="summernote" name="content" class="form-control"></textarea>
+                            <textarea id="content" name="content" class="form-control"></textarea>
                         </div>
 
                         <!-- Hidden Params -->
-                        <input type="hidden" class="form-control" name="author" value="히든작성자"/>
+                        <input type="hidden" class="form-control" id="author" name="author" value="히든작성자"/>
 
                         <div class="mx-4 my-4 text-end">
+                            <!--
                             <input id="btn-save" class="btn btn-dark my-2" type="submit" value="저장하기">
+                            -->
+                            <button id="btn-save" type="button" class="btn btn-dark my-2">저장하기</button>
                         </div>
                     </form>
                 </div>
@@ -100,7 +103,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#summernote').summernote({
+        $('#content').summernote({
             height: 500,
             minHeight: null,
             maxHeight: null,

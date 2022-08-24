@@ -2,16 +2,14 @@ package com.skuniv.cgvr.controller.notice;
 
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
-import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
-import com.skuniv.cgvr.dto.posts.PostsUpdateRequestDto;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -23,9 +21,14 @@ public class NoticeAllController {
     /* 게시판 목록보기 */
     @GetMapping("notice/all/board")
     public String noticeAllBoard(Model model) {
-        // PostsRepository -> findByCategory~~~ 처리 후
-        // PostsService -> findByCategory~~~ 추가한 뒤 카테고리별 추출처리필요
         List<PostsListResponseDto> responseDtoList = this.postsService.findAllDesc();
+//        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllByCategoryNameDesc("일반");
+//        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllByCategoryNameDesc("수업");
+//        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllByCategoryNameDesc("연구");
+//        List<PostsListResponseDto> responseDtoList = new ArrayList<PostsListResponseDto>();
+//        responseDtoList.addAll(responseDtoList1);
+//        responseDtoList.addAll(responseDtoList2);
+//        responseDtoList.addAll(responseDtoList3);
         model.addAttribute("posts", responseDtoList);
         return "notice_all_board";
     }
@@ -64,22 +67,21 @@ public class NoticeAllController {
     /* 게시글 작성요청 */
     // RestController 처리예정
     // JavaScript AJAX 통신 처리예정
-    @PostMapping("notice/all/posts/form")
-    public String noticeAllPostSave(PostsSaveRequestDto requestDto) {
-        Long id = this.postsService.save(requestDto);
-        return "redirect:/notice/all/posts/" + id;
-    }
-
+//    @PostMapping("notice/all/posts/form")
+//    public String noticeAllPostSave(PostsSaveRequestDto requestDto) {
+//        Long id = this.postsService.save(requestDto);
+//        return "redirect:/notice/all/posts/" + id;
+//    }
 
     /* 게시글 수정요청 */
     // PutMapping 처리예정
     // RestController 처리예정
     // JavaScript AJAX 통신 처리예정
-    @PostMapping("notice/all/posts/update/{id}")
-    public String noticeAllPostUpdate(@PathVariable Long id, PostsUpdateRequestDto requestDto) {
-        this.postsService.update(id, requestDto);
-        return "redirect:/notice/all/posts/" + id;
-    }
+//    @PostMapping("notice/all/posts/update/{id}")
+//    public String noticeAllPostUpdate(@PathVariable Long id, PostsUpdateRequestDto requestDto) {
+//        this.postsService.update(id, requestDto);
+//        return "redirect:/notice/all/posts/" + id;
+//    }
 
 
     /* 게시글 삭제요청 */
@@ -87,9 +89,9 @@ public class NoticeAllController {
     // RestController 처리예정
     // JavaScript AJAX 통신 처리예정
     // 왜인지는 모르나 현재 GetMapping으로 처리되고 있음
-    @GetMapping("notice/all/posts/delete/{id}")
-    public String noticeAllPostDelete(@PathVariable Long id) {
-        this.postsService.delete(id);
-        return "redirect:/notice/all/board";
-    }
+//    @GetMapping("notice/all/posts/delete/{id}")
+//    public String noticeAllPostDelete(@PathVariable Long id) {
+//        this.postsService.delete(id);
+//        return "redirect:/notice/all/board";
+//    }
 }
