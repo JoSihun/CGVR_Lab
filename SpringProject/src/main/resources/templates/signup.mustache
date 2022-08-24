@@ -24,19 +24,19 @@
             <div class="tab-content">
                 <!-- Login -->
                 <div class="tab-pane fade" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                    <form>
+                    <form method="POST" action="/signin">
                         <h3 class="text-center">Sign in</h3>
 
-                        <!-- Email input -->
+                        <!-- PortalID input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="username" class="form-control" />
-                            <label class="form-label" for="username">Email or Username</label>
+                            <input id="loginName" name="userId" class="form-control" />
+                            <label class="form-label" for="loginName">UserId</label>
                         </div>
 
                         <!-- Password input -->
                         <div class="form-outline mb-4">
-                            <input type="password" id="password" class="form-control" />
-                            <label class="form-label" for="password">Password</label>
+                            <input type="password" id="loginPassword" name="password" class="form-control" />
+                            <label class="form-label" for="loginPassword">Password</label>
                         </div>
 
                         <!-- 2 column grid layout -->
@@ -57,7 +57,6 @@
 
                         <!-- Submit button -->
                         <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
                         <!-- Register buttons -->
                         <div class="text-center">
@@ -126,7 +125,7 @@
     $(document).ready(function() {
         var errorMessage = [[$(errorMessage)]];
         if (errorMessage != null) {
-            alert(errorMessage);
+            alert('별ㄷ');
         }
     })
 </script>
