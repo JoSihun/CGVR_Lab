@@ -66,7 +66,8 @@ var main = {
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val(),
-            categoryName: $('#categoryName').val()
+            categoryName: $('#categoryName').val(),
+            projectName: $('#projectName').val()
         };
 
         $.ajax({
@@ -90,6 +91,7 @@ var main = {
         var data = {
             title: $('#title').val(),
             content: $('#content').val(),
+            projectName: $('#projectName').val(),
             categoryName: $('#categoryName').val()
         };
 

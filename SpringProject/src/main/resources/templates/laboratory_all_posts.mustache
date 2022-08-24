@@ -77,10 +77,10 @@
                 </div>
 
                 <!-- Card Body -->
-                <div class="card-body text-dark d-flex justify-content-between">
+                <div class="card-body text-dark d-flex justify-content-between align-items-end">
                     <div class="d-inline-block">
-                        <h5 class="card-title d-inline-block m-0" style="color: gray">[{{categoryName}}][{{projectName}}]</h5>
-                        <h5 class="card-title d-inline-block m-0">{{title}}</h5>
+                        <h6 class="card-title" style="color: gray">[{{categoryName}}][{{projectName}}]</h6>
+                        <h4 class="card-title">{{title}}</h4>
                     </div>
                     <div class="d-inline-block">
                         <div class="text-end"><small style="color: #6c757d">조회수 {{hits}}</small></div>
@@ -98,15 +98,16 @@
 
                 <!-- Card Footer -->
                 <div class="card-footer text-dark">
-                    <p class="card-text">첨부 파일</p>
-                    <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
-                    <div class="d-flex justify-content-end">
+                    <div class="mb-2 text-start">
+                        첨부파일
+                    </div>
+                    <div class="mb-2 text-end">
+                        <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
+                        <!-- <form> 태그가 있어야 GET Request 가능 / Front가 지저분해지는 문제있음 -->
                         <form class="d-inline-block" method="GET" action="/laboratory/all/posts/update/{{id}}">
                             <button class="btn btn-primary" type="submit" id="btn-update">수정</button>
                         </form>
-                        <form class="d-inline-block" method="GET" action="/laboratory/all/posts/delete/{{id}}">
-                            <button class="btn btn-danger" type="submit" id="btn-posts-delete">삭제</button>
-                        </form>
+                        <button class="btn btn-danger" type="submit" id="btn-posts-delete">삭제</button>
                     </div>
                 </div>
 
@@ -150,14 +151,17 @@
 
             <!-- Input Comments -->
             <div class="card shadow border border-dark bg-light mb-4">
-                <div class="card-body">
-                    <form class="mb-4" method="POST">
-                        <!-- Hidden Param -->
-                        <input type="hidden" class="form-control" name="author" value="히든작성자"/>
-
-                        <textarea class="form-control" rows="3" placeholder="댓글을 작성해보세요."></textarea>
+                <div class="card-body text-dark">
+                    <div class="mb-3 text-start">
+                        <textarea id="content" name="content" class="form-control" rows="3" placeholder="댓글을 작성해보세요"></textarea>
+                    </div>
+                    <div class="mb-0 text-end">
                         <button class="btn btn-dark text-end" type="submit" id="btn-comments-save">등록</button>
-                    </form>
+                    </div>
+
+                    <!-- Hidden Param -->
+                    <input type="hidden" id="postsId" value="{{posts.id}}">
+                    <input type="hidden" class="form-control" id="author" name="author" value="히든작성자"/>
                 </div>
             </div>
 

@@ -1,11 +1,12 @@
-laboratory_material_posts_form.mustache{{>header}}
+{{>header}}
 {{>banner}}
 <div class="container-fluid">
     <div class="row mx-4 my-4">
+
         <!-- 좌측 사이드 메뉴 -->
         <div class="col-xl-2">
             <!-- 연구생 정보 -->
-            <div class="row mb-4">
+            <div class="row mb-3">
                 <div class="col-xl-12">
                     <div class="card border border-dark">
                         <!-- Card Header -->
@@ -25,18 +26,18 @@ laboratory_material_posts_form.mustache{{>header}}
 
             <!-- 게시글 검색 빠른메뉴 -->
             <form method="post">
-                <div class="row mb-4">
-                    <div class="col-sm-8 mb-2">
+                <div class="row">
+                    <div class="col-sm-8 mb-3">
                         <input class="form-control border-dark" id="search" type="text" placeholder="게시글 제목입력">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 mb-3">
                         <button class="btn btn-dark btn-block" type="submit">검색</button>
                     </div>
                 </div>
             </form>
 
             <!-- 글쓰기 빠른메뉴 -->
-            <div class="row mb-4">
+            <div class="row mb-3">
                 <div class="col-xl-12">
                     <form class="d-flex" method="GET" action="/laboratory/all/posts/form">
                         <button class="btn btn-dark btn-block" type="submit">글쓰기</button>
@@ -45,7 +46,7 @@ laboratory_material_posts_form.mustache{{>header}}
             </div>
 
             <!-- 게시판 빠른메뉴 -->
-            <div class="row">
+            <div class="row mb-3 mb-xl-0">
                 <div class="col-xl-12">
                     <div class="card border border-dark">
                         <!-- Card Header -->
@@ -77,53 +78,52 @@ laboratory_material_posts_form.mustache{{>header}}
                 {{#posts}}
                 <!-- Card Body -->
                 <div class="card-body text-dark">
-                    <form method="POST" action="/laboratory/all/posts/update/{{id}}">
+                    <form>
                         <!-- Category -->
-                        <div class="mx-4 mb-4 d-flex">
+                        <div class="mx-2 mb-2 d-flex">
                             <!-- CategoryName -->
-                            <div class="d-inline-block">
-                                <label for="categoryName" class="form-label">카테고리</label>
-                                <select class="form-control" name="categoryName" id="category">
+                            <div class="d-inline-block w-50">
+                                <select class="form-control" name="categoryName" id="categoryName">
+                                    <option value="">게시판을 선택하세요</option>
                                     <option value="공지">공지 게시판</option>
                                     <option value="논문">논문 게시판</option>
                                     <option value="자료">자료 게시판</option>
                                 </select>
                             </div>
                             <!-- ProjectName -->
-                            <div class="d-inline-block">
-                                <label for="projectName" class="form-label">프로젝트</label>
-                                <select class="form-control" name="projectName" id="project">
+                            <div class="d-inline-block w-50">
+                                <select class="form-control" name="projectName" id="projectName">
+                                    <option value="">프로젝트를 선택하세요</option>
                                     <option value="프로젝트1">프로젝트1</option>
                                     <option value="프로젝트2">프로젝트2</option>
                                     <option value="프로젝트3">프로젝트3</option>
                                 </select>
                             </div>
                         </div>
+
                         <!-- Title -->
-                        <div class="mx-4 mb-4">
-                            <label for="title" class="form-label">제목</label>
-                            <input name="title" class="form-control" type="text" placeholder="제목을 입력하세요" value="{{title}}">
+                        <div class="mx-2 mb-2">
+                            <input id="title" name="title" class="form-control" type="text" placeholder="제목을 입력하세요" value="{{title}}">
                         </div>
+
+                        <!-- Content -->
+                        <div class="mx-2 mb-2">
+                            <textarea id="content" name="content" class="form-control">{{{content}}}</textarea>
+                        </div>
+
                         <!-- Attachment  -->
-                        <div class="mx-4 mb-4">
-                            <label class="form-label">첨부파일</label>
-                            <!--                            <input type="file" class="form-control" aria-label="file example" required>-->
-                            <input type="file" class="form-control" aria-label="file example">
+                        <div class="mx-2 mb-4">
+                            <input id="file" name="file" class="form-control" type="file">
                             <div class="invalid-feedback">Example invalid form file feedback</div>
                         </div>
-                        <!-- Input Tmp Attachment id -->
-                        <input type="hidden" class="form-control" name="attachment_id" value="1"/>
-                        <!-- Content -->
-                        <div class="mx-4 mb-4">
-                            <label for="content" class="form-label">내용</label>
-                            <textarea id="summernote" name="content" class="form-control">{{content}}</textarea>
-                        </div>
 
-                        <!-- Hidden Params -->
-                        <input type="hidden" class="form-control" name="author" value="히든작성자"/>
+                        <!-- Temporal Hidden Params -->
+                        <input type="hidden" class="form-control" id="attachment_id" name="attachment_id" value="0"/>
+                        <input type="hidden" class="form-control" id="author" name="author" value="히든작성자"/>
+                        <input type="hidden" class="form-control" id="id" name="id" value="{{id}}"/>
 
-                        <div class="mx-4 mb-4 text-end">
-                            <button class="btn btn-dark" type="submit" id="btn-save">저장하기</button>
+                        <div class="mx-2 mb-2 text-end">
+                            <button id="btn-posts-update" class="btn btn-dark" type="submit">저장하기</button>
                         </div>
                     </form>
                 </div>
@@ -137,12 +137,12 @@ laboratory_material_posts_form.mustache{{>header}}
 
 <script>
     $(document).ready(function () {
-        $("#category").val("{{posts.categoryName}}").prop("selected", true)
-        $("#project").val("{{posts.projectName}}").prop("selected", true)
+        $("#categoryName").val("{{posts.categoryName}}").prop("selected", true)
+        $("#projectName").val("{{posts.projectName}}").prop("selected", true)
     });
 
     $(document).ready(function() {
-        $('#summernote').summernote({
+        $('#content').summernote({
             height: 500,
             minHeight: null,
             maxHeight: null,

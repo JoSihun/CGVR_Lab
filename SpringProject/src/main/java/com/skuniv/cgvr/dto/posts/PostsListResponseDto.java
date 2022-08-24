@@ -13,6 +13,9 @@ public class PostsListResponseDto {
     private String title;
     private String author;
 
+    private String projectName;
+    private String categoryName;
+
     private String createdDate;
     private String updatedDate;
 
@@ -22,6 +25,8 @@ public class PostsListResponseDto {
         this.hits = entity.getHits();
         this.title = entity.getTitle();
         this.author = entity.getAuthor();
+        this.projectName = entity.getProjectName();
+        this.categoryName = entity.getCategoryName();
 
         this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
         this.updatedDate = entity.getUpdatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
