@@ -16,19 +16,28 @@ var main = {
             role: $('#role').val(),
             userId: $('#userId').val()
         };
-
-        $.ajax({
-            type: 'POST',
-            url: '/admin/api',
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
-            alert('관리자가 등록되었습니다.');
-            window.location.href = '/admin';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
+        console.log(data.userId);
+        if(data.userId) {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/api',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('관리자가 등록되었습니다.');
+                window.location.href = '/admin';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        }
+        // else if(data.userId == null) {
+        //     alert('이미 등록된 회원의 학번입니다.');
+        //     //window.location.href = '/admin';
+        // }
+        else {
+            alert('학번은 필수 입력사항입니다.');
+        }
     },
     delete : function (id) {
 

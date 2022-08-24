@@ -13,6 +13,7 @@ public class UserRestController {
     /* 관리자 등록 */
     @PostMapping("/admin/api")
     public Long adminAssign(@RequestBody UserSaveRequestDto requestDto) {
+        System.out.println(requestDto.getUserId());
         return userService.regist(requestDto);
     }
 
