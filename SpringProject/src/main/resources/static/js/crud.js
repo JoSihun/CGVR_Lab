@@ -2,30 +2,66 @@ var main = {
     init : function () {
         var _this = this;
         $('#btn-posts-save').on('click', function () {
-            _this.save();
+            var result = confirm("저장하시겠습니까?");
+            if (result) {
+                _this.postsSave();
+            }
+            else{
+                alert("저장이 취소되었습니다.");
+            }
         });
 
         $('#btn-posts-update').on('click', function () {
-            _this.update();
+            var result = confirm("저장하시겠습니까?");
+            if (result) {
+                _this.postsUpdate();
+            }
+            else {
+                alert("저장이 취소되었습니다.");
+            }
         });
 
         $('#btn-posts-delete').on('click', function () {
-            _this.delete();
+            var result = confirm("삭제하시겠습니까?");
+            if (result) {
+                _this.postsDelete();
+            }
+            else{
+                alert("삭제가 취소되었습니다.");
+            }
         });
 
         $('#btn-comments-save').on('click', function () {
-            _this.save();
+            var result = confirm("저장하시겠습니까?");
+            if (result) {
+                _this.commentsSave();
+            }
+            else{
+                alert("저장이 취소되었습니다.");
+            }
         });
 
-        $('#btn-comments-update').on('click', function () {
-            _this.update();
+        $('[id="btn-comments-update"]').on('click', function () {
+            var result = confirm("저장하시겠습니까?");
+            if (result) {
+                _this.commentsUpdate();
+            }
+            else{
+                alert("저장이 취소되었습니다.");
+            }
         });
-
-        $('#btn-comments-delete').on('click', function () {
-            _this.delete();
+''
+        $('[id="btn-comments-delete"]').on('click', function () {
+            var result = confirm("삭제하시겠습니까?");
+            if (result) {
+                _this.commentsDelete();
+            }
+            else{
+                alert("삭제가 취소되었습니다.");
+            }
         });
     },
-    save : function () {
+    postsSave : function () {
         var data = {
             title: $('#title').val(),
             author: $('#author').val(),
@@ -35,7 +71,7 @@ var main = {
 
         $.ajax({
             type: 'POST',
-            url: '/notice/all/api/posts',
+            url: '/posts/api',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data),
@@ -50,7 +86,7 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    update : function () {
+    postsUpdate : function () {
         var data = {
             title: $('#title').val(),
             content: $('#content').val(),
@@ -61,7 +97,7 @@ var main = {
 
         $.ajax({
             type: 'PUT',
-            url: '/notice/all/api/posts/'+id,
+            url: '/posts/api/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data),
@@ -76,12 +112,12 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    delete : function () {
-        var id = $('#id').val();
+    postsDelete : function () {
+        var id = $('#postsId').val();
 
         $.ajax({
             type: 'DELETE',
-            url: '/notice/all/api/posts/'+id,
+            url: '/posts/api/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
         }).done(function() {
@@ -94,7 +130,63 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    }
+    },
+    commentsSave : function () {
+        var data = {
+            author: $('#author').val(),
+            content: $('#content').val(),
+            postsId: $('#postsId').val(),
+        };
+        var postsId = $('#postsId').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/posts/api/' + postsId +  '/comments',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+        }).done(function() {
+            alert('댓글이 등록되었습니다.');
+            window.location.reload(true);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    commentsUpdate : function () {
+        var data = {
+            content: $('#updateContent').val(),
+        };
+
+        var id = $('#commentsId').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/posts/api/comments/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+        }).done(function(response) {
+            alert('댓글이 수정되었습니다.');
+            window.location.reload(true);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    commentsDelete : function () {
+        var id = $('#commentsId').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/posts/api/comments/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+        }).done(function() {
+            alert('댓글이 삭제되었습니다.');
+            window.location.reload(true);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
 
 };
 

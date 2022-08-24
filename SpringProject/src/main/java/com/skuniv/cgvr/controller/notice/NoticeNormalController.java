@@ -105,9 +105,9 @@ public class NoticeNormalController {
     // JavaScript AJAX 통신 처리예정
     // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
     // 현재 <a href=""> 사용하여 GetMapping으로 처리되고 있음
-    @PostMapping("notice/normal/posts/{id}/comments")
-    public String CommentSave(@PathVariable Long id, CommentsSaveRequestDto requestDto) {
-        this.commentsService.save(id, requestDto);
-        return "redirect:/notice/normal/posts/" + id;
-    }
+//    @PostMapping("notice/normal/posts/{id}/comments")
+//    public String CommentSave(@PathVariable Long id, CommentsSaveRequestDto requestDto) {
+//        this.commentsService.save(id, requestDto);
+//        return "redirect:/notice/normal/posts/" + id;
+//    }
 }

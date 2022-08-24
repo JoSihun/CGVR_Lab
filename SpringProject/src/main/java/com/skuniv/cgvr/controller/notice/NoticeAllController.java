@@ -1,7 +1,9 @@
 package com.skuniv.cgvr.controller.notice;
 
+import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
+import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import java.util.List;
 @Controller
 public class NoticeAllController {
     private final PostsService postsService;
+    private final CommentsService commentsService;
 
 
     /* 게시판 목록보기 */
@@ -38,7 +41,10 @@ public class NoticeAllController {
     @GetMapping("notice/all/posts/{id}")
     public String noticeAllPost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
+        List<CommentsListResponseDto> responseDtoList = this.commentsService.findAllByPostId(id);
         model.addAttribute("posts", responseDto);
+        model.addAttribute("comments", responseDtoList);
+        model.addAttribute("commentsSize", responseDtoList.size());
         return "notice_all_posts";
     }
 

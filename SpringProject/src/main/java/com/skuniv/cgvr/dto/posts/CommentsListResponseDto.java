@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 @Getter
 public class CommentsListResponseDto {
+    private Long id;
     private String content;
     private String author;
     private String createdDate;
@@ -17,6 +18,7 @@ public class CommentsListResponseDto {
 
 
     public CommentsListResponseDto(Comments entity) {
+        this.id = entity.getId();
         this.content = entity.getContent();
         this.author = entity.getAuthor();
         this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));

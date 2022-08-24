@@ -1,4 +1,4 @@
-package com.skuniv.cgvr.controller.notice;
+package com.skuniv.cgvr.controller;
 
 import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
 import com.skuniv.cgvr.dto.posts.PostsUpdateRequestDto;
@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-public class NoticeAllRestController {
+public class PostsRestController {
     private final PostsService postsService;
 
     /* 게시글 작성요청 */
-    @PostMapping("/notice/all/api/posts")
-    public Long noticeAllPostSave(@RequestBody PostsSaveRequestDto requestDto) {
+    @PostMapping("/posts/api")
+    public Long postsSave(@RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(requestDto);
     }
 
     /* 게시글 수정요청 */
-    @PutMapping("/notice/all/api/posts/{id}")
-    public Long noticeAllPostUpdate(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
+    @PutMapping("/posts/api/{id}")
+    public Long postsUpdate(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);
     }
 
     /* 게시글 삭제요청 */
-    @DeleteMapping("/notice/all/api/posts/{id}")
-    public Long noticeAllPostDelete(@PathVariable Long id) {
+    @DeleteMapping("/posts/api/{id}")
+    public Long postsDelete(@PathVariable Long id) {
         postsService.delete(id);
         return id;
     }
