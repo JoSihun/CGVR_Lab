@@ -104,11 +104,8 @@
                     </div>
                     <div class="mb-2 text-end">
                         <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
-                        <!-- <form> 태그가 있어야 GET Request 가능 / Front가 지저분해지는 문제있음 -->
-                        <form class="d-inline-block" method="GET" action="/laboratory/all/posts/update/{{id}}">
-                            <button class="btn btn-primary" type="submit" id="btn-update">수정</button>
-                        </form>
-                        <button class="btn btn-danger" type="submit" id="btn-posts-delete">삭제</button>
+                        <button type="submit" class="btn btn-primary" onclick="location.href='/laboratory/all/posts/update/{{id}}';">수정</button>
+                        <button type="button" class="btn btn-danger" id="btn-posts-delete">삭제</button>
                     </div>
                 </div>
 
@@ -159,8 +156,6 @@
                                     <button type="button" class="btn btn-dark text-end" id="btn-comments-update">수정</button>
                                 </div>
                             </div>
-
-
 
                         </li>
                         {{/comments}}
