@@ -42,9 +42,10 @@ var main = {
         });
 
         $('[id="btn-comments-update"]').on('click', function () {
+            var form = this.closest('form');
             var result = confirm("저장하시겠습니까?");
             if (result) {
-                _this.commentsUpdate();
+                _this.commentsUpdate(form);
             }
             else{
                 alert("저장이 취소되었습니다.");
@@ -52,9 +53,10 @@ var main = {
         });
 ''
         $('[id="btn-comments-delete"]').on('click', function () {
+            var input = $(this).closest('li').find('input');
             var result = confirm("삭제하시겠습니까?");
             if (result) {
-                _this.commentsDelete();
+                _this.commentsDelete(input);
             }
             else{
                 alert("삭제가 취소되었습니다.");
@@ -66,7 +68,8 @@ var main = {
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val(),
-            categoryName: $('#categoryName').val()
+            categoryName: $('#categoryName').val(),
+            projectName: $('#projectName').val()
         };
 
         $.ajax({
@@ -152,16 +155,15 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    commentsUpdate : function () {
+    commentsUpdate : function (form) {
         var data = {
-            content: $('#updateContent').val(),
+            content: form.querySelector('#updateContent').value,
         };
-
-        var id = $('#commentsId').val();
+        var id = form.querySelector('#commentsId').value;
 
         $.ajax({
             type: 'PUT',
-            url: '/posts/api/comments/'+id,
+            url: '/posts/api/comments/' + id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data),
@@ -172,8 +174,9 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    commentsDelete : function () {
-        var id = $('#commentsId').val();
+    commentsDelete : function (input) {
+        var id = input.val();
+        console.log(id);
 
         $.ajax({
             type: 'DELETE',
