@@ -174,8 +174,9 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    commentsDelete : function () {
-        var id = $('#commentsId').val();
+    commentsDelete : function (id) {
+        // var id = $('#commentsId').val();
+        console.log(id);
 
         $.ajax({
             type: 'DELETE',

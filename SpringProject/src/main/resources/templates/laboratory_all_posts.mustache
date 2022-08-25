@@ -2,10 +2,11 @@
 {{>banner}}
 <div class="container-fluid">
     <div class="row mx-4 my-4">
+
         <!-- 좌측 사이드 메뉴 -->
         <div class="col-xl-2">
             <!-- 연구생 정보 -->
-            <div class="row mb-4">
+            <div class="row mb-3">
                 <div class="col-xl-12">
                     <div class="card border border-dark">
                         <!-- Card Header -->
@@ -25,18 +26,18 @@
 
             <!-- 게시글 검색 빠른메뉴 -->
             <form method="post">
-                <div class="row mb-4">
-                    <div class="col-sm-8 mb-2">
+                <div class="row">
+                    <div class="col-sm-8 mb-3">
                         <input class="form-control border-dark" id="search" type="text" placeholder="게시글 제목입력">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 mb-3">
                         <button class="btn btn-dark btn-block" type="submit">검색</button>
                     </div>
                 </div>
             </form>
 
             <!-- 글쓰기 빠른메뉴 -->
-            <div class="row mb-4">
+            <div class="row mb-3">
                 <div class="col-xl-12">
                     <form class="d-flex" method="GET" action="/laboratory/all/posts/form">
                         <button class="btn btn-dark btn-block" type="submit">글쓰기</button>
@@ -45,7 +46,7 @@
             </div>
 
             <!-- 게시판 빠른메뉴 -->
-            <div class="row">
+            <div class="row mb-3 mb-xl-0">
                 <div class="col-xl-12">
                     <div class="card border border-dark">
                         <!-- Card Header -->
@@ -133,14 +134,34 @@
                                     <small>{{createdDate}}&nbsp;</small>
                                 </div>
                                 <div class="d-inline-block">
-                                    <small><a class="text-dark" style="color: gray" href="#">수정</a></small>
+                                    <small><a class="text-dark" style="color: gray" href="#" data-bs-toggle="collapse" data-bs-target="#comments-update-form-{{id}}">수정</a></small>
                                     <small>/</small>
-                                    <small><a class="text-dark" style="color: gray" href="#">삭제</a></small>
+                                    <small><a class="text-dark" style="color: gray" href="#" id="btn-comments-delete">삭제</a></small>
                                 </div>
                             </div>
-                            <div>
+
+                            <!-- Collapse Show Content -->
+                            <div class="collapse show" id="comments-update-form-{{id}}">
                                 {{content}}
                             </div>
+
+                            <!-- Collapse Update Form -->
+                            <div class="collapse" id="comments-update-form-{{id}}">
+                                <!-- Hidden Param -->
+                                <input type="hidden" class="form-control" id="commentsId" value="{{id}}">
+
+                                <div class="mb-3 text-start">
+                                    <textarea class="form-control" rows="3" id="updateContent" placeholder="댓글을 작성해보세요">{{{content}}}</textarea>
+                                </div>
+
+                                <div class="mb-0 text-end">
+                                    <button type="button" class="btn btn-dark text-end" data-bs-toggle="collapse" data-bs-target="#comments-update-form-{{id}}">취소</button>
+                                    <button type="button" class="btn btn-dark text-end" id="btn-comments-update">수정</button>
+                                </div>
+                            </div>
+
+
+
                         </li>
                         {{/comments}}
                     </ul>
@@ -153,17 +174,17 @@
             <div class="card shadow border border-dark bg-light mb-4">
                 <div class="card-body text-dark">
                     <div class="mb-3 text-start">
-                        <textarea id="content" name="content" class="form-control" rows="3" placeholder="댓글을 작성해보세요"></textarea>
+                        <textarea class="form-control" rows="3" id="content" placeholder="댓글을 작성해보세요"></textarea>
                     </div>
                     <div class="mb-0 text-end">
-                        <button class="btn btn-dark text-end" type="submit" id="btn-comments-save">등록</button>
+                        <button type="button" class="btn btn-dark text-end" id="btn-comments-save">등록</button>
                     </div>
-
-                    <!-- Hidden Param -->
-                    <input type="hidden" id="postsId" value="{{posts.id}}">
-                    <input type="hidden" class="form-control" id="author" name="author" value="히든작성자"/>
                 </div>
             </div>
+
+            <!-- Hidden Param -->
+            <input type="hidden" class="form-control" id="author" value="히든작성자"/>
+            <input type="hidden" class="form-control" id="postsId" value="{{posts.id}}">
 
         </div>
 
