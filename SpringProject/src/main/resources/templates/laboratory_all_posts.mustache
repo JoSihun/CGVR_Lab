@@ -25,23 +25,19 @@
             </div>
 
             <!-- 게시글 검색 빠른메뉴 -->
-            <form method="post">
-                <div class="row">
-                    <div class="col-sm-8 mb-3">
-                        <input class="form-control border-dark" id="search" type="text" placeholder="게시글 제목입력">
-                    </div>
-                    <div class="col-sm-4 mb-3">
-                        <button class="btn btn-dark btn-block" type="submit">검색</button>
-                    </div>
+            <div class="row">
+                <div class="col-sm-8 mb-3">
+                    <input type="text" class="form-control border-dark" id="searchValue" placeholder="게시글 제목입력">
                 </div>
-            </form>
+                <div class="col-sm-4 mb-3">
+                    <button type="button" class="btn btn-dark btn-block" id="btn-search">검색</button>
+                </div>
+            </div>
 
             <!-- 글쓰기 빠른메뉴 -->
             <div class="row mb-3">
                 <div class="col-xl-12">
-                    <form class="d-flex" method="GET" action="/laboratory/all/posts/form">
-                        <button class="btn btn-dark btn-block" type="submit">글쓰기</button>
-                    </form>
+                    <button class="btn btn-dark btn-block" onclick="location.href='/laboratory/all/posts/form';">글쓰기</button>
                 </div>
             </div>
 
@@ -163,7 +159,6 @@
                 </div>
 
             </div>
-
 
             <!-- Input Comments -->
             <div class="card shadow border border-dark bg-light mb-4">

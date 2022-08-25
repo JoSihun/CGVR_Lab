@@ -1,8 +1,10 @@
 package com.skuniv.cgvr.controller.laboratory;
 
+import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
+import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.List;
 @Controller
 public class LaboratoryPaperController {
     private final PostsService postsService;
+    private final CommentsService commentsService;
 
     /* 게시판 목록보기 */
     @GetMapping("laboratory/paper/board")
@@ -31,7 +34,10 @@ public class LaboratoryPaperController {
     @GetMapping("laboratory/paper/posts/{id}")
     public String laboratoryPaperPost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
+        List<CommentsListResponseDto> responseDtoList = this.commentsService.findAllByPostId(id);
         model.addAttribute("posts", responseDto);
+        model.addAttribute("comments", responseDtoList);
+        model.addAttribute("commentsSize", responseDtoList.size());
         return "laboratory_paper_posts";
     }
 
@@ -47,12 +53,17 @@ public class LaboratoryPaperController {
     }
 
 
-    /* 게시글 작성요청 */
-    // RestController 처리예정
-    // JavaScript AJAX 통신 처리예정
-    @PostMapping("laboratory/paper/posts/form")
-    public String laboratoryPaperPostSave(PostsSaveRequestDto requestDto) {
-        Long id = this.postsService.save(requestDto);
-        return "redirect:/laboratory/paper/posts/" + id;
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+    /* 게시글 수정폼 */
+    @GetMapping("laboratory/paper/posts/update/{id}")
+    public String laboratoryPaperPostUpdate(@PathVariable Long id, Model model) {
+        PostsResponseDto responseDto = this.postsService.findById(id);
+        model.addAttribute("posts", responseDto);
+        return "laboratory_paper_posts_update_form";
     }
+
+
 }

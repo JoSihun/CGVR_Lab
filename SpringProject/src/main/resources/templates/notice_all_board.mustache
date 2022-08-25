@@ -1,108 +1,176 @@
 {{>header}}
 {{>banner}}
-<div class="container-fluid mt-4">
+<div class="container-fluid">
     <div class="row mx-4 my-4">
+
+        <!-- 좌측 사이드 메뉴 -->
         <div class="col-xl-2">
-            <div class="card border border-dark mb-4 text-dark bg-light">
-                <!-- Card Header -->
-                <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h5 class="m-0 font-weight-bold">연구생 정보</h5>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div><a class="card-text text-dark">2017305045 염동빈</a></div>
-                    <div><a class="card-text text-dark">재학정보 : 4학년</a></div>
-                </div>
-            </div>
+            <!-- 연구생 정보 -->
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <div class="card border border-dark">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>연구생 정보</b></h5>
+                        </div>
 
-            <div class="row">
-                <div class="col-sm-8">
-                    <input type="text" class="form-control border-dark mb-4" id="search" placeholder="게시글 제목입력"/>
-                </div>
-                <div class="col-sm-4">
-                    <a href="#" role="button" class="btn btn-dark btn-block mb-4">검색</a>
-                </div>
-            </div>
-
-            <div class="row-cols-xl-2">
-                <a href="/notice/all/posts/form" role="button" class="btn btn-dark btn-block mb-4">글 쓰기</a>
-            </div>
-
-            <div class="row-cols-xl">
-                <div class="card border border-dark text-dark bg-light">
-                    <!-- Card Header -->
-                    <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h5 class="m-0 font-weight-bold">공지사항</h5>
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <div><p class="card-text"><strong>이름</strong> : 염동빈</p></div>
+                            <div><p class="card-text"><strong>학번</strong> : 2017305045</p></div>
+                            <div><p class="card-text"><strong>재학정보</strong> : 4학년</p></div>
+                        </div>
                     </div>
-                    <!-- Card Body -->
-                    <div class="card-body" style="align-content: baseline">
-                        <div><a class="card-text text-dark" href="/notice/all/board"><b>전체 공지사항</b></a></div>
-                        <div><a class="card-text text-dark" href="/notice/normal/board">일반 공지사항</a></div>
-                        <div><a class="card-text text-dark" href="/notice/lecture/board">수업 공지사항</a></div>
-                        <div><a class="card-text text-dark" href="/notice/laboratory/board">연구 공지사항</a></div>
+                </div>
+            </div>
+
+            <!-- 게시글 검색 빠른메뉴 -->
+            <div class="row">
+                <div class="col-sm-8 mb-3">
+                    <input type="text" class="form-control border-dark" id="searchValue" placeholder="게시글 제목입력">
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <button type="button" class="btn btn-dark btn-block" id="btn-search">검색</button>
+                </div>
+            </div>
+
+            <!-- 글쓰기 빠른메뉴 -->
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <button class="btn btn-dark btn-block" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                </div>
+            </div>
+
+            <!-- 게시판 빠른메뉴 -->
+            <div class="row mb-3 mb-xl-0">
+                <div class="col-xl-12">
+                    <div class="card border border-dark">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>공지사항</b></h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <div><a class="card-text text-dark" href="/notice/all/board"><b>전체 공지사항</b></a></div>
+                            <div><a class="card-text text-dark" href="/notice/normal/board">일반 공지사항</a></div>
+                            <div><a class="card-text text-dark" href="/notice/lecture/board">수업 공지사항</a></div>
+                            <div><a class="card-text text-dark" href="/notice/laboratory/board">연구 공지사항</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
 
+        <!-- 우측 게시판 보드 -->
         <div class="col-xl-10">
-            <div class="card border border-dark h-100 mb-4 text-dark bg-light">
+            <div class="card border border-dark h-100">
                 <!-- Card Header -->
-                <div class="card-header py-3 d-flex flex-row bg-dark text-white align-items-center justify-content-between">
-                    <h5 class="m-0 font-weight-bold">전체 공지사항</h5>
+                <div class="card-header bg-dark text-white">
+                    <h5 class="m-0"><b>전체 공지사항</b></h5>
                 </div>
+
                 <!-- Card Body -->
-                <div class="card-body">
+                <div class="card-body text-dark">
                     <table class="table table-hover table-sm">
-                        <thead>
+                        <thead class="table-dark">
                         <tr>
-                            <th scope="col" style="width: 5%" class="text-center">번호</th>
-                            <th scope="col" style="width: 50%" class="text-start">제목</th>
-                            <th scope="col" style="width: 15%" class="text-center">작성자</th>
-                            <th scope="col" style="width: 15%" class="text-center">작성일</th>
-                            <th scope="col" style="width: 10%" class="text-center">조회수</th>
+                            <th style="width: 5%" class="text-center" >번호</th>
+                            <th style="width: 50%" class="text-start" >제목</th>
+                            <th style="width: 15%" class="text-center" >작성자</th>
+                            <th style="width: 15%" class="text-center" >작성일</th>
+                            <th style="width: 10%" class="text-center" >조회수</th>
                         </tr>
                         </thead>
                         <tbody id="tbody">
                         {{#posts}}
-                            <tr>
-                                <th scope="row" style="width: 5%" class="text-center">{{id}}</th>
-                                <td style="width: 50%" class="text-start"><a href="/notice/all/posts/{{id}}">{{title}}</a></td>
-                                <td style="width: 15%" class="text-center">{{author}}</td>
-                                <td style="width: 15%" class="text-center">{{createdDate}}</td>
-                                <td style="width: 10%" class="text-center">{{hits}}</td>
-                            </tr>
+                        <tr>
+                            <td class="text-center">{{id}}</td>
+                            <td class="text-start">
+                                <a class="text-dark" href="/notice/all/posts/{{id}}">
+                                    <span style="color: gray">[{{categoryName}}]</span>
+                                    {{title}}
+                                </a>
+                            </td>
+                            <td class="text-center">{{author}}</td>
+                            <td class="text-center">{{createdDate}}</td>
+                            <td class="text-center">{{hits}}</td>
+                        </tr>
                         {{/posts}}
                         </tbody>
                     </table>
                 </div>
-                </table>
-                <!-- 페이징 -->
-                <!-- 여기도 게시글 개수에 따라서 처리해야함 -->
-                <div>
-                    <nav aria-label="paging">
-                        <ul class="pagination pagination-lg justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+
+                <!-- 게시글 검색 및 글쓰기, 페이지네이션 -->
+                <div class="text-dark"><hr>
+                    <div class="row mb-2">
+                        <!-- Column 1: Empty Space -->
+                        <div class="col-sm-2 text-start">
+
+                        </div>
+
+                        <!-- Column 2: Search Form -->
+                        <div class="col-sm-8 text-center">
+
+                            <div class="row align-items-center">
+                                <!-- Sub Column 1: Search Category -->
+                                <div class="col-sm-2 text-end">
+                                    <select class="form-select-sm text-start" id="searchCategory">
+                                        <option value="제목">제목</option>
+                                        <option value="작성자">작성자</option>
+                                        <option value="제목+작성자">제목+작성자</option>
+                                    </select>
+                                </div>
+                                <!-- Sub Column 2: Input Search Keyword -->
+                                <div class="col-sm-8 text-center">
+                                    <input type="text" class="form-control border-dark" id="searchValue" placeholder="게시글 제목입력">
+                                </div>
+                                <!-- Sub Column 3: Search Button -->
+                                <div class="col-sm-2 text-start">
+                                    <button type="button" class="btn btn-dark" id="btn-search">검색</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Column 3: Writing Post Form -->
+                        <div class="col-sm-2 text-end">
+                            <button class="btn btn-dark me-4" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav class="mb-2" aria-label="Page navigation Sample">
+                        <ul class="pagination pagination-sm m-0 justify-content-center">
+                            <li class="page-item"><a class="page-link" href="#">첫 페이지</a></li>
+                            <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item"><a class="page-link" href="#">4</a></li>
                             <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
+                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                            <li class="page-item"><a class="page-link" href="#">끝 페이지</a></li>
                         </ul>
                     </nav>
                 </div>
+
             </div>
         </div>
+
     </div>
 </div>
+
+<style>
+    .page-item.active .page-link {
+        font-weight: bold;
+        background-color: black;
+    }
+
+    .page-item.disabled .page-link {
+        color: gray;
+        background-color: #e6e6e6;
+    }
+</style>
 {{>footer}}

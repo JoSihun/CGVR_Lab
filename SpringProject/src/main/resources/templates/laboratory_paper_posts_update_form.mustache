@@ -37,7 +37,7 @@
             <!-- 글쓰기 빠른메뉴 -->
             <div class="row mb-3">
                 <div class="col-xl-12">
-                    <button class="btn btn-dark btn-block" onclick="location.href='/laboratory/material/posts/form';">글쓰기</button>
+                    <button class="btn btn-dark btn-block" onclick="location.href='/laboratory/paper/posts/form';">글쓰기</button>
                 </div>
             </div>
 
@@ -54,8 +54,8 @@
                         <div class="card-body text-dark">
                             <div><a class="card-text text-dark" href="/laboratory/all/board">전체 게시판</a></div>
                             <div><a class="card-text text-dark" href="/laboratory/notice/board">공지 게시판</a></div>
-                            <div><a class="card-text text-dark" href="/laboratory/paper/board">논문 게시판</a></div>
-                            <div><a class="card-text text-dark" href="/laboratory/material/board"><b>자료 게시판</b></a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/paper/board"><b>논문 게시판</b></a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/material/board">자료 게시판</a></div>
                         </div>
                     </div>
                 </div>
@@ -68,9 +68,10 @@
             <div class="card border border-dark h-100">
                 <!-- Card Header -->
                 <div class="card-header bg-dark text-white">
-                    <h5 class="m-0"><b>자료 게시판</b></h5>
+                    <h5 class="m-0"><b>논문 게시판</b></h5>
                 </div>
 
+                {{#posts}}
                 <!-- Card Body -->
                 <div class="card-body text-dark">
 
@@ -82,7 +83,7 @@
                                 <option value="">게시판을 선택하세요</option>
                                 <option value="공지">공지 게시판</option>
                                 <option value="논문">논문 게시판</option>
-                                <option value="자료" selected>자료 게시판</option>
+                                <option value="자료">자료 게시판</option>
                             </select>
                         </div>
                         <!-- ProjectName -->
@@ -98,12 +99,12 @@
 
                     <!-- Title -->
                     <div class="mx-2 mb-2">
-                        <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+                        <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" value="{{title}}">
                     </div>
 
                     <!-- Content -->
                     <div class="mx-2 mb-2">
-                        <textarea class="form-control" id="content"></textarea>
+                        <textarea class="form-control" id="content">{{{content}}}</textarea>
                     </div>
 
                     <!-- Attachment  -->
@@ -113,15 +114,16 @@
                     </div>
 
                     <!-- Hidden Params -->
+                    <input type="hidden" class="form-control" id="id" value="{{id}}"/>
                     <input type="hidden" class="form-control" id="author" value="히든작성자"/>
                     <input type="hidden" class="form-control" id="attachment_id" value="0"/>
 
                     <div class="mx-2 mb-2 text-end">
-                        <button type="button" class="btn btn-dark" id="btn-posts-save">저장하기</button>
+                        <button type="button" class="btn btn-dark" id="btn-posts-update">저장하기</button>
                     </div>
 
                 </div>
-
+                {{/posts}}
             </div>
         </div>
 
@@ -130,6 +132,11 @@
 
 
 <script>
+    $(document).ready(function () {
+        $("#projectName").val("{{posts.projectName}}").prop("selected", true)
+        $("#categoryName").val("{{posts.categoryName}}").prop("selected", true)
+    });
+
     $(document).ready(function() {
         $('#content').summernote({
             height: 500,

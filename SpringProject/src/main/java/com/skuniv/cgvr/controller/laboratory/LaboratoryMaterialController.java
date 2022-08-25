@@ -1,8 +1,10 @@
 package com.skuniv.cgvr.controller.laboratory;
 
+import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
+import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,11 +19,12 @@ import java.util.List;
 @Controller
 public class LaboratoryMaterialController {
     private final PostsService postsService;
+    private final CommentsService commentsService;
 
     /* 게시판 목록보기 */
     @GetMapping("laboratory/material/board")
     public String laboratoryMaterialBoard(Model model) {
-        List<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryNameDesc("공지");
+        List<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryNameDesc("자료");
         model.addAttribute("posts", responseDtoList);
         return "laboratory_material_board";
     }
@@ -31,7 +34,10 @@ public class LaboratoryMaterialController {
     @GetMapping("laboratory/material/posts/{id}")
     public String laboratoryMaterialPost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
+        List<CommentsListResponseDto> responseDtoList = this.commentsService.findAllByPostId(id);
         model.addAttribute("posts", responseDto);
+        model.addAttribute("comments", responseDtoList);
+        model.addAttribute("commentsSize", responseDtoList.size());
         return "laboratory_material_posts";
     }
 
@@ -47,12 +53,17 @@ public class LaboratoryMaterialController {
     }
 
 
-    /* 게시글 작성요청 */
-    // RestController 처리예정
-    // JavaScript AJAX 통신 처리예정
-    @PostMapping("laboratory/material/posts/form")
-    public String laboratoryMaterialPostSave(PostsSaveRequestDto requestDto) {
-        Long id = this.postsService.save(requestDto);
-        return "redirect:/laboratory/material/posts/" + id;
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+    /* 게시글 수정폼 */
+    @GetMapping("laboratory/material/posts/update/{id}")
+    public String laboratoryMaterialPostUpdate(@PathVariable Long id, Model model) {
+        PostsResponseDto responseDto = this.postsService.findById(id);
+        model.addAttribute("posts", responseDto);
+        return "laboratory_material_posts_update_form";
     }
+
+
 }

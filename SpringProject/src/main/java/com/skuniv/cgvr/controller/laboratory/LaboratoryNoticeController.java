@@ -1,8 +1,10 @@
 package com.skuniv.cgvr.controller.laboratory;
 
+import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
+import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.List;
 @Controller
 public class LaboratoryNoticeController {
     private final PostsService postsService;
+    private final CommentsService commentsService;
 
     /* 게시판 목록보기 */
     @GetMapping("laboratory/notice/board")
@@ -31,7 +34,10 @@ public class LaboratoryNoticeController {
     @GetMapping("laboratory/notice/posts/{id}")
     public String laboratoryNoticePost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
+        List<CommentsListResponseDto> responseDtoList = this.commentsService.findAllByPostId(id);
         model.addAttribute("posts", responseDto);
+        model.addAttribute("comments", responseDtoList);
+        model.addAttribute("commentsSize", responseDtoList.size());
         return "laboratory_notice_posts";
     }
 
@@ -47,12 +53,17 @@ public class LaboratoryNoticeController {
     }
 
 
-    /* 게시글 작성요청 */
-    // RestController 처리예정
-    // JavaScript AJAX 통신 처리예정
-    @PostMapping("laboratory/notice/posts/form")
-    public String laboratoryNoticePostSave(PostsSaveRequestDto requestDto) {
-        Long id = this.postsService.save(requestDto);
-        return "redirect:/laboratory/notice/posts/" + id;
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+    /* 게시글 수정폼 */
+    @GetMapping("laboratory/notice/posts/update/{id}")
+    public String laboratoryNoticePostUpdate(@PathVariable Long id, Model model) {
+        PostsResponseDto responseDto = this.postsService.findById(id);
+        model.addAttribute("posts", responseDto);
+        return "laboratory_notice_posts_update_form";
     }
+
+
 }

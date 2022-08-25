@@ -1,141 +1,183 @@
 {{>header}}
 {{>banner}}
-<div class="container-fluid mt-4">
+<div class="container-fluid">
     <div class="row mx-4 my-4">
+
+        <!-- 좌측 사이드 메뉴 -->
         <div class="col-xl-2">
-            <div class="card border border-dark mb-4 text-dark bg-light">
-                <!-- Card Header -->
-                <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h5 class="m-0 font-weight-bold">연구생 정보</h5>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div><a class="card-text text-dark">2017305045 염동빈</a></div>
-                    <div><a class="card-text text-dark">재학정보 : 4학년</a></div>
-                </div>
-            </div>
+            <!-- 연구생 정보 -->
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <div class="card border border-dark">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>연구생 정보</b></h5>
+                        </div>
 
-            <div class="row">
-                <div class="col-sm-8">
-                    <input type="text" class="form-control border-dark mb-4" id="search" placeholder="게시글 제목입력"/>
-                </div>
-                <div class="col-sm-4">
-                    <a href="#" role="button" class="btn btn-dark btn-block mb-4">검색</a>
-                </div>
-            </div>
-
-            <div class="row-cols-xl-2">
-                <a href="/notice/lecture/posts/form" role="button" class="btn btn-dark btn-block mb-4">글 쓰기</a>
-            </div>
-
-            <div class="row-cols-xl">
-                <div class="card border border-dark text-dark bg-light">
-                    <!-- Card Header -->
-                    <div class="card-header text-white bg-dark py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h5 class="m-0 font-weight-bold">공지사항</h5>
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <div><p class="card-text"><strong>이름</strong> : 염동빈</p></div>
+                            <div><p class="card-text"><strong>학번</strong> : 2017305045</p></div>
+                            <div><p class="card-text"><strong>재학정보</strong> : 4학년</p></div>
+                        </div>
                     </div>
-                    <!-- Card Body -->
-                    <div class="card-body" style="align-content: baseline">
-                        <div><a class="card-text text-dark" href="/notice/all/board">전체 공지사항</a></div>
-                        <div><a class="card-text text-dark" href="/notice/normal/board">일반 공지사항</a></div>
-                        <div><a class="card-text text-dark" href="/notice/lecture/board"><b>수업 공지사항</b></a></div>
-                        <div><a class="card-text text-dark" href="/notice/laboratory/board">연구 공지사항</a></div>
+                </div>
+            </div>
+
+            <!-- 게시글 검색 빠른메뉴 -->
+            <div class="row">
+                <div class="col-sm-8 mb-3">
+                    <input type="text" class="form-control border-dark" id="searchValue" placeholder="게시글 제목입력">
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <button type="button" class="btn btn-dark btn-block" id="btn-search">검색</button>
+                </div>
+            </div>
+
+            <!-- 글쓰기 빠른메뉴 -->
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <button class="btn btn-dark btn-block" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                </div>
+            </div>
+
+            <!-- 게시판 빠른메뉴 -->
+            <div class="row mb-3 mb-xl-0">
+                <div class="col-xl-12">
+                    <div class="card border border-dark">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>공지사항</b></h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <div><a class="card-text text-dark" href="/notice/all/board">전체 공지사항</a></div>
+                            <div><a class="card-text text-dark" href="/notice/normal/board">일반 공지사항</a></div>
+                            <div><a class="card-text text-dark" href="/notice/lecture/board"><b>수업 공지사항</b></a></div>
+                            <div><a class="card-text text-dark" href="/notice/laboratory/board">연구 공지사항</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
 
+        {{#posts}}
+        <!-- 우측 게시판 보드 -->
         <div class="col-xl-10">
-            {{#posts}}
-            <!-- 게시글 -->
-            <div class="card shadow mb-4 text-dark bg-light">
+            <!-- Posts Content -->
+            <div class="card shadow mb-4 border border-dark bg-light">
                 <!-- Card Header -->
-                <div class="card-header py-3 d-flex flex-row bg-dark text-white align-items-center justify-content-between">
-                    <h5 class="m-0 font-weight-bold">수업 공지사항</h5>
-                </div>
-                <!-- 제목, 작성자, 작성일, 조회수 -->
-                <div class="card-body">
-                    <!-- Title -->
-                    <h3>{{title}}</h3>
-                    <!-- Author % RegDate & Hits -->
-                    <strong>{{author}}</strong>
-                    <small><span style="color:#6c757d">{{createdDate}} 조회 {{hits}}</span></small>
+                <div class="card-header bg-dark text-white">
+                    <h5 class="m-0"><b>수업 공지사항</b></h5>
                 </div>
 
-                <!-- 글 내용 -->
-                <div class="card-footer">
-                    <!-- Content -->
-                    {{{content}}}
+                <!-- Card Body -->
+                <div class="card-body text-dark d-flex justify-content-between align-items-end">
+                    <div class="d-inline-block">
+                        <h6 class="card-title" style="color: gray">[{{categoryName}}] 공지사항</h6>
+                        <h4 class="card-title">{{title}}</h4>
+                    </div>
+                    <div class="d-inline-block">
+                        <div class="text-end"><small style="color: #6c757d">조회수 {{hits}}</small></div>
+                        <div class="text-end"><strong style="color: #6c757d">작성자: {{author}}</strong></div>
+                        <div class="text-end"><small style="color: #6c757d">작성일 {{createdDate}}</small></div>
+                    </div>
+
+
                 </div>
 
-                <!-- 첨부파일, 수정/삭제 버튼 -->
-                <div class="card-footer">
-                    <p class="card-text text-dark">첨부 파일</p>
-                    <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
-                    <a href="/notice/lecture/posts/delete/{{id}}" id="btn-delete" class="btn btn-danger" style="float:right;">삭제</a>
-                    <a href="/notice/lecture/posts/update/{{id}}" id="btn-update" class="btn btn-primary" style="float:right;">수정</a>
+                <!-- Card Footer -->
+                <div class="card-footer text-dark" style="min-height: 500px">
+                    <p class="card-text">{{{content}}}</p>
                 </div>
-            </div>
 
-            <!-- 댓글 목록 -->
-            <!-- 현재 댓글 기능 구현이 되지않아 프론트로만 간단히 처리하였음. 처리 이후 이 주석 지울 것 -->
-            <div class="card shadow mb-4 text-dark bg-light">
-                <div class="card-header">
-                    <h5 class="card-title">댓글 20</h5>
+                <!-- Card Footer -->
+                <div class="card-footer text-dark">
+                    <div class="mb-2 text-start">
+                        첨부파일
+                    </div>
+                    <div class="mb-2 text-end">
+                        <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
+                        <button type="submit" class="btn btn-primary" onclick="location.href='/notice/lecture/posts/update/{{id}}';">수정</button>
+                        <button type="button" class="btn btn-danger" id="btn-posts-delete">삭제</button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <!-- 반복을 통한 댓글 리스트 조회 -->
-                    <ul id="comment-list" class="list-group bg-light">
-                        <li id="comment-3" class="list-group-item">
-                            <div>
-                                <div>
-                                    <strong>2016305078 강건마</strong>
-                                    <small>
-                                        22.08.09 19:29
-                                        <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
-                                        <a href="#" class="text-dark">수정</a>
-                                        <a href="#" class="text-dark">삭제</a>
-                                    </small>
-                                </div>
-                                <div>
-                                    여자가...말대꾸?!
-                                </div>
-                            </div>
-                        </li>
-                        <li id="comment-2" class="list-group-item">
-                            <div>
-                                <div>
-                                    <strong>2016305078 최영환</strong>
-                                    <small>
-                                        22.08.09 19:29
-                                        <a href="#" class="text-dark">수정</a>
-                                        <a href="#" class="text-dark">삭제</a>
-                                    </small>
-                                </div>
-                                <div>
-                                    그 누구보다 빠르게 난 남들과는 다르게 색다르게 리듬을 타는 비트 위의 나그네 더 빠르게 빨려들어가 빠져버리는 네 박자 리듬 위에 나는 매일 비트를 쪼개
-                                    그 누구보다 빠르게 난 남들과는 다르게 색다르게 리듬을 타는 비트 위의 나그네 더 빠르게 빨려들어가 빠져버리는 네 박자 리듬 위에 나는 매일 비트를 쪼개
-                                    그 누구보다 빠르게 난 남들과는 다르게 색다르게 리듬을 타는 비트 위의 나그네 더 빠르게 빨려들어가 빠져버리는 네 박자 리듬 위에 나는 매일 비트를 쪼개
-                                    그 누구보다 빠르게 난 남들과는 다르게 색다르게 리듬을 타는 비트 위의 나그네 더 빠르게 빨려들어가 빠져버리는 네 박자 리듬 위에 나는 매일 비트를 쪼개
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
             {{/posts}}
-            <!-- 댓글 입력창 -->
-            <div class="card shadow mb-4 text-dark bg-light">
-                <div class="card-body">
-                    <form class="mb-4">
-                        <input name="author" class="form-control" type="hidden"/>
-                        <textarea class="form-control" rows="3" placeholder="댓글을 작성해보세요."></textarea>
-                    </form>
-                    <a class="btn btn-primary" style="float:right;btn-space">등록</a>
+
+
+            <!-- Posts Comments -->
+            <div class="card shadow border border-dark bg-light mb-4">
+                <!-- Card Header -->
+                <div class="card-header bg-dark text-white">
+                    <h5 class="m-0"><b>댓글 {{commentsSize}}</b></h5>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body text-dark">
+                    <ul class="list-group bg-light">
+                        {{#comments}}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-inline-block">
+                                    <strong>{{author}}&nbsp;</strong>
+                                    <small>{{createdDate}}&nbsp;</small>
+                                </div>
+                                <div class="d-inline-block">
+                                    <small><a class="text-dark" style="color: gray" href="#" data-bs-toggle="collapse" data-bs-target="#comments-update-form-{{id}}">수정</a></small>
+                                    <small>/</small>
+                                    <small><a class="text-dark" style="color: gray" href="#" id="btn-comments-delete">삭제</a></small>
+                                </div>
+                            </div>
+
+                            <!-- Collapse Show Content -->
+                            <div class="collapse show" id="comments-update-form-{{id}}">
+                                {{content}}
+                            </div>
+
+                            <!-- Collapse Update Form -->
+                            <div class="collapse" id="comments-update-form-{{id}}">
+                                <!-- Hidden Param -->
+                                <input type="hidden" class="form-control" id="commentsId" value="{{id}}">
+
+                                <div class="mb-3 text-start">
+                                    <textarea class="form-control" rows="3" id="updateContent" placeholder="댓글을 작성해보세요">{{{content}}}</textarea>
+                                </div>
+
+                                <div class="mb-0 text-end">
+                                    <button type="button" class="btn btn-dark text-end" data-bs-toggle="collapse" data-bs-target="#comments-update-form-{{id}}">취소</button>
+                                    <button type="button" class="btn btn-dark text-end" id="btn-comments-update">수정</button>
+                                </div>
+                            </div>
+
+                        </li>
+                        {{/comments}}
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Input Comments -->
+            <div class="card shadow border border-dark bg-light mb-4">
+                <div class="card-body text-dark">
+                    <div class="mb-3 text-start">
+                        <textarea class="form-control" rows="3" id="content" placeholder="댓글을 작성해보세요"></textarea>
+                    </div>
+                    <div class="mb-0 text-end">
+                        <button type="button" class="btn btn-dark text-end" id="btn-comments-save">등록</button>
+                    </div>
                 </div>
             </div>
+
+            <!-- Hidden Param -->
+            <input type="hidden" class="form-control" id="author" value="히든작성자"/>
+            <input type="hidden" class="form-control" id="postsId" value="{{posts.id}}">
+
         </div>
+
     </div>
 </div>
 

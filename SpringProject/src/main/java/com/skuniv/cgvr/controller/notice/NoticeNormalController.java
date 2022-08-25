@@ -45,13 +45,16 @@ public class NoticeNormalController {
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
-
     /* 게시글 작성폼 */
     @GetMapping("notice/normal/posts/form")
     public String noticeNormalPostForm() {
         return "notice_normal_posts_form";
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
 
     /* 게시글 수정폼 */
     @GetMapping("notice/normal/posts/update/{id}")
@@ -62,52 +65,4 @@ public class NoticeNormalController {
     }
 
 
-    /* 게시글 작성요청 */
-    // RestController 처리예정
-    // JavaScript AJAX 통신 처리예정
-    @PostMapping("notice/normal/posts/form")
-    public String noticeNormalPostSave(PostsSaveRequestDto requestDto) {
-        Long id = this.postsService.save(requestDto);
-        return "redirect:/notice/normal/posts/" + id;
-    }
-
-
-    /* 게시글 수정요청 */
-    // PutMapping 처리예정
-    // RestController 처리예정
-    // JavaScript AJAX 통신 처리예정
-    @PostMapping("notice/normal/posts/update/{id}")
-    public String noticeNormalPostUpdate(@PathVariable Long id, PostsUpdateRequestDto requestDto) {
-        this.postsService.update(id, requestDto);
-        return "redirect:/notice/normal/posts/" + id;
-    }
-
-
-    /* 게시글 삭제요청 */
-    // DeleteMapping 처리예정
-    // RestController 처리예정
-    // JavaScript AJAX 통신 처리예정
-    // 현재 <a href=""> 사용하여 GetMapping으로 처리되고 있음
-    @GetMapping("notice/normal/posts/delete/{id}")
-    public String noticeNormalPostDelete(@PathVariable Long id) {
-        this.postsService.delete(id);
-        return "redirect:/notice/normal/board";
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
-
-
-    /* 댓글 등록요청 */
-    // RestController 처리예정
-    // JavaScript AJAX 통신 처리예정
-    // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
-    // 현재 <a href=""> 사용하여 GetMapping으로 처리되고 있음
-//    @PostMapping("notice/normal/posts/{id}/comments")
-//    public String CommentSave(@PathVariable Long id, CommentsSaveRequestDto requestDto) {
-//        this.commentsService.save(id, requestDto);
-//        return "redirect:/notice/normal/posts/" + id;
-//    }
 }

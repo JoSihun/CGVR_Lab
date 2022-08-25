@@ -25,6 +25,13 @@ public class IndexController {
         List<PostsListResponseDto> responseDtoList5 = this.postsService.findAllByCategoryNameDesc("논문");
         List<PostsListResponseDto> responseDtoList6 = this.postsService.findAllByCategoryNameDesc("자료");
 
+        if (responseDtoList1.size() > 5) { responseDtoList1 = responseDtoList1.subList(0, 5); }
+        if (responseDtoList2.size() > 5) { responseDtoList2 = responseDtoList2.subList(0, 5); }
+        if (responseDtoList3.size() > 5) { responseDtoList3 = responseDtoList3.subList(0, 5); }
+        if (responseDtoList4.size() > 5) { responseDtoList4 = responseDtoList4.subList(0, 5); }
+        if (responseDtoList5.size() > 5) { responseDtoList5 = responseDtoList5.subList(0, 5); }
+        if (responseDtoList6.size() > 5) { responseDtoList6 = responseDtoList6.subList(0, 5); }
+
         model.addAttribute("noticeNormalPosts", responseDtoList1);
         model.addAttribute("noticeLecturePosts", responseDtoList2);
         model.addAttribute("noticeLaboratoryPosts", responseDtoList3);

@@ -37,7 +37,7 @@
             <!-- 글쓰기 빠른메뉴 -->
             <div class="row mb-3">
                 <div class="col-xl-12">
-                    <button class="btn btn-dark btn-block" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                    <button class="btn btn-dark btn-block" onclick="location.href='/laboratory/paper/posts/form';">글쓰기</button>
                 </div>
             </div>
 
@@ -47,15 +47,15 @@
                     <div class="card border border-dark">
                         <!-- Card Header -->
                         <div class="card-header bg-dark text-white">
-                            <h5 class="m-0"><b>공지사항</b></h5>
+                            <h5 class="m-0"><b>연구 게시판</b></h5>
                         </div>
 
                         <!-- Card Body -->
                         <div class="card-body text-dark">
-                            <div><a class="card-text text-dark" href="/notice/all/board">전체 공지사항</a></div>
-                            <div><a class="card-text text-dark" href="/notice/normal/board">일반 공지사항</a></div>
-                            <div><a class="card-text text-dark" href="/notice/lecture/board">수업 공지사항</a></div>
-                            <div><a class="card-text text-dark" href="/notice/laboratory/board"><b>연구 공지사항</b></a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/all/board">전체 게시판</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/notice/board">공지 게시판</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/paper/board"><b>논문 게시판</b></a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/material/board">자료 게시판</a></div>
                         </div>
                     </div>
                 </div>
@@ -70,13 +70,13 @@
             <div class="card shadow mb-4 border border-dark bg-light">
                 <!-- Card Header -->
                 <div class="card-header bg-dark text-white">
-                    <h5 class="m-0"><b>연구 공지사항</b></h5>
+                    <h5 class="m-0"><b>논문 게시판</b></h5>
                 </div>
 
                 <!-- Card Body -->
                 <div class="card-body text-dark d-flex justify-content-between align-items-end">
                     <div class="d-inline-block">
-                        <h6 class="card-title" style="color: gray">[{{categoryName}}] 공지사항</h6>
+                        <h6 class="card-title" style="color: gray">[{{categoryName}}][{{projectName}}]</h6>
                         <h4 class="card-title">{{title}}</h4>
                     </div>
                     <div class="d-inline-block">
@@ -100,7 +100,7 @@
                     </div>
                     <div class="mb-2 text-end">
                         <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
-                        <button type="submit" class="btn btn-primary" onclick="location.href='/notice/laboratory/posts/update/{{id}}';">수정</button>
+                        <button type="submit" class="btn btn-primary" onclick="location.href='/laboratory/paper/posts/update/{{id}}';">수정</button>
                         <button type="button" class="btn btn-danger" id="btn-posts-delete">삭제</button>
                     </div>
                 </div>

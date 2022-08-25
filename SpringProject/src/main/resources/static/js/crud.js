@@ -42,10 +42,10 @@ var main = {
         });
 
         $('[id="btn-comments-update"]').on('click', function () {
-            var form = this.closest('form');
+            var commentsInfo = this.closest('li');
             var result = confirm("저장하시겠습니까?");
             if (result) {
-                _this.commentsUpdate(form);
+                _this.commentsUpdate(commentsInfo);
             }
             else{
                 alert("저장이 취소되었습니다.");
@@ -53,10 +53,10 @@ var main = {
         });
 ''
         $('[id="btn-comments-delete"]').on('click', function () {
-            var input = $(this).closest('li').find('input');
+            var commentsInfo = this.closest('li');
             var result = confirm("삭제하시겠습니까?");
             if (result) {
-                _this.commentsDelete(input);
+                _this.commentsDelete(commentsInfo);
             }
             else{
                 alert("삭제가 취소되었습니다.");
@@ -156,11 +156,11 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    commentsUpdate : function (form) {
+    commentsUpdate : function (commentsInfo) {
         var data = {
-            content: form.querySelector('#updateContent').value,
+            content: commentsInfo.querySelector('#updateContent').value,
         };
-        var id = form.querySelector('#commentsId').value;
+        var id = commentsInfo.querySelector('#commentsId').value;
 
         $.ajax({
             type: 'PUT',
@@ -176,8 +176,8 @@ var main = {
         });
     },
 
-    commentsDelete : function (input) {
-        var id = input.val();
+    commentsDelete : function (commentsInfo) {
+        var id = commentsInfo.querySelector('#commentsId').value;
         console.log(id);
 
         $.ajax({
