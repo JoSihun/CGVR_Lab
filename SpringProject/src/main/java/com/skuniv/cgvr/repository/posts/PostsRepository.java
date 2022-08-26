@@ -1,10 +1,8 @@
 package com.skuniv.cgvr.repository.posts;
 
 import com.skuniv.cgvr.domain.posts.Posts;
-import net.bytebuddy.TypeCache;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

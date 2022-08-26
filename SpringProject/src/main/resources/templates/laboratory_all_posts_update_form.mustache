@@ -151,7 +151,8 @@
                 $("#projectName").attr("disabled", false);
             } else {
                 $("#projectName").hide();
-                $("#projectName").val($(this).text());
+                // $("#projectName").val($(this).text());
+                $("#projectName").val($("#selectProjectName").val());
                 $("#projectName").attr("disabled", true);
             }
         })

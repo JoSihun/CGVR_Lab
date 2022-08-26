@@ -1,9 +1,12 @@
 package com.skuniv.cgvr.service;
 
 import com.skuniv.cgvr.domain.Projects;
+import com.skuniv.cgvr.domain.posts.Posts;
 import com.skuniv.cgvr.dto.ProjectsListResponseDto;
+import com.skuniv.cgvr.dto.ProjectsResponseDto;
 import com.skuniv.cgvr.dto.ProjectsSaveRequestDto;
 import com.skuniv.cgvr.dto.ProjectsUpdateRequestDto;
+import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.repository.ProjectsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -24,6 +27,13 @@ public class ProjectsService {
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         List<Projects> projectsList = this.projectsRepository.findAll(sort);
         return projectsList.stream().map(ProjectsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    /** 프로젝트명으로 검색하기 */
+    @Transactional
+    public ProjectsResponseDto findByProjectName(String projectName) {
+        Projects entity = this.projectsRepository.findByProjectName(projectName);
+        return new ProjectsResponseDto(entity);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

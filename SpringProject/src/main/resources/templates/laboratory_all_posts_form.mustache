@@ -96,9 +96,15 @@
                             </select>
                         </div>
                         <!-- ProjectName Collapse -->
-                        <div class="w-50" id="projectNameCollapse">
-                            <input type="text" class="form-control" id="projectName" disabled placeholder="프로젝트명을 입력하세요">
-                        </div>
+                        <button type="button" class="w-10 btn btn-danger" id="btn-projectName-delete">삭제</button>
+                        <input type="text" class="w-50 form-control" id="projectName" disabled placeholder="프로젝트명을 입력하세요">
+<!--                        <div class="w-25">-->
+<!--                            <button type="button" class="btn btn-danger" id="btn-projectName-delete">삭제</button>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; ProjectName Collapse &ndash;&gt;-->
+<!--                        <div class="w-50">-->
+<!--                            <input type="text" class="form-control" id="projectName" disabled placeholder="프로젝트명을 입력하세요">-->
+<!--                        </div>-->
                     </div>
 
                     <!-- Title -->
@@ -137,14 +143,20 @@
 <script>
     $(document).ready(function () {
         $("#projectName").hide();
+        $("#btn-projectName-delete").hide()
         $("#selectProjectName").change(function () {
             if ($("#selectProjectName").val() == "direct") {
+                $("#btn-projectName-delete").hide()
                 $("#projectName").show();
                 $("#projectName").val('');
                 $("#projectName").attr("disabled", false);
-            } else {
+            } else if ($("#selectProjectName").val() == "") {
+                $("#btn-projectName-delete").hide()
+            }
+            else {
                 $("#projectName").hide();
-                $("#projectName").val($(this).text());
+                $("#btn-projectName-delete").show()
+                $("#projectName").val($("#selectProjectName").val());
                 $("#projectName").attr("disabled", true);
             }
         })

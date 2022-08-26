@@ -18,8 +18,11 @@ public class PostsRestController {
     @PostMapping("/posts/api")
     public Long postsSave(@RequestBody PostsSaveRequestDto requestDto) {
         ProjectsSaveRequestDto projectsSaveRequestDto = new ProjectsSaveRequestDto();
-        projectsSaveRequestDto.setProjectName(requestDto.getProjectName());
-        projectsService.save(projectsSaveRequestDto);
+        System.out.println(projectsService.findByProjectName(requestDto.getProjectName()));
+        if (projectsService.findByProjectName(requestDto.getProjectName()) == null) {
+            projectsSaveRequestDto.setProjectName(requestDto.getProjectName());
+            projectsService.save(projectsSaveRequestDto);
+        }
         return postsService.save(requestDto);
     }
 
