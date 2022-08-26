@@ -32,7 +32,6 @@ public class PostsResponseDto {
         this.hits = entity.getHits();
         this.projectName = entity.getProjectName();
         this.categoryName = entity.getCategoryName();
-        this.attachment_id = entity.getAttachment_id();
 
         this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
         this.updatedDate = entity.getUpdatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));

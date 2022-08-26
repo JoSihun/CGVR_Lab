@@ -20,7 +20,6 @@ public class PostsUpdateRequestDto {
                 .content(content)
                 .projectName(projectName)
                 .categoryName(categoryName)
-                .attachment_id(attachment_id)
                 .build();
     }
 }

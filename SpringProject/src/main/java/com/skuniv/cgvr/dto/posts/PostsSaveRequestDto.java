@@ -28,7 +28,6 @@ public class PostsSaveRequestDto {
                 .content(content)
                 .author(author)
                 .hits(hits)
-                .attachment_id(attachment_id)
                 .projectName(projectName)
                 .categoryName(categoryName)
                 .build();

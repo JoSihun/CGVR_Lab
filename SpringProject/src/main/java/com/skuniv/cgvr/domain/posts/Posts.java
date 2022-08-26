@@ -1,5 +1,6 @@
 package com.skuniv.cgvr.domain.posts;
 
+import com.skuniv.cgvr.domain.Attachments;
 import com.skuniv.cgvr.domain.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -30,16 +31,18 @@ public class Posts extends BaseTimeEntity {
 
     @Column
     private Long hits;
-    private Long attachment_id;
 
     @OneToMany(mappedBy = "posts", cascade = CascadeType.REMOVE)
     private List<Comments> commentsList;
 
+    @OneToMany(mappedBy = "posts", cascade = CascadeType.REMOVE)
+    private List<Attachments> attachmenstList;
+
 
     @Builder
     public Posts(String title, String content, String author,
-                 String projectName, String categoryName,
-                 Long hits, Long attachment_id, List<Comments> commentsList) {
+                 String projectName, String categoryName, Long hits,
+                 List<Comments> commentsList, List<Attachments> attachmenstList) {
         this.title = title;
         this.content = content;
         this.author = author;
@@ -47,8 +50,8 @@ public class Posts extends BaseTimeEntity {
         this.hits = 0L;
         this.projectName = projectName;
         this.categoryName = categoryName;
-        this.attachment_id = attachment_id;
         this.commentsList = commentsList;
+        this.attachmenstList = attachmenstList;
     }
 
     public void increaseHits() {
@@ -62,6 +65,5 @@ public class Posts extends BaseTimeEntity {
 
         this.projectName = projectName;
         this.categoryName = categoryName;
-        this.attachment_id = attachment_id;
     }
 }

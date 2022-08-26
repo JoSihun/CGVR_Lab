@@ -1,7 +1,9 @@
 package com.skuniv.cgvr.controller;
 
+import com.skuniv.cgvr.dto.ProjectsSaveRequestDto;
 import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
 import com.skuniv.cgvr.dto.posts.PostsUpdateRequestDto;
+import com.skuniv.cgvr.service.ProjectsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +12,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class PostsRestController {
     private final PostsService postsService;
+    private final ProjectsService projectsService;
 
     /* 게시글 작성요청 */
     @PostMapping("/posts/api")
     public Long postsSave(@RequestBody PostsSaveRequestDto requestDto) {
+        ProjectsSaveRequestDto projectsSaveRequestDto = new ProjectsSaveRequestDto();
+        projectsSaveRequestDto.setProjectName(requestDto.getProjectName());
+        projectsService.save(projectsSaveRequestDto);
         return postsService.save(requestDto);
     }
 

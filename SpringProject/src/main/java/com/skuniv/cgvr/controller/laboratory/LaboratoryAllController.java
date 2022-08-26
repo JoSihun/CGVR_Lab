@@ -1,7 +1,9 @@
 package com.skuniv.cgvr.controller.laboratory;
 
 import com.skuniv.cgvr.domain.posts.Posts;
+import com.skuniv.cgvr.dto.ProjectsListResponseDto;
 import com.skuniv.cgvr.dto.posts.*;
+import com.skuniv.cgvr.service.ProjectsService;
 import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class LaboratoryAllController {
     private final PostsService postsService;
     private final CommentsService commentsService;
+    private final ProjectsService projectsService;
 
     /* 게시판 목록보기 */
     @GetMapping("laboratory/all/board")
@@ -58,7 +61,9 @@ public class LaboratoryAllController {
 
     /* 게시글 작성폼 */
     @GetMapping("laboratory/all/posts/form")
-    public String laboratoryAllPostForm() {
+    public String laboratoryAllPostForm(Model model) {
+        List<ProjectsListResponseDto> responseDtoList = this.projectsService.findAllAsc();
+        model.addAttribute("projects", responseDtoList);
         return "laboratory_all_posts_form";
     }
 
@@ -71,7 +76,9 @@ public class LaboratoryAllController {
     @GetMapping("laboratory/all/posts/update/{id}")
     public String laboratoryAllPostUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
+        List<ProjectsListResponseDto> responseDtoList = this.projectsService.findAllAsc();
         model.addAttribute("posts", responseDto);
+        model.addAttribute("projects", responseDtoList);
         return "laboratory_all_posts_update_form";
     }
 
