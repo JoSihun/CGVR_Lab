@@ -35,6 +35,12 @@ public class User {
         this.contact = contact;
         this.role = role;
     }
+    public void update(String userId, String korName, String email, String contact) {
+        this.userId = userId;
+        this.korName = korName;
+        this.email = email;
+        this.contact = contact;
+    }
 
     public static User createUser(UserFormDto userFormDto) {
         return User.builder()
