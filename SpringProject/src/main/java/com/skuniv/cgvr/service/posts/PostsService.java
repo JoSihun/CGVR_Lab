@@ -8,6 +8,8 @@ import com.skuniv.cgvr.dto.posts.PostsUpdateRequestDto;
 import com.skuniv.cgvr.repository.posts.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.TypeCache;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,13 @@ public class PostsService {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         List<Posts> postsList = this.postsRepository.findByCategoryName(categoryName, sort);
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    /* 페이징 테스트 */
+    @Transactional
+    public Page<PostsListResponseDto> findAllByCategoryName(String categoryName, Pageable pageable) {
+        Page<Posts> postsList = this.postsRepository.findAllByCategoryName(categoryName, pageable);
+        return postsList.map(PostsListResponseDto::new);
     }
 
 

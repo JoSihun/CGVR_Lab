@@ -2,6 +2,8 @@ package com.skuniv.cgvr.repository.posts;
 
 import com.skuniv.cgvr.domain.posts.Posts;
 import net.bytebuddy.TypeCache;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +13,9 @@ import java.util.List;
 public interface PostsRepository extends JpaRepository<Posts, Long> {
     /* 카테고리별 게시판 목록보기 */
     List<Posts> findByCategoryName(String categoryName, Sort sort);
+
+    /* 페이징 테스트 */
+    Page<Posts> findAllByCategoryName(String categoryName, Pageable pageable);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

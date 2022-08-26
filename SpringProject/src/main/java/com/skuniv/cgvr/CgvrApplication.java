@@ -2,7 +2,9 @@ package com.skuniv.cgvr;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 
 @EnableJpaAuditing		// JPA Auditing 기능 사용을 위함
 @SpringBootApplication
@@ -34,5 +36,14 @@ public class CgvrApplication {
 		}
 	}
 	 */
+
+	/* 페이징 테스트 */
+	/* Pageable 객체 커스터 마이징 */
+	@Bean
+	public PageableHandlerMethodArgumentResolverCustomizer customizer() {
+		return pageableResolver -> {
+			pageableResolver.setOneIndexedParameters(true);
+		};
+	}
 
 }
