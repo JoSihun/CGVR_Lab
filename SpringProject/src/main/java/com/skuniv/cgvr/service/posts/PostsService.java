@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class PostsService {
     private final PostsRepository postsRepository;
 
-
     /* 전체 게시판 목록보기 - 작성순 */
     @Transactional
     public List<PostsListResponseDto> findAllAsc() {
@@ -61,6 +60,38 @@ public class PostsService {
         // 최종수정일자 기준으로 정렬하려면 id 대신 updatedDate 사용
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         List<Posts> postsList = this.postsRepository.findByCategoryName(categoryName, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    /* 제목으로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByTitle(String search) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findByTitleContaining(search, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    /* 내용으로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByContent(String search) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findByContentContaining(search, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    /* 작성자로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByAuthor(String search) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findByAuthorContaining(search, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    /* 제목&내용으로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByTitleOrContent(String search) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findByTitleLikeOrContentContaining(search, search, sort);
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 

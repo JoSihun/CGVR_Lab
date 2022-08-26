@@ -18,13 +18,15 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /* 제목 검색 목록보기 */
-    List<Posts> findByTitleLike(String title, Sort sort);
+    List<Posts> findByTitleContaining(String title, Sort sort);
     /* 내용 검색 목록보기 */
-    List<Posts> findByContentLike(String content, Sort sort);
+    List<Posts> findByContentContaining(String content, Sort sort);
     /* 작성자 검색 목록보기 */
-    List<Posts> findByAuthorLike(String content, Sort sort);
+    List<Posts> findByAuthorContaining(String content, Sort sort);
+    /* 제목+작성자 검색 목록보기 */
+    List<Posts> findByTitleLikeOrAuthorContaining(String title, String author, Sort sort);
     /* 제목+내용 검색 목록보기 */
-    List<Posts> findByTitleLikeOrContentLike(String title, String content, Sort sort);
+    List<Posts> findByTitleLikeOrContentContaining(String title, String content, Sort sort);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
