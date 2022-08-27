@@ -1,8 +1,13 @@
 package com.skuniv.cgvr.controller.notice;
 
+import com.skuniv.cgvr.domain.Category;
+import com.skuniv.cgvr.domain.Project;
+import com.skuniv.cgvr.dto.category.CategoryListResponseDto;
+import com.skuniv.cgvr.dto.category.CategoryResponseDto;
 import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
+import com.skuniv.cgvr.service.CategoryService;
 import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +26,7 @@ import java.util.stream.Collectors;
 public class NoticeAllController {
     private final PostsService postsService;
     private final CommentsService commentsService;
+    private final CategoryService categoryService;
 
 
     /* 게시판 목록보기 */
@@ -58,7 +64,9 @@ public class NoticeAllController {
 
     /* 게시글 작성폼 */
     @GetMapping("notice/all/posts/form")
-    public String noticeAllPostForm() {
+    public String noticeAllPostForm(Model model) {
+        List<CategoryListResponseDto> responseDtoList = this.categoryService.findAllAsc();
+        model.addAttribute("category", responseDtoList);
         return "notice_all_posts_form";
     }
 

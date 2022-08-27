@@ -25,8 +25,9 @@ public class PostsListResponseDto {
         this.hits = entity.getHits();
         this.title = entity.getTitle();
         this.author = entity.getAuthor();
-        this.projectName = entity.getProjectName();
-        this.categoryName = entity.getCategoryName();
+
+        this.projectName = entity.getProject().getProjectName();
+        this.categoryName = entity.getCategory().getCategoryName();
 
         this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
         this.updatedDate = entity.getUpdatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
@@ -43,8 +44,4 @@ public class PostsListResponseDto {
         }
     }
 
-
-    public void formatTitle(String commentsCount) {
-        this.title += String.format(" [%s]", commentsCount);
-    }
 }

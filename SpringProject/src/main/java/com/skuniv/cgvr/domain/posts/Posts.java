@@ -2,6 +2,8 @@ package com.skuniv.cgvr.domain.posts;
 
 import com.skuniv.cgvr.domain.Attachments;
 import com.skuniv.cgvr.domain.BaseTimeEntity;
+import com.skuniv.cgvr.domain.Category;
+import com.skuniv.cgvr.domain.Project;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,13 +26,14 @@ public class Posts extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
     private String author;
-
-    @Column
-    private String projectName;
-    private String categoryName;
-
-    @Column
     private Long hits;
+
+
+    @ManyToOne
+    private Project project;
+
+    @ManyToOne
+    private Category category;
 
     @OneToMany(mappedBy = "posts", cascade = CascadeType.REMOVE)
     private List<Comments> commentsList;
@@ -40,16 +43,16 @@ public class Posts extends BaseTimeEntity {
 
 
     @Builder
-    public Posts(String title, String content, String author,
-                 String projectName, String categoryName, Long hits,
-                 List<Comments> commentsList, List<Attachments> attachmenstList) {
+    public Posts(String title, String content, String author, Long hits,
+                 List<Comments> commentsList, List<Attachments> attachmenstList,
+                 Project project, Category category) {
         this.title = title;
         this.content = content;
         this.author = author;
-
         this.hits = 0L;
-        this.projectName = projectName;
-        this.categoryName = categoryName;
+
+        this.project = project;
+        this.category = category;
         this.commentsList = commentsList;
         this.attachmenstList = attachmenstList;
     }
@@ -58,12 +61,11 @@ public class Posts extends BaseTimeEntity {
         this.hits++;
     }
 
-    public void update(String title, String content, Long attachment_id,
-                       String projectName, String categoryName) {
+    public void update(String title, String content, Project project, Category category) {
         this.title = title;
         this.content = content;
 
-        this.projectName = projectName;
-        this.categoryName = categoryName;
+        this.project = project;
+        this.category = category;
     }
 }
