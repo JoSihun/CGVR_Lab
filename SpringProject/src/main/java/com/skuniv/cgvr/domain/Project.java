@@ -1,10 +1,8 @@
 package com.skuniv.cgvr.domain;
 
-import com.skuniv.cgvr.domain.posts.Posts;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -17,13 +15,9 @@ public class Project extends BaseTimeEntity {
     @Column
     private String projectName;
 
-    @OneToMany(mappedBy = "project")
-    private List<Posts> postsList;
-
 
     @Builder
-    public Project(String projectName, List<Posts> postsList) {
-        this.postsList = postsList;
+    public Project(String projectName) {
         this.projectName = projectName;
     }
 

@@ -1,6 +1,12 @@
 package com.skuniv.cgvr.controller;
 
+import com.skuniv.cgvr.domain.Project;
+import com.skuniv.cgvr.dto.category.CategoryListResponseDto;
+import com.skuniv.cgvr.dto.category.CategoryResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
+import com.skuniv.cgvr.dto.project.ProjectListResponseDto;
+import com.skuniv.cgvr.service.CategoryService;
+import com.skuniv.cgvr.service.ProjectService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +19,8 @@ import java.util.List;
 @Controller
 public class IndexController {
     private final PostsService postsService;
+    private final ProjectService projectService;
+    private final CategoryService categoryService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -42,4 +50,13 @@ public class IndexController {
         return "index";
     }
 
+
+    @GetMapping("/manage/posts/title")
+    public String managePostsTitle(Model model) {
+        List<ProjectListResponseDto> projectListResponseDtos = this.projectService.findAllAsc();
+        List<CategoryListResponseDto> categoryListResponseDtos = this.categoryService.findAllAsc();
+        model.addAttribute("project", projectListResponseDtos);
+        model.addAttribute("category", categoryListResponseDtos);
+        return "manage_posts_title";
+    }
 }

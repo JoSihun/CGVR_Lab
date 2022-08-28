@@ -13,8 +13,8 @@ public class PostsSaveRequestDto {
     private String author;
     private Long hits;
 
-    private Project project;
-    private Category category;
+    private String projectName;
+    private String categoryName;
 
 
     public Posts toEntity() {
@@ -23,8 +23,8 @@ public class PostsSaveRequestDto {
                 .content(content)
                 .author(author)
                 .hits(hits)
-                .project(project)
-                .category(category)
+                .projectName(projectName)
+                .categoryName(categoryName)
                 .build();
     }
 }

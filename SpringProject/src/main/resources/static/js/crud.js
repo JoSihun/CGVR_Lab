@@ -63,16 +63,6 @@ var main = {
             }
         });
 
-
-        $('#btn-projectName-delete').on('click', function () {
-            var result = confirm("삭제하시겠습니까?");
-            if (result) {
-                _this.projectNameDelete();
-            }
-            else{
-                alert("삭제가 취소되었습니다.");
-            }
-        });
     },
     postsSave : function () {
         var data = {
@@ -198,24 +188,6 @@ var main = {
             contentType:'application/json; charset=utf-8',
         }).done(function() {
             alert('댓글이 삭제되었습니다.');
-            window.location.reload(true);
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    },
-
-
-    projectNameDelete : function () {
-        var projectName = $("#projectName").val();
-        console.log(id);
-
-        $.ajax({
-            type: 'DELETE',
-            url: '/projects/api/'+projectName,
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-        }).done(function() {
-            alert('프로젝트명이 삭제되었습니다.');
             window.location.reload(true);
         }).fail(function (error) {
             alert(JSON.stringify(error));

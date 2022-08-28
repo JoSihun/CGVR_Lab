@@ -28,8 +28,8 @@ public class PostsResponseDto {
         this.content = entity.getContent();
         this.author = entity.getAuthor();
 
-        this.projectName = entity.getProject().getProjectName();
-        this.categoryName = entity.getCategory().getCategoryName();
+        this.projectName = entity.getProjectName();
+        this.categoryName = entity.getCategoryName();
 
         this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
         this.updatedDate = entity.getUpdatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));

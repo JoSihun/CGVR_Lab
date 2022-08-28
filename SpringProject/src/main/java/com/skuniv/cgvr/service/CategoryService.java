@@ -41,7 +41,7 @@ public class CategoryService {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /** 카테고리명 단일보기 - ID 접근 */
+    /** 카테고리명 단일조회 - PK ID로 검색 */
     @Transactional
     public CategoryResponseDto findById(final Long id) {
         Category entity = this.categoryRepository.findById(id).orElseThrow(
@@ -50,10 +50,11 @@ public class CategoryService {
     }
 
 
-    /** 카테고리명 단일보기 - 카테고리명 접근 */
+    /** 카테고리명 단일조회 - 카테고리명으로 검색 */
     @Transactional
-    public CategoryResponseDto findByCategoryName(final String categoryName) {
+    public CategoryResponseDto findByCategoryName(String categoryName) {
         Category entity = this.categoryRepository.findByCategoryName(categoryName);
+        if (entity == null) return null;
         return new CategoryResponseDto(entity);
     }
 

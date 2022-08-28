@@ -10,15 +10,15 @@ import lombok.Data;
 public class PostsUpdateRequestDto {
     private String title;
     private String content;
-    private Project project;
-    private Category category;
+    private String projectName;
+    private String categoryName;
 
     public Posts toEntity() {
         return Posts.builder()
                 .title(title)
                 .content(content)
-                .project(project)
-                .category(category)
+                .projectName(projectName)
+                .categoryName(categoryName)
                 .build();
     }
 }

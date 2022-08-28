@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface PostsRepository extends JpaRepository<Posts, Long> {
     /* 카테고리별 게시판 목록보기 */
-//    List<Posts> findByCategoryName(String categoryName, Sort sort);
+    List<Posts> findAllByCategoryName(String categoryName, Sort sort);
+
+    /* 프로젝트별 게시판 목록보기 */
+    List<Posts> findAllByProjectName(String projectName, Sort sort);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

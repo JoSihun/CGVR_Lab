@@ -29,11 +29,8 @@ public class Posts extends BaseTimeEntity {
     private Long hits;
 
 
-    @ManyToOne
-    private Project project;
-
-    @ManyToOne
-    private Category category;
+    private String projectName;
+    private String categoryName;
 
     @OneToMany(mappedBy = "posts", cascade = CascadeType.REMOVE)
     private List<Comments> commentsList;
@@ -44,15 +41,15 @@ public class Posts extends BaseTimeEntity {
 
     @Builder
     public Posts(String title, String content, String author, Long hits,
-                 List<Comments> commentsList, List<Attachments> attachmenstList,
-                 Project project, Category category) {
+                 String projectName, String categoryName,
+                 List<Comments> commentsList, List<Attachments> attachmenstList) {
         this.title = title;
         this.content = content;
         this.author = author;
         this.hits = 0L;
 
-        this.project = project;
-        this.category = category;
+        this.projectName = projectName;
+        this.categoryName = categoryName;
         this.commentsList = commentsList;
         this.attachmenstList = attachmenstList;
     }
@@ -61,11 +58,11 @@ public class Posts extends BaseTimeEntity {
         this.hits++;
     }
 
-    public void update(String title, String content, Project project, Category category) {
+    public void update(String title, String content, String projectName, String categoryName) {
         this.title = title;
         this.content = content;
 
-        this.project = project;
-        this.category = category;
+        this.projectName = projectName;
+        this.categoryName = categoryName;
     }
 }

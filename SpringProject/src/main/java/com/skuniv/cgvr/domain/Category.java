@@ -1,13 +1,11 @@
 package com.skuniv.cgvr.domain;
 
-import com.skuniv.cgvr.domain.posts.Posts;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -20,13 +18,9 @@ public class Category extends BaseTimeEntity {
     @Column
     private String categoryName;
 
-    @OneToMany(mappedBy = "category")
-    private List<Posts> postsList;
-
 
     @Builder
-    public Category(String categoryName, List<Posts> postsList) {
-        this.postsList = postsList;
+    public Category(String categoryName) {
         this.categoryName = categoryName;
     }
 

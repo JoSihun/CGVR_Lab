@@ -2,6 +2,7 @@ package com.skuniv.cgvr.service;
 
 import com.skuniv.cgvr.domain.Project;
 import com.skuniv.cgvr.dto.project.ProjectListResponseDto;
+import com.skuniv.cgvr.dto.project.ProjectResponseDto;
 import com.skuniv.cgvr.dto.project.ProjectSaveRequestDto;
 import com.skuniv.cgvr.dto.project.ProjectUpdateRequestDto;
 import com.skuniv.cgvr.repository.ProjectRepository;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 public class ProjectService {
     private final ProjectRepository projectsRepository;
 
-    /** 프로젝트명 목록보기 */
+    /** 전체 프로젝트명 목록보기 - 작성순 */
     @Transactional
     public List<ProjectListResponseDto> findAllAsc() {
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
@@ -27,9 +28,36 @@ public class ProjectService {
     }
 
 
+    /** 전체 프로젝트명 목록보기 - 최신순 */
+    @Transactional
+    public List<ProjectListResponseDto> findAllDesc() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Project> projectList = this.projectsRepository.findAll(sort);
+        return projectList.stream().map(ProjectListResponseDto::new).collect(Collectors.toList());
+    }
+
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /** 프로젝트명 단일조회 - PK ID로 검색*/
+    @Transactional
+    public ProjectResponseDto findById(final Long id) {
+        Project entity = this.projectsRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("해당 프로젝트가 존재하지 않습니다. id=" + id));
+        return new ProjectResponseDto(entity);
+    }
+
+
+    /** 프로젝트명 단일조회 - 프로젝트명으로 검색 */
+    @Transactional
+    public ProjectResponseDto findByProjectName(final String projectName) {
+        Project entity = this.projectsRepository.findByProjectName(projectName);
+        if (entity == null) return null;
+        return new ProjectResponseDto(entity);
+    }
+
 
     /** 프로젝트명 저장하기 */
     @Transactional
