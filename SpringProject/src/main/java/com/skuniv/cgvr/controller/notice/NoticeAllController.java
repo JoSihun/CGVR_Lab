@@ -1,5 +1,6 @@
 package com.skuniv.cgvr.controller.notice;
 
+import com.skuniv.cgvr.domain.posts.Comments;
 import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
@@ -28,35 +29,63 @@ public class NoticeAllController {
     @GetMapping("notice/all/board")
     public String noticeAllBoard(Model model, @RequestParam(name="searchFilter", required=false) String searchFilter,
                                  @RequestParam(name="searchValue", required=false) String searchValue) {
-//        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllByCategoryNameDesc("일반");
-//        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllByCategoryNameDesc("수업");
-//        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllByCategoryNameDesc("연구");
-//        List<PostsListResponseDto> responseDtoList = new ArrayList<PostsListResponseDto>();
-//        responseDtoList.addAll(responseDtoList1);
-//        responseDtoList.addAll(responseDtoList2);
-//        responseDtoList.addAll(responseDtoList3);
-//        responseDtoList = responseDtoList.stream().sorted(
-//                Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
+
         List<PostsListResponseDto> responseDtoList;
+        List<PostsListResponseDto> responseDtoList1;
+        List<PostsListResponseDto> responseDtoList2;
+        List<PostsListResponseDto> responseDtoList3;
         if(searchValue != null) {
             switch (searchFilter) {
                 case "title":
-                    responseDtoList = this.postsService.findAllByTitle(searchValue);
+                    responseDtoList1 = this.postsService.findAllByTitle("일반", searchValue);
+                    responseDtoList2 = this.postsService.findAllByTitle("수업", searchValue);
+                    responseDtoList3 = this.postsService.findAllByTitle("연구", searchValue);
+                    responseDtoList = new ArrayList<PostsListResponseDto>();
+                    responseDtoList.addAll(responseDtoList1);
+                    responseDtoList.addAll(responseDtoList2);
+                    responseDtoList.addAll(responseDtoList3);
+                    responseDtoList = responseDtoList.stream().sorted(
+                            Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
                     break;
                 case "content":
-                    responseDtoList = this.postsService.findAllByContent(searchValue);
+                    responseDtoList1 = this.postsService.findAllByContent("일반", searchValue);
+                    responseDtoList2 = this.postsService.findAllByContent("수업", searchValue);
+                    responseDtoList3 = this.postsService.findAllByContent("연구", searchValue);
+                    responseDtoList = new ArrayList<PostsListResponseDto>();
+                    responseDtoList.addAll(responseDtoList1);
+                    responseDtoList.addAll(responseDtoList2);
+                    responseDtoList.addAll(responseDtoList3);
+                    responseDtoList = responseDtoList.stream().sorted(
+                            Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
                     break;
                 case "author":
-                    responseDtoList = this.postsService.findAllByAuthor(searchValue);
+                    responseDtoList1 = this.postsService.findAllByAuthor("일반", searchValue);
+                    responseDtoList2 = this.postsService.findAllByAuthor("수업", searchValue);
+                    responseDtoList3 = this.postsService.findAllByAuthor("연구", searchValue);
+                    responseDtoList = new ArrayList<PostsListResponseDto>();
+                    responseDtoList.addAll(responseDtoList1);
+                    responseDtoList.addAll(responseDtoList2);
+                    responseDtoList.addAll(responseDtoList3);
+                    responseDtoList = responseDtoList.stream().sorted(
+                            Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
                     break;
                 default:
-                    responseDtoList = this.postsService.findAllByTitleOrContent(searchValue);
+                    responseDtoList1 = this.postsService.findAllByTitleOrContent("일반", searchValue);
+                    responseDtoList2 = this.postsService.findAllByTitleOrContent("수업", searchValue);
+                    responseDtoList3 = this.postsService.findAllByTitleOrContent("연구", searchValue);
+                    responseDtoList = new ArrayList<PostsListResponseDto>();
+                    responseDtoList.addAll(responseDtoList1);
+                    responseDtoList.addAll(responseDtoList2);
+                    responseDtoList.addAll(responseDtoList3);
+                    responseDtoList = responseDtoList.stream().sorted(
+                            Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
                     break;
             }
         }
         else {
             responseDtoList = this.postsService.findAllDesc();
         }
+
         model.addAttribute("posts", responseDtoList);
         return "notice_all_board";
     }

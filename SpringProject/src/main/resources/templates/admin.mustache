@@ -8,6 +8,9 @@
 {{#admin}}
     <div class="container-fluid mt-4">
         <div class="row mx-4 my-4">
+            <div class="col-xl-1">
+
+            </div>
             <div class="col-xl-2">
                 <div class="card border border-dark mb-4 text-dark bg-light">
                     <!-- Card Header -->
@@ -16,8 +19,9 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <div><a class="card-text text-dark">{{sessionUserId}} {{sessionKorName}}</a></div>
-                        <div><a class="card-text text-dark">재학정보 : {{sessionGrade}}학년</a></div>
+                        <div><p class="card-text"><strong>이름</strong> : {{sessionKorName}}</p></div>
+                        <div><p class="card-text"><strong>학번</strong> : {{sessionUserId}}</p></div>
+                        <div><p class="card-text"><strong>재학정보</strong> : {{sessionGrade}}학년</p></div>
                     </div>
                 </div>
             </div>
@@ -31,6 +35,14 @@
                     <!-- Card Body -->
                     <div class="card-body">
                         <ul class="list-group bg-light">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="text-center; col-xl-2"><strong>학번</strong></div>
+                                    <div class="text-center; col-xl-2"><strong>이름</strong></div>
+                                    <div class="text-center; col-xl-2"><strong>연락처</strong></div>
+                                    <div class="text-center; col-xl-4"><strong>이메일</strong></div>
+                                </div>
+                            </li>
                             {{#users}}
                                 <li class="list-group-item">
                                     <!-- Collapse Show Content -->

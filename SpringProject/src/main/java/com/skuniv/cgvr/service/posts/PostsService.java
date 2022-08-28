@@ -11,6 +11,7 @@ import net.bytebuddy.TypeCache;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,33 +66,36 @@ public class PostsService {
 
     /* 제목으로 검색 게시판 목록보기 - 최신순 */
     @Transactional
-    public List<PostsListResponseDto> findAllByTitle(String search) {
+    public List<PostsListResponseDto> findAllByTitle(String categoryName, String title) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Posts> postsList = this.postsRepository.findByTitleContaining(search, sort);
+        List<Posts> postsList = this.postsRepository.findByCategoryNameAndTitleContaining(categoryName, title, sort);
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
     /* 내용으로 검색 게시판 목록보기 - 최신순 */
     @Transactional
-    public List<PostsListResponseDto> findAllByContent(String search) {
+    public List<PostsListResponseDto> findAllByContent(String categoryName, String content) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Posts> postsList = this.postsRepository.findByContentContaining(search, sort);
+        List<Posts> postsList = this.postsRepository.findByCategoryNameAndContentContaining(categoryName, content, sort);
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
     /* 작성자로 검색 게시판 목록보기 - 최신순 */
     @Transactional
-    public List<PostsListResponseDto> findAllByAuthor(String search) {
+    public List<PostsListResponseDto> findAllByAuthor(String categoryName, String author) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Posts> postsList = this.postsRepository.findByAuthorContaining(search, sort);
+        List<Posts> postsList = this.postsRepository.findByCategoryNameAndAuthorContaining(categoryName, author, sort);
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
     /* 제목&내용으로 검색 게시판 목록보기 - 최신순 */
     @Transactional
-    public List<PostsListResponseDto> findAllByTitleOrContent(String search) {
+    public List<PostsListResponseDto> findAllByTitleOrContent(String categoryName, String search) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Posts> postsList = this.postsRepository.findByTitleLikeOrContentContaining(search, search, sort);
+        List<Posts> postsList = this.postsRepository.findByCategoryNameAndTitleContainingOrContentContaining(categoryName, search, search, sort);
+        for(Posts post : postsList) {
+            System.out.println(post.getCategoryName() + post.getTitle());
+        }
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 

@@ -19,6 +19,8 @@ public class PostsListResponseDto {
     private String createdDate;
     private String updatedDate;
 
+    private Long commentsSize;
+
 
     public PostsListResponseDto(Posts entity) {
         this.id = entity.getId();
@@ -28,8 +30,9 @@ public class PostsListResponseDto {
         this.projectName = entity.getProjectName();
         this.categoryName = entity.getCategoryName();
 
-        this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
-        this.updatedDate = entity.getUpdatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+        this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
+        this.updatedDate = entity.getUpdatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
+        this.commentsSize = (long) entity.getCommentsList().size();
     }
 
 

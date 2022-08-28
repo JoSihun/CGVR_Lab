@@ -25,13 +25,13 @@
             </div>
 
             <!-- 게시글 검색 빠른메뉴 -->
-            <form method="get">
+            <form method="GET">
                 <div class="row">
                     <div class="col-sm-8 mb-3">
                         <input type="text" class="form-control border-dark" name="searchValue" placeholder="게시글 제목입력">
                     </div>
                     <div class="col-sm-4 mb-3">
-                        <input class="btn btn-dark me-4" type="submit" value="검색"/>
+                        <button type="submit" class="btn btn-dark btn-block me-4">검색</button>
                     </div>
                     <input type="hidden" class="form-control" name="searchFilter" value="title"/>
                 </div>
@@ -94,6 +94,7 @@
                                 <a class="text-dark" href="/notice/all/posts/{{id}}">
                                     <span style="color: gray">[{{categoryName}}]</span>
                                     {{title}}
+                                    <span style="color: darkorange">[{{commentsSize}}]</span>
                                 </a>
                             </td>
                             <td class="text-center">{{author}}</td>
@@ -116,7 +117,7 @@
                         <!-- Column 2: Search Form -->
                         <div class="col-sm-8 text-center">
 
-                            <form method="get">
+                            <form method="GET">
                                 <div class="row align-items-center">
                                     <!-- Sub Column 1: Search Category -->
                                     <div class="col-sm-2 text-end">
@@ -133,7 +134,7 @@
                                     </div>
                                     <!-- Sub Column 3: Search Button -->
                                     <div class="col-sm-2 text-start">
-                                        <input class="btn btn-dark me-4" type="submit" value="검색"/>
+                                        <button type="submit" class="btn btn-dark me-4">검색</button>
                                     </div>
                                 </div>
                             </form>
