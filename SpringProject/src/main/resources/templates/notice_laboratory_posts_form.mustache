@@ -77,14 +77,16 @@
                     <!-- Category -->
                     <div class="mx-2 mb-2 d-flex">
                         <!-- CategoryName -->
-                        <div class="d-inline-block w-50">
-                            <select class="form-control" id="categoryName">
+                        <div class="d-inline-block w-25">
+                            <select class="form-control" id="selectCategoryName">
                                 <option value="">공지사항을 선택하세요</option>
-                                <option value="일반">일반 공지사항</option>
-                                <option value="수업">수업 공지사항</option>
-                                <option value="연구" selected>연구 공지사항</option>
+                                <option value="일반 공지사항">일반 공지사항</option>
+                                <option value="수업 공지사항">수업 공지사항</option>
+                                <option value="연구 공지사항" selected>연구 공지사항</option>
                             </select>
                         </div>
+                        <!-- CategoryName Collapse Hidden -->
+                        <input type="text" class="w-25 form-control" id="categoryName" placeholder="카테고리명을 입력하세요">
                     </div>
 
                     <!-- Title -->
@@ -121,6 +123,15 @@
 
 
 <script>
+    $(document).ready(function () {
+        $("#categoryName").hide();
+        $("#categoryName").attr("disabled", true);
+        $("#categoryName").val($("#selectCategoryName").val());
+        $("#selectCategoryName").change(function () {
+            $("#categoryName").val($("#selectCategoryName").val());
+        });
+    });
+
     $(document).ready(function() {
         $('#content').summernote({
             height: 500,

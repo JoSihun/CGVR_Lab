@@ -33,11 +33,13 @@ public class PostsRestController {
             this.categoryService.save(categorySaveRequestDto);
         }
 
-        ProjectResponseDto projectResponseDto = this.projectService.findByProjectName(requestDto.getProjectName());
-        if (projectResponseDto == null) {
-            ProjectSaveRequestDto projectSaveRequestDto = new ProjectSaveRequestDto();
-            projectSaveRequestDto.setProjectName(requestDto.getProjectName());
-            this.projectService.save(projectSaveRequestDto);
+        if (requestDto.getProjectName() != null){
+            ProjectResponseDto projectResponseDto = this.projectService.findByProjectName(requestDto.getProjectName());
+            if (projectResponseDto == null) {
+                ProjectSaveRequestDto projectSaveRequestDto = new ProjectSaveRequestDto();
+                projectSaveRequestDto.setProjectName(requestDto.getProjectName());
+                this.projectService.save(projectSaveRequestDto);
+            }
         }
 
         return this.postsService.save(requestDto);

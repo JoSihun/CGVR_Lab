@@ -32,9 +32,9 @@ public class NoticeAllController {
     /* 게시판 목록보기 */
     @GetMapping("notice/all/board")
     public String noticeAllBoard(Model model) {
-        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllByCategoryNameDesc("일반");
-        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllByCategoryNameDesc("수업");
-        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllByCategoryNameDesc("연구");
+        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllByCategoryNameDesc("일반 공지사항");
+        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllByCategoryNameDesc("수업 공지사항");
+        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllByCategoryNameDesc("연구 공지사항");
         List<PostsListResponseDto> responseDtoList = new ArrayList<PostsListResponseDto>();
         responseDtoList.addAll(responseDtoList1);
         responseDtoList.addAll(responseDtoList2);
@@ -79,7 +79,9 @@ public class NoticeAllController {
     @GetMapping("notice/all/posts/update/{id}")
     public String noticeAllPostUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
+        List<CategoryListResponseDto> responseDtoList = this.categoryService.findAllAsc();
         model.addAttribute("posts", responseDto);
+        model.addAttribute("category", responseDtoList);
         return "notice_all_posts_update_form";
     }
 

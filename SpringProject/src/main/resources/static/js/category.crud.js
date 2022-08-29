@@ -14,7 +14,7 @@ var main = {
         $('[id="btn-category-update"]').on('click', function () {
             var result = confirm("카테고리를 수정하시겠습니까?");
             if (result) {
-                var categoryInfo = this.closest('tr');
+                var categoryInfo = this.closest('li');
                 _this.categoryUpdate(categoryInfo);
             } else {
                 alert("카테고리 수정이 취소되었습니다.");
@@ -24,7 +24,7 @@ var main = {
         $('[id="btn-category-delete"]').on('click', function () {
             var result = confirm("카테고리를 삭제하시겠습니까?");
             if (result) {
-                var categoryInfo = this.closest('tr');
+                var categoryInfo = this.closest('li');
                 _this.categoryDelete(categoryInfo);
             } else {
                 alert("카테고리 삭제가 취소되었습니다.");
@@ -44,7 +44,7 @@ var main = {
         $('[id="btn-project-update"]').on('click', function () {
             var result = confirm("프로젝트명을 수정하시겠습니까?");
             if (result) {
-                var projectInfo = this.closest('tr');
+                var projectInfo = this.closest('li');
                 _this.projectUpdate(projectInfo);
             } else {
                 alert("프로젝트명 수정이 취소되었습니다.");
@@ -54,7 +54,7 @@ var main = {
         $('[id="btn-project-delete"]').on('click', function () {
             var result = confirm("프로젝트명을 삭제하시겠습니까?");
             if (result) {
-                var projectInfo = this.closest('tr');
+                var projectInfo = this.closest('li');
                 _this.projectDelete(projectInfo);
             } else {
                 alert("프로젝트명 삭제가 취소되었습니다.");

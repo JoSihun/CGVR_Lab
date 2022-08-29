@@ -104,47 +104,45 @@
 
                         <!-- Card Body -->
                         <div class="card-body text-dark">
-                            <ul class="list-group bg-light">
-                                <li class="list-group-item bg-dark text-white">
-                                    <div class="row">
-                                        <div class="col-xl-2 text-center">번호</div>
-                                        <div class="col-xl-4 text-start">카테고리명</div>
-                                        <div class="col-xl-2 text-center">작성일</div>
-                                        <div class="col-xl-2 text-center">수정일</div>
-                                        <div class="col-xl-2 text-center">수정/삭제</div>
-                                    </div>
-                                </li>
+                            <table class="table table-striped table-sm">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 10%" class="text-center" >번호</th>
+                                    <th style="width: 45%" class="text-start" >카테고리명</th>
+                                    <th style="width: 15%" class="text-center" >작성일</th>
+                                    <th style="width: 15%" class="text-center" >수정일</th>
+                                    <th style="width: 15%" class="text-center" >수정/삭제</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody">
                                 {{#category}}
-                                <li class="list-group-item">
-                                    <!-- Category Collapse Show -->
-                                    <div class="row collapse show" id="category-update-form-{{id}}">
-                                        <div class="col-xl-2 text-center">{{id}}</div>
-                                        <div class="col-xl-4 text-start">{{categoryName}}</div>
-                                        <div class="col-xl-2 text-center">{{createdDate}}</div>
-                                        <div class="col-xl-2 text-center">{{updatedDate}}</div>
-                                        <div class="col-xl-2 text-center">
+                                    <tr class="collapse show" id="category-update-form-{{id}}">
+                                        <td class="text-center">{{id}}</td>
+                                        <td class="text-start">[{{categoryName}}]</td>
+                                        <td class="text-center">{{createdDate}}</td>
+                                        <td class="text-center">{{updatedDate}}</td>
+                                        <td class="text-center">
                                             <input type="hidden" class="form-control" id="deleteCategoryId" value="{{id}}">
                                             <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#category-update-form-{{id}}">수정</button>
                                             <button class="btn btn-danger" id="btn-category-delete">삭제</button>
-                                        </div>
-                                    </div>
-                                    <!-- Category Collapse Hidden -->
-                                    <div class="row collapse text-danger" id="category-update-form-{{id}}" style="font-weight: bold">
-                                        <div class="col-xl-2 text-center">{{id}}</div>
-                                        <div class="col-xl-4 text-start">
+                                        </td>
+                                    </tr>
+                                    <tr class="collapse" id="category-update-form-{{id}}">
+                                        <td class="text-center">{{id}}</td>
+                                        <td class="text-start">
                                             <input type="text" class="form-control border-dark" id="updateCategoryName" value="{{categoryName}}">
-                                        </div>
-                                        <div class="col-xl-2 text-center">{{createdDate}}</div>
-                                        <div class="col-xl-2 text-center">{{updatedDate}}</div>
-                                        <div class="col-xl-2 text-center">
+                                        </td>
+                                        <td class="text-center">{{createdDate}}</td>
+                                        <td class="text-center">{{updatedDate}}</td>
+                                        <td class="text-center">
                                             <input type="hidden" class="form-control" id="updateCategoryId" value="{{id}}">
                                             <button class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#category-update-form-{{id}}">취소</button>
                                             <button class="btn btn-primary" id="btn-category-update">수정</button>
-                                        </div>
-                                    </div>
-                                </li>
+                                        </td>
+                                    </tr>
                                 {{/category}}
-                            </ul>
+                                </tbody>
+                            </table>
                         </div>
 
                         <!-- 카테고리 추가 -->
@@ -193,47 +191,45 @@
 
                         <!-- Card Body -->
                         <div class="card-body text-dark">
-                            <ul class="list-group bg-light">
-                                <li class="list-group-item bg-dark text-white">
-                                    <div class="row">
-                                        <div class="col-xl-2 text-center">번호</div>
-                                        <div class="col-xl-4 text-start">프로젝트명</div>
-                                        <div class="col-xl-2 text-center">작성일</div>
-                                        <div class="col-xl-2 text-center">수정일</div>
-                                        <div class="col-xl-2 text-center">수정/삭제</div>
-                                    </div>
-                                </li>
+                            <table class="table table-striped table-sm">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 10%" class="text-center" >번호</th>
+                                    <th style="width: 45%" class="text-start" >프로젝트명</th>
+                                    <th style="width: 15%" class="text-center" >작성일</th>
+                                    <th style="width: 15%" class="text-center" >수정일</th>
+                                    <th style="width: 15%" class="text-center" >수정/삭제</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody">
                                 {{#project}}
-                                    <li class="list-group-item">
-                                        <!-- Category Collapse Show -->
-                                        <div class="row collapse show" id="project-update-form-{{id}}">
-                                            <div class="col-xl-2 text-center">{{id}}</div>
-                                            <div class="col-xl-4 text-start">{{projectName}}</div>
-                                            <div class="col-xl-2 text-center">{{createdDate}}</div>
-                                            <div class="col-xl-2 text-center">{{updatedDate}}</div>
-                                            <div class="col-xl-2 text-center">
-                                                <input type="hidden" class="form-control" id="deleteProjectId" value="{{id}}">
-                                                <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#project-update-form-{{id}}">수정</button>
-                                                <button class="btn btn-danger" id="btn-project-delete">삭제</button>
-                                            </div>
-                                        </div>
-                                        <!-- Category Collapse Hidden -->
-                                        <div class="row collapse text-danger" id="project-update-form-{{id}}" style="font-weight: bold">
-                                            <div class="col-xl-2 text-center">{{id}}</div>
-                                            <div class="col-xl-4 text-start">
-                                                <input type="text" class="form-control border-dark" id="updateProjectName" value="{{projectName}}">
-                                            </div>
-                                            <div class="col-xl-2 text-center">{{createdDate}}</div>
-                                            <div class="col-xl-2 text-center">{{updatedDate}}</div>
-                                            <div class="col-xl-2 text-center">
-                                                <input type="hidden" class="form-control" id="updateProjectId" value="{{id}}">
-                                                <button class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#project-update-form-{{id}}">취소</button>
-                                                <button class="btn btn-primary" id="btn-project-update">수정</button>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    <tr class="collapse show" id="project-update-form-{{id}}">
+                                        <td class="text-center">{{id}}</td>
+                                        <td class="text-start">[{{projectName}}]</td>
+                                        <td class="text-center">{{createdDate}}</td>
+                                        <td class="text-center">{{updatedDate}}</td>
+                                        <td class="text-center">
+                                            <input type="hidden" class="form-control" id="deleteProjectId" value="{{id}}">
+                                            <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#project-update-form-{{id}}">수정</button>
+                                            <button class="btn btn-danger" id="btn-project-delete">삭제</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="collapse" id="project-update-form-{{id}}">
+                                        <td class="text-center">{{id}}</td>
+                                        <td class="text-start">
+                                            <input type="text" class="form-control border-dark" id="updateProjectName" value="{{projectName}}">
+                                        </td>
+                                        <td class="text-center">{{createdDate}}</td>
+                                        <td class="text-center">{{updatedDate}}</td>
+                                        <td class="text-center">
+                                            <input type="hidden" class="form-control" id="updateProjectId" value="{{id}}">
+                                            <button class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#project-update-form-{{id}}">취소</button>
+                                            <button class="btn btn-primary" id="btn-project-update">수정</button>
+                                        </td>
+                                    </tr>
                                 {{/project}}
-                            </ul>
+                                </tbody>
+                            </table>
                         </div>
 
                         <!-- 프로젝트 추가 -->
