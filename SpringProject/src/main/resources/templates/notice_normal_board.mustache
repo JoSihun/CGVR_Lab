@@ -148,10 +148,10 @@
                                 <li class="page-item"><a class="page-link" href="?page={{prev}}">&laquo;</a></li>
                             {{/hasPrev}}
                             {{^hasPrev}}
-                                <li class="page-item disabled"><a class="page-link" href="?page={{prev}}">&laquo;</a></li>
+                                <li class="page-item disabled"><a class="page-link">&laquo;</a></li>
                             {{/hasPrev}}
                             {{#pageIndex}}
-                                <li class="page-item"><a class="page-link" href="?page={{.}}">{{.}}</a></li>
+                                <li class="page-item" id="{{.}}" name="page-index"><a class="page-link" href="?page={{.}}">{{.}}</a></li>
                             {{/pageIndex}}
                             <!--
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -164,7 +164,7 @@
                                 <li class="page-item"><a class="page-link" href="?page={{next}}">&raquo;</a></li>
                             {{/hasNext}}
                             {{^hasNext}}
-                                <li class="page-item disabled"><a class="page-link" href="?page={{next}}">&raquo;</a></li>
+                                <li class="page-item disabled"><a class="page-link">&raquo;</a></li>
                             {{/hasNext}}
                             <li class="page-item"><a class="page-link" href="?page={{endPage}}">끝 페이지</a></li>
                         </ul>
@@ -176,6 +176,28 @@
 
     </div>
 </div>
+
+<script>
+    /* 현재 페이지 표시 스크립트 */
+    $(function() {
+        console.log("현재페이지 번호: " + {{currentPage}});
+        console.log("시작페이지 번호: " + {{startPage}});
+        console.log("마지막페이지 번호: " + {{endPage}});
+
+        var pageIndex = $("li[name=page-index]");
+        console.log(pageIndex.length);
+        pageIndex.each(function() {
+            console.log(this.id);
+            console.log("현재페이지번호: " + {{currentPage}});
+            if ((this.id-1) == {{currentPage}}) {
+                $(this).addClass('active');
+            }
+            else {
+                $(this).removeClass('active');
+            }
+        });
+    });
+</script>
 
 <style>
     .page-item.active .page-link {

@@ -34,19 +34,20 @@ public class NoticeNormalController {
 
     /* 페이징 테스트 */
     @GetMapping("notice/normal/board")
-    public String noticeNormalBoard(Model model, @PageableDefault(sort = "id", size=20, direction = Sort.Direction.DESC) Pageable pageable) {
+    public String noticeNormalBoard(Model model, @PageableDefault(sort = "id", size=5, direction = Sort.Direction.DESC) Pageable pageable) {
         Page<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryName("일반", pageable);
         ArrayList pageIndex = new ArrayList();
         for (int i = 1; i <= responseDtoList.getTotalPages(); i++) pageIndex.add(i);
 
         model.addAttribute("posts", responseDtoList);
-        model.addAttribute("prev", pageable.previousOrFirst().getPageNumber());         // 이전 페이지 이동
-        model.addAttribute("next", pageable.next().getPageNumber());                    // 다음 페이지 이동
-        model.addAttribute("hasPrev", responseDtoList.hasPrevious());                   // 이전 페이지 존재 여부
-        model.addAttribute("hasNext", responseDtoList.hasNext());                       // 다음 페이지 존재 여부
-        model.addAttribute("pageIndex", pageIndex);                                     // 페이지 인덱스
-        model.addAttribute("startPage", pageable.first().getPageNumber());              // 시작 페이지 번호
-        model.addAttribute("endPage", responseDtoList.getTotalPages()-1);   // 마지막 페이지 번호
+        model.addAttribute("hasPrev", responseDtoList.hasPrevious());                       // 이전 페이지 존재 여부
+        if (responseDtoList.hasPrevious()) model.addAttribute("prev", pageable.previousOrFirst().getPageNumber()+1);  // 이전 페이지 번호
+        model.addAttribute("hasNext", responseDtoList.hasNext());                           // 다음 페이지 존재 여부
+        if (responseDtoList.hasNext()) model.addAttribute("next", pageable.next().getPageNumber()+1);  // 다음 페이지 번호
+        model.addAttribute("pageIndex", pageIndex);                                         // 페이지 인덱스
+        model.addAttribute("startPage", pageable.first().getPageNumber()+1);    // 시작 페이지 번호
+        model.addAttribute("endPage", responseDtoList.getTotalPages());       // 마지막 페이지 번호
+        model.addAttribute("currentPage", responseDtoList.getNumber());       // 현재 페이지 번호
         return "notice_normal_board";
     }
 
