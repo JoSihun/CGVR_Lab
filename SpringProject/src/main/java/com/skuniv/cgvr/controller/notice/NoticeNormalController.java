@@ -36,11 +36,20 @@ public class NoticeNormalController {
 
     /* 페이징 테스트 */
     @GetMapping("notice/normal/board")
-    public String noticeNormalBoard(Model model, @PageableDefault(sort = "id", size=10, direction = Sort.Direction.DESC) Pageable pageable) {
+    public String noticeNormalBoard(Model model, @PageableDefault(sort = "id", size=1, direction = Sort.Direction.DESC) Pageable pageable) {
         Page<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryName("일반 공지사항", pageable);
+
+        int currentPage = responseDtoList.getNumber();
+        int startPage = Math.max(currentPage / 5 * 5 + 1, 1);
+        if ((currentPage % 5)+1 == 0) startPage -= 5;
+        int endPage = Math.min(currentPage+5, responseDtoList.getTotalPages());
+
         // 프론트에서 처리할 페이지 인덱스 생성
         ArrayList pageIndex = new ArrayList();
-        for (int i = 1; i <= responseDtoList.getTotalPages(); i++) pageIndex.add(i);
+        for (int i = startPage; i <= startPage + 4; i++) {
+            pageIndex.add(i);
+            if (i >= endPage) break;
+        }
 
         model.addAttribute("posts", responseDtoList);
         model.addAttribute("hasPrev", responseDtoList.hasPrevious());                       // 이전 페이지 존재 여부
@@ -50,17 +59,20 @@ public class NoticeNormalController {
             model.addAttribute("prev", responseDtoList.previousOrFirstPageable().getPageNumber()+1);
         if (responseDtoList.hasNext())
             model.addAttribute("next", responseDtoList.nextOrLastPageable().getPageNumber()+1);
-        model.addAttribute("pageIndex", pageIndex);                                         // 프론트에서 처리할 페이지 인덱스
-        model.addAttribute("startPage", 1);    // 시작 페이지 번호(객체에 따로 메소드가 없어서 1로 때림)
-        model.addAttribute("endPage", responseDtoList.getTotalPages());       // 마지막 페이지 번호
-        model.addAttribute("currentPage", responseDtoList.getNumber());       // 현재 페이지 번호
+        model.addAttribute("pageIndex", pageIndex);     // 프론트에서 처리할 페이지 인덱스
+        model.addAttribute("startPage", startPage);     // 페이지 인덱스 시작 번호
+        model.addAttribute("endPage", endPage);         // 페이지 인덱스 마지막 번호
+        model.addAttribute("lastPage", responseDtoList.getTotalPages());  // 마지막 페이지
+        model.addAttribute("currentPage", currentPage); // 현재 페이지 번호
         return "notice_normal_board";
     }
     
     /* 동빈 검색 테스트
     @GetMapping("notice/normal/board")
-    public String noticeNormalBoard(Model model, @RequestParam(name="searchFilter", required=false) String searchFilter,
-                                 @RequestParam(name="searchValue", required=false) String searchValue) {
+    public String noticeNormalBoard(Model model,
+                                    @RequestParam(name="searchFilter", required=false) String searchFilter,
+                                    @RequestParam(name="searchValue", required=false) String searchValue) {
+                                    List<PostsListResponseDto> responseDtoList;
                                  if(searchValue != null) {
             switch (searchFilter) {
                 case "title":
