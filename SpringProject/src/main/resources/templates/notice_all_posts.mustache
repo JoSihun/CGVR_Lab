@@ -25,14 +25,17 @@
             </div>
 
             <!-- 게시글 검색 빠른메뉴 -->
-            <div class="row">
-                <div class="col-sm-8 mb-3">
-                    <input type="text" class="form-control border-dark" id="searchValue" placeholder="게시글 제목입력">
+            <form method="GET" action="/notice/all/board">
+                <div class="row">
+                    <div class="col-sm-8 mb-3">
+                        <input type="text" class="form-control border-dark" name="searchValue" placeholder="게시글 제목입력">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <button type="submit" class="btn btn-dark btn-block me-4">검색</button>
+                    </div>
+                    <input type="hidden" class="form-control" name="searchFilter" value="title"/>
                 </div>
-                <div class="col-sm-4 mb-3">
-                    <button type="button" class="btn btn-dark btn-block" id="btn-search">검색</button>
-                </div>
-            </div>
+            </form>
 
             <!-- 글쓰기 빠른메뉴 -->
             <div class="row mb-3">

@@ -69,11 +69,10 @@ public class NoticeNormalController {
     
     /* 동빈 검색 테스트
     @GetMapping("notice/normal/board")
-    public String noticeNormalBoard(Model model,
-                                    @RequestParam(name="searchFilter", required=false) String searchFilter,
-                                    @RequestParam(name="searchValue", required=false) String searchValue) {
-                                    List<PostsListResponseDto> responseDtoList;
-                                 if(searchValue != null) {
+    public String noticeNormalBoard(Model model, @RequestParam(name="searchFilter", required=false) String searchFilter,
+                                 @RequestParam(name="searchValue", required=false) String searchValue) {
+    List<PostsListResponseDto> responseDtoList;
+    if(searchValue != null) {
             switch (searchFilter) {
                 case "title":
                     responseDtoList = this.postsService.findAllByTitle("일반 공지사항", searchValue);
