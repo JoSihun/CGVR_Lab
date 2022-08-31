@@ -1,21 +1,30 @@
 package com.skuniv.cgvr.domain;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-@NoArgsConstructor
-public class Category {
+public class Category extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
-    private String content;
+    private String categoryName;
+
+
     @Builder
-    public Category(Long id, String content) {
-        this.id = id;
-        this.content = content;
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public void update(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

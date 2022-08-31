@@ -1,0 +1,277 @@
+{{>header}}
+{{>banner}}
+<div class="container-fluid">
+    <div class="row mx-4 my-4">
+
+        <!-- 좌측 사이드 메뉴 -->
+        <div class="col-xl-2">
+            <!-- 연구생 정보 -->
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <div class="card border border-dark">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>연구생 정보</b></h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <div><p class="card-text"><strong>이름</strong> : 염동빈</p></div>
+                            <div><p class="card-text"><strong>학번</strong> : 2017305045</p></div>
+                            <div><p class="card-text"><strong>재학정보</strong> : 4학년</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 게시글 검색 빠른메뉴 -->
+            <div class="row">
+                <div class="col-sm-8 mb-3">
+                    <input type="text" class="form-control border-dark" id="searchValue" placeholder="게시글 제목입력">
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <button type="button" class="btn btn-dark btn-block" id="btn-search">검색</button>
+                </div>
+            </div>
+
+            <!-- 글쓰기 빠른메뉴 -->
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <button class="btn btn-dark btn-block" onclick="location.href='/laboratory/all/posts/form';">글쓰기</button>
+                </div>
+            </div>
+
+            <!-- 글머리 관리 빠른메뉴 -->
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <button class="btn btn-dark btn-block" onclick="location.href='/manage/posts/title';">글머리 관리</button>
+                </div>
+            </div>
+
+            <!-- 게시판 빠른메뉴1 -->
+            <div class="row mb-3">
+                <div class="col-xl-12">
+                    <div class="card border border-dark">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>공지사항</b></h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <div><a class="card-text text-dark" href="/notice/all/board">전체 공지사항</a></div>
+                            <div><a class="card-text text-dark" href="/notice/normal/board">일반 공지사항</a></div>
+                            <div><a class="card-text text-dark" href="/notice/lecture/board">수업 공지사항</a></div>
+                            <div><a class="card-text text-dark" href="/notice/laboratory/board">연구 공지사항</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 게시판 빠른메뉴2 -->
+            <div class="row mb-3 mb-xl-0">
+                <div class="col-xl-12">
+                    <div class="card border border-dark">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>연구 게시판</b></h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <div><a class="card-text text-dark" href="/laboratory/all/board">전체 게시판</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/notice/board">공지 게시판</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/paper/board">논문 게시판</a></div>
+                            <div><a class="card-text text-dark" href="/laboratory/material/board">자료 게시판</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 우측 메인 영역 -->
+        <div class="col-xl-10">
+
+            <!-- 카테고리 관리 -->
+            <div class="row mb-4">
+                <div class="col-xl-12">
+                    <div class="card border border-dark h-100">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>카테고리 관리</b></h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <table class="table table-striped table-sm">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 10%" class="text-center" >번호</th>
+                                    <th style="width: 45%" class="text-start" >카테고리명</th>
+                                    <th style="width: 15%" class="text-center" >작성일</th>
+                                    <th style="width: 15%" class="text-center" >수정일</th>
+                                    <th style="width: 15%" class="text-center" >수정/삭제</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                {{#category}}
+                                    <tr class="collapse show" id="category-update-form-{{id}}">
+                                        <td class="text-center">{{id}}</td>
+                                        <td class="text-start">[{{categoryName}}]</td>
+                                        <td class="text-center">{{createdDate}}</td>
+                                        <td class="text-center">{{updatedDate}}</td>
+                                        <td class="text-center">
+                                            <input type="hidden" class="form-control" id="deleteCategoryId" value="{{id}}">
+                                            <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#category-update-form-{{id}}">수정</button>
+                                            <button class="btn btn-danger" id="btn-category-delete">삭제</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="collapse" id="category-update-form-{{id}}">
+                                        <td class="text-center">{{id}}</td>
+                                        <td class="text-start">
+                                            <input type="text" class="form-control border-dark" id="updateCategoryName" value="{{categoryName}}">
+                                        </td>
+                                        <td class="text-center">{{createdDate}}</td>
+                                        <td class="text-center">{{updatedDate}}</td>
+                                        <td class="text-center">
+                                            <input type="hidden" class="form-control" id="updateCategoryId" value="{{id}}">
+                                            <button class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#category-update-form-{{id}}">취소</button>
+                                            <button class="btn btn-primary" id="btn-category-update">수정</button>
+                                        </td>
+                                    </tr>
+                                {{/category}}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 카테고리 추가 -->
+                        <div class="text-dark"><hr>
+                            <div class="row mb-2">
+                                <!-- Column 1: Empty Column -->
+                                <div class="col-sm-2 text-start">
+
+                                </div>
+                                <!-- Column 2: Add Category -->
+                                <div class="col-sm-8 text-center">
+                                    <div class="row align-items-center">
+                                        <!-- Sub Column 1: Empty Column -->
+                                        <div class="col-sm-2 text-end">
+
+                                        </div>
+                                        <!-- Sub Column 2: Input -->
+                                        <div class="col-sm-8 text-center">
+                                            <input type="text" class="form-control border-dark" id="categoryName" placeholder="추가할 카테고리명을 입력하세요">
+                                        </div>
+                                        <!-- Sub Column 3: Button -->
+                                        <div class="col-sm-2 text-start">
+                                            <button type="button" class="form-control btn btn-dark" id="btn-category-save">추가</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Column 3: Empty Column -->
+                                <div class="col-sm-2 text-end">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- 프로젝트 관리 -->
+            <div class="row mb-4">
+                <div class="col-xl-12">
+                    <div class="card border border-dark h-100">
+                        <!-- Card Header -->
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="m-0"><b>프로젝트 관리</b></h5>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body text-dark">
+                            <table class="table table-striped table-sm">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 10%" class="text-center" >번호</th>
+                                    <th style="width: 45%" class="text-start" >프로젝트명</th>
+                                    <th style="width: 15%" class="text-center" >작성일</th>
+                                    <th style="width: 15%" class="text-center" >수정일</th>
+                                    <th style="width: 15%" class="text-center" >수정/삭제</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                {{#project}}
+                                    <tr class="collapse show" id="project-update-form-{{id}}">
+                                        <td class="text-center">{{id}}</td>
+                                        <td class="text-start">[{{projectName}}]</td>
+                                        <td class="text-center">{{createdDate}}</td>
+                                        <td class="text-center">{{updatedDate}}</td>
+                                        <td class="text-center">
+                                            <input type="hidden" class="form-control" id="deleteProjectId" value="{{id}}">
+                                            <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#project-update-form-{{id}}">수정</button>
+                                            <button class="btn btn-danger" id="btn-project-delete">삭제</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="collapse" id="project-update-form-{{id}}">
+                                        <td class="text-center">{{id}}</td>
+                                        <td class="text-start">
+                                            <input type="text" class="form-control border-dark" id="updateProjectName" value="{{projectName}}">
+                                        </td>
+                                        <td class="text-center">{{createdDate}}</td>
+                                        <td class="text-center">{{updatedDate}}</td>
+                                        <td class="text-center">
+                                            <input type="hidden" class="form-control" id="updateProjectId" value="{{id}}">
+                                            <button class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#project-update-form-{{id}}">취소</button>
+                                            <button class="btn btn-primary" id="btn-project-update">수정</button>
+                                        </td>
+                                    </tr>
+                                {{/project}}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 프로젝트 추가 -->
+                        <div class="text-dark"><hr>
+                            <div class="row mb-2">
+                                <!-- Column 1: Empty Column -->
+                                <div class="col-sm-2 text-start">
+
+                                </div>
+                                <!-- Column 2: Add Project -->
+                                <div class="col-sm-8 text-center">
+                                    <div class="row align-items-center">
+                                        <!-- Sub Column 1: Empty Column -->
+                                        <div class="col-sm-2 text-end">
+
+                                        </div>
+                                        <!-- Sub Column 2: Input -->
+                                        <div class="col-sm-8 text-center">
+                                            <input type="text" class="form-control border-dark" id="projectName" placeholder="추가할 프로젝트명을 입력하세요">
+                                        </div>
+                                        <!-- Sub Column 3: Button -->
+                                        <div class="col-sm-2 text-start">
+                                            <button type="button" class="form-control btn btn-dark" id="btn-project-save">추가</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Column 3: Empty Column -->
+                                <div class="col-sm-2 text-end">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+{{>footer}}

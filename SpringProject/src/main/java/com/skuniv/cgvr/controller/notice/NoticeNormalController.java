@@ -1,6 +1,8 @@
 package com.skuniv.cgvr.controller.notice;
 
+import com.skuniv.cgvr.dto.category.CategoryListResponseDto;
 import com.skuniv.cgvr.dto.posts.*;
+import com.skuniv.cgvr.service.CategoryService;
 import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 public class NoticeNormalController {
     private final PostsService postsService;
     private final CommentsService commentsService;
+    private final CategoryService categoryService;
 
 
     /* 게시판 목록보기 */
@@ -35,7 +37,7 @@ public class NoticeNormalController {
     /* 페이징 테스트 */
     @GetMapping("notice/normal/board")
     public String noticeNormalBoard(Model model, @PageableDefault(sort = "id", size=10, direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryName("일반", pageable);
+        Page<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryName("일반 공지사항", pageable);
         // 프론트에서 처리할 페이지 인덱스 생성
         ArrayList pageIndex = new ArrayList();
         for (int i = 1; i <= responseDtoList.getTotalPages(); i++) pageIndex.add(i);
@@ -75,7 +77,9 @@ public class NoticeNormalController {
 
     /* 게시글 작성폼 */
     @GetMapping("notice/normal/posts/form")
-    public String noticeNormalPostForm() {
+    public String noticeNormalPostForm(Model model) {
+        List<CategoryListResponseDto> responseDtoList = this.categoryService.findAllAsc();
+        model.addAttribute("category", responseDtoList);
         return "notice_normal_posts_form";
     }
 
@@ -88,7 +92,9 @@ public class NoticeNormalController {
     @GetMapping("notice/normal/posts/update/{id}")
     public String noticeNormalPostUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
+        List<CategoryListResponseDto> responseDtoList = this.categoryService.findAllAsc();
         model.addAttribute("posts", responseDto);
+        model.addAttribute("category", responseDtoList);
         return "notice_normal_posts_update_form";
     }
 

@@ -1,22 +1,17 @@
 package com.skuniv.cgvr.dto.posts;
 
+import com.skuniv.cgvr.domain.Category;
+import com.skuniv.cgvr.domain.Project;
 import com.skuniv.cgvr.domain.posts.Posts;
-import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Data
 public class PostsSaveRequestDto {
     private String title;
     private String content;
     private String author;
-
     private Long hits;
-    private Long attachment_id;
 
     private String projectName;
     private String categoryName;
@@ -28,7 +23,6 @@ public class PostsSaveRequestDto {
                 .content(content)
                 .author(author)
                 .hits(hits)
-                .attachment_id(attachment_id)
                 .projectName(projectName)
                 .categoryName(categoryName)
                 .build();

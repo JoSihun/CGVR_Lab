@@ -1,9 +1,10 @@
 package com.skuniv.cgvr.controller.notice;
 
-import com.skuniv.cgvr.domain.posts.Comments;
+import com.skuniv.cgvr.dto.category.CategoryListResponseDto;
 import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
+import com.skuniv.cgvr.service.CategoryService;
 import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class NoticeAllController {
     private final PostsService postsService;
     private final CommentsService commentsService;
+    private final CategoryService categoryService;
 
 
     /* 게시판 목록보기 */
@@ -37,9 +39,9 @@ public class NoticeAllController {
         if(searchValue != null) {
             switch (searchFilter) {
                 case "title":
-                    responseDtoList1 = this.postsService.findAllByTitle("일반", searchValue);
-                    responseDtoList2 = this.postsService.findAllByTitle("수업", searchValue);
-                    responseDtoList3 = this.postsService.findAllByTitle("연구", searchValue);
+                    responseDtoList1 = this.postsService.findAllByTitle("일반 공지사항", searchValue);
+                    responseDtoList2 = this.postsService.findAllByTitle("수업 공지사항", searchValue);
+                    responseDtoList3 = this.postsService.findAllByTitle("연구 공지사항", searchValue);
                     responseDtoList = new ArrayList<PostsListResponseDto>();
                     responseDtoList.addAll(responseDtoList1);
                     responseDtoList.addAll(responseDtoList2);
@@ -48,9 +50,9 @@ public class NoticeAllController {
                             Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
                     break;
                 case "content":
-                    responseDtoList1 = this.postsService.findAllByContent("일반", searchValue);
-                    responseDtoList2 = this.postsService.findAllByContent("수업", searchValue);
-                    responseDtoList3 = this.postsService.findAllByContent("연구", searchValue);
+                    responseDtoList1 = this.postsService.findAllByContent("일반 공지사항", searchValue);
+                    responseDtoList2 = this.postsService.findAllByContent("수업 공지사항", searchValue);
+                    responseDtoList3 = this.postsService.findAllByContent("연구 공지사항", searchValue);
                     responseDtoList = new ArrayList<PostsListResponseDto>();
                     responseDtoList.addAll(responseDtoList1);
                     responseDtoList.addAll(responseDtoList2);
@@ -59,9 +61,9 @@ public class NoticeAllController {
                             Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
                     break;
                 case "author":
-                    responseDtoList1 = this.postsService.findAllByAuthor("일반", searchValue);
-                    responseDtoList2 = this.postsService.findAllByAuthor("수업", searchValue);
-                    responseDtoList3 = this.postsService.findAllByAuthor("연구", searchValue);
+                    responseDtoList1 = this.postsService.findAllByAuthor("일반 공지사항", searchValue);
+                    responseDtoList2 = this.postsService.findAllByAuthor("수업 공지사항", searchValue);
+                    responseDtoList3 = this.postsService.findAllByAuthor("연구 공지사항", searchValue);
                     responseDtoList = new ArrayList<PostsListResponseDto>();
                     responseDtoList.addAll(responseDtoList1);
                     responseDtoList.addAll(responseDtoList2);
@@ -70,9 +72,9 @@ public class NoticeAllController {
                             Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
                     break;
                 default:
-                    responseDtoList1 = this.postsService.findAllByTitleOrContent("일반", searchValue);
-                    responseDtoList2 = this.postsService.findAllByTitleOrContent("수업", searchValue);
-                    responseDtoList3 = this.postsService.findAllByTitleOrContent("연구", searchValue);
+                    responseDtoList1 = this.postsService.findAllByTitleOrContent("일반 공지사항", searchValue);
+                    responseDtoList2 = this.postsService.findAllByTitleOrContent("수업 공지사항", searchValue);
+                    responseDtoList3 = this.postsService.findAllByTitleOrContent("연구 공지사항", searchValue);
                     responseDtoList = new ArrayList<PostsListResponseDto>();
                     responseDtoList.addAll(responseDtoList1);
                     responseDtoList.addAll(responseDtoList2);
@@ -85,7 +87,7 @@ public class NoticeAllController {
         else {
             responseDtoList = this.postsService.findAllDesc();
         }
-
+        
         model.addAttribute("posts", responseDtoList);
         return "notice_all_board";
     }
@@ -108,7 +110,9 @@ public class NoticeAllController {
 
     /* 게시글 작성폼 */
     @GetMapping("notice/all/posts/form")
-    public String noticeAllPostForm() {
+    public String noticeAllPostForm(Model model) {
+        List<CategoryListResponseDto> responseDtoList = this.categoryService.findAllAsc();
+        model.addAttribute("category", responseDtoList);
         return "notice_all_posts_form";
     }
 
@@ -121,7 +125,9 @@ public class NoticeAllController {
     @GetMapping("notice/all/posts/update/{id}")
     public String noticeAllPostUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
+        List<CategoryListResponseDto> responseDtoList = this.categoryService.findAllAsc();
         model.addAttribute("posts", responseDto);
+        model.addAttribute("category", responseDtoList);
         return "notice_all_posts_update_form";
     }
 }

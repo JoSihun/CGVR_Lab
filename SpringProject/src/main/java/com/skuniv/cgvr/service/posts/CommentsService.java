@@ -22,7 +22,6 @@ public class CommentsService {
 
 
     /* 댓글 불러오기 */
-    // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
     @Transactional
     public List<CommentsListResponseDto> findAllByPostId(Long postId) {
         Posts entity = this.postsRepository.findById(postId).orElseThrow(
@@ -33,7 +32,6 @@ public class CommentsService {
 
 
     /* 댓글 저장하기 */
-    // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
     @Transactional
     public Long save(Long postId, CommentsSaveRequestDto requestDto) {
         Posts entity = this.postsRepository.findById(postId).orElseThrow(
@@ -44,7 +42,6 @@ public class CommentsService {
 
 
     /* 댓글 수정하기 */
-    // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
     @Transactional
     public Long update(Long id, CommentsUpdateRequestDto requestDto) {
         Comments entity = this.commentsRepository.findById(id).orElseThrow(
@@ -55,7 +52,6 @@ public class CommentsService {
 
 
     /* 댓글 삭제하기 */
-    // 루틴에 맞게 구현은 하였으나, 테스트 해보지 않았음
     @Transactional
     public Long delete(Long id) {
         Comments entity = this.commentsRepository.findById(id).orElseThrow(
