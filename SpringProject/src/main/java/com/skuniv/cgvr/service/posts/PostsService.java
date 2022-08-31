@@ -1,10 +1,12 @@
 package com.skuniv.cgvr.service.posts;
 
+import com.skuniv.cgvr.domain.Category;
 import com.skuniv.cgvr.domain.posts.Posts;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
 import com.skuniv.cgvr.dto.posts.PostsUpdateRequestDto;
+import com.skuniv.cgvr.repository.CategoryRepository;
 import com.skuniv.cgvr.repository.posts.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,13 +15,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
+    private final CategoryRepository categoryRepository;
 
     /* 전체 게시판 목록보기 - 작성순 */
     @Transactional
@@ -49,7 +55,7 @@ public class PostsService {
         // 최초작성일자 기준으로 정렬하려면 id 대신 createdDate 사용
         // 최종수정일자 기준으로 정렬하려면 id 대신 updatedDate 사용
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
-        List<Posts> postsList = this.postsRepository.findByCategoryName(categoryName, sort);
+        List<Posts> postsList = this.postsRepository.findAllByCategoryName(categoryName, sort);
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
@@ -60,7 +66,29 @@ public class PostsService {
         // 최초작성일자 기준으로 정렬하려면 id 대신 createdDate 사용
         // 최종수정일자 기준으로 정렬하려면 id 대신 updatedDate 사용
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Posts> postsList = this.postsRepository.findByCategoryName(categoryName, sort);
+        List<Posts> postsList = this.postsRepository.findAllByCategoryName(categoryName, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+
+    /* 프로젝트별 게시판 목록보기 - 작성순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByProjectNameAsc(String projectName) {
+        // 최초작성일자 기준으로 정렬하려면 id 대신 createdDate 사용
+        // 최종수정일자 기준으로 정렬하려면 id 대신 updatedDate 사용
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+        List<Posts> postsList = this.postsRepository.findAllByProjectName(projectName, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+
+    /* 프로젝트별 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByProjectNameDesc(String projectName) {
+        // 최초작성일자 기준으로 정렬하려면 id 대신 createdDate 사용
+        // 최종수정일자 기준으로 정렬하려면 id 대신 updatedDate 사용
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findAllByProjectName(projectName, sort);
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
@@ -133,7 +161,7 @@ public class PostsService {
     public Long update ( final Long id, final PostsUpdateRequestDto requestDto){
         Posts entity = this.postsRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + id));
-        entity.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getAttachment_id(),
+        entity.update(requestDto.getTitle(), requestDto.getContent(),
                 requestDto.getProjectName(), requestDto.getCategoryName());
         return id;
     }

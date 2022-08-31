@@ -27,6 +27,7 @@ public class PostsListResponseDto {
         this.hits = entity.getHits();
         this.title = entity.getTitle();
         this.author = entity.getAuthor();
+
         this.projectName = entity.getProjectName();
         this.categoryName = entity.getCategoryName();
 
@@ -46,8 +47,4 @@ public class PostsListResponseDto {
         }
     }
 
-
-    public void formatTitle(String commentsCount) {
-        this.title += String.format(" [%s]", commentsCount);
-    }
 }

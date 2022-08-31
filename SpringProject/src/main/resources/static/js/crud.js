@@ -31,6 +31,7 @@ var main = {
             }
         });
 
+
         $('#btn-comments-save').on('click', function () {
             var result = confirm("저장하시겠습니까?");
             if (result) {
@@ -62,6 +63,7 @@ var main = {
                 alert("삭제가 취소되었습니다.");
             }
         });
+
     },
     postsSave : function () {
         var data = {

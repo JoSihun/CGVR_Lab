@@ -1,6 +1,12 @@
 package com.skuniv.cgvr.controller;
 
+import com.skuniv.cgvr.domain.Project;
+import com.skuniv.cgvr.dto.category.CategoryListResponseDto;
+import com.skuniv.cgvr.dto.category.CategoryResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
+import com.skuniv.cgvr.dto.project.ProjectListResponseDto;
+import com.skuniv.cgvr.service.CategoryService;
+import com.skuniv.cgvr.service.ProjectService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,17 +19,19 @@ import java.util.List;
 @Controller
 public class IndexController {
     private final PostsService postsService;
+    private final ProjectService projectService;
+    private final CategoryService categoryService;
 
     @GetMapping("/")
     public String index(Model model) {
         // 최대 5개만 가져오는 기능필요
         // 임시로 변수명 숫자로 일원화 처리, 추후수정필요
-        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllByCategoryNameDesc("일반");
-        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllByCategoryNameDesc("수업");
-        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllByCategoryNameDesc("연구");
-        List<PostsListResponseDto> responseDtoList4 = this.postsService.findAllByCategoryNameDesc("공지");
-        List<PostsListResponseDto> responseDtoList5 = this.postsService.findAllByCategoryNameDesc("논문");
-        List<PostsListResponseDto> responseDtoList6 = this.postsService.findAllByCategoryNameDesc("자료");
+        List<PostsListResponseDto> responseDtoList1 = this.postsService.findAllByCategoryNameDesc("일반 공지사항");
+        List<PostsListResponseDto> responseDtoList2 = this.postsService.findAllByCategoryNameDesc("수업 공지사항");
+        List<PostsListResponseDto> responseDtoList3 = this.postsService.findAllByCategoryNameDesc("연구 공지사항");
+        List<PostsListResponseDto> responseDtoList4 = this.postsService.findAllByCategoryNameDesc("공지 게시판");
+        List<PostsListResponseDto> responseDtoList5 = this.postsService.findAllByCategoryNameDesc("논문 게시판");
+        List<PostsListResponseDto> responseDtoList6 = this.postsService.findAllByCategoryNameDesc("자료 게시판");
 
         if (responseDtoList1.size() > 5) { responseDtoList1 = responseDtoList1.subList(0, 5); }
         if (responseDtoList2.size() > 5) { responseDtoList2 = responseDtoList2.subList(0, 5); }
@@ -42,4 +50,13 @@ public class IndexController {
         return "index";
     }
 
+
+    @GetMapping("/manage/posts/title")
+    public String managePostsTitle(Model model) {
+        List<ProjectListResponseDto> projectListResponseDtos = this.projectService.findAllAsc();
+        List<CategoryListResponseDto> categoryListResponseDtos = this.categoryService.findAllAsc();
+        model.addAttribute("project", projectListResponseDtos);
+        model.addAttribute("category", categoryListResponseDtos);
+        return "manage_posts_title";
+    }
 }
