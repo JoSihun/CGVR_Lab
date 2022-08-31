@@ -1,6 +1,5 @@
 package com.skuniv.cgvr.controller.notice;
 
-import com.skuniv.cgvr.domain.posts.Comments;
 import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
