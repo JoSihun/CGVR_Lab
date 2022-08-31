@@ -56,6 +56,35 @@ public class NoticeNormalController {
         model.addAttribute("currentPage", responseDtoList.getNumber());       // 현재 페이지 번호
         return "notice_normal_board";
     }
+    
+    /* 동빈 검색 테스트
+    @GetMapping("notice/normal/board")
+    public String noticeNormalBoard(Model model, @RequestParam(name="searchFilter", required=false) String searchFilter,
+                                 @RequestParam(name="searchValue", required=false) String searchValue) {
+                                 if(searchValue != null) {
+            switch (searchFilter) {
+                case "title":
+                    responseDtoList = this.postsService.findAllByTitle("일반 공지사항", searchValue);
+                    break;
+                case "content":
+                    responseDtoList = this.postsService.findAllByContent("일반 공지사항", searchValue);
+                    break;
+                case "author":
+                    responseDtoList = this.postsService.findAllByAuthor("일반 공지사항", searchValue);
+                    break;
+                default:
+                    responseDtoList = this.postsService.findAllByTitleOrContent("일반 공지사항", searchValue);
+                    break;
+            }
+        }
+        else {
+            responseDtoList = this.postsService.findAllByCategoryNameDesc("일반 공지사항");
+        }
+
+        model.addAttribute("posts", responseDtoList);
+        return "notice_normal_board";
+     }
+     */
 
 
     /* 게시글 상세보기 */

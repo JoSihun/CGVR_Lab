@@ -85,7 +85,15 @@ public class NoticeAllController {
             }
         }
         else {
-            responseDtoList = this.postsService.findAllDesc();
+            responseDtoList1 = this.postsService.findAllByCategoryNameDesc("일반 공지사항");
+            responseDtoList2 = this.postsService.findAllByCategoryNameDesc("수업 공지사항");
+            responseDtoList3 = this.postsService.findAllByCategoryNameDesc("연구 공지사항");
+            responseDtoList = new ArrayList<PostsListResponseDto>();
+            responseDtoList.addAll(responseDtoList1);
+            responseDtoList.addAll(responseDtoList2);
+            responseDtoList.addAll(responseDtoList3);
+            responseDtoList = responseDtoList.stream().sorted(
+                    Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
         }
         
         model.addAttribute("posts", responseDtoList);
