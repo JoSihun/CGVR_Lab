@@ -34,7 +34,7 @@ public class NoticeNormalController {
 
     /* 페이징 테스트 */
     @GetMapping("notice/normal/board")
-    public String noticeNormalBoard(Model model, @PageableDefault(sort = "id", size=5, direction = Sort.Direction.DESC) Pageable pageable) {
+    public String noticeNormalBoard(Model model, @PageableDefault(sort = "id", size=10, direction = Sort.Direction.DESC) Pageable pageable) {
         Page<PostsListResponseDto> responseDtoList = this.postsService.findAllByCategoryName("일반", pageable);
         // 프론트에서 처리할 페이지 인덱스 생성
         ArrayList pageIndex = new ArrayList();

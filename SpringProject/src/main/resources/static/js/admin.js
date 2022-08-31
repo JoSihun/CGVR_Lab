@@ -4,8 +4,13 @@ var main = {
         $('#admin-grant').on('click', function () {
             _this.grant();
         });
-        $('#admin-revoke').on('click', function () {
-            _this.revoke();
+        $('[id="admin-revoke"]').on('click', function () {
+            var adminsInfo = this.closest('li');
+            _this.revoke(adminsInfo);
+        });
+        $('[id="admin-update"]').on('click', function () {
+            var adminsInfo = this.closest('li');
+           _this.update(adminsInfo);
         });
     },
     grant : function () {
@@ -35,8 +40,9 @@ var main = {
             alert('학번은 필수 입력사항입니다.');
         }
     },
-    revoke : function (id) {
-
+    revoke : function (adminsInfo) {
+        var id = adminsInfo.querySelector('#selectedId').value;
+        console.log(id);
         const con_check = confirm('삭제하시겠습니까?');
         if(con_check) {
             $.ajax({
@@ -51,6 +57,27 @@ var main = {
                 alert(JSON.stringify(error));
             });
         }
+    },
+    update : function (adminsInfo) {
+        var data = {
+            contact: adminsInfo.querySelector('#updateContact').value,
+            email: adminsInfo.querySelector('#updateEmail').value,
+            korName: adminsInfo.querySelector('#updateKorName').value,
+            userId: adminsInfo.querySelector('#updateUserId').value,
+        };
+        var id = adminsInfo.querySelector('#selectedId').value;
+        $.ajax({
+            type: 'PUT',
+            url: '/admin/api/' + id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+        }).done(function () {
+            alert('관리자 정보가 수정되었습니다');
+            window.location.href = '/admin';
+        }).fail(function (error) {
+            alert(JSON.stringify(error))
+        });
     }
 };
 

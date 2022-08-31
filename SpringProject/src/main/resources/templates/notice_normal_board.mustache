@@ -180,15 +180,9 @@
 <script>
     /* 현재 페이지 표시 스크립트 */
     $(function() {
-        console.log("현재페이지 번호: " + {{currentPage}});
-        console.log("시작페이지 번호: " + {{startPage}});
-        console.log("마지막페이지 번호: " + {{endPage}});
-
         var pageIndex = $("li[name=page-index]");
-        console.log(pageIndex.length);
+
         pageIndex.each(function() {
-            console.log(this.id);
-            console.log("현재페이지번호: " + {{currentPage}});
             if ((this.id-1) == {{currentPage}}) {
                 $(this).addClass('active');
             }

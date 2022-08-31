@@ -3,6 +3,7 @@ package com.skuniv.cgvr.service.user;
 import com.skuniv.cgvr.domain.user.User;
 import com.skuniv.cgvr.dto.user.UserListResponseDto;
 import com.skuniv.cgvr.dto.user.UserSaveRequestDto;
+import com.skuniv.cgvr.dto.user.UserUpdateRequestDto;
 import com.skuniv.cgvr.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -35,18 +36,26 @@ public class UserService {
 
     /* 관리자 등록 */
     @Transactional
-    public Long regist(final UserSaveRequestDto requestDto) {
-        // 학번 중복 시 어떻게 해결할지 흠흠
-        User findUser = this.userRepository.findByUserId(requestDto.getUserId());
-        if (findUser != null)
-            requestDto.setUserId(null);
+    public Long grant(final UserSaveRequestDto requestDto) {
+//        User findUser = this.userRepository.findByUserId(requestDto.getUserId());
+//        if (findUser != null)
+//            requestDto.setUserId(null);
         return this.userRepository.save(requestDto.toEntity()).getId();
+    }
+    /* 관리자 수정 */
+    @Transactional
+    public Long update(final Long id, final UserUpdateRequestDto requestDto) {
+        User entity = this.userRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 관리자입니다. id=" + id));
+        entity.update(requestDto.getUserId(), requestDto.getKorName(), requestDto.getEmail(),
+                requestDto.getContact());
+        return id;
     }
     /* 관리자 제거 */
     @Transactional
-    public Long delete(final Long id) {
+    public Long revoke(final Long id) {
         User entity = this.userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("이미 존재하지 않는 게시글입니다. id=" + id));
+                () -> new IllegalArgumentException("이미 존재하지 않는 관리자입니다. id=" + id));
         this.userRepository.delete(entity);
         return id;
     }

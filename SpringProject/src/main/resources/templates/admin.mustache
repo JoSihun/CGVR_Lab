@@ -8,6 +8,9 @@
 {{#admin}}
     <div class="container-fluid mt-4">
         <div class="row mx-4 my-4">
+            <div class="col-xl-1">
+
+            </div>
             <div class="col-xl-2">
                 <div class="card border border-dark mb-4 text-dark bg-light">
                     <!-- Card Header -->
@@ -16,13 +19,14 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <div><a class="card-text text-dark">{{sessionUserId}} {{sessionKorName}}</a></div>
-                        <div><a class="card-text text-dark">재학정보 : {{sessionGrade}}학년</a></div>
+                        <div><p class="card-text"><strong>이름</strong> : {{sessionKorName}}</p></div>
+                        <div><p class="card-text"><strong>학번</strong> : {{sessionUserId}}</p></div>
+                        <div><p class="card-text"><strong>재학정보</strong> : {{sessionGrade}}학년</p></div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-10">
+            <div class="col-xl-8">
                 <div class="card border border-dark mb-4 text-dark bg-light">
                     <!-- Card Header -->
                     <div class="card-header py-3 d-flex flex-row bg-dark text-white align-items-center justify-content-between">
@@ -30,33 +34,59 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <table class="table table-striped table-sm">
-                            <thead>
-                            <tr>
-                                <th scope="col" class="text-center"><b>학번</b></th>
-                                <th scope="col" class="text-center"><b>이름</b></th>
-                                <th scope="col" class="text-center"><b>연락처</b></th>
-                                <th scope="col" class="text-center"><b>이메일</b></th>
-                            </tr>
-                            </thead>
-                            <tbody id="tbody">
+                        <ul class="list-group bg-light">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="text-center; col-xl-2"><strong>학번</strong></div>
+                                    <div class="text-center; col-xl-2"><strong>이름</strong></div>
+                                    <div class="text-center; col-xl-2"><strong>연락처</strong></div>
+                                    <div class="text-center; col-xl-4"><strong>이메일</strong></div>
+                                </div>
+                            </li>
                             {{#users}}
-                            <tr>
-                                {{#userId}}<th scope="row" class="text-center">{{userId}}</th>{{/userId}}
-                                {{^userId}}<th scope="row" class="text-center">없음</th>{{/userId}}
-                                {{#korName}}<th scope="row" class="text-center">{{korName}}</th>{{/korName}}
-                                {{^korName}}<th scope="row" class="text-center">없음</th>{{/korName}}
-                                {{#contact}}<th scope="row" class="text-center">{{contact}}</th>{{/contact}}
-                                {{^contact}}<th scope="row" class="text-center">없음</th>{{/contact}}
-                                {{#email}}<th scope="row" class="text-center">{{email}}</th>{{/email}}
-                                {{^email}}<th scope="row" class="text-center">없음</th>{{/email}}
-                                <th><a type="button" onclick="main.revoke({{id}})" class="btn btn-sm btn-danger">삭제</a></th>
-                            </tr>
+                                <li class="list-group-item">
+                                    <!-- Collapse Show Content -->
+                                    <div class="collapse show row" id="admin-update-form-{{id}}">
+                                        {{#userId}}<div class="text-center; col-xl-2">{{userId}}</div>{{/userId}}
+                                        {{#korName}}<div class="text-center; col-xl-2">{{korName}}</div>{{/korName}}
+                                        {{#contact}}<div class="text-center; col-xl-2">{{contact}}</div>{{/contact}}
+                                        {{#email}}<div class="text-center; col-xl-4">{{email}}</div>{{/email}}
+                                        <div class="col-xl-2">
+                                            <small><a class="text-dark" href="#" data-bs-toggle="collapse" data-bs-target="#admin-update-form-{{id}}"><span style="color: blue">수정</span></a></small>
+                                            <small>/</small>
+                                            <small><a class="text-dark" href="#" id="admin-revoke"><span style="color:red">삭제</span></a></small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Collapse Update Form -->
+                                    <div class="collapse" id="admin-update-form-{{id}}">
+                                        <!-- Hidden Param -->
+                                        <input type="hidden" class="form-control" id="selectedId" value="{{id}}">
+
+                                        <div class="row mb-3">
+                                            <div class="form_group col-xl-2">
+                                                <input type="text" class=form-control id="updateUserId" name="userId" placeholder="학번입력" value="{{userId}}"/>
+                                            </div>
+                                            <div class="form_group col-xl-2">
+                                                <input type="text" class=form-control id="updateKorName" name="korName" placeholder="이름입력" value="{{korName}}"/>
+                                            </div>
+                                            <div class="form_group col-xl-2">
+                                                <input type="text" class=form-control id="updateContact" name="contact" placeholder="연락처입력" value="{{contact}}"/>
+                                            </div>
+                                            <div class="form_group col-xl-4">
+                                                <input type="text" class=form-control id="updateEmail" name="email" placeholder="이메일입력" value="{{email}}"/>
+                                            </div>
+                                            <div class="form_group col-xl-2">
+                                                <button type="button" class="btn btn-dark text-end" id="admin-update">수정</button>
+                                                <button type="button" class="btn btn-dark text-end" data-bs-toggle="collapse" data-bs-target="#admin-update-form-{{id}}">취소</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </li>
                             {{/users}}
-                            </tbody>
-                        </table>
+                        </ul>
                     </div>
-                    </table>
                 </div>
                 <div class="card border border-dark text-dark bg-light">
                     <!-- Card Header -->
@@ -76,7 +106,7 @@
                                 <div class="form_group col-xl-2">
                                     <input type="text" class=form-control id="contact" name="contact" placeholder="연락처입력"/>
                                 </div>
-                                <div class="form_group col-xl-3">
+                                <div class="form_group col-xl-4">
                                     <input type="text" class=form-control id="email" name="email" placeholder="이메일입력"/>
                                 </div>
                                 <!-- Hidden -->

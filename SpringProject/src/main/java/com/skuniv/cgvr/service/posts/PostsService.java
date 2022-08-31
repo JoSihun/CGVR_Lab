@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,6 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-
 
     /* 전체 게시판 목록보기 - 작성순 */
     @Transactional
@@ -73,6 +73,41 @@ public class PostsService {
         return postsList.map(PostsListResponseDto::new);
     }
 
+    /* 제목으로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByTitle (String categoryName, String title){
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findByCategoryNameAndTitleContaining(categoryName, title, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    /* 내용으로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByContent (String categoryName, String content){
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findByCategoryNameAndContentContaining(categoryName, content, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    /* 작성자로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByAuthor (String categoryName, String author){
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findByCategoryNameAndAuthorContaining(categoryName, author, sort);
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
+    /* 제목&내용으로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public List<PostsListResponseDto> findAllByTitleOrContent (String categoryName, String search){
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Posts> postsList = this.postsRepository.findByCategoryNameAndTitleContainingOrContentContaining(categoryName, search, search, sort);
+        for (Posts post : postsList) {
+            System.out.println(post.getCategoryName() + post.getTitle());
+        }
+        return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+    }
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +115,7 @@ public class PostsService {
 
     /* 게시글 상세조회 */
     @Transactional
-    public PostsResponseDto findById(final Long id) {
+    public PostsResponseDto findById ( final Long id){
         Posts entity = this.postsRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id = " + id));
         entity.increaseHits();
@@ -90,14 +125,14 @@ public class PostsService {
 
     /* 게시글 저장하기 */
     @Transactional
-    public Long save(final PostsSaveRequestDto requestDto) {
+    public Long save ( final PostsSaveRequestDto requestDto){
         return this.postsRepository.save(requestDto.toEntity()).getId();
     }
 
 
     /* 게시글 수정하기 */
     @Transactional
-    public Long update(final Long id, final PostsUpdateRequestDto requestDto) {
+    public Long update ( final Long id, final PostsUpdateRequestDto requestDto){
         Posts entity = this.postsRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + id));
         entity.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getAttachment_id(),
@@ -108,7 +143,7 @@ public class PostsService {
 
     /* 게시글 삭제하기 */
     @Transactional
-    public Long delete(final Long id) {
+    public Long delete ( final Long id){
         Posts entity = this.postsRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("이미 존재하지 않는 게시글입니다. id=" + id));
         this.postsRepository.delete(entity);
