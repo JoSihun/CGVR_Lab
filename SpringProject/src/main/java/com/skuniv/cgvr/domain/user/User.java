@@ -2,8 +2,6 @@ package com.skuniv.cgvr.domain.user;
 
 import com.skuniv.cgvr.dto.user.UserFormDto;
 import lombok.*;
-import org.springframework.lang.Nullable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
