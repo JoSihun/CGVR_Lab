@@ -2,6 +2,7 @@ package com.skuniv.cgvr.domain;
 
 import com.skuniv.cgvr.domain.posts.Posts;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 

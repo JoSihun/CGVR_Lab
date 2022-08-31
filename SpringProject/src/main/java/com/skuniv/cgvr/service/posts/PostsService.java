@@ -1,11 +1,13 @@
 package com.skuniv.cgvr.service.posts;
 
+import com.skuniv.cgvr.domain.Attachments;
 import com.skuniv.cgvr.domain.Category;
 import com.skuniv.cgvr.domain.posts.Posts;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
 import com.skuniv.cgvr.dto.posts.PostsUpdateRequestDto;
+import com.skuniv.cgvr.repository.AttachmentsRepository;
 import com.skuniv.cgvr.repository.CategoryRepository;
 import com.skuniv.cgvr.repository.posts.PostsRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -148,10 +151,18 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
-
+    private final AttachmentsRepository attachmentsRepository;
     /* 게시글 저장하기 */
     @Transactional
-    public Long save ( final PostsSaveRequestDto requestDto){
+    public Long save (final PostsSaveRequestDto requestDto, List<MultipartFile> files){
+        List<Attachments> attachmentsList = new ArrayList<Attachments>();
+
+        if (!attachmentsList.isEmpty()) {
+            for (Attachments attachments : attachmentsList) {
+
+                attachmentsRepository.save(attachments);
+            }
+        }
         return this.postsRepository.save(requestDto.toEntity()).getId();
     }
 
