@@ -29,7 +29,8 @@ public class NoticeAllController {
 
     /* 게시판 목록보기 */
     @GetMapping("notice/all/board")
-    public String noticeAllBoard(Model model, @RequestParam(name="searchFilter", required=false) String searchFilter,
+    public String noticeAllBoard(Model model,
+                                 @RequestParam(name="searchFilter", required=false) String searchFilter,
                                  @RequestParam(name="searchValue", required=false) String searchValue) {
 
         List<PostsListResponseDto> responseDtoList;

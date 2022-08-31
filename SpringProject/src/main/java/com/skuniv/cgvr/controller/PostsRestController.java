@@ -14,6 +14,7 @@ import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,7 +26,7 @@ public class PostsRestController {
 
     /* 게시글 작성요청 */
     @PostMapping("/posts/api")
-    public Long postsSave(@RequestBody PostsSaveRequestDto requestDto) {
+    public Long postsSave(@RequestBody PostsSaveRequestDto requestDto, MultipartFile file) {
         CategoryResponseDto categoryResponseDto = this.categoryService.findByCategoryName(requestDto.getCategoryName());
         if (categoryResponseDto == null) {
             CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
