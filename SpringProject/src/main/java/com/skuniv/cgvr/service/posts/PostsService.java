@@ -1,6 +1,5 @@
 package com.skuniv.cgvr.service.posts;
 
-import com.skuniv.cgvr.domain.Category;
 import com.skuniv.cgvr.domain.posts.Posts;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
@@ -15,10 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -92,12 +88,10 @@ public class PostsService {
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
-    /* 페이징 테스트 */
-    @Transactional
-    public Page<PostsListResponseDto> findAllByCategoryName(String categoryName, Pageable pageable) {
-        Page<Posts> postsList = this.postsRepository.findAllByCategoryName(categoryName, pageable);
-        return postsList.map(PostsListResponseDto::new);
-    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /* 제목으로 검색 게시판 목록보기 - 최신순 */
     @Transactional
@@ -134,6 +128,49 @@ public class PostsService {
         return postsList.stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    /* 페이지네이션 적용 */
+    /* 카테고리별 게시판 목록보기 */
+    @Transactional
+    public Page<PostsListResponseDto> findAllByCategoryName(String categoryName, Pageable pageable) {
+        Page<Posts> postsList = this.postsRepository.findAllByCategoryName(categoryName, pageable);
+        return postsList.map(PostsListResponseDto::new);
+    }
+
+    /* 제목으로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public Page<PostsListResponseDto> findAllByTitle (String categoryName, String title, Pageable pageable){
+        Page<Posts> postsList = this.postsRepository.findByCategoryNameAndTitleContaining(categoryName, title, pageable);
+        return postsList.map(PostsListResponseDto::new);
+    }
+
+    /* 내용으로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public Page<PostsListResponseDto> findAllByContent (String categoryName, String content, Pageable pageable){
+        Page<Posts> postsList = this.postsRepository.findByCategoryNameAndContentContaining(categoryName, content, pageable);
+        return postsList.map(PostsListResponseDto::new);
+    }
+
+    /* 작성자로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public Page<PostsListResponseDto> findAllByAuthor (String categoryName, String author, Pageable pageable){
+        Page<Posts> postsList = this.postsRepository.findByCategoryNameAndAuthorContaining(categoryName, author, pageable);
+        return postsList.map(PostsListResponseDto::new);
+    }
+
+    /* 제목&내용으로 검색 게시판 목록보기 - 최신순 */
+    @Transactional
+    public Page<PostsListResponseDto> findAllByTitleOrContent (String categoryName, String search, Pageable pageable){
+        Page<Posts> postsList = this.postsRepository.findByCategoryNameAndTitleContainingOrContentContaining(categoryName, search, search, pageable);
+        for (Posts post : postsList) {
+            System.out.println(post.getCategoryName() + post.getTitle());
+        }
+        return postsList.map(PostsListResponseDto::new);
+    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
