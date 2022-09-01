@@ -27,7 +27,7 @@ public class PostsRestController {
 
     /* 게시글 작성요청 */
     @PostMapping("/posts/api")
-    public Long postsSave(@RequestBody PostsSaveRequestDto requestDto, @RequestParam List<MultipartFile> files) {
+    public Long postsSave(PostsSaveRequestDto requestDto, List<MultipartFile> files) throws Exception {
 
         CategoryResponseDto categoryResponseDto = this.categoryService.findByCategoryName(requestDto.getCategoryName());
         if (categoryResponseDto == null) {

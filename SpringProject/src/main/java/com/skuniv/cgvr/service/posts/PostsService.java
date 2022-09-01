@@ -3,6 +3,7 @@ package com.skuniv.cgvr.service.posts;
 import com.skuniv.cgvr.domain.Attachments;
 import com.skuniv.cgvr.domain.Category;
 import com.skuniv.cgvr.domain.posts.Posts;
+import com.skuniv.cgvr.dto.AttachmentsSaveRequestDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
@@ -15,13 +16,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.io.File;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 public class PostsService {
     private final PostsRepository postsRepository;
     private final CategoryRepository categoryRepository;
+    private final AttachmentsRepository attachmentsRepository;
 
     /* 전체 게시판 목록보기 - 작성순 */
     @Transactional
@@ -151,18 +152,27 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
-    private final AttachmentsRepository attachmentsRepository;
+
     /* 게시글 저장하기 */
     @Transactional
-    public Long save (final PostsSaveRequestDto requestDto, List<MultipartFile> files){
-        List<Attachments> attachmentsList = new ArrayList<Attachments>();
+    public Long save (final PostsSaveRequestDto requestDto, List<MultipartFile> files) throws Exception {
+        List<AttachmentsSaveRequestDto> attachmentsSaveRequestDtos = new ArrayList<AttachmentsSaveRequestDto>();
 
-        if (!attachmentsList.isEmpty()) {
-            for (Attachments attachments : attachmentsList) {
+        for (MultipartFile file : files) {
+            String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 
-                attachmentsRepository.save(attachments);
-            }
+            AttachmentsSaveRequestDto attachmentsSaveRequestDto = new AttachmentsSaveRequestDto();
+            attachmentsSaveRequestDto.setPosts();
+            attachmentsSaveRequestDto.setFileName(file.getOriginalFilename());
+            attachmentsSaveRequestDto.setFilePath(filePath + "/" + fileName);
+            attachmentsSaveRequestDto.setFileSize(file.getSize());
+            this.attachmentsRepository.save(attachmentsSaveRequestDto.toEntity());
+
+            File saveFile = new File(filePath, fileName);
+            file.transferTo(saveFile);
         }
+
         return this.postsRepository.save(requestDto.toEntity()).getId();
     }
 

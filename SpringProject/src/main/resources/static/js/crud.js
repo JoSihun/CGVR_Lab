@@ -66,30 +66,57 @@ var main = {
 
     },
     postsSave : function () {
-        var data = {
-            title: $('#title').val(),
-            author: $('#author').val(),
-            content: $('#content').val(),
-            categoryName: $('#categoryName').val(),
-            projectName: $('#projectName').val()
-        };
+        // var data = {
+        //     title: $('#title').val(),
+        //     author: $('#author').val(),
+        //     content: $('#content').val(),
+        //     categoryName: $('#categoryName').val(),
+        //     projectName: $('#projectName').val()
+        // };
+
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '/posts/api',
+        //     dataType: 'json',
+        //     contentType:'application/json; charset=utf-8',
+        //     data: JSON.stringify(data),
+        // }).done(function(response) {
+        //     alert('글이 등록되었습니다.');
+        //     var arrayLink = document.location.href.split('/').slice(3, -1);
+        //     var stringLink = arrayLink.join('/');
+        //     var redirectUrl = '/' + stringLink + '/' + response;
+        //     console.log(redirectUrl);
+        //     window.location.href = redirectUrl;
+        // }).fail(function (error) {
+        //     alert(JSON.stringify(error));
+        // });
+
+        let form = $('#fileUploadForm')[0];
+        let formData = new FormData(form);
+        formData.append("title", $('#title').val());
+        formData.append("author", $('#author').val());
+        formData.append("content", $('#content').val());
+        formData.append("projectName", $('#projectName').val());
+        formData.append("categoryName", $('#categoryName').val());
 
         $.ajax({
             type: 'POST',
             url: '/posts/api',
+            enctype: 'multipart/form-data',
+            data: formData,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data),
-        }).done(function(response) {
+            processData: false,
+            contentType: false,
+        }).done(function (response) {
             alert('글이 등록되었습니다.');
             var arrayLink = document.location.href.split('/').slice(3, -1);
             var stringLink = arrayLink.join('/');
             var redirectUrl = '/' + stringLink + '/' + response;
-            console.log(redirectUrl);
             window.location.href = redirectUrl;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+
     },
     postsUpdate : function () {
         var data = {

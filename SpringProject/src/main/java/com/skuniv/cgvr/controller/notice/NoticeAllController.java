@@ -93,10 +93,12 @@ public class NoticeAllController {
             responseDtoList.addAll(responseDtoList1);
             responseDtoList.addAll(responseDtoList2);
             responseDtoList.addAll(responseDtoList3);
+
             responseDtoList = responseDtoList.stream().sorted(
                     Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
         }
-        
+
+
         model.addAttribute("posts", responseDtoList);
         return "notice_all_board";
     }
