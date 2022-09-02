@@ -1,18 +1,27 @@
 package com.skuniv.cgvr.controller.laboratory;
 
+import com.skuniv.cgvr.dto.AttachmentsListResponseDto;
 import com.skuniv.cgvr.dto.category.CategoryListResponseDto;
 import com.skuniv.cgvr.dto.project.ProjectListResponseDto;
 import com.skuniv.cgvr.dto.posts.*;
+import com.skuniv.cgvr.service.AttachmentsService;
 import com.skuniv.cgvr.service.CategoryService;
 import com.skuniv.cgvr.service.ProjectService;
 import com.skuniv.cgvr.service.posts.CommentsService;
 import com.skuniv.cgvr.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.annotation.Resource;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -24,6 +33,7 @@ public class LaboratoryAllController {
     private final PostsService postsService;
     private final CommentsService commentsService;
     private final ProjectService projectService;
+    private final AttachmentsService attachmentsService;
 
 
     /* 게시판 목록보기 */
@@ -47,11 +57,19 @@ public class LaboratoryAllController {
     @GetMapping("laboratory/all/posts/{id}")
     public String laboratoryAllPost(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
-        List<CommentsListResponseDto> responseDtoList = this.commentsService.findAllByPostId(id);
+        List<CommentsListResponseDto> responseDtoList1 = this.commentsService.findAllByPostId(id);
+        List<AttachmentsListResponseDto> responseDtoList2 = this.attachmentsService.findAllByPostId(id);
         model.addAttribute("posts", responseDto);
-        model.addAttribute("comments", responseDtoList);
-        model.addAttribute("commentsSize", responseDtoList.size());
+        model.addAttribute("comments", responseDtoList1);
+        model.addAttribute("commentsSize", responseDtoList1.size());
+        model.addAttribute("attachments", responseDtoList2);
         return "laboratory_all_posts";
+    }
+
+    /** 파일 다운로드 */
+    @GetMapping("/laboratory/all/posts/{postsId}/download/{attachId}")
+    public ResponseEntity<Resource> downloadAttachment(@PathVariable Long postsId, @PathVariable Long attachId) throws MalformedURLException {
+        UrlResource resource = new UrlResource("file:" + )
     }
 
 

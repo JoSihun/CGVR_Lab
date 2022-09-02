@@ -25,4 +25,12 @@ public class AttachmentsService {
         List<Attachments> attachmentsList = entity.getAttachmenstList();
         return attachmentsList.stream().map(AttachmentsListResponseDto::new).collect(Collectors.toList());
     }
+
+    @Transactional
+    public AttachmentsResponseDto findById(Long attachmentId) {
+        Attachments entity = this.attachmentsRepository.findById(attachmentId).orElseThrow(
+                () -> new IllegalArgumentException("해당 파일이 존재하지 않습니다. id=" + attachmentId));
+        return new AttachmentsListResponseDto(entity);
+        
+    }
 }

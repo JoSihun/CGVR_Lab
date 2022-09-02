@@ -156,24 +156,25 @@ public class PostsService {
     /* 게시글 저장하기 */
     @Transactional
     public Long save (final PostsSaveRequestDto requestDto, List<MultipartFile> files) throws Exception {
-        List<AttachmentsSaveRequestDto> attachmentsSaveRequestDtos = new ArrayList<AttachmentsSaveRequestDto>();
+        Long postId = this.postsRepository.save(requestDto.toEntity()).getId();
+        Posts entity = this.postsRepository.findById(postId).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + postId));
 
         for (MultipartFile file : files) {
             String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            File saveFile = new File(filePath, fileName);
+            file.transferTo(saveFile);
 
             AttachmentsSaveRequestDto attachmentsSaveRequestDto = new AttachmentsSaveRequestDto();
-            attachmentsSaveRequestDto.setPosts();
+            attachmentsSaveRequestDto.setPosts(entity);
             attachmentsSaveRequestDto.setFileName(file.getOriginalFilename());
             attachmentsSaveRequestDto.setFilePath(filePath + "/" + fileName);
             attachmentsSaveRequestDto.setFileSize(file.getSize());
             this.attachmentsRepository.save(attachmentsSaveRequestDto.toEntity());
-
-            File saveFile = new File(filePath, fileName);
-            file.transferTo(saveFile);
         }
 
-        return this.postsRepository.save(requestDto.toEntity()).getId();
+        return postId;
     }
 
 
@@ -193,6 +194,8 @@ public class PostsService {
     public Long delete ( final Long id){
         Posts entity = this.postsRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("이미 존재하지 않는 게시글입니다. id=" + id));
+        // ENTITY에서 먼저 ATTACHMENTS에 접근해서 관련파일 모두 삭제 후
+        // ENTITY 삭제 -> CASCADE로 나머지가 모두 삭제될 것으로 예상
         this.postsRepository.delete(entity);
         return id;
     }

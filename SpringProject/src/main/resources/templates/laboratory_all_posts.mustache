@@ -99,7 +99,13 @@
                 <!-- Card Footer -->
                 <div class="card-footer text-dark">
                     <div class="mb-2 text-start">
-                        첨부파일
+                        <strong>첨부파일</strong>
+                        {{#attachments}}
+                            <div class="d-flex justify-content-between">
+                                <div class="d-inline-block"><a class="text-dark" href="#"><u>{{fileName}}</u></a></div>
+                                <div class="d-inline-block">{{fileSize}} Kbytes</div>
+                            </div>
+                        {{/attachments}}
                     </div>
                     <div class="mb-2 text-end">
                         <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->

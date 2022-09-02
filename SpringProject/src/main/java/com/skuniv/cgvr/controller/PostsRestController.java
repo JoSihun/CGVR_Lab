@@ -1,7 +1,5 @@
 package com.skuniv.cgvr.controller;
 
-import com.mysql.cj.log.Log;
-import com.skuniv.cgvr.dto.AttachmentsSaveRequestDto;
 import com.skuniv.cgvr.dto.category.CategoryResponseDto;
 import com.skuniv.cgvr.dto.category.CategorySaveRequestDto;
 import com.skuniv.cgvr.dto.project.ProjectResponseDto;
