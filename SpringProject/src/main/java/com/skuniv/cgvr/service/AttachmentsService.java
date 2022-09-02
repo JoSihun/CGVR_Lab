@@ -3,6 +3,7 @@ package com.skuniv.cgvr.service;
 import com.skuniv.cgvr.domain.Attachments;
 import com.skuniv.cgvr.domain.posts.Posts;
 import com.skuniv.cgvr.dto.AttachmentsListResponseDto;
+import com.skuniv.cgvr.dto.AttachmentsResponseDto;
 import com.skuniv.cgvr.repository.AttachmentsRepository;
 import com.skuniv.cgvr.repository.posts.PostsRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,6 @@ public class AttachmentsService {
     public AttachmentsResponseDto findById(Long attachmentId) {
         Attachments entity = this.attachmentsRepository.findById(attachmentId).orElseThrow(
                 () -> new IllegalArgumentException("해당 파일이 존재하지 않습니다. id=" + attachmentId));
-        return new AttachmentsListResponseDto(entity);
-        
+        return new AttachmentsResponseDto(entity);
     }
 }

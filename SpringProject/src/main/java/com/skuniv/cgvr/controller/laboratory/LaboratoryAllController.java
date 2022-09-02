@@ -1,6 +1,7 @@
 package com.skuniv.cgvr.controller.laboratory;
 
 import com.skuniv.cgvr.dto.AttachmentsListResponseDto;
+import com.skuniv.cgvr.dto.AttachmentsResponseDto;
 import com.skuniv.cgvr.dto.category.CategoryListResponseDto;
 import com.skuniv.cgvr.dto.project.ProjectListResponseDto;
 import com.skuniv.cgvr.dto.posts.*;
@@ -13,15 +14,19 @@ import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.util.UriUtils;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -67,9 +72,13 @@ public class LaboratoryAllController {
     }
 
     /** 파일 다운로드 */
-    @GetMapping("/laboratory/all/posts/{postsId}/download/{attachId}")
-    public ResponseEntity<Resource> downloadAttachment(@PathVariable Long postsId, @PathVariable Long attachId) throws MalformedURLException {
-        UrlResource resource = new UrlResource("file:" + )
+    @GetMapping(value = "/laboratory/all/posts/{postsId}/download/{attachId}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<UrlResource> downloadAttachment(@PathVariable Long postsId, @PathVariable Long attachId) throws MalformedURLException {
+        AttachmentsResponseDto responseDto = this.attachmentsService.findById(attachId);
+        UrlResource resource = new UrlResource("file:" + responseDto.getFilePath());
+        String encodedFileName = UriUtils.encode(responseDto.getFileName(), StandardCharsets.UTF_8);
+        String contentDisposition = "attachment; filename=" + encodedFileName;
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);
     }
 
 

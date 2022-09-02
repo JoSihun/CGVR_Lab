@@ -102,7 +102,10 @@
                         <strong>첨부파일</strong>
                         {{#attachments}}
                             <div class="d-flex justify-content-between">
-                                <div class="d-inline-block"><a class="text-dark" href="#"><u>{{fileName}}</u></a></div>
+                                <div class="d-inline-block">
+                                    <a class="text-dark" href="/laboratory/all/posts/{{posts.id}}/download/{{id}}"
+                                       onclick="return confirm('파일을 다운로드하시겠습니까?')"><u>{{fileName}}</u></a>
+                                </div>
                                 <div class="d-inline-block">{{fileSize}} Kbytes</div>
                             </div>
                         {{/attachments}}

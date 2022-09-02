@@ -3,6 +3,8 @@ package com.skuniv.cgvr.dto;
 import com.skuniv.cgvr.domain.Attachments;
 import lombok.Getter;
 
+import java.time.format.DateTimeFormatter;
+
 @Getter
 public class AttachmentsResponseDto {
     private Long id;
@@ -17,7 +19,7 @@ public class AttachmentsResponseDto {
         this.fileSize = entity.getFileSize();
         this.fileName = entity.getFileName();
         this.filePath = entity.getFilePath();
-        this.createdDate = entity.getCreatedDate();
-        this.updatedDate = entity.getUpdatedDate();
+        this.createdDate = entity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
+        this.updatedDate = entity.getUpdatedDate().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
     }
 }
