@@ -104,8 +104,11 @@
 
                     <!-- Attachment  -->
                     <div class="mx-2 mb-4">
-                        <input type="file" class="form-control" id="file" multiple="multiple">
-                        <div class="invalid-feedback">Example invalid form file feedback</div>
+                        <form id="fileUploadForm" enctype="multipart/form-data">
+                            <input type="file" class="form-control" id="files" name="files" multiple="multiple">
+                            <div class="invalid-feedback">Example invalid form file feedback</div>
+                            <div id="file-list" style="border:2px solid #c9c9c9;min-height:100px"></div>
+                        </form>
                     </div>
 
                     <!-- Hidden Params -->
@@ -126,6 +129,21 @@
 
 
 <script>
+    $(document).ready(function () {
+        $("#files").change(function () {
+            $("#file-list").empty();
+            let fileList = $("#files")[0].files;
+            for (let i = 0; i < fileList.length; i++) {
+                $("#file-list").append(
+                        "<div class='d-flex justify-content-between'>" +
+                        "<div class='d-inline-block'>" + fileList[i].name + "</div>" +
+                        "<div class='d-inline-block'>" + fileList[i].size + " Bytes</div>" +
+                        "</div>"
+                );
+            };
+        });
+    });
+
     $(document).ready(function () {
         $("#categoryName").hide();
         $("#categoryName").attr("disabled", true);

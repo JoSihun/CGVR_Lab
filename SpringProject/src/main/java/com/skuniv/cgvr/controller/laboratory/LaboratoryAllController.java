@@ -71,6 +71,7 @@ public class LaboratoryAllController {
         return "laboratory_all_posts";
     }
 
+
     /** 파일 다운로드 */
     @GetMapping(value = "/laboratory/all/posts/{postsId}/download/{attachId}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<UrlResource> downloadAttachment(@PathVariable Long postsId, @PathVariable Long attachId) throws MalformedURLException {
@@ -103,9 +104,11 @@ public class LaboratoryAllController {
     @GetMapping("laboratory/all/posts/update/{id}")
     public String laboratoryAllPostUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto responseDto = this.postsService.findById(id);
-        List<ProjectListResponseDto> responseDtoList = this.projectService.findAllAsc();
+        List<ProjectListResponseDto> responseDtoList1 = this.projectService.findAllAsc();
+        List<AttachmentsListResponseDto> responseDtoList2 = this.attachmentsService.findAllByPostId(id);
         model.addAttribute("posts", responseDto);
-        model.addAttribute("project", responseDtoList);
+        model.addAttribute("project", responseDtoList1);
+        model.addAttribute("attachments", responseDtoList2);
         return "laboratory_all_posts_update_form";
     }
 

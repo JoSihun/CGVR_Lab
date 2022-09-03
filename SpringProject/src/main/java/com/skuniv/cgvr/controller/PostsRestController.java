@@ -26,14 +26,17 @@ public class PostsRestController {
     /* 게시글 작성요청 */
     @PostMapping("/posts/api")
     public Long postsSave(PostsSaveRequestDto requestDto, List<MultipartFile> files) throws Exception {
-
-        CategoryResponseDto categoryResponseDto = this.categoryService.findByCategoryName(requestDto.getCategoryName());
-        if (categoryResponseDto == null) {
-            CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
-            categorySaveRequestDto.setCategoryName(requestDto.getCategoryName());
-            this.categoryService.save(categorySaveRequestDto);
+        /* 카테고리명 존재유무 확인 및 저장 */
+        if (requestDto.getCategoryName() != null) {
+            CategoryResponseDto categoryResponseDto = this.categoryService.findByCategoryName(requestDto.getCategoryName());
+            if (categoryResponseDto == null) {
+                CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
+                categorySaveRequestDto.setCategoryName(requestDto.getCategoryName());
+                this.categoryService.save(categorySaveRequestDto);
+            }
         }
 
+        /* 프로젝트명 존재유무 확인 및 저장 */
         if (requestDto.getProjectName() != null){
             ProjectResponseDto projectResponseDto = this.projectService.findByProjectName(requestDto.getProjectName());
             if (projectResponseDto == null) {
@@ -48,22 +51,28 @@ public class PostsRestController {
 
     /* 게시글 수정요청 */
     @PutMapping("/posts/api/{id}")
-    public Long postsUpdate(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
-        CategoryResponseDto categoryResponseDto = this.categoryService.findByCategoryName(requestDto.getCategoryName());
-        if (categoryResponseDto == null) {
-            CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
-            categorySaveRequestDto.setCategoryName(requestDto.getCategoryName());
-            this.categoryService.save(categorySaveRequestDto);
+    public Long postsUpdate(@PathVariable Long id, PostsUpdateRequestDto requestDto, List<MultipartFile> files) throws Exception {
+        /* 카테고리명 존재유무 확인 및 저장 */
+        if (requestDto.getCategoryName() != null) {
+            CategoryResponseDto categoryResponseDto = this.categoryService.findByCategoryName(requestDto.getCategoryName());
+            if (categoryResponseDto == null) {
+                CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
+                categorySaveRequestDto.setCategoryName(requestDto.getCategoryName());
+                this.categoryService.save(categorySaveRequestDto);
+            }
         }
 
-        ProjectResponseDto projectResponseDto = this.projectService.findByProjectName(requestDto.getProjectName());
-        if (projectResponseDto == null) {
-            ProjectSaveRequestDto projectSaveRequestDto = new ProjectSaveRequestDto();
-            projectSaveRequestDto.setProjectName(requestDto.getProjectName());
-            this.projectService.save(projectSaveRequestDto);
+        /* 프로젝트명 존재유무 확인 및 저장 */
+        if (requestDto.getProjectName() != null){
+            ProjectResponseDto projectResponseDto = this.projectService.findByProjectName(requestDto.getProjectName());
+            if (projectResponseDto == null) {
+                ProjectSaveRequestDto projectSaveRequestDto = new ProjectSaveRequestDto();
+                projectSaveRequestDto.setProjectName(requestDto.getProjectName());
+                this.projectService.save(projectSaveRequestDto);
+            }
         }
 
-        return this.postsService.update(id, requestDto);
+        return this.postsService.update(id, requestDto, files);
     }
 
     /* 게시글 삭제요청 */

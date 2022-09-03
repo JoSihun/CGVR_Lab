@@ -19,6 +19,8 @@ public class AttachmentsService {
     private final PostsRepository postsRepository;
     private final AttachmentsRepository attachmentsRepository;
 
+
+    /** 게시글에 연결된 첨부파일 모두 불러오기 */
     @Transactional
     public List<AttachmentsListResponseDto> findAllByPostId(Long postId) {
         Posts entity = this.postsRepository.findById(postId).orElseThrow(
@@ -27,6 +29,8 @@ public class AttachmentsService {
         return attachmentsList.stream().map(AttachmentsListResponseDto::new).collect(Collectors.toList());
     }
 
+
+    /** 단일 첨부파일 데이터 불러오기 */
     @Transactional
     public AttachmentsResponseDto findById(Long attachmentId) {
         Attachments entity = this.attachmentsRepository.findById(attachmentId).orElseThrow(
