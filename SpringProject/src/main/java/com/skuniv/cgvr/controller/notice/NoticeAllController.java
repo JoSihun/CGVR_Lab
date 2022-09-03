@@ -6,7 +6,6 @@ import com.skuniv.cgvr.dto.category.CategoryListResponseDto;
 import com.skuniv.cgvr.dto.posts.CommentsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
-import com.skuniv.cgvr.dto.project.ProjectListResponseDto;
 import com.skuniv.cgvr.service.AttachmentsService;
 import com.skuniv.cgvr.service.CategoryService;
 import com.skuniv.cgvr.service.posts.CommentsService;
@@ -16,6 +15,11 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,8 +46,9 @@ public class NoticeAllController {
     /* 게시판 목록보기 */
     @GetMapping("notice/all/board")
     public String noticeAllBoard(Model model,
-                                 @RequestParam(name="searchFilter", required=false) String searchFilter,
-                                 @RequestParam(name="searchValue", required=false) String searchValue) {
+                                 @PageableDefault(sort = "id", size=20, direction = Sort.Direction.DESC) Pageable pageable,
+                                 @RequestParam(name="searchFilter", defaultValue = "") String searchFilter,
+                                 @RequestParam(name="searchValue", defaultValue = "") String searchValue) {
 
         List<PostsListResponseDto> responseDtoList;
         List<PostsListResponseDto> responseDtoList1;
@@ -110,8 +115,46 @@ public class NoticeAllController {
                     Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
         }
 
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), responseDtoList.size());
 
-        model.addAttribute("posts", responseDtoList);
+        // 페이지 객체 선언
+        Page<PostsListResponseDto> responseDtoPage = new PageImpl<>(responseDtoList.subList(start, end), pageable, responseDtoList.size());
+
+        // 페이지 인덱스
+        int currentPage = responseDtoPage.getNumber();
+        int startPage = Math.max(currentPage / 5 * 5 + 1, 1);
+        if ((currentPage % 5)+1 == 0) startPage -= 5;
+        int endPage = Math.min(currentPage+5, responseDtoPage.getTotalPages());
+
+        // 프론트에서 처리할 페이지 인덱스 생성
+        ArrayList pageIndex = new ArrayList();
+        for (int i = startPage; i <= startPage + 4; i++) {
+            pageIndex.add(i);
+            if (i >= endPage) break;
+        }
+
+        model.addAttribute("posts", responseDtoPage);
+
+        /* 페이징을 위한 파라미터 */
+        model.addAttribute("hasPrev", responseDtoPage.hasPrevious());                       // 이전 페이지 존재 여부
+        model.addAttribute("hasNext", responseDtoPage.hasNext());                           // 다음 페이지 존재 여부
+        if (responseDtoPage.hasPrevious())
+            model.addAttribute("prev",
+                    responseDtoPage.previousOrFirstPageable().getPageNumber()+1);           // 이전 페이지 번호
+        if (responseDtoPage.hasNext())
+            model.addAttribute("next",
+                    responseDtoPage.nextOrLastPageable().getPageNumber()+1);                // 이전 페이지 번호
+        model.addAttribute("pageIndex", pageIndex);                                         // 프론트에서 처리할 페이지 인덱스
+        model.addAttribute("startPage", startPage);                                         // 페이지 인덱스 시작 번호
+        model.addAttribute("endPage", endPage);                                             // 페이지 인덱스 마지막 번호
+        model.addAttribute("lastPage", responseDtoPage.getTotalPages());                    // 마지막 페이지
+        model.addAttribute("currentPage", currentPage);                                     // 현재 페이지 번호
+
+        /* 검색 기능용 파라미터 */
+        model.addAttribute("searchValue", searchValue);     // 검색어
+        model.addAttribute("searchFilter", searchFilter);   // 검색필터
+
         return "notice_all_board";
     }
 

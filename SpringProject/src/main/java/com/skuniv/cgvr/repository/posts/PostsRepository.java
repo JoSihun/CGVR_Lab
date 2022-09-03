@@ -10,14 +10,18 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PostsRepository extends JpaRepository<Posts, Long> {
-    /* 카테고리별 게시판 목록보기 */
+
+    /* 카테고리별 게시판 목록보기 - Sort */
     List<Posts> findAllByCategoryName(String categoryName, Sort sort);
 
-    /* 프로젝트별 게시판 목록보기 */
+    /* 프로젝트별 게시판 목록보기 - Sort */
     List<Posts> findAllByProjectName(String projectName, Sort sort);
 
-    /* 페이징 테스트 */
+    /* 카테고리별 게시판 목록보기 - Pageable */
     Page<Posts> findAllByCategoryName(String categoryName, Pageable pageable);
+
+    /* 프로젝트별 게시판 목록보기 - Pageable */
+    Page<Posts> findAllByProjectName(String projectName, Pageable pageable);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +39,23 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
     /* 카테고리별 제목+내용 검색 목록보기 and 안에 or을 묶어서 쓸 수가 없어서 @Query로 직접 작성 */
     @Query("select p from Posts p where p.categoryName = ?1 and (p.title like %?2% or p.content like %?3%)")
     List<Posts> findByCategoryNameAndTitleContainingOrContentContaining(String categoryName, String title, String content, Sort sort);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /* 페이지네이션 적용 */
+    /* 제목 검색 목록보기 */
+    Page<Posts> findByCategoryNameAndTitleContaining(String categoryName, String title, Pageable pageable);
+    /* 내용 검색 목록보기 */
+    Page<Posts> findByCategoryNameAndContentContaining(String categoryName, String content, Pageable pageable);
+    /* 작성자 검색 목록보기 */
+    Page<Posts> findByCategoryNameAndAuthorContaining(String categoryName, String content, Pageable pageable);
+    /* 제목+작성자 검색 목록보기 */
+    Page<Posts> findByTitleLikeOrAuthorContaining(String categoryName, String title, String author, Pageable pageable);
+    /* 카테고리별 제목+내용 검색 목록보기 and 안에 or을 묶어서 쓸 수가 없어서 @Query로 직접 작성 */
+    @Query("select p from Posts p where p.categoryName = ?1 and (p.title like %?2% or p.content like %?3%)")
+    Page<Posts> findByCategoryNameAndTitleContainingOrContentContaining(String categoryName, String title, String content, Pageable pageable);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
