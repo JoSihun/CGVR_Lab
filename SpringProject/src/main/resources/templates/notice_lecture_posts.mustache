@@ -16,9 +16,14 @@
 
                         <!-- Card Body -->
                         <div class="card-body text-dark">
-                            <div><p class="card-text"><strong>이름</strong> : 염동빈</p></div>
-                            <div><p class="card-text"><strong>학번</strong> : 2017305045</p></div>
-                            <div><p class="card-text"><strong>재학정보</strong> : 4학년</p></div>
+                            {{#admin}}
+                                <div><p class="card-text"><strong>이름</strong> : {{sessionKorName}}</p></div>
+                                <div><p class="card-text"><strong>학번</strong> : {{sessionUserId}}</p></div>
+                                <div><p class="card-text"><strong>재학정보</strong> : {{sessionGrade}}학년</p></div>
+                            {{/admin}}
+                            {{^admin}}
+                                <div><p class="card-text"><strong>연구원만 표시됩니다</strong></p></div>
+                            {{/admin}}
                         </div>
                     </div>
                 </div>
@@ -40,7 +45,12 @@
             <!-- 글쓰기 빠른메뉴 -->
             <div class="row mb-3">
                 <div class="col-xl-12">
-                    <button class="btn btn-dark btn-block" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                    {{#admin}}
+                        <button class="btn btn-dark btn-block" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                    {{/admin}}
+                    {{^admin}}
+                        <button class="btn btn-dark btn-block">글쓰기</button>
+                    {{/admin}}
                 </div>
             </div>
 
@@ -174,6 +184,7 @@
 
             </div>
 
+            {{#admin}}
             <!-- Input Comments -->
             <div class="card shadow border border-dark bg-light mb-4">
                 <div class="card-body text-dark">
@@ -185,6 +196,7 @@
                     </div>
                 </div>
             </div>
+            {{/admin}}
 
             <!-- Hidden Param -->
             <input type="hidden" class="form-control" id="author" value="히든작성자"/>

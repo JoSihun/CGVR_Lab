@@ -1,5 +1,11 @@
 {{>header}}
 {{>banner}}
+{{^admin}}
+    <div class="text-center mx-auto my-auto">
+        <h2>관리자만 게시글 작성이 가능합니다.</h2>
+    </div>
+{{/admin}}
+{{#admin}}
 <div class="container-fluid">
     <div class="row mx-4 my-4">
 
@@ -164,4 +170,5 @@
         });
     });
 </script>
+{{/admin}}
 {{>footer}}

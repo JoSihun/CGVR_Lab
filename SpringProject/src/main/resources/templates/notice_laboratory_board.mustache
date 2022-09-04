@@ -16,14 +16,14 @@
 
                         <!-- Card Body -->
                         <div class="card-body text-dark">
-                            {{#sessionKorName}}
-                            <div><p class="card-text"><strong>이름</strong> : {{sessionKorName}}</p></div>
-                            <div><p class="card-text"><strong>학번</strong> : {{sessionUserId}}</p></div>
-                            <div><p class="card-text"><strong>재학정보</strong> : {{sessionGrade}}학년</p></div>
-                            {{/sessionKorName}}
-                            {{^sessionKorName}}
-                                <div><p class="card-text"><strong>로그인후 이용가능합니다</strong></p></div>
-                            {{/sessionKorName}}
+                            {{#admin}}
+                                <div><p class="card-text"><strong>이름</strong> : {{sessionKorName}}</p></div>
+                                <div><p class="card-text"><strong>학번</strong> : {{sessionUserId}}</p></div>
+                                <div><p class="card-text"><strong>재학정보</strong> : {{sessionGrade}}학년</p></div>
+                            {{/admin}}
+                            {{^admin}}
+                                <div><p class="card-text"><strong>연구원만 표시됩니다</strong></p></div>
+                            {{/admin}}
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,12 @@
             <!-- 글쓰기 빠른메뉴 -->
             <div class="row mb-3">
                 <div class="col-xl-12">
-                    <button class="btn btn-dark btn-block" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                    {{#admin}}
+                        <button class="btn btn-dark btn-block" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                    {{/admin}}
+                    {{^admin}}
+                        <button class="btn btn-dark btn-block">글쓰기</button>
+                    {{/admin}}
                 </div>
             </div>
 
@@ -68,7 +73,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <!-- 우측 게시판 보드 -->
@@ -116,7 +120,9 @@
                     <div class="row mb-2">
                         <!-- Column 1: Manage Title Header -->
                         <div class="col-sm-2 text-start">
+                            {{#admin}}
                             <button class="btn btn-dark ms-4" onclick="location.href='/manage/posts/title';">글머리 관리</button>
+                            {{/admin}}
                         </div>
 
                         <!-- Column 2: Search Form -->
@@ -147,7 +153,9 @@
 
                         <!-- Column 3: Writing Post Form -->
                         <div class="col-sm-2 text-end">
+                            {{#admin}}
                             <button class="btn btn-dark me-4" onclick="location.href='/notice/laboratory/posts/form';">글쓰기</button>
+                            {{/admin}}
                         </div>
                     </div>
 
