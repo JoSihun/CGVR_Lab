@@ -90,10 +90,11 @@
                         {{#posts}}
                         <tr>
                             <td class="text-center">{{id}}</td>
-                            <td class="text-start">
+                            <td class="text-start text-truncate" style="max-width: 150px">
                                 <a class="text-dark" href="/laboratory/material/posts/{{id}}">
                                     <span style="color: gray">[{{categoryName}}][{{projectName}}]</span>
                                     {{title}}
+                                    <span style="color: darkorange">[{{commentsSize}}]</span>
                                 </a>
                             </td>
                             <td class="text-center">{{author}}</td>

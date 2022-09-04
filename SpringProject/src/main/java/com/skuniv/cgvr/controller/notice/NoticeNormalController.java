@@ -75,6 +75,11 @@ public class NoticeNormalController {
             responseDtoList = this.postsService.findAllByCategoryName("일반 공지사항", pageable);
         }
 
+        // 날짜 포매팅
+        for(PostsListResponseDto responseDto : responseDtoList) {
+            responseDto.boardFormat();
+        }
+
         // 페이지 인덱스
         int currentPage = responseDtoList.getNumber();
         int startPage = Math.max(currentPage / 5 * 5 + 1, 1);

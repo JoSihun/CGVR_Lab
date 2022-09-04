@@ -40,6 +40,25 @@ public class IndexController {
         if (responseDtoList5.size() > 5) { responseDtoList5 = responseDtoList5.subList(0, 5); }
         if (responseDtoList6.size() > 5) { responseDtoList6 = responseDtoList6.subList(0, 5); }
 
+        for(PostsListResponseDto responseDto : responseDtoList1) {
+            responseDto.indexFormat();
+        }
+        for(PostsListResponseDto responseDto : responseDtoList2) {
+            responseDto.indexFormat();
+        }
+        for(PostsListResponseDto responseDto : responseDtoList3) {
+            responseDto.indexFormat();
+        }
+        for(PostsListResponseDto responseDto : responseDtoList4) {
+            responseDto.indexFormat();
+        }
+        for(PostsListResponseDto responseDto : responseDtoList5) {
+            responseDto.indexFormat();
+        }
+        for(PostsListResponseDto responseDto : responseDtoList6) {
+            responseDto.indexFormat();
+        }
+
         model.addAttribute("noticeNormalPosts", responseDtoList1);
         model.addAttribute("noticeLecturePosts", responseDtoList2);
         model.addAttribute("noticeLaboratoryPosts", responseDtoList3);

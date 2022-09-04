@@ -77,6 +77,11 @@ public class LaboratoryMaterialController {
             responseDtoList = this.postsService.findAllByCategoryName("자료 게시판", pageable);
         }
 
+        // 날짜 포매팅
+        for(PostsListResponseDto responseDto : responseDtoList) {
+            responseDto.boardFormat();
+        }
+
         // 페이지 인덱스
         int currentPage = responseDtoList.getNumber();
         int startPage = Math.max(currentPage / 5 * 5 + 1, 1);

@@ -115,6 +115,11 @@ public class NoticeAllController {
                     Comparator.comparing(PostsListResponseDto::getId).reversed()).collect(Collectors.toList());
         }
 
+        // 날짜 포매팅
+        for(PostsListResponseDto responseDto : responseDtoList) {
+            responseDto.boardFormat();
+        }
+
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), responseDtoList.size());
 

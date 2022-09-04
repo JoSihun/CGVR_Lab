@@ -37,14 +37,18 @@ public class PostsListResponseDto {
     }
 
 
-    public void formatCreatedDate() {
+    public void boardFormat() {
         String[] array = this.createdDate.split(" ");   // 날짜 시간 분리
         // 최초작성일이 오늘인 경우
         if (array[0].equals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")))) {
             this.createdDate = array[1].substring(0, 5);      // 시간 분단위까지만 저장
-        } else {
+        } else { // 이외의 일인 경우
             this.createdDate = array[0];                      // 날짜 저장
         }
     }
 
+    public void indexFormat() {
+        String[] array = this.createdDate.split(" ");
+        this.createdDate = array[0];
+    }
 }
