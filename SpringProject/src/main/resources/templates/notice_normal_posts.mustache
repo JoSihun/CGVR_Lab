@@ -124,8 +124,10 @@
                     </div>
                     <div class="mb-2 text-end">
                         <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
+                        {{#myPost}}
                         <button type="submit" class="btn btn-primary" onclick="location.href='/notice/normal/posts/update/{{id}}';">수정</button>
                         <button type="button" class="btn btn-danger" id="btn-posts-delete">삭제</button>
+                        {{/myPost}}
                     </div>
                 </div>
 
@@ -166,7 +168,17 @@
                             <div class="collapse" id="comments-update-form-{{id}}">
                                 <!-- Hidden Param -->
                                 <input type="hidden" class="form-control" id="commentsId" value="{{id}}">
-
+                                <input type="hidden" class="form-control" id="commentsAuthor" value="{{author}}">
+                                <!-- If logged-in User -->
+                                {{#sessionKorName}}
+                                    <input type="hidden" class="form-control" id="sessionKorName" value="{{sessionKorName}}">
+                                    <input type="hidden" class="form-control" id="sessionUserId" value="{{sessionUserId}}">
+                                {{/sessionKorName}}
+                                <!-- else -->
+                                {{^sessionKorName}}
+                                    <input type="hidden" class="form-control" id="sessionKorName" value="none">
+                                    <input type="hidden" class="form-control" id="sessionUserId" value="none">
+                                {{/sessionKorName}}
                                 <div class="mb-3 text-start">
                                     <textarea class="form-control" rows="3" id="updateContent" placeholder="댓글을 작성해보세요">{{{content}}}</textarea>
                                 </div>
@@ -199,11 +211,11 @@
             {{/admin}}
 
             <!-- Hidden Param -->
-            <input type="hidden" class="form-control" id="author" value="히든작성자"/>
+            {{#sessionKorName}}
+            <input type="hidden" class="form-control" id="author" value="{{sessionUserId}} {{sessionKorName}}"/>
             <input type="hidden" class="form-control" id="postsId" value="{{posts.id}}">
-
+            {{/sessionKorName}}
         </div>
-
     </div>
 </div>
 

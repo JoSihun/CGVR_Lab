@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -121,7 +122,7 @@ public class NoticeNormalController {
     /* 게시글 상세보기 */
     // 댓글 기능을 추가하였으나, 테스트 해보지 않았음
     @GetMapping("notice/normal/posts/{id}")
-    public String noticeNormalPost(@PathVariable Long id, Model model) {
+    public String noticeNormalPost(@PathVariable Long id, Model model, HttpSession session) {
         PostsResponseDto responseDto = this.postsService.findById(id);
         List<CommentsListResponseDto> responseDtoList1 = this.commentsService.findAllByPostId(id);
         List<AttachmentsListResponseDto> responseDtoList2 = this.attachmentsService.findAllByPostId(id);
@@ -129,6 +130,12 @@ public class NoticeNormalController {
         model.addAttribute("comments", responseDtoList1);
         model.addAttribute("commentsSize", responseDtoList1.size());
         model.addAttribute("attachments", responseDtoList2);
+        // 본인 글 확인 (이부분은 단순 프론트단에서 버튼 유무만 결정하도록)
+        String cmpUser = session.getAttribute("sessionUserId") + " " + session.getAttribute("sessionKorName");
+        if(responseDto.getAuthor().equals(cmpUser)) {
+            model.addAttribute("myPost", true);
+        }
+        // 본인 댓글 확인 (js를 통해 막음 → 댓글은 리스트라서 타임리프가 아닌 이상 불가능해보임)
         return "notice_normal_posts";
     }
 

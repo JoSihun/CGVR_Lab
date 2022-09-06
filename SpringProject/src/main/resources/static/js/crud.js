@@ -45,23 +45,45 @@ var main = {
 
         $('[id="btn-comments-update"]').on('click', function () {
             var commentsInfo = this.closest('li');
-            var result = confirm("저장하시겠습니까?");
-            if (result) {
-                _this.commentsUpdate(commentsInfo);
+            var data = {
+                author: commentsInfo.querySelector('#commentsAuthor').value,
+                sessionUserId: commentsInfo.querySelector('#sessionUserId').value,
+                sessionKorName : commentsInfo.querySelector('#sessionKorName').value,
             }
-            else{
-                alert("저장이 취소되었습니다.");
+            var sessionUser = [data.sessionUserId, data.sessionKorName].join(' ');
+
+            if(data.author !== sessionUser) {
+                alert('본인이 작성한 댓글만 수정 가능합니다.');
+            }
+            else {
+                var result = confirm("저장하시겠습니까?");
+                if (result) {
+                    _this.commentsUpdate(commentsInfo);
+                } else {
+                    alert("저장이 취소되었습니다.");
+                }
             }
         });
 ''
         $('[id="btn-comments-delete"]').on('click', function () {
             var commentsInfo = this.closest('li');
-            var result = confirm("삭제하시겠습니까?");
-            if (result) {
-                _this.commentsDelete(commentsInfo);
+            var data = {
+                author: commentsInfo.querySelector('#commentsAuthor').value,
+                sessionUserId: commentsInfo.querySelector('#sessionUserId').value,
+                sessionKorName : commentsInfo.querySelector('#sessionKorName').value,
             }
-            else{
-                alert("삭제가 취소되었습니다.");
+            var sessionUser = [data.sessionUserId, data.sessionKorName].join(' ');
+
+            if(data.author !== sessionUser) {
+                alert('본인이 작성한 댓글만 삭제 가능합니다.');
+            }
+            else {
+                var result = confirm("삭제하시겠습니까?");
+                if (result) {
+                    _this.commentsDelete(commentsInfo);
+                } else {
+                    alert("삭제가 취소되었습니다.");
+                }
             }
         });
 
