@@ -117,7 +117,7 @@ public class NoticeAllController {
         int endPage = Math.min(currentPage+5, responseDtoPage.getTotalPages());
 
         // 프론트에서 처리할 페이지 인덱스 생성
-        ArrayList pageIndex = new ArrayList();
+        ArrayList<Integer> pageIndex = new ArrayList<>();
         for (int i = startPage; i <= startPage + 4; i++) {
             pageIndex.add(i);
             if (i >= endPage) break;
