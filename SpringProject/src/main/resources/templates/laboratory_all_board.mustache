@@ -100,10 +100,11 @@
                         {{#posts}}
                         <tr>
                             <td class="text-center">{{id}}</td>
-                            <td class="text-start text-truncate" style="max-width: 150px">
+                            <td class="text-start">
+                                <!-- 게시글 제목길이 상하여백 개선필요 -->
                                 <a class="text-dark" href="/laboratory/all/posts/{{id}}">
                                     <span style="color: gray">[{{categoryName}}][{{projectName}}]</span>
-                                    {{title}}
+                                    <span class="d-inline-block text-truncate" style="max-width: 150px">{{title}}</span>
                                     <span style="color: darkorange">[{{commentsSize}}]</span>
                                 </a>
                             </td>
