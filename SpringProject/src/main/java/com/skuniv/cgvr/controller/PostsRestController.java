@@ -24,7 +24,7 @@ public class PostsRestController {
 
 
     /* 게시글 작성요청 */
-    @PostMapping("/posts/api")
+    @PostMapping("posts/api")
     public Long postsSave(PostsSaveRequestDto requestDto, List<MultipartFile> files) throws Exception {
         /* 카테고리명 존재유무 확인 및 저장 */
         if (requestDto.getCategoryName() != null) {
