@@ -16,9 +16,14 @@
 
                         <!-- Card Body -->
                         <div class="card-body text-dark">
-                            <div><p class="card-text"><strong>이름</strong> : 염동빈</p></div>
-                            <div><p class="card-text"><strong>학번</strong> : 2017305045</p></div>
-                            <div><p class="card-text"><strong>재학정보</strong> : 4학년</p></div>
+                            {{#admin}}
+                                <div><p class="card-text"><strong>이름</strong> : {{sessionKorName}}</p></div>
+                                <div><p class="card-text"><strong>학번</strong> : {{sessionUserId}}</p></div>
+                                <div><p class="card-text"><strong>재학정보</strong> : {{sessionGrade}}학년</p></div>
+                            {{/admin}}
+                            {{^admin}}
+                                <div><p class="card-text"><strong>연구원만 표시됩니다</strong></p></div>
+                            {{/admin}}
                         </div>
                     </div>
                 </div>
@@ -40,7 +45,12 @@
             <!-- 글쓰기 빠른메뉴 -->
             <div class="row mb-3">
                 <div class="col-xl-12">
-                    <button class="btn btn-dark btn-block" onclick="location.href='/laboratory/notice/posts/form';">글쓰기</button>
+                    {{#admin}}
+                        <button class="btn btn-dark btn-block" onclick="location.href='/laboratory/all/posts/form';">글쓰기</button>
+                    {{/admin}}
+                    {{^admin}}
+                        <button class="btn btn-dark btn-block">글쓰기</button>
+                    {{/admin}}
                 </div>
             </div>
 
@@ -99,12 +109,25 @@
                 <!-- Card Footer -->
                 <div class="card-footer text-dark">
                     <div class="mb-2 text-start">
-                        첨부파일
+                        <strong>첨부파일</strong>
+                        {{#attachments}}
+                            <div class="d-flex justify-content-between">
+                                <div class="d-inline-block">
+                                    <a class="text-dark" href="/laboratory/notice/posts/{{posts.id}}/download/{{id}}"
+                                       onclick="return confirm('파일을 다운로드하시겠습니까?')"><u>[다운로드]</u>&nbsp;</a>
+                                    <a class="text-dark" href="/laboratory/notice/posts/{{posts.id}}/download/{{id}}"
+                                       onclick="return confirm('파일을 다운로드하시겠습니까?')"><u>{{fileName}}</u></a>
+                                </div>
+                                <div class="d-inline-block">{{fileSize}}</div>
+                            </div>
+                        {{/attachments}}
                     </div>
                     <div class="mb-2 text-end">
                         <!-- 수정 / 삭제 : 권한 있는 사람한테만 보이도록 -->
-                        <button type="submit" class="btn btn-primary" onclick="location.href='/laboratory/all/posts/update/{{id}}';">수정</button>
+                        {{#myPost}}
+                        <button type="submit" class="btn btn-primary" onclick="location.href='/laboratory/notice/posts/update/{{id}}';">수정</button>
                         <button type="button" class="btn btn-danger" id="btn-posts-delete">삭제</button>
+                        {{/myPost}}
                     </div>
                 </div>
 
@@ -145,7 +168,17 @@
                             <div class="collapse" id="comments-update-form-{{id}}">
                                 <!-- Hidden Param -->
                                 <input type="hidden" class="form-control" id="commentsId" value="{{id}}">
-
+                                <input type="hidden" class="form-control" id="commentsAuthor" value="{{author}}">
+                                <!-- If logged-in User -->
+                                {{#sessionKorName}}
+                                    <input type="hidden" class="form-control" id="sessionKorName" value="{{sessionKorName}}">
+                                    <input type="hidden" class="form-control" id="sessionUserId" value="{{sessionUserId}}">
+                                {{/sessionKorName}}
+                                <!-- else -->
+                                {{^sessionKorName}}
+                                    <input type="hidden" class="form-control" id="sessionKorName" value="none">
+                                    <input type="hidden" class="form-control" id="sessionUserId" value="none">
+                                {{/sessionKorName}}
                                 <div class="mb-3 text-start">
                                     <textarea class="form-control" rows="3" id="updateContent" placeholder="댓글을 작성해보세요">{{{content}}}</textarea>
                                 </div>
@@ -163,6 +196,7 @@
 
             </div>
 
+            {{#admin}}
             <!-- Input Comments -->
             <div class="card shadow border border-dark bg-light mb-4">
                 <div class="card-body text-dark">
@@ -174,13 +208,14 @@
                     </div>
                 </div>
             </div>
+            {{/admin}}
 
             <!-- Hidden Param -->
-            <input type="hidden" class="form-control" id="author" value="히든작성자"/>
+            {{#sessionKorName}}
+            <input type="hidden" class="form-control" id="author" value="{{sessionUserId}} {{sessionKorName}}"/>
             <input type="hidden" class="form-control" id="postsId" value="{{posts.id}}">
-
+            {{/sessionKorName}}
         </div>
-
     </div>
 </div>
 

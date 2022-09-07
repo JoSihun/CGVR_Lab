@@ -9,19 +9,28 @@
             <div class="card border border-dark h-100" style="min-height: 300px">
                 <h5 class="card-header text-white bg-dark text-center">일반 공지사항</h5>
                 <ul class="list-group list-group-dark">
-                    {{#noticeNormalPosts}}
                     <li class="list-group-item p-0">
                         <table>
+                            <thead>
+                            <tr>
+                                <th style="width: 10%" class="text-center"> </th>
+                                <th style="width: 40%" class="text-start">제목</th>
+                                <th style="width: 10%" class="text-center">조회수</th>
+                                <th style="width: 15%" class="text-center">작성자</th>
+                                <th style="width: 15%" class="text-center">작성일</th>
+                            </tr>
+                            </thead>
+                            {{#noticeNormalPosts}}
                             <tr>
                                 <td style="width: 10%" class="text-center">{{id}}</td>
-                                <td style="width: 40%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                <td style="max-width: 150px" class="text-start text-truncate"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
                                 <td style="width: 10%" class="text-center">{{hits}}</td>
-                                <td style="width: 15%" class="text-center">{{author}}</td>
+                                <td style="width: 15%; max-width: 150px" class="text-center text-truncate">{{author}}</td>
                                 <td style="width: 15%" class="text-center">{{createdDate}}</td>
                             </tr>
+                            {{/noticeNormalPosts}}
                         </table>
                     </li>
-                    {{/noticeNormalPosts}}
                 </ul>
             </div>
         </div>
@@ -32,19 +41,28 @@
             <div class="card border border-dark h-100" style="min-height: 300px">
                 <h5 class="card-header text-white bg-dark text-center">수업 공지사항</h5>
                 <ul class="list-group list-group-dark">
-                    {{#noticeLecturePosts}}
-                        <li class="list-group-item p-0">
-                            <table>
-                                <tr>
-                                    <td style="width: 10%" class="text-center">{{id}}</td>
-                                    <td style="width: 40%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
-                                    <td style="width: 10%" class="text-center">{{hits}}</td>
-                                    <td style="width: 15%" class="text-center">{{author}}</td>
-                                    <td style="width: 15%" class="text-center">{{createdDate}}</td>
-                                </tr>
-                            </table>
-                        </li>
-                    {{/noticeLecturePosts}}
+                    <li class="list-group-item p-0">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="width: 10%" class="text-center"> </th>
+                                <th style="width: 40%" class="text-start">제목</th>
+                                <th style="width: 10%" class="text-center">조회수</th>
+                                <th style="width: 15%" class="text-center">작성자</th>
+                                <th style="width: 15%" class="text-center">작성일</th>
+                            </tr>
+                            </thead>
+                            {{#noticeLecturePosts}}
+                            <tr>
+                                <td style="width: 10%" class="text-center">{{id}}</td>
+                                <td style="max-width: 150px" class="text-start text-truncate"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                <td style="width: 10%" class="text-center">{{hits}}</td>
+                                <td style="width: 15%; max-width: 150px" class="text-center text-truncate">{{author}}</td>
+                                <td style="width: 15%" class="text-center">{{createdDate}}</td>
+                            </tr>
+                            {{/noticeLecturePosts}}
+                        </table>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -53,23 +71,30 @@
         <div class="col-lg-4">
             <div class="card border border-dark h-100" style="min-height: 300px">
                 <h5 class="card-header text-white bg-dark text-center">연구 공지사항</h5>
-
                 <ul class="list-group list-group-dark">
-                    {{#noticeLaboratoryPosts}}
-                        <li class="list-group-item p-0">
-                            <table>
-                                <tr>
-                                    <td style="width: 10%" class="text-center">{{id}}</td>
-                                    <td style="width: 40%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
-                                    <td style="width: 10%" class="text-center">{{hits}}</td>
-                                    <td style="width: 15%" class="text-center">{{author}}</td>
-                                    <td style="width: 15%" class="text-center">{{createdDate}}</td>
-                                </tr>
-                            </table>
-                        </li>
-                    {{/noticeLaboratoryPosts}}
+                    <li class="list-group-item p-0">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="width: 10%" class="text-center"> </th>
+                                <th style="width: 40%" class="text-start">제목</th>
+                                <th style="width: 10%" class="text-center">조회수</th>
+                                <th style="width: 15%" class="text-center">작성자</th>
+                                <th style="width: 15%" class="text-center">작성일</th>
+                            </tr>
+                            </thead>
+                            {{#noticeLaboratoryPosts}}
+                            <tr>
+                                <td style="width: 10%" class="text-center">{{id}}</td>
+                                <td style="max-width: 150px" class="text-start text-truncate"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                <td style="width: 10%" class="text-center">{{hits}}</td>
+                                <td style="width: 15%; max-width: 150px" class="text-center text-truncate">{{author}}</td>
+                                <td style="width: 15%" class="text-center">{{createdDate}}</td>
+                            </tr>
+                            {{/noticeLaboratoryPosts}}
+                        </table>
+                    </li>
                 </ul>
-
             </div>
         </div>
     </div>
@@ -81,19 +106,28 @@
             <div class="card border border-dark h-100" style="min-height: 300px">
                 <h5 class="card-header text-white bg-dark text-center">연구실 공지사항</h5>
                 <ul class="list-group list-group-dark">
-                    {{#LaboratoryNoticePosts}}
-                        <li class="list-group-item p-0">
-                            <table>
-                                <tr>
-                                    <td style="width: 10%" class="text-center">{{id}}</td>
-                                    <td style="width: 40%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
-                                    <td style="width: 10%" class="text-center">{{hits}}</td>
-                                    <td style="width: 15%" class="text-center">{{author}}</td>
-                                    <td style="width: 15%" class="text-center">{{createdDate}}</td>
-                                </tr>
-                            </table>
-                        </li>
-                    {{/LaboratoryNoticePosts}}
+                    <li class="list-group-item p-0">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="width: 10%" class="text-center"> </th>
+                                <th style="width: 40%" class="text-start">제목</th>
+                                <th style="width: 10%" class="text-center">조회수</th>
+                                <th style="width: 15%" class="text-center">작성자</th>
+                                <th style="width: 15%" class="text-center">작성일</th>
+                            </tr>
+                            </thead>
+                            {{#LaboratoryNoticePosts}}
+                            <tr>
+                                <td style="width: 10%" class="text-center">{{id}}</td>
+                                <td style="max-width: 150px" class="text-start text-truncate"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                <td style="width: 10%" class="text-center">{{hits}}</td>
+                                <td style="width: 15%; max-width: 150px" class="text-center text-truncate">{{author}}</td>
+                                <td style="width: 15%" class="text-center">{{createdDate}}</td>
+                            </tr>
+                            {{/LaboratoryNoticePosts}}
+                        </table>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -103,19 +137,28 @@
             <div class="card border border-dark h-100" style="min-height: 300px">
                 <h5 class="card-header text-white bg-dark text-center">논문 게시판</h5>
                 <ul class="list-group list-group-dark">
-                    {{#LaboratoryPaperPosts}}
-                        <li class="list-group-item p-0">
-                            <table>
-                                <tr>
-                                    <td style="width: 10%" class="text-center">{{id}}</td>
-                                    <td style="width: 40%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
-                                    <td style="width: 10%" class="text-center">{{hits}}</td>
-                                    <td style="width: 15%" class="text-center">{{author}}</td>
-                                    <td style="width: 15%" class="text-center">{{createdDate}}</td>
-                                </tr>
-                            </table>
-                        </li>
-                    {{/LaboratoryPaperPosts}}
+                    <li class="list-group-item p-0">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="width: 10%" class="text-center"> </th>
+                                <th style="width: 40%" class="text-start">제목</th>
+                                <th style="width: 10%" class="text-center">조회수</th>
+                                <th style="width: 15%" class="text-center">작성자</th>
+                                <th style="width: 15%" class="text-center">작성일</th>
+                            </tr>
+                            </thead>
+                            {{#LaboratoryPaperPosts}}
+                            <tr>
+                                <td style="width: 10%" class="text-center">{{id}}</td>
+                                <td style="max-width: 150px" class="text-start text-truncate"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                <td style="width: 10%" class="text-center">{{hits}}</td>
+                                <td style="width: 15%; max-width: 150px" class="text-center text-truncate">{{author}}</td>
+                                <td style="width: 15%" class="text-center">{{createdDate}}</td>
+                            </tr>
+                            {{/LaboratoryPaperPosts}}
+                        </table>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -125,19 +168,28 @@
             <div class="card border border-dark h-100" style="min-height: 300px">
                 <h5 class="card-header text-white bg-dark text-center">자료 게시판</h5>
                 <ul class="list-group list-group-dark">
-                    {{#LaboratoryMaterialPosts}}
-                        <li class="list-group-item p-0">
-                            <table>
-                                <tr>
-                                    <td style="width: 10%" class="text-center">{{id}}</td>
-                                    <td style="width: 40%" class="text-start"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
-                                    <td style="width: 10%" class="text-center">{{hits}}</td>
-                                    <td style="width: 15%" class="text-center">{{author}}</td>
-                                    <td style="width: 15%" class="text-center">{{createdDate}}</td>
-                                </tr>
-                            </table>
-                        </li>
-                    {{/LaboratoryMaterialPosts}}
+                    <li class="list-group-item p-0">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="width: 10%" class="text-center"> </th>
+                                <th style="width: 40%" class="text-start">제목</th>
+                                <th style="width: 10%" class="text-center">조회수</th>
+                                <th style="width: 15%" class="text-center">작성자</th>
+                                <th style="width: 15%" class="text-center">작성일</th>
+                            </tr>
+                            </thead>
+                            {{#LaboratoryMaterialPosts}}
+                            <tr>
+                                <td style="width: 10%" class="text-center">{{id}}</td>
+                                <td style="width: 40%; max-width: 150px" class="text-start text-truncate"><a href="/notice/normal/posts/{{id}}">{{title}}</a></td>
+                                <td style="width: 10%" class="text-center">{{hits}}</td>
+                                <td style="width: 15%; max-width: 150px" class="text-center text-truncate">{{author}}</td>
+                                <td style="width: 15%" class="text-center">{{createdDate}}</td>
+                            </tr>
+                            {{/LaboratoryMaterialPosts}}
+                        </table>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 
 @Getter
-public class AttachmentsListResponseDto {
+public class AttachmentsResponseDto {
     private Long id;
     private String fileName;
     private String filePath;
@@ -15,7 +15,7 @@ public class AttachmentsListResponseDto {
     private String createdDate;
     private String updatedDate;
 
-    public AttachmentsListResponseDto(Attachments entity) {
+    public AttachmentsResponseDto(Attachments entity) {
         this.id = entity.getId();
         this.fileName = entity.getFileName();
         this.filePath = entity.getFilePath();

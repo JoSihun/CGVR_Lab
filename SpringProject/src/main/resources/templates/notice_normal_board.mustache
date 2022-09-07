@@ -16,9 +16,14 @@
 
                         <!-- Card Body -->
                         <div class="card-body text-dark">
-                            <div><p class="card-text"><strong>이름</strong> : 염동빈</p></div>
-                            <div><p class="card-text"><strong>학번</strong> : 2017305045</p></div>
-                            <div><p class="card-text"><strong>재학정보</strong> : 4학년</p></div>
+                            {{#admin}}
+                                <div><p class="card-text"><strong>이름</strong> : {{sessionKorName}}</p></div>
+                                <div><p class="card-text"><strong>학번</strong> : {{sessionUserId}}</p></div>
+                                <div><p class="card-text"><strong>재학정보</strong> : {{sessionGrade}}학년</p></div>
+                            {{/admin}}
+                            {{^admin}}
+                                <div><p class="card-text"><strong>연구원만 표시됩니다</strong></p></div>
+                            {{/admin}}
                         </div>
                     </div>
                 </div>
@@ -40,7 +45,12 @@
             <!-- 글쓰기 빠른메뉴 -->
             <div class="row mb-3">
                 <div class="col-xl-12">
-                    <button class="btn btn-dark btn-block" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                    {{#admin}}
+                        <button class="btn btn-dark btn-block" onclick="location.href='/notice/all/posts/form';">글쓰기</button>
+                    {{/admin}}
+                    {{^admin}}
+                        <button class="btn btn-dark btn-block">글쓰기</button>
+                    {{/admin}}
                 </div>
             </div>
 
@@ -90,10 +100,11 @@
                         {{#posts}}
                         <tr>
                             <td class="text-center">{{id}}</td>
-                            <td class="text-start">
+                            <td class="text-start text-truncate" style="max-width: 150px">
                                 <a class="text-dark" href="/notice/normal/posts/{{id}}">
                                     <span style="color: gray">[{{categoryName}}]</span>
                                     {{title}}
+                                    <span style="color: darkorange">[{{commentsSize}}]</span>
                                 </a>
                             </td>
                             <td class="text-center">{{author}}</td>
@@ -110,7 +121,9 @@
                     <div class="row mb-2">
                         <!-- Column 1: Manage Title Header -->
                         <div class="col-sm-2 text-start">
-                            <button class="btn btn-dark ms-4" onclick="location.href='/manage/posts/title';">글머리 관리</button>
+                            {{#admin}}
+                                <button class="btn btn-dark ms-4" onclick="location.href='/manage/posts/title';">글머리 관리</button>
+                            {{/admin}}
                         </div>
 
                         <!-- Column 2: Search Form -->
@@ -141,7 +154,9 @@
 
                         <!-- Column 3: Writing Post Form -->
                         <div class="col-sm-2 text-end">
-                            <button class="btn btn-dark me-4" onclick="location.href='/notice/normal/posts/form';">글쓰기</button>
+                            {{#admin}}
+                                <button class="btn btn-dark me-4" onclick="location.href='/notice/laboratory/posts/form';">글쓰기</button>
+                            {{/admin}}
                         </div>
                     </div>
 

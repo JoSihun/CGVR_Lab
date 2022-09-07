@@ -1,10 +1,13 @@
 package com.skuniv.cgvr.service.posts;
 
+import com.skuniv.cgvr.domain.Attachments;
 import com.skuniv.cgvr.domain.posts.Posts;
+import com.skuniv.cgvr.dto.AttachmentsSaveRequestDto;
 import com.skuniv.cgvr.dto.posts.PostsListResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsResponseDto;
 import com.skuniv.cgvr.dto.posts.PostsSaveRequestDto;
 import com.skuniv.cgvr.dto.posts.PostsUpdateRequestDto;
+import com.skuniv.cgvr.repository.AttachmentsRepository;
 import com.skuniv.cgvr.repository.CategoryRepository;
 import com.skuniv.cgvr.repository.posts.PostsRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +15,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.io.File;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -22,6 +27,7 @@ import java.util.stream.Collectors;
 public class PostsService {
     private final PostsRepository postsRepository;
     private final CategoryRepository categoryRepository;
+    private final AttachmentsRepository attachmentsRepository;
 
     /* 전체 게시판 목록보기 - 작성순 */
     @Transactional
@@ -188,16 +194,71 @@ public class PostsService {
 
     /* 게시글 저장하기 */
     @Transactional
-    public Long save ( final PostsSaveRequestDto requestDto){
-        return this.postsRepository.save(requestDto.toEntity()).getId();
+    public Long save (final PostsSaveRequestDto requestDto, List<MultipartFile> files) throws Exception {
+        Long postId = this.postsRepository.save(requestDto.toEntity()).getId();
+        Posts entity = this.postsRepository.findById(postId).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + postId));
+
+        /* 첨부파일 저장 및 데이터 생성 */
+        for (MultipartFile file : files) {
+            /* 실제 파일 저장 루틴 */
+            String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            File saveFile = new File(filePath, fileName);
+            file.transferTo(saveFile);
+
+            /* 저장된 파일명 및 파일경로 데이터 생성 */
+            AttachmentsSaveRequestDto attachmentsSaveRequestDto = new AttachmentsSaveRequestDto();
+            attachmentsSaveRequestDto.setPosts(entity);
+            attachmentsSaveRequestDto.setFileSize(file.getSize());
+            attachmentsSaveRequestDto.setFileName(file.getOriginalFilename());
+            attachmentsSaveRequestDto.setFilePath(filePath + "/" + fileName);
+            this.attachmentsRepository.save(attachmentsSaveRequestDto.toEntity());
+        }
+
+        return postId;
     }
 
 
     /* 게시글 수정하기 */
     @Transactional
-    public Long update ( final Long id, final PostsUpdateRequestDto requestDto){
+    public Long update ( final Long id, final PostsUpdateRequestDto requestDto, List<MultipartFile> files) throws Exception {
         Posts entity = this.postsRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + id));
+
+        /* 기존 첨부파일 삭제 및 데이터 삭제 */
+        List<Attachments> attachmentsList = entity.getAttachmenstList();
+        for (Attachments attachments: attachmentsList) {
+            File file = new File(attachments.getFilePath());
+            if (file.exists()) {
+                if (file.delete()) {
+                    System.out.println("File Delete Success. FilePath: " + attachments.getFilePath());
+                } else {
+                    System.out.println("File Delete Failed.");
+                }
+            } else {
+                System.out.println("File doesn't exists. FilePath: " + attachments.getFilePath());
+            }
+            this.attachmentsRepository.delete(attachments);
+        }
+
+        /* 첨부파일 저장 및 데이터 생성 */
+        for (MultipartFile file : files) {
+            /* 실제 파일 저장 루틴 */
+            String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            File saveFile = new File(filePath, fileName);
+            file.transferTo(saveFile);
+
+            /* 저장된 파일명 및 파일경로 데이터 생성 */
+            AttachmentsSaveRequestDto attachmentsSaveRequestDto = new AttachmentsSaveRequestDto();
+            attachmentsSaveRequestDto.setPosts(entity);
+            attachmentsSaveRequestDto.setFileName(file.getOriginalFilename());
+            attachmentsSaveRequestDto.setFilePath(filePath + "/" + fileName);
+            attachmentsSaveRequestDto.setFileSize(file.getSize());
+            this.attachmentsRepository.save(attachmentsSaveRequestDto.toEntity());
+        }
+
         entity.update(requestDto.getTitle(), requestDto.getContent(),
                 requestDto.getProjectName(), requestDto.getCategoryName());
         return id;
@@ -209,6 +270,23 @@ public class PostsService {
     public Long delete ( final Long id){
         Posts entity = this.postsRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("이미 존재하지 않는 게시글입니다. id=" + id));
+
+        /* 첨부파일 삭제 및 데이터 삭제 */
+        List<Attachments> attachmentsList = entity.getAttachmenstList();
+        for (Attachments attachments: attachmentsList) {
+            File file = new File(attachments.getFilePath());
+            if (file.exists()) {
+                if (file.delete()) {
+                    System.out.println("File Delete Success. FilePath: " + attachments.getFilePath());
+                } else {
+                    System.out.println("File Delete Failed.");
+                }
+            } else {
+                System.out.println("File doesn't exists. FilePath: " + attachments.getFilePath());
+            }
+            this.attachmentsRepository.delete(attachments);
+        }
+
         this.postsRepository.delete(entity);
         return id;
     }
