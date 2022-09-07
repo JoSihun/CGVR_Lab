@@ -210,6 +210,9 @@ public class PostsService {
             File saveFile = new File(filePath, fileName);
             file.transferTo(saveFile);
 
+            //파일권한적용
+            Runtime.getRuntime().exec("chmod -R 777 " + saveFile);
+
             /* 저장된 파일명 및 파일경로 데이터 생성 */
             AttachmentsSaveRequestDto attachmentsSaveRequestDto = new AttachmentsSaveRequestDto();
             attachmentsSaveRequestDto.setPosts(entity);
