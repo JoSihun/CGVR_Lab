@@ -90,3 +90,36 @@ WikiDocs 4-08 NginX 참고
 4) Ubuntu lab506에서 stop.sh 실행
 5) Ubuntu lab506에서 git pull
 6) Ubuntu lab506에서 start.sh 실행
+
+=============================================================================
+# Ubuntu Server NginX SSL(Https 443 Port) 적용
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot
+
+service nginx stop
+certbot certonly --standalone -d skuniv-cgvrlab.kro.kr
+service nginx start
+
+vim /etc/nginx/sites-available/cgvr
+server {
+        listen 443 ssl;
+        server_name skuniv-cgvrlab.kro.kr;
+
+        ssl_certificate         /etc/letsencrypt/live/skuniv-cgvrlab.kro.kr/fullchain.pem;
+        ssl_certificate_key     /etc/letsencrypt/live/skuniv-cgvrlab.kro.kr/privkey.pem;
+
+        location / {
+                #root   /usr/share/nginx/html;
+                #index  index.html;
+                #try_files      $uri $uri/ /index.html;
+                proxy_pass http://localhost:8080;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $http_host;
+        }
+}
+service nginx restart
