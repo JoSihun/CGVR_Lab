@@ -33,7 +33,7 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 2. 1 MVC Pattern Architecture
-![image](https://user-images.githubusercontent.com/59362257/190065469-81d101d8-7855-440b-87b5-ff0352d179b0.png)
+![image](https://user-images.githubusercontent.com/74171272/190108616-2e7bcfd7-66eb-4f84-b8b3-229dd5927b90.png)
 
 
 ### 2. 2 Rest API
