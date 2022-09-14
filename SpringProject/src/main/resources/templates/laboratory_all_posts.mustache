@@ -1,5 +1,11 @@
 {{>header}}
 {{>banner}}
+{{^admin}}
+    <div class="text-center mx-auto my-auto">
+        <h2>관리자만 읽을 수 있는 글입니다.</h2>
+    </div>
+{{/admin}}
+{{#admin}}
 <div class="container-fluid">
     <div class="row mx-4 my-4">
 
@@ -219,5 +225,5 @@
     </div>
 </div>
 
-
+{{/admin}}
 {{>footer}}
