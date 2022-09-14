@@ -92,14 +92,66 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 4. 3 SSL (Https 443 Port)
+HTTPS가 아닌 HTTP 프로토콜을 사용하면 브라우저(클라이언트)와 서비스(서버) 사이에 주고 받는 데이터가 암호화 되지 않는다. 클라이언트와 서버가 데이터를 주고 받는 네트워크 경로는 매우 복잡한데 이 과정에서 누군가(해커)가 데이터를 훔쳐보는 일은 어렵지 않다. 따라서 네트워크 구간에서 주고받는 데이터는 반드시 암호화 하여 데이터가 노출되더라도 무슨 내용인지 알수 없게 해야 한다.  
 
+이러한 역할을 하는 것이 바로 HTTP에 SSL(Secured Socket Layer) 기능을 더한 HTTPS 프로토콜이다. 우리가 만든 서비스에 HTTPS 프로토콜을 제공하기 위해서는 SSL 인증서가 필요하다. SSL 인증서를 발급받아 Nginx에 적용하면 HTTPS 프로토콜로 서비스를 할수 있다.
+[[참고자료](https://wikidocs.net/163144)]
 
+- 인증서 발급을 위한 `Let's Encrypt` 설치
+```bash
+ubuntu@researcher1:~$ sudo apt-get install certbot
+ubuntu@researcher1:~$ sudo apt-get install python3-certbot-nginx
+```
 
+- 인증서 발급
+```bash
+ubuntu@researcher1:~$ sudo service nginx stop
+ubuntu@researcher1:~$ sudo certbot certonly --nginx -d skuniv-cgvrlab.kro.kr
+ubuntu@researcher1:~$ sudo service nginx start
+```
+
+- 아래와 같이 인증서가 발급된다
+```bash
+/etc/letsencrypt/live/[domain]/fullchain.pem
+/etc/letsencrypt/live/[domain]/privkey.pem
+```
+
+- `NginX` 설정 : `/etc/nginx/sites-available/cgvr`
+```bash
+server {
+        listen 80;
+        server_name skuniv-cgvrlab.kro.kr;
+
+        location / {
+                return 301 https://$server_name$request_uri;
+        }
+}
+
+server {
+        listen 443 ssl;
+        server_name skuniv-cgvrlab.kro.kr;
+
+        ssl_certificate         /etc/letsencrypt/live/skuniv-cgvrlab.kro.kr/fullchain.pem;
+        ssl_certificate_key     /etc/letsencrypt/live/skuniv-cgvrlab.kro.kr/privkey.pem;
+
+        location / {
+                proxy_pass http://localhost:8080;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $http_host;
+        }
+}
+```
+- `443 port` 방화벽 해제 및 `NginX` 재실행
+```bash
+ubuntu@researcher1:~$ sudo ufw allow 443
+ubuntu@researcher1:~$ sudo service nginx restart
+```
 
 ## 5. 결론
 
 
-### 5. 1 결과페이지
+### 5. 1 결과
 
 
 ### 5. 2 개발후기
