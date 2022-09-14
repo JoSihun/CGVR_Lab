@@ -48,10 +48,20 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 3. 1 Table
+<p align="center">
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190083429-02fe88f5-e7ac-4de7-949f-2832208b734d.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190090946-f82f256d-6fae-491e-9d49-1c4f9c65319b.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190092094-859ba283-992d-4179-8902-3f8435d56d79.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190092710-03c066c5-d422-4e36-b40a-5cfc983c3130.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190084090-ebe1d3b8-29e1-451b-a4de-6d80c6a8a9e9.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190084248-b57da527-08ca-4f00-b9aa-a2772e6161fa.png" />
+</p>
 
 
 ### 3. 2 ERD
-![image](https://user-images.githubusercontent.com/59362257/190061600-166702f0-967c-47b8-abd4-893ecf101432.png)
+<p align="center">
+  <img width="75%" src="https://user-images.githubusercontent.com/59362257/190061600-166702f0-967c-47b8-abd4-893ecf101432.png" />
+</p>
 
 
 
