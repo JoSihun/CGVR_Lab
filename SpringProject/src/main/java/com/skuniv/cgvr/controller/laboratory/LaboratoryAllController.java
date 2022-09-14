@@ -227,13 +227,18 @@ public class LaboratoryAllController {
 
     /* 게시글 수정폼 */
     @GetMapping("laboratory/all/posts/update/{id}")
-    public String laboratoryAllPostUpdate(@PathVariable Long id, Model model) {
+    public String laboratoryAllPostUpdate(@PathVariable Long id, Model model, HttpSession session) {
         PostsResponseDto responseDto = this.postsService.findById(id);
         List<ProjectListResponseDto> responseDtoList1 = this.projectService.findAllAsc();
         List<AttachmentsListResponseDto> responseDtoList2 = this.attachmentsService.findAllByPostId(id);
         model.addAttribute("posts", responseDto);
         model.addAttribute("project", responseDtoList1);
         model.addAttribute("attachments", responseDtoList2);
+        // 본인 글 확인 (본인 글만 수정할 수 있도록)
+        String cmpUser = session.getAttribute("sessionUserId") + " " + session.getAttribute("sessionKorName");
+        if(responseDto.getAuthor().equals(cmpUser)) {
+            model.addAttribute("myPost", true);
+        }
         return "laboratory_all_posts_update_form";
     }
 

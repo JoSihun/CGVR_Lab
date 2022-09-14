@@ -1,5 +1,11 @@
 {{>header}}
 {{>banner}}
+{{^myPost}}
+    <div class="text-center mx-auto my-auto">
+        <h2>본인이 작성한 글만 수정 가능합니다.</h2>
+    </div>
+{{/myPost}}
+{{#myPost}}
 <div class="container-fluid">
     <div class="row mx-4 my-4">
 
@@ -205,4 +211,5 @@
         });
     });
 </script>
+{{/myPost}}
 {{>footer}}
