@@ -18,14 +18,24 @@ SeoKyeong University CGVR Lab Webpage.
 
 ### 1. 2 Ubuntu Server Setting
 ![image](https://user-images.githubusercontent.com/59362257/190059975-3c2cd753-c353-4e1f-b116-60123b2bec50.png)
-- Ubuntu SSH Server 연결
-- 개발자 Local PC 연동
-- Github 공동개발환경 사용
+- `Ubuntu Server` 공동개발환경 사용
+  - `Local Client`: 개발자 PC
+  - `Ubuntu Server`: 서버 PC, `Local Client`와 SSH Protocol 연결
+  - `MySQL`: `Client`와 `Server` 동일하게 Setting
+  - `CGVRLAB`: `MySQL` Schema
+- `Github` 공동개발환경 사용
+  - `Client`에서 개발 후 `git push`
+  - `Server`에서 `git pull`
+
 
 
 ### 1. 3 NginX Server Setting
 ![image](https://user-images.githubusercontent.com/59362257/190060634-becfd186-47bc-4175-91cf-893d22020344.png)
-
+- `Client`로부터 `80 Port`에 `Request` 요청
+- `NginX`: `80 Port`로 들어온 요청을 `8080 Port`로 연결
+- `Java`: `Spring Boot Project`를 `8080 Port`로 서비스
+- `8080 Port`에서 `Request` 처리, `NginX`로 `Response` 전달
+- `NginX`: `Client`에게 `Response` 전달
 
 
 
@@ -61,8 +71,14 @@ SeoKyeong University CGVR Lab Webpage.
 ### 3. 2 ERD
 <p align="center">
   <img width="75%" src="https://user-images.githubusercontent.com/59362257/190061600-166702f0-967c-47b8-abd4-893ecf101432.png" />
-</p>
+</p>  
 
+- `user`: 사용자  
+- `posts`: 게시글  
+- `comments`: 댓글  
+- `project`: 연구 프로젝트명  
+- `category`: 카테고리명  
+- `attachment`: 첨부파일  
 
 
 
