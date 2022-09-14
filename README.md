@@ -4,8 +4,10 @@ SeoKyeong University CGVR Lab Webpage.
 [[HyperLink](https://skuniv-cgvrlab.kro.kr)]: https://skuniv-cgvrlab.kro.kr
 
 
-## 1. Environments
+## 1. CO-Development Environment
 
+
+### 1. 1 Environments
 - Windows 10
 - Ubuntu 20.04 LTS (Server)
 - MySQL
@@ -14,21 +16,15 @@ SeoKyeong University CGVR Lab Webpage.
 - BootStrap / Mustache / NginX
 
 
-### 1. 1 CO-Development Environment
+### 1. 2 Ubuntu Server Setting
 ![image](https://user-images.githubusercontent.com/59362257/190059975-3c2cd753-c353-4e1f-b116-60123b2bec50.png)
 - Ubuntu SSH Server 연결
 - 개발자 Local PC 연동
 - Github 공동개발환경 사용
 
 
-### 1. 2 NginX Server Setting
+### 1. 3 NginX Server Setting
 ![image](https://user-images.githubusercontent.com/59362257/190060634-becfd186-47bc-4175-91cf-893d22020344.png)
-
-
-
-
-
-
 
 
 
@@ -39,18 +35,52 @@ SeoKyeong University CGVR Lab Webpage.
 ### 2. 1 MVC Pattern Architecture
 ![image](https://user-images.githubusercontent.com/59362257/190065469-81d101d8-7855-440b-87b5-ff0352d179b0.png)
 
+
 ### 2. 2 Rest API
+
+
+### 2. 3 ULR Connection
+
 
 
 
 ## 3. DataBase
+
+
+### 3. 1 Table
+
+
+### 3. 2 ERD
 ![image](https://user-images.githubusercontent.com/59362257/190061600-166702f0-967c-47b8-abd4-893ecf101432.png)
 
 
 
 
+## 4. DNS(Domain Name Service)
 
 
+### 4. 1 DNS Architecture
+
+
+### 4. 2 내도메인.한국
+
+
+### 4. 3 SSL (Https 443 Port)
+
+
+
+
+## 5. 결론
+
+
+### 5. 1 결과페이지
+
+
+### 5. 2 개발후기
+
+
+### 5. 3 향후계획(개선사항)
+- 연구실 인수인계를 통해 지속적으로 운영할 예정
 
 
 
