@@ -202,10 +202,16 @@ public class PostsService {
         /* 첨부파일 저장 및 데이터 생성 */
         for (MultipartFile file : files) {
             /* 실제 파일 저장 루틴 */
-            String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+//            String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+            File tempFilePath = new File(System.getProperty("user.dir"));
+            String filePath = tempFilePath.getParent() + "/CGVRLAB_FILES";
+
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
             File saveFile = new File(filePath, fileName);
             file.transferTo(saveFile);
+
+            //파일권한적용
+            Runtime.getRuntime().exec("chmod -R 777 " + saveFile);
 
             /* 저장된 파일명 및 파일경로 데이터 생성 */
             AttachmentsSaveRequestDto attachmentsSaveRequestDto = new AttachmentsSaveRequestDto();
