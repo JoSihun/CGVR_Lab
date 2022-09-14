@@ -86,6 +86,12 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 4. 1 DNS Architecture
+<p align="center">
+  <img width="50%" src="https://user-images.githubusercontent.com/59362257/190125010-58fb7754-e9da-4489-a260-1ec494ada0aa.png" />
+</p>
+
+도메인 이름 시스템(DNS)은 사람이 읽을 수 있는 도메인 이름(예: www.amazon.com)을 머신이 읽을 수 있는 IP 주소(예: 192.0.2.44)로 변환합니다.
+[[참고자료](https://aws.amazon.com/ko/route53/what-is-dns/)]
 
 
 ### 4. 2 내도메인.한국
@@ -181,6 +187,16 @@ ubuntu@researcher1:~$ sudo service nginx restart
 
 
 
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
 
 - This image shows how drone autonomous flight machine learning works.  
 - Unity ML-Agents has 5 different functions below.  
