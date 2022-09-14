@@ -39,7 +39,7 @@ SeoKyeong University CGVR Lab Webpage.
 ### 2. 2 Rest API
 
 
-### 2. 3 ULR Connection
+### 2. 3 UR Connection
 
 
 
