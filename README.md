@@ -18,14 +18,24 @@ SeoKyeong University CGVR Lab Webpage.
 
 ### 1. 2 Ubuntu Server Setting
 ![image](https://user-images.githubusercontent.com/59362257/190059975-3c2cd753-c353-4e1f-b116-60123b2bec50.png)
-- Ubuntu SSH Server 연결
-- 개발자 Local PC 연동
-- Github 공동개발환경 사용
+- `Ubuntu Server` 공동개발환경 사용
+  - `Local Client`: 개발자 PC
+  - `Ubuntu Server`: 서버 PC, `Local Client`와 SSH Protocol 연결
+  - `MySQL`: `Client`와 `Server` 동일하게 Setting
+  - `CGVRLAB`: `MySQL` Schema
+- `Github` 공동개발환경 사용
+  - `Client`에서 개발 후 `git push`
+  - `Server`에서 `git pull`
+
 
 
 ### 1. 3 NginX Server Setting
 ![image](https://user-images.githubusercontent.com/59362257/190060634-becfd186-47bc-4175-91cf-893d22020344.png)
-
+- `Client`로부터 `80 Port`에 `Request` 요청
+- `NginX`: `80 Port`로 들어온 요청을 `8080 Port`로 연결
+- `Java`: `Spring Boot Project`를 `8080 Port`로 서비스
+- `8080 Port`에서 `Request` 처리, `NginX`로 `Response` 전달
+- `NginX`: `Client`에게 `Response` 전달
 
 
 
@@ -97,11 +107,27 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 3. 1 Table
+<p align="center">
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190083429-02fe88f5-e7ac-4de7-949f-2832208b734d.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190090946-f82f256d-6fae-491e-9d49-1c4f9c65319b.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190092094-859ba283-992d-4179-8902-3f8435d56d79.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190092710-03c066c5-d422-4e36-b40a-5cfc983c3130.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190084090-ebe1d3b8-29e1-451b-a4de-6d80c6a8a9e9.png" />
+  <img width="40%" src="https://user-images.githubusercontent.com/59362257/190084248-b57da527-08ca-4f00-b9aa-a2772e6161fa.png" />
+</p>
 
 
 ### 3. 2 ERD
-![image](https://user-images.githubusercontent.com/59362257/190061600-166702f0-967c-47b8-abd4-893ecf101432.png)
+<p align="center">
+  <img width="75%" src="https://user-images.githubusercontent.com/59362257/190061600-166702f0-967c-47b8-abd4-893ecf101432.png" />
+</p>  
 
+- `user`: 사용자  
+- `posts`: 게시글  
+- `comments`: 댓글  
+- `project`: 연구 프로젝트명  
+- `category`: 카테고리명  
+- `attachment`: 첨부파일  
 
 
 
@@ -109,20 +135,78 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 4. 1 DNS Architecture
+<p align="center">
+  <img width="50%" src="https://user-images.githubusercontent.com/59362257/190125010-58fb7754-e9da-4489-a260-1ec494ada0aa.png" />
+</p>
+
+도메인 이름 시스템(DNS)은 사람이 읽을 수 있는 도메인 이름(예: www.amazon.com)을 머신이 읽을 수 있는 IP 주소(예: 192.0.2.44)로 변환합니다.
+[[참고자료](https://aws.amazon.com/ko/route53/what-is-dns/)]
 
 
 ### 4. 2 내도메인.한국
 
 
 ### 4. 3 SSL (Https 443 Port)
+HTTPS가 아닌 HTTP 프로토콜을 사용하면 브라우저(클라이언트)와 서비스(서버) 사이에 주고 받는 데이터가 암호화 되지 않는다. 클라이언트와 서버가 데이터를 주고 받는 네트워크 경로는 매우 복잡한데 이 과정에서 누군가(해커)가 데이터를 훔쳐보는 일은 어렵지 않다. 따라서 네트워크 구간에서 주고받는 데이터는 반드시 암호화 하여 데이터가 노출되더라도 무슨 내용인지 알수 없게 해야 한다.  
 
+이러한 역할을 하는 것이 바로 HTTP에 SSL(Secured Socket Layer) 기능을 더한 HTTPS 프로토콜이다. 우리가 만든 서비스에 HTTPS 프로토콜을 제공하기 위해서는 SSL 인증서가 필요하다. SSL 인증서를 발급받아 Nginx에 적용하면 HTTPS 프로토콜로 서비스를 할수 있다.
+[[참고자료](https://wikidocs.net/163144)]
 
+- 인증서 발급을 위한 `Let's Encrypt` 설치
+```bash
+ubuntu@researcher1:~$ sudo apt-get install certbot
+ubuntu@researcher1:~$ sudo apt-get install python3-certbot-nginx
+```
 
+- 인증서 발급
+```bash
+ubuntu@researcher1:~$ sudo service nginx stop
+ubuntu@researcher1:~$ sudo certbot certonly --nginx -d skuniv-cgvrlab.kro.kr
+ubuntu@researcher1:~$ sudo service nginx start
+```
+
+- 아래와 같이 인증서가 발급된다
+```bash
+/etc/letsencrypt/live/[domain]/fullchain.pem
+/etc/letsencrypt/live/[domain]/privkey.pem
+```
+
+- `NginX` 설정 : `/etc/nginx/sites-available/cgvr`
+```bash
+server {
+        listen 80;
+        server_name skuniv-cgvrlab.kro.kr;
+
+        location / {
+                return 301 https://$server_name$request_uri;
+        }
+}
+
+server {
+        listen 443 ssl;
+        server_name skuniv-cgvrlab.kro.kr;
+
+        ssl_certificate         /etc/letsencrypt/live/skuniv-cgvrlab.kro.kr/fullchain.pem;
+        ssl_certificate_key     /etc/letsencrypt/live/skuniv-cgvrlab.kro.kr/privkey.pem;
+
+        location / {
+                proxy_pass http://localhost:8080;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $http_host;
+        }
+}
+```
+- `443 port` 방화벽 해제 및 `NginX` 재실행
+```bash
+ubuntu@researcher1:~$ sudo ufw allow 443
+ubuntu@researcher1:~$ sudo service nginx restart
+```
 
 ## 5. 결론
 
 
-### 5. 1 결과페이지
+### 5. 1 결과
 
 
 ### 5. 2 개발후기
@@ -152,6 +236,16 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 
+---
+---
+---
+---
+---
+---
+---
+---
+---
+---
 
 - This image shows how drone autonomous flight machine learning works.  
 - Unity ML-Agents has 5 different functions below.  

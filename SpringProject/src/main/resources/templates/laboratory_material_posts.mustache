@@ -158,7 +158,7 @@
                                     <strong>{{author}}&nbsp;</strong>
                                     <small>{{createdDate}}&nbsp;</small>
                                 </div>
-                                <div class="d-inline-block">
+                                <div class="d-inline-block" id="comments-edit-delete">
                                     <small><a class="text-dark" style="color: gray" href="#" data-bs-toggle="collapse" data-bs-target="#comments-update-form-{{id}}">수정</a></small>
                                     <small>/</small>
                                     <small><a class="text-dark" style="color: gray" href="#" id="btn-comments-delete">삭제</a></small>
@@ -225,5 +225,24 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        let commentsList = document.querySelectorAll('li');
+        for (var i = 0; i < commentsList.length; i++) {
+            try {
+                let commentsAuthor = commentsList[i].querySelector('#commentsAuthor').value;
+                let sessionUserId = commentsList[i].querySelector('#sessionUserId').value;
+                let sessionKorName = commentsList[i].querySelector('#sessionKorName').value;
+                let sessionUser = [sessionUserId, sessionKorName].join(' ');
+                if (commentsAuthor !== sessionUser) {
+                    let commentsEditDelete = commentsList[i].querySelector('#comments-edit-delete');
+                    commentsEditDelete.style.visibility = 'hidden';
+                }
+            } catch (error) {
+                // Pass
+            }
+        }
+    });
+</script>
 {{/admin}}
 {{>footer}}
