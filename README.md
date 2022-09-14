@@ -43,13 +43,35 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 2. 1 MVC Pattern Architecture
-![image](https://user-images.githubusercontent.com/59362257/190065469-81d101d8-7855-440b-87b5-ff0352d179b0.png)
+#### 2. 1. 1 MVC Pattern   
+- Model-View-Controller 의 약자로, 애플리케이션을 세 가지 역할로 구분한 개발 방법론   
+- Model : 데이터, 정보들의 가공을 책임지는 컴포넌트. 애플리케이션의 정보, 데이터를 나타냄   
+- View : 사용자 인터페이스 요소를 의미함   
+- Controller : Model 과 View 사이를 이어주는 브릿지(Bridge)역할을 수행함   
+- MVC 패턴의 가장 큰 장점으로는 '유지보수의 편리성' 이 있음   
+
+![image](https://user-images.githubusercontent.com/74171272/190120481-ae48ab3e-cc97-49ea-b136-bd5a6794b520.png)
+
+1. 사용자가 웹사이트에 접속(Uses)
+2. Controller 는 사용자가 요청한 웹페이지를 서비스하기 위해서 모델을 호출함(Manipulates)
+3. Model 은 데이터베이스나 파일과 같은 데이터 소스를 제어한 후 그 결과를 반환함
+4. Controller 는 Model 이 반환한 결과를 View 에 반영함(Updates)
+5. 데이터가 반영된 View 가 사용자에게 보여짐(Sees)
+
+#### 2. 1. 2 MVC Model 1   
+![image](https://user-images.githubusercontent.com/74171272/190120616-011b9e75-ae6f-40b7-9d3f-2477c5620f6d.png)
+#### 2. 1. 3 MVC Model 2   
+![image](https://user-images.githubusercontent.com/74171272/190120670-85f81b4e-da8f-4a3a-a57c-532ec1655b74.png)
+
+### 2. 2 Spring Service Architecture
+![image](https://user-images.githubusercontent.com/74171272/190108990-c9d62ce8-a9b5-44b5-8f37-83b25f5855ab.png)
 
 
-### 2. 2 Rest API
+### 2. 3 Rest API
+![image](https://user-images.githubusercontent.com/74171272/190115632-076b67f8-262a-4336-af7c-e5f95cee66bd.png)
 
 
-### 2. 3 URL Connection
+### 2. 4 URL Connection
 
 
 
