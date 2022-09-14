@@ -35,31 +35,58 @@ SeoKyeong University CGVR Lab Webpage.
 ### 2. 1 MVC Pattern Architecture
 #### 2. 1. 1 MVC Pattern   
 - Model-View-Controller 의 약자로, 애플리케이션을 세 가지 역할로 구분한 개발 방법론   
-- Model : 데이터, 정보들의 가공을 책임지는 컴포넌트. 애플리케이션의 정보, 데이터를 나타냄   
-- View : 사용자 인터페이스 요소를 의미함   
-- Controller : Model 과 View 사이를 이어주는 브릿지(Bridge)역할을 수행함   
-- MVC 패턴의 가장 큰 장점으로는 '유지보수의 편리성' 이 있음   
+- `Model` : 데이터, 정보들의 가공을 책임지는 컴포넌트. 애플리케이션의 정보, 데이터를 나타냄   
+- `View` : 사용자 인터페이스(UI) 요소를 의미함   
+- `Controller` : Model 과 View 사이를 이어주는 브릿지(Bridge)역할을 수행함   
+- 비즈니스 로직과 UI 로직을 분리하여 유지보수를 독립적으로 수행할 수 있음
+- `Model` 과 `View` 가 다른 컴포넌트들에 종속되지 않아 애플리케이션의 확장성, 유연성에 유리함
+- 중복 코딩의 문제점이 제거됨
 
 ![image](https://user-images.githubusercontent.com/74171272/190120481-ae48ab3e-cc97-49ea-b136-bd5a6794b520.png)
-
-1. 사용자가 웹사이트에 접속(Uses)
-2. Controller 는 사용자가 요청한 웹페이지를 서비스하기 위해서 모델을 호출함(Manipulates)
-3. Model 은 데이터베이스나 파일과 같은 데이터 소스를 제어한 후 그 결과를 반환함
-4. Controller 는 Model 이 반환한 결과를 View 에 반영함(Updates)
-5. 데이터가 반영된 View 가 사용자에게 보여짐(Sees)
+- MVC WEB 에 적용할 경우 예시
+  - 사용자가 웹사이트에 접속(Uses)
+  - Controller 는 사용자가 요청한 웹페이지를 서비스하기 위해서 모델을 호출함(Manipulates)
+  - Model 은 데이터베이스나 파일과 같은 데이터 소스를 제어한 후 그 결과를 반환함
+  - Controller 는 Model 이 반환한 결과를 View 에 반영함(Updates)
+  - 데이터가 반영된 View 가 사용자에게 보여짐(Sees)
 
 #### 2. 1. 2 MVC Model 1   
 ![image](https://user-images.githubusercontent.com/74171272/190120616-011b9e75-ae6f-40b7-9d3f-2477c5620f6d.png)
+- `Controller` 영역에 `View` 영역을 같이 구현하는 방식.
+- `View` 와 `Controller` 를 모두 `JSP` 가 담당하는 형태를 가지므로, 구현 난이도는 쉬움
+- JSP 하나에서 MVC 가 모두 이루어져, 재사용성, 가독성 하락의 문제점이 존재함 => 유지보수에 문제가 발생함   
+
 #### 2. 1. 3 MVC Model 2   
 ![image](https://user-images.githubusercontent.com/74171272/190120670-85f81b4e-da8f-4a3a-a57c-532ec1655b74.png)
+- 널리 표준으로 사용되는 패턴. `Spring Framework` 에서도 채택한 패턴
+- MVC Model 1 과 달리 `Controller` 와 `View` 가 분리되어 MVC Model 1 의 단점 보완 가능
+- `Model`, `View`, `Controller` 중 수정해야할 부분이 있다면, 해당 부분만 꺼내어 수정하면 되므로, 유지보수에서 큰 이점을 가짐
 
 ### 2. 2 Spring Service Architecture
 ![image](https://user-images.githubusercontent.com/74171272/190108990-c9d62ce8-a9b5-44b5-8f37-83b25f5855ab.png)
+- `Entity(Domain)`
+  - DB 에 쓰일 컬럼과 여러 `Entity` 간 연관관계를 정의함
+  - DB 의 테이블을 하나의 `Entity` 로 생각해도 무방함
+- `Service`
+  - 비즈니스 로직과 트랜잭션을 처리함
+- `Repository`
+  - `Entitiy`에 의해 생성된 `DB`에 접근하는 메소드를사용하기 위한 인터페이스
+  - `Service` 와 `DB` 를 연결하는 고리의 역할을 수행
+  - `DB`에 접근하는 객체인 `DAO(Data Access Object)` 영역으로 이해하면 됨
 
+- `DTO(Data Transfer Object`
+  - 계층 간 데이터 교환을 위한 객체
+  - `Entity` 와 유사하지만, `Service` 에서 수정이 가능하므로, `DB` 의 칼럼과는 독립적임
 
-### 2. 3 Rest API
+### 2. 3 Restul API
 ![image](https://user-images.githubusercontent.com/74171272/190115632-076b67f8-262a-4336-af7c-e5f95cee66bd.png)
+- `REST(Representational State Transfer`
+  - HTTP URI 를 통해 리소스를 명시하고, HTTP Method(POST, GET, PUT, DELETE)를 통해 해당 리소스에 대한 CRUD 연산을 적용하는 것을 의미함
+  - 즉, 어떤 리소스에 대해 CRUD 연산을 수행하기 위해 URI 로 HTTP Method 를 사용하여 요청을 보내는 것
 
+- `RESTful API`
+  - REST 기반의 API 를 웹으로 구현한 것
+  - 기본적으로 웹의 기존 기술과 HTTP 프로토콜을 그대로 활용하기 때문에 웹의 장점을 최대한 활용할 수 있는 아키텍처 스타일
 
 ### 2. 4 URL Connection
 
