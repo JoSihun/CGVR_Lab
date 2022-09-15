@@ -72,6 +72,7 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 2. 4 URL Connection
+![image](https://user-images.githubusercontent.com/77912766/190369844-b7253af2-4f19-44d5-8b42-f18582d59771.png)
 
 
 
@@ -117,6 +118,10 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 4. 2 내도메인.한국
+[[해당 사이트](https://내도메인.한국)]
+3차 도메인을 무료로 등록할 수 있는 사이트로 간단한 정보만을 기입하여 회원가입 후 사용 가능하며, 중요한 개인 정보를 수집하지 않는다.
+
+![제목 없음 blur](https://user-images.githubusercontent.com/77912766/190369404-07e000cf-e930-49a0-9a83-703cd86c9771.png)
 
 
 ### 4. 3 SSL (Https 443 Port)
