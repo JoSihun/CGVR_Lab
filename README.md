@@ -45,10 +45,10 @@ SeoKyeong University CGVR Lab Webpage.
 ![image](https://user-images.githubusercontent.com/74171272/190120481-ae48ab3e-cc97-49ea-b136-bd5a6794b520.png)
 - MVC WEB 에 적용할 경우 예시
   - 사용자가 웹사이트에 접속(Uses)
-  - Controller 는 사용자가 요청한 웹페이지를 서비스하기 위해서 모델을 호출함(Manipulates)
-  - Model 은 데이터베이스나 파일과 같은 데이터 소스를 제어한 후 그 결과를 반환함
-  - Controller 는 Model 이 반환한 결과를 View 에 반영함(Updates)
-  - 데이터가 반영된 View 가 사용자에게 보여짐(Sees)
+  - `Controller` 는 사용자가 요청한 웹페이지를 서비스하기 위해서 `Model` 을 호출함(Manipulates)
+  - `Model` 은 데이터베이스나 파일과 같은 데이터 소스를 제어한 후 그 결과를 반환함
+  - `Controller` 는 `Model` 이 반환한 결과를 `View` 에 반영함(Updates)
+  - 데이터가 반영된 `View` 가 사용자에게 보여짐(Sees)
 
 #### 2. 1. 2 MVC Model 1   
 ![image](https://user-images.githubusercontent.com/74171272/190120616-011b9e75-ae6f-40b7-9d3f-2477c5620f6d.png)
