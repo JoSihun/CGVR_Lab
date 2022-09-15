@@ -54,7 +54,7 @@ SeoKyeong University CGVR Lab Webpage.
 ![image](https://user-images.githubusercontent.com/74171272/190120616-011b9e75-ae6f-40b7-9d3f-2477c5620f6d.png)
 - `Controller` 영역에 `View` 영역을 같이 구현하는 방식.
 - `View` 와 `Controller` 를 모두 `JSP` 가 담당하는 형태를 가지므로, 구현 난이도는 쉬움
-- JSP 하나에서 MVC 가 모두 이루어져, 재사용성, 가독성 하락의 문제점이 존재함 => 유지보수에 문제가 발생함   
+- `JSP` 하나에서 MVC 가 모두 이루어져, 재사용성, 가독성 하락의 문제점이 존재함 => 유지보수에 문제가 발생함   
 
 #### 2. 1. 3 MVC Model 2   
 ![image](https://user-images.githubusercontent.com/74171272/190120670-85f81b4e-da8f-4a3a-a57c-532ec1655b74.png)
@@ -67,6 +67,8 @@ SeoKyeong University CGVR Lab Webpage.
 - `Entity(Domain)`
   - DB 에 쓰일 컬럼과 여러 `Entity` 간 연관관계를 정의함
   - DB 의 테이블을 하나의 `Entity` 로 생각해도 무방함
+- `Controller`
+  - `Client`의 요청을 받아 RequestMapping 을 수행하고, 응답을 전달함
 - `Service`
   - 비즈니스 로직과 트랜잭션을 처리함
 - `Repository`
@@ -80,13 +82,189 @@ SeoKyeong University CGVR Lab Webpage.
 
 ### 2. 3 Restul API
 ![image](https://user-images.githubusercontent.com/74171272/190115632-076b67f8-262a-4336-af7c-e5f95cee66bd.png)
-- `REST(Representational State Transfer`
-  - HTTP URI 를 통해 리소스를 명시하고, HTTP Method(POST, GET, PUT, DELETE)를 통해 해당 리소스에 대한 CRUD 연산을 적용하는 것을 의미함
+- `REST(Representational State Transfer)`
+  - HTTP URI(Uniform Resource Identifier) 를 통해 리소스를 명시하고, HTTP Method(POST, GET, PUT, DELETE 등)를 통해 해당 리소스에 대한 CRUD 연산을 적용하는 것을 의미함
   - 즉, 어떤 리소스에 대해 CRUD 연산을 수행하기 위해 URI 로 HTTP Method 를 사용하여 요청을 보내는 것
 
+- `REST` 구성 요소
+  - 자원(Resouce) : HTTP URI
+  - 자원에 대한 행위(Verb) : HTTP Method
+  - 자원에 대한 행위의 내용(Representations) : HTTP Message Pay Load
+
+- `REST` 제약조건
+  - Server-Client(서버-클라이언트 구조)
+  - Stateless(무상태)
+  - Cacheable(캐시 처리 가능)
+  - Layered System(계층화)
+  - Uniform Interface(인터페이스 일관성)
+
 - `RESTful API`
-  - REST 기반의 API 를 웹으로 구현한 것
-  - 기본적으로 웹의 기존 기술과 HTTP 프로토콜을 그대로 활용하기 때문에 웹의 장점을 최대한 활용할 수 있는 아키텍처 스타일
+  - `REST` 아키텍처 스타일의 제약조건을 따르는 API
+
+- Spring RestController
+  - 아래와 같이 `@RestController` 어노테이션을 사용하여 RestController 를 정의함
+  ```java
+  @RequiredArgsConstructor
+  @RestController
+  public class PostsRestController {
+    ...
+  }
+  ```
+  
+  - POST(Create)
+    - 아래와 같이 @PostMapping 어노테이션을 사용하여 POST 메소드를 정의함
+    ```java
+        @PostMapping("posts/api/save")
+        public Long postsSave(PostsSaveRequestDto requestDto, List<MultipartFile> files) throws Exception {
+            /* 카테고리명 존재유무 확인 및 저장 */
+            if (requestDto.getCategoryName() != null) {
+                CategoryResponseDto categoryResponseDto = this.categoryService.findByCategoryName(requestDto.getCategoryName());
+                if (categoryResponseDto == null) {
+                    CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
+                    categorySaveRequestDto.setCategoryName(requestDto.getCategoryName());
+                    this.categoryService.save(categorySaveRequestDto);
+                }
+            }
+
+            /* 프로젝트명 존재유무 확인 및 저장 */
+            if (requestDto.getProjectName() != null){
+                ProjectResponseDto projectResponseDto = this.projectService.findByProjectName(requestDto.getProjectName());
+                if (projectResponseDto == null) {
+                    ProjectSaveRequestDto projectSaveRequestDto = new ProjectSaveRequestDto();
+                    projectSaveRequestDto.setProjectName(requestDto.getProjectName());
+                    this.projectService.save(projectSaveRequestDto);
+                }
+            }
+
+            return this.postsService.save(requestDto, files);
+        }
+    ```
+    
+    - Ajax 통신을 이용하여 클라이언트와 서버 간 데이터 교환
+    ```javascript
+    postsSave : function () {
+        let form = $('#fileUploadForm')[0];
+        let formData = new FormData(form);
+        formData.append("title", $('#title').val());
+        formData.append("author", $('#author').val());
+        formData.append("content", $('#content').val());
+        formData.append("projectName", $('#projectName').val());
+        formData.append("categoryName", $('#categoryName').val());
+
+        $.ajax({
+            type: 'POST',
+            url: '/posts/api',
+            enctype: 'multipart/form-data',
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+        }).done(function (response) {
+            alert('글이 등록되었습니다.');
+            let arrayLink = document.location.href.split('/').slice(3, -1);
+            let stringLink = arrayLink.join('/');
+            let redirectUrl = '/' + stringLink + '/' + response;
+            window.location.href = redirectUrl;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+    ```
+
+  - PUT(Update)
+    - 아래와 같이 `@PutMapping` 어노테이션을 사용하여 Put 메소드를 정의함
+    - `@PathVariable` 어노테이션을 사용하여 수정할 객체를 가져옴
+    ```java
+        @PutMapping("/posts/api/{id}")
+        public Long postsUpdate(@PathVariable Long id, PostsUpdateRequestDto requestDto, List<MultipartFile> files) throws Exception {
+            /* 카테고리명 존재유무 확인 및 저장 */
+            if (requestDto.getCategoryName() != null) {
+                CategoryResponseDto categoryResponseDto = this.categoryService.findByCategoryName(requestDto.getCategoryName());
+                if (categoryResponseDto == null) {
+                    CategorySaveRequestDto categorySaveRequestDto = new CategorySaveRequestDto();
+                    categorySaveRequestDto.setCategoryName(requestDto.getCategoryName());
+                    this.categoryService.save(categorySaveRequestDto);
+                }
+            }
+
+            /* 프로젝트명 존재유무 확인 및 저장 */
+            if (requestDto.getProjectName() != null){
+                ProjectResponseDto projectResponseDto = this.projectService.findByProjectName(requestDto.getProjectName());
+                if (projectResponseDto == null) {
+                    ProjectSaveRequestDto projectSaveRequestDto = new ProjectSaveRequestDto();
+                    projectSaveRequestDto.setProjectName(requestDto.getProjectName());
+                    this.projectService.save(projectSaveRequestDto);
+                }
+            }
+
+            return this.postsService.update(id, requestDto, files);
+        }
+    ```
+    
+    - Ajax 통신을 이용하여 클라이언트와 서버 간 데이터 교환
+    ```javascript
+    postsUpdate : function () {
+        let postsId = $('#id').val();
+        let form = $('#fileUploadForm')[0];
+        let formData = new FormData(form);
+        formData.append("title", $('#title').val());
+        formData.append("content", $('#content').val());
+        formData.append("projectName", $('#projectName').val());
+        formData.append("categoryName", $('#categoryName').val());
+
+        $.ajax({
+            type: 'PUT',
+            url: '/posts/api/'+postsId,
+            enctype: 'multipart/form-data',
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+        }).done(function (response) {
+            alert('글이 수정되었습니다.');
+            let arrayLink = document.location.href.split('/').slice(3, -2);
+            let stringLink = arrayLink.join('/');
+            let redirectUrl = '/' + stringLink + '/' + response;
+            window.location.href = redirectUrl;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+    ```
+
+  - Delete
+    - 아래와 같이 `@DeleteMapping` 어노테이션을 사용하여 Delete 메소드를 정의함
+    - `@PathVariable` 어노테이션을 사용하여 삭제할 객체를 가져옴
+    ```java
+        @DeleteMapping("/posts/api/{id}")
+        public Long postsDelete(@PathVariable Long id) {
+            postsService.delete(id);
+            return id;
+        }
+    ```
+
+    - Ajax 통신을 이용하여 클라이언트와 서버 간 데이터 교환
+    ```javascript
+    postsDelete : function () {
+        var id = $('#postsId').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/posts/api/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+        }).done(function() {
+            alert('글이 삭제되었습니다.');
+            var arrayLink = document.location.href.split('/').slice(3, -2);
+            var stringLink = arrayLink.join('/');
+            var redirectUrl = '/' + stringLink + '/board';
+            console.log(redirectUrl);
+            window.location.href = redirectUrl;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+    ```
 
 ### 2. 4 URL Connection
 
@@ -126,12 +304,11 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 5. 2 개발후기
-
+- 웹 개발 관련 지식의 틀을 잡을 수 있는 기회였다
+- 개인 프로젝트보다 규모가 커서 다양한 오류와 요구사항을 마주침으로써, Spring Boot 의 아키텍처, 서비스, 패키지 구조에 대해 더 자세하고 분명하게 이해할 수 있었다
 
 ### 5. 3 향후계획(개선사항)
 - 연구실 인수인계를 통해 지속적으로 운영할 예정
-
-
 
 
 
