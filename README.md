@@ -277,6 +277,7 @@ SeoKyeong University CGVR Lab Webpage.
     ```
 
 ### 2. 4 URL Connection
+![image](https://user-images.githubusercontent.com/77912766/190369844-b7253af2-4f19-44d5-8b42-f18582d59771.png)
 
 
 
@@ -322,6 +323,10 @@ SeoKyeong University CGVR Lab Webpage.
 
 
 ### 4. 2 내도메인.한국
+[[사이트](https://내도메인.한국)]
+3차 도메인을 무료로 등록할 수 있는 사이트로 간단한 정보만을 기입하여 회원가입 후 사용 가능하며, 중요한 개인 정보를 수집하지 않는다.
+
+![제목 없음 blur](https://user-images.githubusercontent.com/77912766/190369404-07e000cf-e930-49a0-9a83-703cd86c9771.png)
 
 
 ### 4. 3 SSL (Https 443 Port)
@@ -385,15 +390,19 @@ ubuntu@researcher1:~$ sudo service nginx restart
 
 
 ### 5. 1 결과
-
+<p align="center">
+  
+</p>
 
 ### 5. 2 개발후기
+- mustache를 template engine으로 채택하여 사용하면서, 레퍼런스 자료와 기능의 부족으로 다음 개발부터는 thymeleaf를 사용할 것 같다.
+- 처음 해보는 공동 개발 및 웹 개발로 초반에 어려움을 겪었으나, 개발을 진행해가며 새로운 기술을 접하고 지식을 쌓는 계기가 되었다.
 - 웹 개발 관련 지식의 틀을 잡을 수 있는 기회였다
 - 개인 프로젝트보다 규모가 커서 다양한 오류와 요구사항을 마주침으로써, Spring Boot 의 아키텍처, 서비스, 패키지 구조에 대해 더 자세하고 분명하게 이해할 수 있었다
 
 ### 5. 3 향후계획(개선사항)
 - 연구실 인수인계를 통해 지속적으로 운영할 예정
-
+- 모바일 디바이스 사용자를 위해 스프링 모바일을 활용할 예정
 
 
 
