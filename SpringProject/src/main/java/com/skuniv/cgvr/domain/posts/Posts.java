@@ -24,7 +24,7 @@ public class Posts extends BaseTimeEntity {
     @Column(length = 500)
     private String title;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
     private String author;
     private Long hits;
