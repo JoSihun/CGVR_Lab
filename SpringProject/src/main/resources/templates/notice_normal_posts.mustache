@@ -118,6 +118,7 @@
                         <strong>첨부파일</strong>
                         {{#attachments}}
                             <div class="d-flex justify-content-between">
+                                {{#filename}}
                                 <div class="d-inline-block">
                                     <a class="text-dark" href="/notice/normal/posts/{{posts.id}}/download/{{id}}"
                                        onclick="return confirm('파일을 다운로드하시겠습니까?')"><u>[다운로드]</u>&nbsp;</a>
@@ -125,6 +126,7 @@
                                        onclick="return confirm('파일을 다운로드하시겠습니까?')"><u>{{fileName}}</u></a>
                                 </div>
                                 <div class="d-inline-block">{{fileSize}}</div>
+                                {{/filename}}
                             </div>
                         {{/attachments}}
                     </div>
