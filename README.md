@@ -452,7 +452,12 @@ ubuntu@researcher1:~$ sudo service nginx restart
 
 ### 5. 1 결과
 <p align="center">
-  
+  <img width="40%" src="https://user-images.githubusercontent.com/77912766/190949608-fd87a70e-eae4-4448-804f-b2661c0374f2.PNG" />
+  <img width="40%" src="https://user-images.githubusercontent.com/77912766/190949625-b813861d-46b3-4668-aa16-5a5e0bb01f26.PNG" />
+  <img width="40%" src="https://user-images.githubusercontent.com/77912766/190949645-eb7d2480-f1f7-45c5-ab67-68f4863bc4db.PNG" />
+  <img width="40%" src="https://user-images.githubusercontent.com/77912766/190949658-e20023df-dda4-469e-8c47-f006f80998d5.PNG" />
+  <img width="40%" src="https://user-images.githubusercontent.com/77912766/190949670-42e40c66-62d8-402b-8730-e3006fb2feda.PNG" />
+  <img width="40%" src="https://user-images.githubusercontent.com/77912766/190949686-7e1b2c1e-3360-451e-ae72-3bb8a4664906.PNG" />
 </p>
 
 ### 5. 2 개발후기
