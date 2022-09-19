@@ -279,7 +279,68 @@ SeoKyeong University CGVR Lab Webpage.
 ### 2. 4 URL Connection
 ![image](https://user-images.githubusercontent.com/77912766/190369844-b7253af2-4f19-44d5-8b42-f18582d59771.png)
 
+  - `HttpURLConnection`
+    - Java application과 URL간의 모든 연결 관련 클래스인 URLConnection의 서브클래스로 HTTP 고유 기능에 대한 추가 지원을 제공한다
+    - 추상클래스로서 새 인스턴스를 직접 만들 수 없는 대신 URL 객체에서 openConnection()메소드 호출에 의해 인스턴스를 얻을 수 있다
+    - HttpURLConnection 통신을 아래와 같이 진행하였다
+    
+  - `URL 객체 생성 및 URLConnection 객체 얻기`
+    ```java
+    public JSONObject getResponse(String link, JSONObject request) {
+        try {
+            URL url = new URL(link);
+            connection = (HttpURLConnection) url.openConnection();
+            ...
+    ```
+    
+  - `URL 연결 구성`
+    ```java
+    connection.setConnectTimeout(10000);  // 연결 대기 시간 설정
+    connection.setRequestMethod("POST");  // 전송 방식 POST
+    connection.setDoInput(true);          // InputStream으로 서버로부터 응답받음
+    connection.setDoOutput(true);         // OutputStream으로 POST 데이터를 넘겨줌
+    // 서버 Response를 JSON 형식의 타입으로 요청
+    connection.setRequestProperty("Accept", "application/json");
+    // 서버에게 Request Body 전달 시 application/json으로 서버에 전달
+    connection.setRequestProperty("content-type", "application/json");
+    ```
+    
+  - `request 생성`
+    ```java
+    JSONObject payload = new JSONObject();
 
+    payload.put("username", userId);
+    payload.put("password", passWord);
+    payload.put("grant_type", "password");
+    payload.put("userType", "sku");
+    ```
+    
+  - `request 전송 및 연결상태 확인`
+    ```java
+    OutputStream os = connection.getOutputStream();
+    os.write(request.toString().getBytes(StandardCharsets.UTF_8));
+    os.flush();
+
+    // 연결 상태 확인
+    if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+    	System.out.println("request 실패!");
+      return null;
+  	}
+	  ```
+  - `response 받기`
+    ```java
+    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+    StringBuilder sb = new StringBuilder();
+    String str;
+    while ((str = reader.readLine()) != null) {
+      sb.append(str);
+    }
+    reader.close();
+    os.close();
+    connection.disconnect();
+
+    JSONObject response = new JSONObject(sb.toString());
+    ```
 
 
 ## 3. DataBase
