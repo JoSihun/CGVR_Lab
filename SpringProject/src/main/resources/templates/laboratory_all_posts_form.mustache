@@ -167,17 +167,33 @@
                     "<div class='d-flex justify-content-between' id='fileList[" + i + "]'>" +
                         "<div class='d-inline-block'>" + fileList[i].name + "</div>" +
                         "<div class='d-inline-block'>" + fileList[i].size + " Bytes</div>" +
-                        "<a href='#this' id='file-delete'>삭제</a>" +
+                        "<a href='#this' name='" + fileList[i].lastModified + "' id='file-delete'>삭제</a>" +
                     "</div>"
                 );
-            };
-        });
+            }
 
-        $("a[name='file-delete']").on("click", function(e) {
-            alert("파일을 삭제합니다.");
-            console.log($(this));
-            console.log($(this).parent());
-            $(this).parent().remove();
+            // 목록에서 제거
+            $('a[id="file-delete"]').on('click', function (e) {
+                alert("파일을 삭제합니다.");
+
+                // input 태그에서 제거
+                const removeTargetId = this.name;
+                const dataTransfer = new DataTransfer();
+                const files = $("#files")[0].files;
+                Array.from(files)
+                        .filter(file => file.lastModified !== removeTargetId)
+                        .forEach(file => { dataTransfer.items.add(file); });
+
+                // const filesArray = Array.from(files);
+                // filesArray.filter(file => file.lastModified !== removeTargetId);
+                // filesArray.forEach(file => { dataTransfer.items.add(file); });
+                $("#files")[0].files = dataTransfer.files;
+
+                $(this).parent().remove();
+            });
+
+
+
         });
 
     });
