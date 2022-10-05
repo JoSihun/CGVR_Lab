@@ -160,18 +160,29 @@
 <script>
     $(document).ready(function () {
         $("#files").change(function () {
-            $("#file-list").empty();
+            // $("#file-list").empty();
             let fileList = $("#files")[0].files;
             for (let i = 0; i < fileList.length; i++) {
                 $("#file-list").append(
-                    "<div class='d-flex justify-content-between'>" +
-                    "<div class='d-inline-block'>" + fileList[i].name + "</div>" +
-                    "<div class='d-inline-block'>" + fileList[i].size + " Bytes</div>" +
+                    "<div class='d-flex justify-content-between' id='fileList[" + i + "]'>" +
+                        "<div class='d-inline-block'>" + fileList[i].name + "</div>" +
+                        "<div class='d-inline-block'>" + fileList[i].size + " Bytes</div>" +
+                        "<a href='#this' id='file-delete'>삭제</a>" +
                     "</div>"
                 );
             };
         });
+
+        $("a[name='file-delete']").on("click", function(e) {
+            alert("파일을 삭제합니다.");
+            console.log($(this));
+            console.log($(this).parent());
+            $(this).parent().remove();
+        });
+
     });
+
+
 
     $(document).ready(function () {
         $("#projectName").hide();

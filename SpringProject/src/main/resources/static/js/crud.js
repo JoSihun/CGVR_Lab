@@ -124,6 +124,7 @@ var main = {
         formData.append("projectName", $('#projectName').val());
         formData.append("categoryName", $('#categoryName').val());
 
+
         $.ajax({
             type: 'POST',
             url: '/posts/api',
