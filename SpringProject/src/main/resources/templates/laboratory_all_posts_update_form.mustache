@@ -144,7 +144,6 @@
                                             <td>{{fileName}}</td>
                                             <td>{{fileSize}} Bytes</td>
                                             <td>
-                                                <input type="hidden" name="{{filePath}}" value="true">
                                                 <a href="#this" name="{{filePath}}" id="exist-file-delete">삭제</a>
                                             </td>
                                         </tr>
@@ -218,7 +217,6 @@
                 alert("파일을 삭제합니다.");
                 $(this).parent().parent().remove();
             });
-
         });
     });
 

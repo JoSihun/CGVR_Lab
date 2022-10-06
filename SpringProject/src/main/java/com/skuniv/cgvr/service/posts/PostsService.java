@@ -237,43 +237,38 @@ public class PostsService {
         Posts entity = this.postsRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + id));
 
-
-
         /* 기존 첨부파일 삭제 및 데이터 삭제 */
         List<Attachments> attachmentsList = entity.getAttachmenstList();
         for (Attachments attachments: attachmentsList) {
-            File file = new File(attachments.getFilePath());
-
-            System.out.println(attachments.getFilePath());
-            System.out.println(existFileList.contains(attachments.getFilePath()));
-
-            if (!existFileList.contains(attachments.getFilePath())) {
-//            if (file.exists()) {
-                if (file.delete()) {                                    // 서버에서 파일 삭제
-                    this.attachmentsRepository.delete(attachments);     // DB에서 첨부파일 정보 삭제
-                    System.out.println("File Delete Success. FilePath: " + attachments.getFilePath());
+            if (!existFileList.contains(attachments.getFilePath())) {   // 기존 첨부파일에서 삭제된 파일이라면
+                File file = new File(attachments.getFilePath());        // 파일경로 읽기
+                if (file.exists()) {                                        // 파일이 존재한다면
+                    if (file.delete()) {                                        // 서버에서 파일 삭제
+                        this.attachmentsRepository.delete(attachments);         // DB에서 첨부파일 정보 삭제
+                        System.out.println("File Delete Success. FilePath: " + attachments.getFilePath());
+                    } else {
+                        System.out.println("File Delete Failed. FilePath: " + attachments.getFilePath());
+                    }
                 } else {
-                    System.out.println("File Delete Failed.");
+                    System.out.println("File doesn't Exists. FilePath: " + attachments.getFilePath());
                 }
-            } else {
-                System.out.println("File doesn't exists. FilePath: " + attachments.getFilePath());
             }
         }
 
         /* 첨부파일 저장 및 데이터 생성 */
         for (MultipartFile file : files) {
-            // 첨부파일이 없는 경우: 파일크기가 0인 빈 객체 1개
+            // 첨부파일이 없는 경우, files = 파일크기가 0인 빈 객체 1개
             if (files.size() == 1 && file.getSize() == 0) {
                 break;
             }
 
             /* 실제 파일 저장 루틴 */
-            String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+//            String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 //            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 //            File saveFile = new File(filePath, fileName);
 //            file.transferTo(saveFile);
             File tempFilePath = new File(System.getProperty("user.dir"));
-//            String filePath = tempFilePath.getParent() + "/CGVRLAB_FILES";
+            String filePath = tempFilePath.getParent() + "/CGVRLAB_FILES";
 
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
             File saveFile = new File(filePath, fileName);

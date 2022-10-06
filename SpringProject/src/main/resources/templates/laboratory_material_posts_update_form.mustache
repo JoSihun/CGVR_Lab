@@ -139,16 +139,15 @@
                             <div class="invalid-feedback">Example invalid form file feedback</div>
                             <div style="border:2px solid #c9c9c9;min-height:100px">
                                 <table width="100%" id="file-list">
-                                {{#attachments}}
-                                    <tr>
-                                        <td>{{fileName}}</td>
-                                        <td>{{fileSize}} Bytes</td>
-                                        <td>
-                                            <input type="hidden" name="{{filePath}}" value="true">
-                                            <a href="#this" name="{{filePath}}" id="exist-file-delete">삭제</a>
-                                        </td>
-                                    </tr>
-                                {{/attachments}}
+                                    {{#attachments}}
+                                        <tr>
+                                            <td>{{fileName}}</td>
+                                            <td>{{fileSize}} Bytes</td>
+                                            <td>
+                                                <a href="#this" name="{{filePath}}" id="exist-file-delete">삭제</a>
+                                            </td>
+                                        </tr>
+                                    {{/attachments}}
                                 </table>
                             </div>
                         </form>
@@ -214,11 +213,10 @@
             });
 
             // 목록에서 제거 (기존파일)
-            $('a[id="exist-file-delete"]').onclick(function (e) {
+            $('a[id="exist-file-delete"]').on('click', function (e) {
                 alert("파일을 삭제합니다.");
                 $(this).parent().parent().remove();
             });
-
         });
     });
 

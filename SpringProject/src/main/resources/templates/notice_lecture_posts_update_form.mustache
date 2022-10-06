@@ -124,13 +124,18 @@
                         <form id="fileUploadForm" enctype="multipart/form-data">
                             <input type="file" class="form-control" id="files" name="files" multiple="multiple">
                             <div class="invalid-feedback">Example invalid form file feedback</div>
-                            <div id="file-list" style="border:2px solid #c9c9c9;min-height:100px">
-                                {{#attachments}}
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-inline-block">{{fileName}}</div>
-                                        <div class="d-inline-block">{{fileSize}} Bytes</div>
-                                    </div>
-                                {{/attachments}}
+                            <div style="border:2px solid #c9c9c9;min-height:100px">
+                                <table width="100%" id="file-list">
+                                    {{#attachments}}
+                                        <tr>
+                                            <td>{{fileName}}</td>
+                                            <td>{{fileSize}} Bytes</td>
+                                            <td>
+                                                <a href="#this" name="{{filePath}}" id="exist-file-delete">삭제</a>
+                                            </td>
+                                        </tr>
+                                    {{/attachments}}
+                                </table>
                             </div>
                         </form>
                     </div>
@@ -177,7 +182,7 @@
             $("#files")[0].files = dataTransfer.files;
             tempFileList = $("#files")[0].files;
 
-            // 목록에서 제거
+            // 목록에서 제거 (새 파일)
             $('a[id="file-delete"]').on('click', function (e) {
                 alert("파일을 삭제합니다.");
 
@@ -192,6 +197,12 @@
                 $("#files")[0].files = dataTransfer.files;
                 $(this).parent().parent().remove();
                 tempFileList = $("#files")[0].files;
+            });
+
+            // 목록에서 제거 (기존파일)
+            $('a[id="exist-file-delete"]').on('click', function (e) {
+                alert("파일을 삭제합니다.");
+                $(this).parent().parent().remove();
             });
         });
     });
