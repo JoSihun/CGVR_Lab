@@ -198,12 +198,12 @@
                 $(this).parent().parent().remove();
                 tempFileList = $("#files")[0].files;
             });
+        });
 
-            // 목록에서 제거 (기존파일)
-            $('a[id="exist-file-delete"]').on('click', function (e) {
-                alert("파일을 삭제합니다.");
-                $(this).parent().parent().remove();
-            });
+        // 목록에서 제거 (기존파일)
+        $('a[id="exist-file-delete"]').on('click', function (e) {
+            alert("파일을 삭제합니다.");
+            $(this).parent().parent().remove();
         });
     });
 
