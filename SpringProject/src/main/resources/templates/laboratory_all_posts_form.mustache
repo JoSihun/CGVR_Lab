@@ -136,7 +136,7 @@
                         <form id="fileUploadForm" enctype="multipart/form-data">
                             <input type="file" class="form-control" id="files" name="files" multiple="multiple">
                             <div class="invalid-feedback">Example invalid form file feedback</div>
-                            <div id="file-list" style="border:2px solid #c9c9c9;min-height:100px"></div>
+                            <div style="border:2px solid #c9c9c9;min-height:100px"><table width="100%" id="file-list"></table></div>
                         </form>
                     </div>
 
@@ -159,18 +159,27 @@
 
 <script>
     $(document).ready(function () {
+        let tempFileList = $("#files")[0].files;
         $("#files").change(function () {
-            // $("#file-list").empty();
             let fileList = $("#files")[0].files;
             for (let i = 0; i < fileList.length; i++) {
                 $("#file-list").append(
-                    "<div class='d-flex justify-content-between' id='fileList[" + i + "]'>" +
-                        "<div class='d-inline-block'>" + fileList[i].name + "</div>" +
-                        "<div class='d-inline-block'>" + fileList[i].size + " Bytes</div>" +
-                        "<a href='#this' name='" + fileList[i].lastModified + "' id='file-delete'>삭제</a>" +
-                    "</div>"
+                    "<tr>" +
+                        "<td>" + fileList[i].name + "</td>" +
+                        "<td>" + fileList[i].size + " Bytes</td>" +
+                        "<td>" +
+                            "<a href='#this' name='" + fileList[i].lastModified + "' id='file-delete'>삭제</a>" +
+                        "</td>" +
+                    "</tr>"
                 );
             }
+            const dataTransfer = new DataTransfer();
+            Array.from(tempFileList)
+                    .forEach(file => { dataTransfer.items.add(file); });
+            Array.from(fileList)
+                    .forEach(file => { dataTransfer.items.add(file); });
+            $("#files")[0].files = dataTransfer.files;
+            tempFileList = $("#files")[0].files;
 
             // 목록에서 제거
             $('a[id="file-delete"]').on('click', function (e) {
@@ -181,24 +190,15 @@
                 const dataTransfer = new DataTransfer();
                 const files = $("#files")[0].files;
                 Array.from(files)
-                        .filter(file => file.lastModified !== removeTargetId)
+                        .filter(file => file.lastModified != removeTargetId)
                         .forEach(file => { dataTransfer.items.add(file); });
 
-                // const filesArray = Array.from(files);
-                // filesArray.filter(file => file.lastModified !== removeTargetId);
-                // filesArray.forEach(file => { dataTransfer.items.add(file); });
                 $("#files")[0].files = dataTransfer.files;
-
-                $(this).parent().remove();
+                $(this).parent().parent().remove();
+                tempFileList = $("#files")[0].files;
             });
-
-
-
         });
-
     });
-
-
 
     $(document).ready(function () {
         $("#projectName").hide();
