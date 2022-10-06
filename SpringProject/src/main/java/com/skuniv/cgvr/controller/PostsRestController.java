@@ -13,7 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -51,7 +53,8 @@ public class PostsRestController {
 
     /* 게시글 수정요청 */
     @PutMapping("/posts/api/{id}")
-    public Long postsUpdate(@PathVariable Long id, PostsUpdateRequestDto requestDto, List<MultipartFile> files) throws Exception {
+    public Long postsUpdate(@PathVariable Long id, PostsUpdateRequestDto requestDto, List<MultipartFile> files,
+                            @RequestParam Map<String, Object> map) throws Exception {
         /* 카테고리명 존재유무 확인 및 저장 */
         if (requestDto.getCategoryName() != null) {
             CategoryResponseDto categoryResponseDto = this.categoryService.findByCategoryName(requestDto.getCategoryName());
@@ -72,7 +75,14 @@ public class PostsRestController {
             }
         }
 
-        return this.postsService.update(id, requestDto, files);
+        /* 기존 첨부파일 저장경로 ArrayList 생성 */
+        ArrayList<String> existFileList = new ArrayList<String>();
+        String existFileListLength = (String) map.get("existFileListLength");
+        for (int i = 0; i < Integer.parseInt(existFileListLength); i++) {
+            existFileList.add((String) map.get("existFileList[" + i + "]"));
+        }
+
+        return this.postsService.update(id, requestDto, files, existFileList);
     }
 
     /* 게시글 삭제요청 */

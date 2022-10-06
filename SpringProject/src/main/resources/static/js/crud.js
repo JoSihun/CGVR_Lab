@@ -180,6 +180,12 @@ var main = {
         formData.append("projectName", $('#projectName').val());
         formData.append("categoryName", $('#categoryName').val());
 
+        existFileList = $('a[id="exist-file-delete"]');
+        formData.append("existFileListLength", existFileList.length);
+        for (var i = 0; i < existFileList.length; i++) {
+            formData.append("existFileList[" + i + "]", existFileList[i].name);
+        }
+
         $.ajax({
             type: 'PUT',
             url: '/posts/api/'+postsId,
