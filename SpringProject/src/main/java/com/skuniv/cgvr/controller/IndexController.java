@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -77,5 +78,10 @@ public class IndexController {
         model.addAttribute("project", projectListResponseDtos);
         model.addAttribute("category", categoryListResponseDtos);
         return "manage_posts_title";
+    }
+
+    @GetMapping("/kakao")
+    public String kakaoApi() {
+        return "kakao_api.html";
     }
 }
