@@ -79,9 +79,4 @@ public class IndexController {
         model.addAttribute("category", categoryListResponseDtos);
         return "manage_posts_title";
     }
-
-    @GetMapping("/kakao")
-    public String kakaoApi() {
-        return "kakao_api.html";
-    }
 }
